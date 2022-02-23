@@ -174,19 +174,15 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: How does this app help current librarians?<br>
+**A**: The app helps librarians manage the statuses of books borrowed and borrowers.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Category    | Format                                                                                                                                                                                                                                                                                                         |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Patron**  | `patron add n/<name> s/<id> p/<phone> e/<email> [t/<tag> …]` <br> `patron edit INDEX [n/<name>] [s/<id>] [p/<phone>] [e/<email>] [t/<tag> …]` <br> `patron delete INDEX` <br> `patron find n/<name keyword> [n/<name keyword> ...]` <br> `patron list`                                                         |
+| **Book**    | `book add n/<name> i/<ISBN> [a/<author> …] [t/<category tag> …]` <br> `book edit INDEX n/<name> i/<ISBN> [a/<author> …] [t/<category tag> …]` <br> `book delete INDEX` <br> `borrow b/<index> p/<index> d/<return date>` <br> `return [b/<index>] or [p/<index>]`<br> `request INDEX1 INDEX2` <br> `book list` |
+| **General** | `clear`<br> `exit` <br> `help` <br> `up and down arrow`                                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                                                                        |
