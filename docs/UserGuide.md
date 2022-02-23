@@ -3,36 +3,46 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+LibTask is a **desktop application for librarians to manage book loans and requests by patrons, optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your book tracking tasks done faster than traditional GUI apps. 
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# 1. Introduction
+
+As a school librarian of a large library, you may already have your own desktop library software. However, existing library softwares are GUI-based and slow to work with. If you prefer to work with CLI commands efficiently while still having the benefits of aesthetic displays, then LibTask is designed just for you! LibTask provides you with a well packaged system of commands for managing book loans and book requests by your patrons. Using LibTask, you can quickly process borrowing and returning books, and view different groups of patrons and books to perform tasks such as notifying patrons with overdue books. The system also maintains two independent lists of books and patrons, allowing you to perform queries more efficiently.
+
+--------------------------------------------------------------------------------------------------------------------
+
+# 2. Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `libtask.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your LibTask.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`patron list`** : Lists all the patrons in libTask.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`patron add`**`n/Alice s/S01823283S p/90123212 e/profA@u.nus.edu ` : Adds a patron named `Alice` into LibTask.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`patron delete`**`3` : Deletes the 3rd patron shown in the current patron list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`book add`**` n/Harry Potter i/12398-12398-239 a/J.K.Rowling t/Thriller t/Magic`: Adds a book titled `Harry Potter`.
 
-   * **`exit`** : Exits the app.
+   * **`book list`** : Lists all the books in libTask.
+
+   * **`book delete`**`1` : Deletes the 1st book shown in the current book list.
+
+   * **`exit`** : Exits libTask.
 
 1. Refer to the [Features](#features) below for details of each command.
 
