@@ -202,7 +202,7 @@ _Details coming soon ..._
 ### Category: General Commands
 | Function                                   | Format Of Command                   |
 |--------------------------------------------|-------------------------------------|
-| **Clear the sample data**                  | `clear`                             | 
-| **Exit the application**                   | `exit`                              | 
-| **Quick guide on how to use commands**     | `help`                              | 
+| **Clear the sample data**                  | `clear`                             |
+| **Exit the application**                   | `exit`                              |
+| **Quick guide on how to use commands**     | `help`                              |
 | **Navigating the different patrons/books** | **Clicking the up and down arrows** |
