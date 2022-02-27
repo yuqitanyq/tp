@@ -181,8 +181,30 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Category    | Format                                                                                                                                                                                                                                                                                                         |
-|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Patron**  | `patron add n/<name> s/<id> p/<phone> e/<email> [t/<tag> …]` <br> `patron edit INDEX [n/<name>] [s/<id>] [p/<phone>] [e/<email>] [t/<tag> …]` <br> `patron delete INDEX` <br> `patron find n/<name keyword> [n/<name keyword> ...]` <br> `patron list`                                                         |
-| **Book**    | `book add n/<name> i/<ISBN> [a/<author> …] [t/<category tag> …]` <br> `book edit INDEX n/<name> i/<ISBN> [a/<author> …] [t/<category tag> …]` <br> `book delete INDEX` <br> `borrow b/<index> p/<index> d/<return date>` <br> `return [b/<index>] or [p/<index>]`<br> `request INDEX1 INDEX2` <br> `book list` |
-| **General** | `clear`<br> `exit` <br> `help` <br> `up and down arrow`                                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                                                                        |
+### Category: Patron Commands
+| Function                     | Format Of Command                                                           |
+|------------------------------|-----------------------------------------------------------------------------|
+| **Add a new patron**         | `patron add n/<name> s/<id> p/<phone> e/<email> [t/<tag> …]`                |
+| **Edit a current patron**    | `patron edit INDEX [n/<name>] [s/<id>] [p/<phone>] [e/<email>] [t/<tag> …]` |
+| **Delete a current patron**  | `patron delete INDEX`                                                       |
+| **Find a particular patron** | `patron find n/<name keyword> [n/<name keyword> ...]`                       |
+| **List all patrons**         | `patron list`                                                               |
+
+### Category: Book Commands
+| Function                  | Format Of Command                                                              |
+|---------------------------|--------------------------------------------------------------------------------|
+| **Add a new book**        | `book add n/<name> i/<ISBN> [a/<author> …] [t/<category tag> …]`               |
+| **Edit a current book**   | `book edit INDEX n/<name> i/<ISBN> [a/<author> …] [t/<category tag> …]`        |
+| **Delete a current book** | `book delete INDEX`                                                            |
+| **Borrow a book**         | `borrow b/<index> p/<index> d/<return date>`                                   |
+| **Return a book**         | `return [b/<index>] or [p/<index>]`                                            |
+| **Request a book**        | `request INDEX1 INDEX2`                                                        |
+| **List all books**        | `book list`                                                                    |
+
+### Category: General Commands
+| Function                                   | Format Of Command                                             |
+|--------------------------------------------|---------------------------------------------------------------|
+| **Clear the sample data**                  | `clear`                                                       | 
+| **Exit the application**                   | `exit`                                                        | 
+| **Quick guide on how to use commands**     | `help`                                                        | 
+| **Navigating the different patrons/books** | **Clicking the up and down arrows**                           | 
