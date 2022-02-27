@@ -189,7 +189,6 @@ _Details coming soon ..._
 | **Delete a current patron**  | `patron delete INDEX`                                                       |
 | **Find a particular patron** | `patron find n/<name keyword> [n/<name keyword> ...]`                       |
 | **List all patrons**         | `patron list`                                                               |
-
 ### Category: Book Commands
 | Function                  | Format Of Command                                                              |
 |---------------------------|--------------------------------------------------------------------------------|
@@ -200,11 +199,10 @@ _Details coming soon ..._
 | **Return a book**         | `return [b/<index>] or [p/<index>]`                                            |
 | **Request a book**        | `request INDEX1 INDEX2`                                                        |
 | **List all books**        | `book list`                                                                    |
-
 ### Category: General Commands
-| Function                                   | Format Of Command                                             |
-|--------------------------------------------|---------------------------------------------------------------|
-| **Clear the sample data**                  | `clear`                                                       | 
-| **Exit the application**                   | `exit`                                                        | 
-| **Quick guide on how to use commands**     | `help`                                                        | 
-| **Navigating the different patrons/books** | **Clicking the up and down arrows**                           | 
+| Function                                   | Format Of Command                   |
+|--------------------------------------------|-------------------------------------|
+| **Clear the sample data**                  | `clear`                             | 
+| **Exit the application**                   | `exit`                              | 
+| **Quick guide on how to use commands**     | `help`                              | 
+| **Navigating the different patrons/books** | **Clicking the up and down arrows** |
