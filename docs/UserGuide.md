@@ -82,6 +82,74 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Adding a patron: `add`
+Adds a patron to the library database.
+
+Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A patron can have any number of tags (including 0)
+</div>
+
+Examples:
+* `patron add n/John s/A02128282A p/93231222 e/e03482@u.nus.edu t/student`
+* `patron add n/Alice s/S01823283S p/90123212 e/profA@u.nus.edu`
+
+### Listing all patrons : `list`
+
+Shows a list of all patrons in the database.
+
+Format: `patron list`
+
+### Editing a patron : `edit`
+
+Edits a patron at a specified index of the displayed patron list.
+
+Format: `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+
+* Edits the patron at the specified `INDEX`. The index refers to the index number shown in the displayed patron list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the patron will be removed i.e. adding of tags is not cumulative.
+* You can remove all the patron’s tags by typing `t/` without
+    specifying any tags after it.
+
+Examples:
+* `patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu` Edits the name, phone number and email address of the 1st patron to be `John Cena`, `91959491` and `johncena@u.nus.edu` respectively.
+* `patron edit 2 n/Alice t/Professor t/Horror ` Edits the name of the 2nd patron to be `Alice` and changes tags to `Professor` and `Horror`.
+
+### Finding a patron by name: `find`
+
+Finds all patrons with names matching the given keywords in the database.
+
+Format: `patron find n/KEYWORD [n/KEYWORD]…​`
+
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Patrons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Example:
+
+`patron find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
+
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Deleting a patron : `delete`
+
+Delete a patron from the system at a specified index of the displayed patron list.
+
+Format: `patron delete INDEX`
+
+* Deletes the patron at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patron list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `patron list` followed by `patron delete 2` deletes the 2nd patron in the patron list.
+* `patron find n/Betsy` followed by `patron delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Adding a book: `add`
 
