@@ -27,31 +27,31 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Tan Yu Qi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yuqitanyq.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yuqitanyq)] [[portfolio](team/yuqitanyq.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Implementation of General features and Integration
 
-### James Doe
+### Sarthak Pradhan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/halpfrog.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/halpfrog)]
+[[portfolio](team/halpfrog.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: General Commands
+
+### Aditi Gupta
+
+<img src="images/aditi2313.png" width="200px">
+
+[[github](http://github.com/aditi2313)]
+[[portfolio](team/aditi2313.md)]
+
+* Role: Developer
+* Responsibilities: Patron commands
