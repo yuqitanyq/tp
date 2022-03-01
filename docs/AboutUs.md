@@ -46,12 +46,12 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: General Commands
 
-### James Doe
+### Aditi Gupta
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/aditi2313.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/aditi2313)]
+[[portfolio](team/aditi2313.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Patron commands
