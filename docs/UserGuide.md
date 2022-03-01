@@ -73,7 +73,7 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a patron: `add`
 
 Adds a person to the address book.
 
