@@ -209,19 +209,35 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: How does this app help current librarians?<br>
+**A**: The app helps librarians manage the statuses of books borrowed and borrowers.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+### Category: Patron Commands
+| Function                     | Format Of Command                                                           |
+|------------------------------|-----------------------------------------------------------------------------|
+| **Add a new patron**         | `patron add n/<name> s/<id> p/<phone> e/<email> [t/<tag> …]`                |
+| **Edit a current patron**    | `patron edit INDEX [n/<name>] [s/<id>] [p/<phone>] [e/<email>] [t/<tag> …]` |
+| **Delete a current patron**  | `patron delete INDEX`                                                       |
+| **Find a particular patron** | `patron find n/<name keyword> [n/<name keyword> ...]`                       |
+| **List all patrons**         | `patron list`                                                               |
+### Category: Book Commands
+| Function                  | Format Of Command                                                              |
+|---------------------------|--------------------------------------------------------------------------------|
+| **Add a new book**        | `book add n/<name> i/<ISBN> [a/<author> …] [t/<category tag> …]`               |
+| **Edit a current book**   | `book edit INDEX n/<name> i/<ISBN> [a/<author> …] [t/<category tag> …]`        |
+| **Delete a current book** | `book delete INDEX`                                                            |
+| **Borrow a book**         | `borrow b/<index> p/<index> d/<return date>`                                   |
+| **Return a book**         | `return [b/<index>] or [p/<index>]`                                            |
+| **Request a book**        | `request INDEX1 INDEX2`                                                        |
+| **List all books**        | `book list`                                                                    |
+### Category: General Commands
+| Function                                   | Format Of Command                   |
+|--------------------------------------------|-------------------------------------|
+| **Clear the sample data**                  | `clear`                             |
+| **Exit the application**                   | `exit`                              |
+| **Quick guide on how to use commands**     | `help`                              |
+| **Navigating the different patrons/books** | **Clicking the up and down arrows** |
