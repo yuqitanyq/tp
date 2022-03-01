@@ -36,15 +36,15 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Sarthak Pradhan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/halpfrog.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/halpfrog)]
+[[portfolio](team/halpfrog.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: General Commands
 
 ### James Doe
 
