@@ -387,7 +387,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resume from step 1.
 
 
-###UC04: Find a patron on LibTask
+### UC04: Find a patron on LibTask
 
 **MSS**
 
@@ -412,11 +412,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**UC05: Delete a patron from LibTask**
+### UC05: Delete a patron from LibTask**
 
 **MSS**
 
-1. User list all patrons [UC03](#uc02-list-patrons-on-libtask).
+1. User list all patrons [UC02](#uc02-list-patrons-on-libtask).
 
 2. User requests to delete a patron and provide the index.
 
@@ -432,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 1.
 
-###UC06: Add book to LibTask
+### UC06: Add book to LibTask
 
 **MSS**
 
@@ -456,7 +456,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 1.
 
-###UC07: List Books on LibTask
+### UC07: List Books on LibTask
 
 **MSS**
 1. User requests to list all books.
@@ -465,7 +465,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-###UC08: Edit a book on LibTask
+### UC08: Edit a book on LibTask
 
 **MSS**
 
@@ -489,7 +489,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 1.
 
-###UC09: Delete Book from LibTask
+### UC09: Delete Book from LibTask
 
 **MSS**
 
@@ -507,7 +507,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 1.
 
-###UC10: Borrow Book
+### UC10: Borrow Book
 
 **MSS**
 
@@ -541,7 +541,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 3.
 
-###UC11: Return Book on LibTask
+### UC11: Return Book on LibTask
 
 **MSS**
 
@@ -567,7 +567,7 @@ Use case ends.
 
       Use case resumes from step 2.
 
-###UC12: Asking for Help on LibTask
+### UC12: Asking for Help on LibTask
 
 **MSS**
 1. User requests to list all commands
@@ -576,7 +576,7 @@ Use case ends.
 
    Use case ends.
 
-###UC13: Exiting LibTask
+### UC13: Exiting LibTask
 
 **MSS**
 1. User requests to exit LibTask
@@ -585,7 +585,7 @@ Use case ends.
 
    Use case ends.
 
-###UC14: Clear database of all Patron's and Book's
+### UC14: Clear database of all Patron's and Book's
 
 **MSS**
 
@@ -603,7 +603,7 @@ Extension
 
       Use case ends
 
-###UC15: Show previously run commands
+### UC15: Show previously run commands
 
 **MSS**
 1. User requests to see previous command
