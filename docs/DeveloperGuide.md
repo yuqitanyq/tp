@@ -412,7 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-### UC05: Delete a patron from LibTask**
+### UC05: Delete a patron from LibTask
 
 **MSS**
 
