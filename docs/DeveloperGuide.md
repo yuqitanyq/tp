@@ -343,7 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resume from step 1.
 
 
-### UC02 List patron's on LibTask
+### UC02: List patron's on LibTask
 
 **MSS**
 
