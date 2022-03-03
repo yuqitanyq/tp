@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -224,13 +224,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -310,45 +310,333 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `LibTask` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+### UC01: Adding a patron to LibTask
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a patron and provides the name and details of the patron.
 
-    Use case ends.
+2. LibTask adds the patron.
+
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Compulsory fields are not provided.
 
-  Use case ends.
+    * 1a1. LibTask shows an error message.
 
-* 3a. The given index is invalid.
+      Use case resumes from step 1.
 
-    * 3a1. AddressBook shows an error message.
+* 1b. The patron details are invalid.
 
-      Use case resumes at step 2.
+    * 1b1. LibTask shows an error message.
 
-*{More to be added}*
+      Use case resumes from step 1.
+
+* 1c. The given name and details are duplicated.
+
+    * 1c1. LibTask shows an error message.
+
+      Use case resume from step 1.
+
+
+### UC02: List patron's on LibTask
+
+**MSS**
+
+1. User requests to list all patrons
+
+2. LibTask shows the list of all the patrons.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. LibTask has no stored patrons.
+
+    * 2a1. LibTask shows an empty list.
+
+      Use case ends.
+
+### UC03: Editing a patron on LibTask
+
+**MSS**
+1. User list all patrons [UC02](#uc02-list-patrons-on-libtask)
+
+2. User requests to edit a patron and provide the index and the necessary details to be edited.
+
+3. LibTask edits the patron.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The index is not provided or is invalid.
+
+    * 1a1. LibTask shows an error message.
+
+      Use case resumes from step 1.
+
+* 1b. The details are not provided or are invalid.
+
+    * 1b1.  LibTask shows an error message.
+
+      Use case resume from step 1.
+
+
+### UC04: Find a patron on LibTask
+
+**MSS**
+
+1. User request to find patron(s) and provide a number of keywords.
+
+2. LibTask shows the list of patrons that match the search.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Keywords not provided or are invalid.
+
+    * 1a1. LibTask shows an error message.
+
+      Use case resumes from step 1.
+
+* 2a.  No patrons fulfil the search criteria.
+
+    * 2a1. LibTask shows an empty list.
+
+      Use case ends.
+
+
+### UC05: Delete a patron from LibTask
+
+**MSS**
+
+1. User list all patrons [UC02](#uc02-list-patrons-on-libtask).
+
+2. User requests to delete a patron and provide the index.
+
+3. LibTask deletes the patron.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The index is not provided or is invalid.
+
+    * 1a1. LibTask shows an error message.
+
+      Use case resumes from step 1.
+
+### UC06: Add book to LibTask
+
+**MSS**
+
+1. User requests to add a book and provides the name and details of the book
+
+2. LibTask adds the module.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Compulsory fields are not provided.
+
+    * 1a1. LibTask shows an error message.
+
+      Use case resumes from step 1.
+
+* 1b. The book details are invalid.
+
+    * 1b1. LibTask shows an error message.
+
+      Use case resumes from step 1.
+
+### UC07: List Books on LibTask
+
+**MSS**
+1. User requests to list all books.
+
+2. LibTask shows the list of all the books.
+
+   Use case ends.
+
+### UC08: Edit a book on LibTask
+
+**MSS**
+
+1. User requests to edit a book and provides the index of the book and the new details.
+
+2. LibTask edits the book.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. LibTask shows an error message.
+
+      Use case resumes from step 1.
+
+* 1b. The new details are invalid.
+
+    * 1b1. LibTask shows an error message.
+
+      Use case resumes from step 1.
+
+### UC09: Delete Book from LibTask
+
+**MSS**
+
+1. User requests to delete a book and provides the index.
+
+2. LibTask deletes the book.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. LibTask shows an error message.
+
+      Use case resumes from step 1.
+
+### UC10: Borrow Book
+
+**MSS**
+
+1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
+
+2. User lists all books [UC07](#uc07-list-books-on-libtask)
+
+3. User requests to establish a borrow relationship and provides index of the patron and index of the book in lists, as well as return date of the book.
+
+4. LibTask establishes a borrow relationship between the patron and the book.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The given index of patron or book is invalid.
+
+    * 3a1. LibTask shows an error message.
+
+      Use case resumes from step 3.
+
+* 3b. The return date of the book is invalid.
+
+    * 3a1. LibTask shows an error message.
+
+      Use case resumes from step 3.
+
+* 3b. The book is already borrowed.
+
+    * 3a1. LibTask shows an error message.
+
+      Use case resumes from step 3.
+
+### UC11: Return Book on LibTask
+
+**MSS**
+
+1. User finds a patron [UC04](#uc04-find-a-patron-on-libtask)
+
+2. User requests to end a borrow relationship and provides index of the patron and index of the book in lists.
+
+3. LibTask removes the borrow relationship between the patron and the book.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The given index of patron or book is invalid.
+
+    * 2a1. LibTask shows an error message.
+
+      Use case resumes from step 2.
+
+* 2b. The book is not borrowed by the patron.
+
+    * 2a1. LibTask shows an error message.
+
+      Use case resumes from step 2.
+
+### UC12: Asking for Help on LibTask
+
+**MSS**
+1. User requests to list all commands
+
+2. LibTask shows the list of all the commands
+
+   Use case ends.
+
+### UC13: Exiting LibTask
+
+**MSS**
+1. User requests to exit LibTask
+
+2. LibTask closes.
+
+   Use case ends.
+
+### UC14: Clear database of all Patron's and Book's
+
+**MSS**
+
+1. User requests to clear database
+
+2. LibTask clears the database.
+
+   Use case ends.
+
+Extension
+
+* 1a. The database is already empty
+
+    * 1a1. LibTask shows an error message
+
+      Use case ends
+
+### UC15: Show previously run commands
+
+**MSS**
+1. User requests to see previous command
+
+2. LibTask shows the last command used
+
+   Use case ends.
+
+Extension
+
+* 1a. No previous command
+
+    * 1a1. LibTask shows an empty field
+
+      Use case ends.
+
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. A novice with no coding background should be able to use the Lib Task.
+5. The system should respond in 1 second.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Patron**: A user of the library
+* **ISBN**: An International Standard Book Number 13 digits in length.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -365,15 +653,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -382,16 +670,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -399,6 +687,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
