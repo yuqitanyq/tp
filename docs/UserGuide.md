@@ -283,29 +283,28 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-
 ### Category: Patron Commands
-| Function                     | Format Of Command                                                           |
-|------------------------------|-----------------------------------------------------------------------------|
-| **Add a new patron**         | `patron add n/<name> s/<id> p/<phone> e/<email> [t/<tag> …]`                |
-| **Edit a current patron**    | `patron edit INDEX [n/<name>] [s/<id>] [p/<phone>] [e/<email>] [t/<tag> …]` |
-| **Delete a current patron**  | `patron delete INDEX`                                                       |
-| **Find a particular patron** | `patron find n/<name keyword> [n/<name keyword> ...]`                       |
-| **List all patrons**         | `patron list`                                                               |
+Function | Format Of Command
+|--------|-------
+**Add a new patron** | `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
+**List all patrons** | `patron list`
+**Edit a patron** | `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+**Find a patron** | `patron find n/KEYWORD [n/KEYWORD]…​`
+**Delete a patron** | `patron delete INDEX`
 ### Category: Book Commands
-| Function                  | Format Of Command                                                              |
-|---------------------------|--------------------------------------------------------------------------------|
-| **Add a new book**        | `book add n/<name> i/<ISBN> [a/<author> …] [t/<category tag> …]`               |
-| **Edit a current book**   | `book edit INDEX n/<name> i/<ISBN> [a/<author> …] [t/<category tag> …]`        |
-| **Delete a current book** | `book delete INDEX`                                                            |
-| **Borrow a book**         | `borrow b/<index> p/<index> d/<return date>`                                   |
-| **Return a book**         | `return [b/<index>] or [p/<index>]`                                            |
-| **Request a book**        | `request INDEX1 INDEX2`                                                        |
-| **List all books**        | `book list`                                                                    |
+Function | Format Of Command
+|--------|-------
+**Add a book** | `book add n/NAME i/ISBN [a/AUTHOR …] [t/CATEGORY_TAG …]`
+**List all books** | `book list`
+**Edit a book** | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR …] [t/CATEGORY_TAG …]`
+**Delete a book** | `book delete INDEX`
+**Borrow a book** | `borrow INDEX1 INDEX2`
+**Return a book** | `return PREFIX/INDEX`
+**Request a book** | `request INDEX1 INDEX2`
 ### Category: General Commands
-| Function                                   | Format Of Command                   |
-|--------------------------------------------|-------------------------------------|
-| **Clear the sample data**                  | `clear`                             |
-| **Exit the application**                   | `exit`                              |
-| **Quick guide on how to use commands**     | `help`                              |
-| **Navigating the different patrons/books** | **Clicking the up and down arrows** |
+Function | Format Of Command
+|--------|-------
+**Clear all entries** | `clear`
+**Exit the program** | `exit`
+**Show message to help page** | `help`
+**Navigating the different patrons/books** | **Clicking the :arrow_up and :arrow_down arrows on :keyboard**
