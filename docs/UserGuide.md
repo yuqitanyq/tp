@@ -307,9 +307,9 @@ _Details coming soon ..._
 
 ### Category: General Commands
 
-| Function                                   | Format Of Command                                                |
-|--------------------------------------------|------------------------------------------------------------------|
-| **Clear all entries**                      | `clear`                                                          |
-| **Exit the program**                       | `exit`                                                           |
-| **Show message to help page**              | `help`                                                           |
-| **Navigating the different patrons/books** | **Clicking the :arrow_up: and :arrow_down: arrows on :keyboard** |
+| Function                                   | Format Of Command                                                              |
+|--------------------------------------------|--------------------------------------------------------------------------------|
+| **Clear all entries**                      | `clear`                                                                        |
+| **Exit the program**                       | `exit`                                                                         |
+| **Show message to help page**              | `help`                                                                         |
+| **Navigating the different patrons/books** | **Clicking the :arrow_up: and :arrow_down: arrows on the keyboard :keyboard:** |
