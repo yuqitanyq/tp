@@ -7,14 +7,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.bookStub.BookStub;
 
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class BookCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "BookListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,7 +24,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final BookStub bookStub;
 
     @FXML
     private HBox cardPane;
@@ -33,24 +33,25 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label studentId;
+    private Label author;
     @FXML
-    private Label phone;
+    private Label isbn;
     @FXML
-    private Label email;
+    private FlowPane tags;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code Book} with the given {@code Book} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public BookCard(BookStub bookStub, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.bookStub = bookStub;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-//        studentId.setText(person.getAddress().value);
-        studentId.setText("Student ID: " +  "A1234567X");
-        phone.setText("Phone: " + person.getPhone().value);
-        email.setText("Email: " + person.getEmail().value);
+        name.setText(bookStub.getName().fullName);
+        author.setText("Author: " + bookStub.getAuthor());
+        isbn.setText("ISBN: " +  bookStub.getIsbn());
+        bookStub.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
@@ -61,13 +62,13 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof BookCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        BookCard card = (BookCard) other;
         return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+                && bookStub.equals(card.bookStub);
     }
 }
