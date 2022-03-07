@@ -15,9 +15,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Address App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="650" minWidth="950" onCloseRequest="#handleExit" title="LibTask" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <!-- LibTask icon from https://www.flaticon.com/free-icon/book_1164651 -->
+    <Image url="@/images/libtask_icon.png" />
   </icons>
   <scene>
     <Scene>
@@ -49,38 +50,39 @@
         </StackPane>
 
         <VBox VBox.vgrow="ALWAYS">
+          <!-- Solution below adapted from https://docs.oracle.com/javafx/2/get_started/fxml_example.fxml.html -->
           <GridPane alignment="CENTER" VBox.vgrow="ALWAYS" xmlns:fx="http://javafx.com/fxml">
 
-            <VBox minWidth="450.0" styleClass="pane-with-border" GridPane.columnIndex="0" GridPane.rowIndex="0" VBox.vgrow="ALWAYS">
-              <Label alignment="CENTER" prefHeight="21.0" prefWidth="449.0" text="Patron List" textAlignment="CENTER" styleClass="cell_panel_title_panel" />
+            <VBox minWidth="450.0" styleClass="cell_panel" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="NEVER" VBox.vgrow="NEVER">
+              <Label alignment="CENTER" maxWidth="Infinity" prefWidth="449.0" styleClass="cell_panel_title_panel" text="Patron List" textAlignment="CENTER" />
             </VBox>
 
-            <VBox minWidth="450.0" styleClass="pane-with-border" GridPane.columnIndex="1" GridPane.rowIndex="0" VBox.vgrow="ALWAYS">
-              <Label alignment="CENTER" prefHeight="21.0" prefWidth="450.0" text="Book List" textAlignment="CENTER" styleClass="cell_panel_title_panel" />
+            <VBox minWidth="450.0" styleClass="cell_panel" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.vgrow="NEVER" VBox.vgrow="NEVER">
+              <Label alignment="CENTER" maxWidth="Infinity" prefWidth="450.0" styleClass="cell_panel_title_panel" text="Book List" textAlignment="CENTER" VBox.vgrow="NEVER" />
             </VBox>
 
             <VBox fx:id="personList" minWidth="450.0" styleClass="pane-with-border" GridPane.columnIndex="0" GridPane.rowIndex="1" VBox.vgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
-              <StackPane fx:id="personListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS" />
+              <StackPane fx:id="personListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" VBox.vgrow="ALWAYS" />
             </VBox>
 
             <VBox fx:id="bookList" minWidth="450.0" styleClass="pane-with-border" GridPane.columnIndex="1" GridPane.rowIndex="1" VBox.vgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
-              <StackPane fx:id="bookListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS" />
+              <StackPane fx:id="bookListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" VBox.vgrow="ALWAYS" />
             </VBox>
 
+            <rowConstraints>
+              <RowConstraints maxHeight="25" />
+              <RowConstraints maxHeight="100" percentHeight="100" />
+            </rowConstraints>
             <columnConstraints>
               <ColumnConstraints percentWidth="50" />
               <ColumnConstraints percentWidth="50" />
             </columnConstraints>
-            <rowConstraints>
-              <RowConstraints percentHeight="5" />
-              <RowConstraints percentHeight="95" />
-            </rowConstraints>
 
           </GridPane>
         </VBox>
