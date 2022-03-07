@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -49,14 +50,23 @@
 
         <VBox VBox.vgrow="ALWAYS">
           <GridPane alignment="CENTER" VBox.vgrow="ALWAYS" xmlns:fx="http://javafx.com/fxml">
-            <VBox fx:id="personList" minWidth="450.0" styleClass="pane-with-border" GridPane.columnIndex="0" GridPane.rowIndex="0" VBox.vgrow="ALWAYS">
+
+            <VBox minWidth="450.0" styleClass="pane-with-border" GridPane.columnIndex="0" GridPane.rowIndex="0" VBox.vgrow="ALWAYS">
+              <Label alignment="CENTER" prefHeight="21.0" prefWidth="449.0" text="Patron List" textAlignment="CENTER" styleClass="cell_panel_title_panel" />
+            </VBox>
+
+            <VBox minWidth="450.0" styleClass="pane-with-border" GridPane.columnIndex="1" GridPane.rowIndex="0" VBox.vgrow="ALWAYS">
+              <Label alignment="CENTER" prefHeight="21.0" prefWidth="450.0" text="Book List" textAlignment="CENTER" styleClass="cell_panel_title_panel" />
+            </VBox>
+
+            <VBox fx:id="personList" minWidth="450.0" styleClass="pane-with-border" GridPane.columnIndex="0" GridPane.rowIndex="1" VBox.vgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
               <StackPane fx:id="personListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS" />
             </VBox>
 
-            <VBox fx:id="bookList" minWidth="450.0" styleClass="pane-with-border" GridPane.columnIndex="1" GridPane.rowIndex="0" VBox.vgrow="ALWAYS">
+            <VBox fx:id="bookList" minWidth="450.0" styleClass="pane-with-border" GridPane.columnIndex="1" GridPane.rowIndex="1" VBox.vgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
@@ -68,7 +78,8 @@
               <ColumnConstraints percentWidth="50" />
             </columnConstraints>
             <rowConstraints>
-              <RowConstraints percentHeight="100" />
+              <RowConstraints percentHeight="5" />
+              <RowConstraints percentHeight="95" />
             </rowConstraints>
 
           </GridPane>

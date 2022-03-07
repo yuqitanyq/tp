@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.bookStub.BookStub;
+import seedu.address.model.bookstub.BookStub;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -48,7 +48,7 @@ public class BookCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(bookStub.getName().fullName);
         author.setText("Author: " + bookStub.getAuthor());
-        isbn.setText("ISBN: " +  bookStub.getIsbn());
+        isbn.setText("ISBN: " + bookStub.getIsbn());
         bookStub.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
