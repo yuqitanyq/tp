@@ -270,7 +270,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                   | I want to …​                                                                  | So that I can…​                                                                                                                       |
+| Priority | As a …​                                                   | I want to …​                                                                  | So that …​                                                                                                                            |
 |----------|-----------------------------------------------------------|-------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
 | `*`      | Librarian                                                 | add a patron (student or staff) to my database                                | I can keep track of books borrowed or requested by the patron                                                                         |
 | `*`      | Librarian                                                 | delete a patron from my database                                              | I do not get overwhelmed by data of graduated students or retired staff.                                                              |
@@ -305,6 +305,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Book recommender who used the application for a long time | recommend books using stored statistics of most frequently requested books    | I can make better recommendations for students that come to us                                                                        |
 | `*`      | Impatient user                                            | be able to experience reasonable response time while using the application    | I can do my job more efficiently                                                                                                      |
 | `*`      | Easily overwhelmed request handler                        | be able to prioritize my book requests                                        | I can effectively handle requests                                                                                                     |
+| `*`      | Librarian                                                 | to be able to view patron and book details through a GUI                      |                                                                                                                                       |
 
 *{More to be added}*
 
