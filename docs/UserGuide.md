@@ -10,13 +10,13 @@ LibTask is a **desktop application for librarians to manage book loans and reque
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 1. Introduction
+## Introduction
 
 As a school librarian of a large library, you may already have your own desktop library software. However, existing library softwares are GUI-based and slow to work with. If you prefer to work with CLI commands efficiently while still having the benefits of aesthetic displays, then LibTask is designed just for you! LibTask provides you with a well packaged system of commands for managing book loans and book requests by your patrons. Using LibTask, you can quickly process borrowing and returning books, and view different groups of patrons and books to perform tasks such as notifying patrons with overdue books. The system also maintains two independent lists of books and patrons, allowing you to perform queries more efficiently.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 2. Quick start
+## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
