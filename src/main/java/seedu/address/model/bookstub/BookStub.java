@@ -47,7 +47,8 @@ public class BookStub {
         return Collections.unmodifiableSet(categoryTags);
     }
 
-    public Set<Tag> getAvailabilityTags() { return Collections.unmodifiableSet(availabilityTags);
+    public Set<Tag> getAvailabilityTags() {
+        return Collections.unmodifiableSet(availabilityTags);
     }
 
     @Override
