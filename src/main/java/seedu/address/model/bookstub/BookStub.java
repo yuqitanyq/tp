@@ -16,17 +16,19 @@ public class BookStub {
     private final String isbn;
 
     // Data fields
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Tag> categoryTags = new HashSet<>();
+    private final Set<Tag> availabilityTags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public BookStub(Name name, String author, String isbn, Set<Tag> tags) {
-        requireAllNonNull(name, author, isbn, tags);
+    public BookStub(Name name, String author, String isbn, Set<Tag> categoryTags, Set<Tag> availabilityTags) {
+        requireAllNonNull(name, author, isbn, categoryTags, availabilityTags);
         this.name = name;
         this.author = author;
         this.isbn = isbn;
-        this.tags.addAll(tags);
+        this.categoryTags.addAll(categoryTags);
+        this.availabilityTags.addAll(availabilityTags);
     }
 
     public Name getName() {
@@ -41,8 +43,11 @@ public class BookStub {
         return isbn;
     }
 
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Tag> getCategoryTags() {
+        return Collections.unmodifiableSet(categoryTags);
+    }
+
+    public Set<Tag> getAvailabilityTags() { return Collections.unmodifiableSet(availabilityTags);
     }
 
     @Override
@@ -59,7 +64,8 @@ public class BookStub {
         return otherBookStub.getName().equals(getName())
                 && otherBookStub.getAuthor().equals(getAuthor())
                 && otherBookStub.getIsbn().equals(getIsbn())
-                && otherBookStub.getTags().equals(getTags());
+                && otherBookStub.getCategoryTags().equals(getCategoryTags())
+                && otherBookStub.getAvailabilityTags().equals(getAvailabilityTags());
     }
 
     @Override
@@ -71,11 +77,19 @@ public class BookStub {
                 .append("; Isbn: ")
                 .append(getIsbn());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+        Set<Tag> categoryTags = getCategoryTags();
+        Set<Tag> availabilityTags = getAvailabilityTags();
+
+        if (!categoryTags.isEmpty()) {
+            builder.append("; Category Tags: ");
+            categoryTags.forEach(builder::append);
         }
+
+        if (!availabilityTags.isEmpty()) {
+            builder.append("; Availability Tags: ");
+            availabilityTags.forEach(builder::append);
+        }
+
         return builder.toString();
     }
 }

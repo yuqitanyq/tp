@@ -134,15 +134,15 @@ public class MainWindow extends UiPart<Stage> {
         Name bookName5 = new Name("General Relativity");
 
         BookStub book1 = new BookStub(bookName1, "J. K. Rowling",
-                "0-545-01022-5", getTagSet("Fantasy"));
+                "0-545-01022-5", getTagSet("Fantasy"), getTagSet("Borrowed"));
         BookStub book2 = new BookStub(bookName2, "Dan Brown", "0-385-50420-9", getTagSet("Thriller",
-                "Mystery", "fiction"));
+                "Mystery", "fiction"), getTagSet("Available"));
         BookStub book3 = new BookStub(bookName3, "John Grisham",
-                "0-440-21172-7", getTagSet("Thriller"));
+                "0-440-21172-7", getTagSet("Thriller"), getTagSet("Available"));
         BookStub book4 = new BookStub(bookName4, "John Steinbeck",
-                "9780140186390", getTagSet("Novel", "Fiction"));
+                "9780140186390", getTagSet("Novel", "Fiction"), getTagSet("Available"));
         BookStub book5 = new BookStub(bookName5, "Robert Wald",
-                "0-226-87033-2", getTagSet("Science", "Nonfiction"));
+                "0-226-87033-2", getTagSet("Science", "Nonfiction"), getTagSet("Borrowed"));
 
         observableBookList.addAll(book1, book2, book3, book4, book5);
 

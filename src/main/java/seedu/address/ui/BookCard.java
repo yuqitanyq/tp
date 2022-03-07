@@ -37,7 +37,11 @@ public class BookCard extends UiPart<Region> {
     @FXML
     private Label isbn;
     @FXML
-    private FlowPane tags;
+    private FlowPane bookCategoryTags;
+
+    // bookAvailabilityTags may not be needed
+    @FXML
+    private FlowPane bookAvailabilityTags;
 
     /**
      * Creates a {@code Book} with the given {@code Book} and index to display.
@@ -49,9 +53,14 @@ public class BookCard extends UiPart<Region> {
         name.setText(bookStub.getName().fullName);
         author.setText("Author: " + bookStub.getAuthor());
         isbn.setText("ISBN: " + bookStub.getIsbn());
-        bookStub.getTags().stream()
+        bookStub.getCategoryTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> bookCategoryTags.getChildren().add(new Label(tag.tagName)));
+
+        // Availability tags might not be needed
+        bookStub.getAvailabilityTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> bookAvailabilityTags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
