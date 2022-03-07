@@ -1,7 +1,12 @@
 package seedu.address.ui;
 
+import static seedu.address.model.util.SampleDataUtil.getTagSet;
+
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +21,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.bookstub.BookStub;
+import seedu.address.model.bookstub.Name;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -117,7 +124,35 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        bookListPanel = new BookListPanel(logic.getFilteredBookList());
+        // Remove the stub deployment books for testing during integration -- NOT SAFE for deployment
+        ObservableList<BookStub> observableBookList = FXCollections.observableArrayList();
+
+        Name bookName1 = new Name("Harry Potter and the Deathly Hallows");
+        Name bookName2 = new Name("The Da Vinci Code");
+        Name bookName3 = new Name("A Time to Kill");
+        Name bookName4 = new Name("East of Eden");
+        Name bookName5 = new Name("General Relativity");
+
+        BookStub book1 = new BookStub(bookName1, "J. K. Rowling",
+                "0-545-01022-5", getTagSet("Fantasy"));
+        BookStub book2 = new BookStub(bookName2, "Dan Brown", "0-385-50420-9", getTagSet("Thriller",
+                "Mystery", "fiction"));
+        BookStub book3 = new BookStub(bookName3, "John Grisham",
+                "0-440-21172-7", getTagSet("Thriller"));
+        BookStub book4 = new BookStub(bookName4, "John Steinbeck",
+                "9780140186390", getTagSet("Novel", "Fiction"));
+        BookStub book5 = new BookStub(bookName5, "Robert Wald",
+                "0-226-87033-2", getTagSet("Science", "Nonfiction"));
+
+        observableBookList.addAll(book1, book2, book3, book4, book5);
+
+        ObservableList<BookStub> internalUnmodifiableList =
+                FXCollections.unmodifiableObservableList(observableBookList);
+
+        FilteredList<BookStub> bookStubObservableList = new FilteredList<BookStub>(internalUnmodifiableList);
+
+        // Rmb to replace bookStubObservableList to logic.getFilteredBookList() as it is not avail currently
+        bookListPanel = new BookListPanel(bookStubObservableList);
         bookListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

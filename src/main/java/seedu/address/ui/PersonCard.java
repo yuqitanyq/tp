@@ -44,6 +44,8 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+
+        // Remove the hardcoded student ID during integration -- NOT SAFE for deployment
         studentId.setText("Student ID: " + "A1234567X");
         phone.setText("Phone: " + person.getPhone().value);
         email.setText("Email: " + person.getEmail().value);
