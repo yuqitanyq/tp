@@ -378,14 +378,28 @@
     -fx-font-size: 11;
 }
 
-#bookAvailabilityTags {
+#bookAvailableTag {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
-#bookAvailabilityTags .label {
+#bookAvailableTag .label {
     -fx-text-fill: white;
-    -fx-background-color: #C2B280;
+    -fx-background-color: #00D100;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#bookBorrowTag {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#bookBorrowTag .label {
+    -fx-text-fill: white;
+    -fx-background-color: #880808;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;

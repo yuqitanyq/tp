@@ -4,39 +4,47 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
+/**
+ * BookStub is a temporarily class for testing GUI.
+ * It is not safe for deployment and needed to be removed during integration.
+ */
 public class BookStub {
 
     // Identity fields
     private final Name name;
-    private final String author;
+    private final List<Author> authors;
     private final String isbn;
+    private final boolean isAvailable;
+    private final String date;
 
     // Data fields
     private final Set<Tag> categoryTags = new HashSet<>();
-    private final Set<Tag> availabilityTags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public BookStub(Name name, String author, String isbn, Set<Tag> categoryTags, Set<Tag> availabilityTags) {
-        requireAllNonNull(name, author, isbn, categoryTags, availabilityTags);
+    public BookStub(Name name, List<Author> authors, String isbn, Set<Tag> categoryTags, boolean isAvailable,
+                    String date) {
+        requireAllNonNull(name, authors, isbn, categoryTags, isAvailable, date);
         this.name = name;
-        this.author = author;
+        this.authors = authors;
         this.isbn = isbn;
         this.categoryTags.addAll(categoryTags);
-        this.availabilityTags.addAll(availabilityTags);
+        this.isAvailable = isAvailable;
+        this.date = date;
     }
 
     public Name getName() {
         return name;
     }
 
-    public String getAuthor() {
-        return author;
+    public List<Author> getAuthor() {
+        return authors;
     }
 
     public String getIsbn() {
@@ -47,8 +55,12 @@ public class BookStub {
         return Collections.unmodifiableSet(categoryTags);
     }
 
-    public Set<Tag> getAvailabilityTags() {
-        return Collections.unmodifiableSet(availabilityTags);
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     @Override
@@ -65,8 +77,7 @@ public class BookStub {
         return otherBookStub.getName().equals(getName())
                 && otherBookStub.getAuthor().equals(getAuthor())
                 && otherBookStub.getIsbn().equals(getIsbn())
-                && otherBookStub.getCategoryTags().equals(getCategoryTags())
-                && otherBookStub.getAvailabilityTags().equals(getAvailabilityTags());
+                && otherBookStub.getCategoryTags().equals(getCategoryTags());
     }
 
     @Override
@@ -79,16 +90,10 @@ public class BookStub {
                 .append(getIsbn());
 
         Set<Tag> categoryTags = getCategoryTags();
-        Set<Tag> availabilityTags = getAvailabilityTags();
 
         if (!categoryTags.isEmpty()) {
             builder.append("; Category Tags: ");
             categoryTags.forEach(builder::append);
-        }
-
-        if (!availabilityTags.isEmpty()) {
-            builder.append("; Availability Tags: ");
-            availabilityTags.forEach(builder::append);
         }
 
         return builder.toString();

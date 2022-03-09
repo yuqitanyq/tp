@@ -3,6 +3,10 @@ package seedu.address.model.bookstub;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Name class provides basic checks for valid characters in book names.
+ * It is not safe for deployment and needed to be removed during integration.
+ */
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =

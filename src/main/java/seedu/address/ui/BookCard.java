@@ -1,12 +1,15 @@
 package seedu.address.ui;
 
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.bookstub.Author;
 import seedu.address.model.bookstub.BookStub;
 
 /**
@@ -33,15 +36,15 @@ public class BookCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label author;
+    private Label authors;
     @FXML
     private Label isbn;
     @FXML
     private FlowPane bookCategoryTags;
-
-    // bookAvailabilityTags may not be needed
     @FXML
-    private FlowPane bookAvailabilityTags;
+    private FlowPane bookAvailableTag;
+    @FXML
+    private FlowPane bookBorrowTag;
 
     /**
      * Creates a {@code Book} with the given {@code Book} and index to display.
@@ -51,16 +54,31 @@ public class BookCard extends UiPart<Region> {
         this.bookStub = bookStub;
         id.setText(displayedIndex + ". ");
         name.setText(bookStub.getName().fullName);
-        author.setText("Author: " + bookStub.getAuthor());
+
+        // Author check needed since author is an optional parameter in book command
+        if (!bookStub.getAuthor().isEmpty()) {
+            authors.setVisible(true);
+            authors.setManaged(true);
+            String authorsString = bookStub.getAuthor().stream()
+                    .sorted(Comparator.comparing(author -> author.getName()))
+                    .map(Author::getName)
+                    .collect(Collectors.joining(", "));
+            authors.setText("Author: " + authorsString);
+        }
+
         isbn.setText("ISBN: " + bookStub.getIsbn());
+
         bookStub.getCategoryTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> bookCategoryTags.getChildren().add(new Label(tag.tagName)));
 
-        // Availability tags might not be needed
-        bookStub.getAvailabilityTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> bookAvailabilityTags.getChildren().add(new Label(tag.tagName)));
+        // Book status check to properly render relevant tags
+        if (bookStub.isAvailable()) {
+            bookAvailableTag.getChildren().add(new Label("Available"));
+        } else {
+            Collections.addAll(bookBorrowTag.getChildren(), new Label("Borrowed"),
+                    new Label(bookStub.getDate()));
+        }
     }
 
     @Override
