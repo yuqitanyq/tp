@@ -45,7 +45,6 @@ public class Isbn {
      */
     public static boolean isValidIsbn(String test) {
         if (!test.matches(VALIDATION_REGEX_ISBN)) {
-            System.out.println("regex problem");
             return false;
         }
         String isbnWithoutHyphen = removeHyphen(test);
