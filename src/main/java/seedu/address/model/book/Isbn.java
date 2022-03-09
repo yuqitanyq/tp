@@ -3,22 +3,15 @@ package seedu.address.model.book;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-public class ISBN {
+public class Isbn {
 
-    private static final int ISBN10_CHECKSUM_DIVIDER = 11;
-    private static final int ISBN13_CHECKSUM_DIVIDER = 10;
-    private static final int ISBN10_LENGTH = 10;
-    private static final int ISBN13_LENGTH = 13;
-    private static final int ISBN13_VALID_PREFIX1 = 978;
-    private static final int ISBN13_VALID_PREFIX2 = 979;
-    private static final String SPECIAL_CHARACTERS = "-";
-
-    public static final String MESSAGE_CONSTRAINTS = "ISBN should adhere to the following constraints:\n"
+    public static final String SPECIAL_CHARACTERS = "-";
+    public static final String MESSAGE_CONSTRAINTS = "Isbn should adhere to the following constraints:\n"
             + "1. Contain only digits and at most one \"" + SPECIAL_CHARACTERS + "\" character between digits,"
             + " and must start and end with digit characters.\n"
             + "2. Contain exactly 10 digits or 13 digits\n"
-            + "3. For 10-digit ISBN, the sum of [position]x[digit at position] must be divisible by 11\n"
-            + "4. For 13-digit ISBN, the digits must start with 978 or 979, and have correct check sum.\n"
+            + "3. For 10-digit Isbn, the sum of [position]x[digit at position] must be divisible by 11\n"
+            + "4. For 13-digit Isbn, the digits must start with 978 or 979, and have correct check sum.\n"
             + "The check sum:\n"
             + "    - is defined as [weight of position]x[digit at position] and must be divisible by 10\n"
             + "    - weight is 1 if position is odd and 3 otherwise\n"
@@ -27,14 +20,21 @@ public class ISBN {
 
     public static final String VALIDATION_REGEX_ISBN = "^[0-9]+(-?[0-9]+)+$";
 
+    private static final int ISBN10_CHECKSUM_DIVIDER = 11;
+    private static final int ISBN13_CHECKSUM_DIVIDER = 10;
+    private static final int ISBN10_LENGTH = 10;
+    private static final int ISBN13_LENGTH = 13;
+    private static final int ISBN13_VALID_PREFIX1 = 978;
+    private static final int ISBN13_VALID_PREFIX2 = 979;
+
     private final String isbn;
 
     /**
-     * Constructs a {@code ISBN}
+     * Constructs a {@code Isbn}
      *
      * @param isbn A valid isbn.
      */
-    public ISBN(String isbn) {
+    public Isbn(String isbn) {
         requireNonNull(isbn);
         checkArgument(isValidIsbn(isbn), MESSAGE_CONSTRAINTS);
         this.isbn = isbn;
@@ -88,7 +88,7 @@ public class ISBN {
         // Checks for valid check sum
         int checkSum = 0;
         for (int i = 0; i < ISBN13_LENGTH; i++) {
-            // weights alternate between 1 and 3 according to ISBN standards
+            // weights alternate between 1 and 3 according to Isbn standards
             int weight = i % 2 == 0 ? 1 : 3;
             int digitAtPosition = Integer.parseInt(isbnWithoutHyphen.substring(i, i + 1));
             checkSum += weight * digitAtPosition;
@@ -106,8 +106,8 @@ public class ISBN {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ISBN // instanceof handles nulls
-                && removeHyphen(isbn).equals(removeHyphen(((ISBN) other).isbn))); // state check
+                || (other instanceof Isbn // instanceof handles nulls
+                && removeHyphen(isbn).equals(removeHyphen(((Isbn) other).isbn))); // state check
     }
 
 

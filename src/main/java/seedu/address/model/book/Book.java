@@ -19,7 +19,7 @@ public class Book {
 
     // Identity fields
     private final BookName bookName;
-    private final ISBN isbn;
+    private final Isbn isbn;
 
     // Data fields
     private final List<Author> authors = new ArrayList<Author>();
@@ -28,7 +28,7 @@ public class Book {
     /**
      * Every field must be present and not null.
      */
-    public Book(BookName bookName, ISBN isbn, List<Author> authors, Set<Tag> tags) {
+    public Book(BookName bookName, Isbn isbn, List<Author> authors, Set<Tag> tags) {
         requireAllNonNull(bookName, isbn, authors, tags);
         this.bookName = bookName;
         this.isbn = isbn;
@@ -40,7 +40,7 @@ public class Book {
         return bookName;
     }
 
-    public ISBN getIsbn() {
+    public Isbn getIsbn() {
         return isbn;
     }
 
@@ -99,7 +99,7 @@ public class Book {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getBookName())
-                .append("; ISBN: ")
+                .append("; Isbn: ")
                 .append(getIsbn());
 
         List<Author> authors = getAuthors();

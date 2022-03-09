@@ -9,12 +9,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Author {
 
-    public static void main(String[] args) {
-        System.out.println(isValidAuthor("J K Rowling"));
-        System.out.println(isValidAuthor(" Rowling"));
-        System.out.println(isValidAuthor("J. K. Rowling"));
-    }
-
     public static final String MESSAGE_CONSTRAINTS =
             "Author names should only contain alphanumeric characters, spaces and dot, "
             + "and it should not be blank, and it must start with an alphanumeric character.";

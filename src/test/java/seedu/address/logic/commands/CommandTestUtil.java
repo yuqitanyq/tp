@@ -37,6 +37,18 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String VALID_BOOK_NAME_HARRY_POTTER = "Harry Potter and The Philosopher's Stone";
+    public static final String VALID_BOOK_NAME_HUNGER_GAMES = "The Hunger Games: MockingJay";
+    public static final String VALID_ISBN_HARRY_POTTER = "978-71617-018-8-5";
+    public static final String VALID_ISBN_HARRY_POTTER_2 = "9787161701885";
+    public static final String VALID_ISBN_HUNGER_GAMES = "9786029293883";
+    public static final String VALID_AUTHOR_JK_ROWLING = "J. K. Rowling";
+    public static final String VALID_AUTHOR_SUZANNE_COLLINS = "Suzanne Collins";
+    public static final String VALID_TAG_ADVENTURE = "Adventure";
+    public static final String VALID_TAG_MAGIC = "Magic";
+    public static final String VALID_TAG_THRILLER = "Thriller";
+    public static final String VALID_TAG_SCIFI = "Scifi";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
