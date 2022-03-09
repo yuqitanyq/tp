@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_COMMAND;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -40,19 +41,23 @@ public class AddressBookParser {
         for (int i = 1; i < stringArray.length; i++) {
             arguments = arguments + stringArray[i] + " ";
         }
-        switch (stringArray[0]) {
+        try {
+            switch (stringArray[0]) {
 
-        case "patron":
-            return parseCommand(arguments);
+            case "patron":
+                return parseCommand(arguments);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
 
-        default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new ParseException(MESSAGE_EMPTY_COMMAND);
         }
     }
 

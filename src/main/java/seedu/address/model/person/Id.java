@@ -9,13 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Id {
 
-    public static final String MESSAGE_CONSTRAINTS = "Ids can take any values, and should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Ids must be of format AXXXXXXXX, and should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+//    public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
@@ -34,7 +34,9 @@ public class Id {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidId(String test) {
-        return test.matches(VALIDATION_REGEX);
+//        return test.matches(VALIDATION_REGEX);
+        String[] idArray = test.split("");
+        return ((idArray.length == 9) && idArray[0].equals("A"));
     }
 
     @Override

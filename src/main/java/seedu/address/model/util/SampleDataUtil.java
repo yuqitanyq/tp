@@ -20,22 +20,22 @@ public class SampleDataUtil {
     public static Patron[] getSamplePersons() {
         return new Patron[] {
             new Patron(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Id("Blk 30 Geylang Street 29, #06-40"),
+                new Id("A0123456H"),
                 getTagSet("friends")),
             new Patron(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Id("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                new Id("A0123456H"),
                 getTagSet("colleagues", "friends")),
             new Patron(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Id("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                new Id("A0123456H"),
                 getTagSet("neighbours")),
             new Patron(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Id("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                new Id("A0123456H"),
                 getTagSet("family")),
             new Patron(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Id("Blk 47 Tampines Street 20, #17-35"),
+                new Id("A0123456H"),
                 getTagSet("classmates")),
             new Patron(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Id("Blk 45 Aljunied Street 85, #11-31"),
+                new Id("A0123456H"),
                 getTagSet("colleagues"))
         };
     }
