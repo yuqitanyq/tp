@@ -109,7 +109,7 @@ public class Patron {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
+                .append("; Id: ")
                 .append(getId());
 
         Set<Tag> tags = getTags();
