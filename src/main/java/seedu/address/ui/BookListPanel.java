@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.bookstub.BookStub;
+import seedu.address.model.book.Book;
 
 /**
  * Panel containing the list of persons.
@@ -18,12 +18,12 @@ public class BookListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(BookListPanel.class);
 
     @FXML
-    private ListView<BookStub> bookListView;
+    private ListView<Book> bookListView;
 
     /**
      * Creates a {@code BookListPanel} with the given {@code ObservableList}.
      */
-    public BookListPanel(ObservableList<BookStub> bookList) {
+    public BookListPanel(ObservableList<Book> bookList) {
         super(FXML);
         bookListView.setItems(bookList);
         bookListView.setCellFactory(listView -> new BookListViewCell());
@@ -32,9 +32,9 @@ public class BookListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Book} using a {@code BookCard}.
      */
-    class BookListViewCell extends ListCell<BookStub> {
+    class BookListViewCell extends ListCell<Book> {
         @Override
-        protected void updateItem(BookStub bookStub, boolean empty) {
+        protected void updateItem(Book bookStub, boolean empty) {
             super.updateItem(bookStub, empty);
 
             if (empty || bookStub == null) {

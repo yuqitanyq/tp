@@ -1,16 +1,7 @@
 package seedu.address.ui;
 
-import static seedu.address.model.util.SampleDataUtil.getTagSet;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -25,10 +16,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.bookstub.Author;
-import seedu.address.model.bookstub.BookStub;
-import seedu.address.model.bookstub.Name;
-import seedu.address.model.tag.Tag;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -130,106 +117,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        // Remove the stub deployment books for testing during integration -- NOT SAFE for deployment
-        ObservableList<BookStub> observableBookList = FXCollections.observableArrayList();
-
-        // Normal book
-        Name bookName0 = new Name("Deception Point");
-        Author bookZeroAuthorOne = new Author("Dan Brown");
-        String isbnBook0 = "0-545-12345-9";
-        Set<Tag> categoryTagsBook0 = getTagSet("Novel", "Suspense", "Thriller", "TechnoThriller");
-        List<Author> authorListBook0 = new ArrayList<Author>();
-        Collections.addAll(authorListBook0, bookZeroAuthorOne);
-        BookStub book0 = new BookStub(bookName0, authorListBook0, isbnBook0, categoryTagsBook0, true,
-                "9/3/2022");
-
-
-        // Intensive book
-        Name bookName1 = new Name("Lorem Ipsum comes from a latin text written in 45BC by Roman statesman Lorem Ipsum"
-                + " comes from a latin text written in 45BC by Roman statesman Lorem Ipsum comes from a latin text"
-                + " written in 45BC by Roman statesman Lorem Ipsum comes from a latin text written in 45BC by Roman"
-                + " statesman Lorem Ipsum comes from a latin text written in 45BC by Roman statesman Lorem Ipsum comes"
-                + " from a latin text written in 45BC by Roman statesman");
-
-        Author bookOneAuthorOne = new Author("accusamus acutum aegritudine alios aliquip allevatio antiqua"
-                + " arbitramur arbitrium arcu augeri captet censes cetero cogitavisse comparare conscientiam"
-                + " contentus cupiditatum deditum democritus depravata deserunt desiderant desistunt detracta"
-                + " didicerimus dirigentur displicet dissensio disseretur distinguique eget elit eo epicurei equos"
-                + " exercitus exorsus fastidium faucibus felis foedus fuissent generis geometrica gravida illam impetus"
-                + " incursione indignae inhaererent initia inquam inter ipsas ipsi iriure lacinia licet mel mi minim"
-                + " mors muniti netus noster nostro occultarum odioque omnino oratoribus oriantur ornateque percipit"
-                + " plura pluribus possint praetulerit privamur probamus procedat propemodum pulchraeque quaerendi"
-                + " quanti quisque rudem sensum sole stultorum successerit successionem suspicor tranquilli unde varias"
-                + " videre voce vulgo ");
-
-        Author bookOneAuthorTwo = new Author("ad admodum aeterno affert amori animo animum antiquitate aperiri"
-                + " arbitrer ars augeri beate class coniunctione conscientiam consentaneum cu cumanum declinationem"
-                + " didicisse dissensio dissentientium distinctio doleamus efficiantur eloquentiam epicuri euripidis"
-                + " fames filio finibus firmitatem foedus grata gubernatoris his homero homines hymenaeos impetu"
-                + " indocti inimicus intellegebat interesset iudicant iudicatum legendis legimus leniter levitatibus"
-                + " loquerer materia memoriter minimum mirari miseram modice monet mortem motum munere naturales nostra"
-                + " nulla nullam nulli omnes optimi parta peccant persequeris plus politus postea praeteritas praetor"
-                + " prima primis pronuntiaret proposita pulvinar quaedam reiciendis scriptorem situm solitudo suavitate"
-                + " summa tempor tenebo terentianus triari tritani uberiora ultima urbane utraque vacuitate velim ");
-
-        Author bookOneAuthorThree = new Author("ab afficit albucius aliquo amici angere angoribus aperiam bonas"
-                + " brevi caret contentam continent convenire cupiditates curae defendere detraxit detrimenti directam"
-                + " disciplinis dissentiunt distinctio dolere effecerit effectrices effluere enim epicureum evolvendis"
-                + " expetendis fore fuerit generibusque generis graeca harum hominibus illo indoctis inliberali"
-                + " intellegamus invidus ipsi iucundius laetitia legimus liber magnis maiora malorum mandaremus"
-                + " maximam medeam mediocris meminit mi momenti nullus occulta offendit omnis operosam oporteat"
-                + " optinere parum pauca pellat percussit permagna posset posuit praesidium pugnantibus putanda putas"
-                + " quamvis quisque reformidans retinent robustus salutatus sapienti scriptum sensu stabilitas"
-                + " studuisse suspicor tantis temeritate traditur utrumque varias velint veniam veri vias videamus"
-                + " videmus voluptaria ");
-
-        String isbnBook1 = "0-545-01022-5";
-
-        Set<Tag> categoryTagsBook1 = getTagSet("Detective", "Mystery", "Fantasy", "Classics", "Historical",
-                "Horror", "Literary", "Romance", "Crime", "SciFi", "Thrillers", "Drama", "Poetry", "Media",
-                "Nonfiction", "Horror1", "Literary1", "Romance1", "Crime1", "SciFi1", "Thrillers1", "Drama1", "Poetry1",
-                "Media1" , "Media2", "Media3", "Media4", "Media5", "Media6", "Media7", "Media8", "Media9", "Media10");
-
-        List<Author> authorListBook1 = new ArrayList<Author>();
-        Collections.addAll(authorListBook1, bookOneAuthorOne, bookOneAuthorTwo, bookOneAuthorThree);
-        BookStub book1 = new BookStub(bookName1, authorListBook1, isbnBook1, categoryTagsBook1, true,
-                "14/3/2022");
-
-        // book 2 with empty tags and empty author list
-
-        Name bookName2 = new Name("Emptiness");
-        List<Author> emptyAuthorListBook2 = new ArrayList<Author>();
-        Set<Tag> emptyCategoryTagsBook2 = getTagSet();
-        String isbnBook2 = "0-0000-00000-0";
-
-        BookStub book2 = new BookStub(bookName2, emptyAuthorListBook2, isbnBook2, emptyCategoryTagsBook2,
-                false, "14/3/2022");
-
-        // Algorithm book
-        Name bookName3 = new Name("CLRS Introduction to Algorithms");
-        Author bookThreeAuthorOne = new Author("Thomas H Cormen");
-        Author bookThreeAuthorTwo = new Author("Charles Eric Leiserson");
-        Author bookThreeAuthorThree = new Author("Ron Rivest");
-        Author bookThreeAuthorFour = new Author("Clifford Stein");
-        List<Author> authorListBook3 = new ArrayList<Author>();
-
-        Collections.addAll(authorListBook3, bookThreeAuthorOne, bookThreeAuthorTwo, bookThreeAuthorThree,
-                bookThreeAuthorFour);
-
-        Set<Tag> categoryTagsBook3 = getTagSet("Algorithm", "Mathematics");
-        String isbnBook3 = "978-0-262-03384-8";
-        BookStub book3 = new BookStub(bookName3, authorListBook3, isbnBook3, categoryTagsBook3, false,
-                "14/3/2022");
-
-        observableBookList.addAll(book0, book2, book3, book1);
-
-        ObservableList<BookStub> internalUnmodifiableList =
-                FXCollections.unmodifiableObservableList(observableBookList);
-
-        FilteredList<BookStub> bookStubObservableList = new FilteredList<BookStub>(internalUnmodifiableList);
-
-        // Remember to replace bookStubObservableList to logic.getFilteredBookList() as it is not avail currently
-        bookListPanel = new BookListPanel(bookStubObservableList);
+        bookListPanel = new BookListPanel(logic.getFilteredBookList());
         bookListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
