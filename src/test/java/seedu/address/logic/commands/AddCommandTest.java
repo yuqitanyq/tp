@@ -20,6 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.book.Book;
 import seedu.address.model.person.Patron;
 import seedu.address.testutil.PersonBuilder;
 
@@ -114,6 +115,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addBook(Book book) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -129,12 +135,27 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasBook(Book book) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Patron target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public void deleteBook(Book target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Patron target, Patron editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setBook(Book target, Book editedBook) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -145,6 +166,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Patron> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Book> getFilteredBookList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredBookList(Predicate<Book> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.book.Book;
 import seedu.address.model.person.Patron;
 
 /**
@@ -14,4 +15,8 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Patron> getPersonList();
 
+    /**
+     * Returns an unmodifiable view of the books list.
+     */
+    ObservableList<Book> getBookList();
 }
