@@ -17,6 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Patron;
+import seedu.address.testutil.TypicalAddressBook
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -24,7 +25,7 @@ import seedu.address.model.person.Patron;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalAddressBook.getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {

@@ -3,6 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_COMMAND;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.Command.CLEAR_COMMAND_WORD;
+import static seedu.address.logic.commands.Command.EXIT_COMMAND_WORD;
+import static seedu.address.logic.commands.Command.HELP_COMMAND_WORD;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,6 +19,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.parser.book.BookCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -79,28 +83,41 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
+        case Command.PATRON_COMMAND_GROUP:
+            // TODO : ADITI please do something like "return new PatronCommandParser().parse(arguments);"
+            return null;
+
+        case Command.BOOK_COMMAND_GROUP:
+            return new BookCommandParser().parse(arguments);
+
+        // TODO : ADITI please move add, edit, del, find, list into your new PatronCommandParser class in new package
+        // TODO : CHANGE TO "case ADD_COMMAND_WORD", import static "ADD_COMMAND_WORD" from Command class
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+        // TODO : CHANGE TO "case EDIT_COMMAND_WORD", import static "EDIT_COMMAND_WORD" from Command class
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
+        // TODO : CHANGE TO "case DELETE_COMMAND_WORD", import static "DELETE_COMMAND_WORD" from Command class
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
+        // TODO : CHANGE TO "case FIND_COMMAND_WORD", import static "FIND_COMMAND_WORD" from Command class
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        // TODO : CHANGE TO "case LIST_COMMAND_WORD", import static "LIST_COMMAND_WORD" from Command class
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case ExitCommand.COMMAND_WORD:
+        case CLEAR_COMMAND_WORD:
+            return new ClearCommand();
+
+        case EXIT_COMMAND_WORD:
             return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
+        case HELP_COMMAND_WORD:
             return new HelpCommand();
 
         default:

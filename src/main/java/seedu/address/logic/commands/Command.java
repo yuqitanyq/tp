@@ -8,6 +8,18 @@ import seedu.address.model.Model;
  */
 public abstract class Command {
 
+    public static final String PATRON_COMMAND_GROUP = "patron";
+    public static final String BOOK_COMMAND_GROUP = "book";
+
+    public static final String ADD_COMMAND_WORD = "add";
+    public static final String EDIT_COMMAND_WORD = "add";
+    public static final String DELETE_COMMAND_WORD = "delete";
+    public static final String FIND_COMMAND_WORD = "find";
+    public static final String LIST_COMMAND_WORD = "list";
+    public static final String HELP_COMMAND_WORD = "help";
+    public static final String EXIT_COMMAND_WORD = "exit";
+    public static final String CLEAR_COMMAND_WORD = "clear";
+
     /**
      * Executes the command and returns the result message.
      *
