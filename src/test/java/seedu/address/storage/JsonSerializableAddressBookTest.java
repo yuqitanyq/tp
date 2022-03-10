@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
+import seedu.address.testutil.LengthyBooks;
 import seedu.address.testutil.TypicalAddressBook;
 import seedu.address.testutil.TypicalBooks;
 
@@ -22,6 +23,7 @@ public class JsonSerializableAddressBookTest {
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
     private static final Path TYPICAL_BOOKS_FILE = TEST_DATA_FOLDER.resolve("typicalBooksAddressBook.json");
     private static final Path INVALID_BOOK_FILE = TEST_DATA_FOLDER.resolve("invalidBookAddressBook.json");
+    private static final Path LENGTHY_BOOK_FILE = TEST_DATA_FOLDER.resolve("lengthyBooksAddressBook.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
@@ -61,6 +63,15 @@ public class JsonSerializableAddressBookTest {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_BOOK_FILE,
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_lengthyBooksFile_success() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(LENGTHY_BOOK_FILE,
+                JsonSerializableAddressBook.class).get();
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        AddressBook lengthyBooksAddressBook = LengthyBooks.getLengthyAddressBook();
+        assertEquals(addressBookFromFile, lengthyBooksAddressBook);
     }
 
 }
