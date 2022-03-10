@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.book.Author;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -52,9 +54,9 @@ public class EditBookCommandParser implements Parser<EditBookCommand> {
         if (argMultimap.getValue(PREFIX_ISBN).isPresent()) {
             editBookDescriptor.setIsbn(ParserUtil.parseIsbn(argMultimap.getValue(PREFIX_ISBN).get()));
         }
-        if (argMultimap.getValue(PREFIX_AUTHOR).isPresent()) {
-            editBookDescriptor.setAuthors(ParserUtil.parseAuthor(argMultimap.getValue(PREFIX_AUTHOR).get()));
-        }
+
+        parseAuthorsForEdit(argMultimap.getAllValues(PREFIX_AUTHOR)).ifPresent(editBookDescriptor::setAuthors);
+
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editBookDescriptor::setTags);
 
         if (!editBookDescriptor.isAnyFieldEdited()) {
@@ -79,4 +81,19 @@ public class EditBookCommandParser implements Parser<EditBookCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Parses {@code Collection<String> authors} into a {@code Optional<List<Author>>} if {@code authors} is non-empty.
+     * If {@code authors} contain only one element which is an empty string, it will be parsed into a
+     * {@code List<Author>} containing zero authors.
+     */
+    private Optional<List<Author>> parseAuthorsForEdit(Collection<String> authors) throws ParseException {
+        assert authors != null;
+
+        if (authors.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> authorList = authors.size() == 1 && authors.contains("") ? Collections.emptyList() : authors;
+        return Optional.of(ParserUtil.parseAuthors(authorList));
+    }
 }
+

@@ -28,8 +28,9 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code String oneBasedIndex} into an {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -59,7 +60,7 @@ public class ParserUtil {
      * Parses a {@code String bookName} into a {@code BookName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code bookname} is invalid.
+     * @throws ParseException if the given {@code bookName} is invalid.
      */
     public static BookName parseBookName(String bookName) throws ParseException {
         requireNonNull(bookName);
@@ -158,24 +159,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String authors} into an {@code List<Author>}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code authors} is invalid.
+     * Parses {@code Collection<String> authors} into a {@code List<Author>}.
      */
-    //todo split via space? or regex? wrong code
-    public static List<Author> parseAuthor(String authors) throws ParseException {
+    public static List<Author> parseAuthors(Collection<String> authors) throws ParseException {
         requireNonNull(authors);
-        String trimmedAuthors = authors.trim();
-        Author newAuthor = new Author(trimmedAuthors);
-        if (!Author.isValidAuthor(trimmedAuthors)) {
-            throw new ParseException(Author.MESSAGE_CONSTRAINTS);
+        final List<Author> authorList = new ArrayList<>();
+        for (String author : authors) {
+            authorList.add(parseAuthor(author));
         }
-
-        List<Author> authorList = new ArrayList<>();
-        authorList.add(newAuthor);
         return authorList;
     }
 
-
+    /**
+     * Parses a {@code String author} into a {@code Author}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code author} is invalid.
+     */
+    public static Author parseAuthor(String author) throws ParseException {
+        requireNonNull(author);
+        String trimmedAuthor = author.trim();
+        if (!Author.isValidAuthor(trimmedAuthor)) {
+            throw new ParseException(Author.MESSAGE_CONSTRAINTS);
+        }
+        return new Author(trimmedAuthor);
+    }
 }
+
