@@ -1,11 +1,16 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.book.Author;
+import seedu.address.model.book.Book;
+import seedu.address.model.book.BookName;
+import seedu.address.model.book.Isbn;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -40,10 +45,39 @@ public class SampleDataUtil {
         };
     }
 
+    public static Book[] getSampleBooks() {
+        return new Book[] {
+            new Book(new BookName("Harry Potter and The Philosopher's Stone"), new Isbn("978-71617-018-8-5"),
+                getAuthorList("J. K. Rowling"),
+                getTagSet("Adventure", "Magic")),
+            new Book(new BookName("The Hunger Games: MockingJay"), new Isbn("9786029293883"),
+                getAuthorList("Suzanne Collins"),
+                getTagSet("Thriller", "Scifi", "Adventure")),
+            new Book(new BookName("Introduction to Algorithms"), new Isbn("978-03-71-88850-6"),
+                getAuthorList("Cormen", "Leiserson", "Rivest", "Stein"),
+                getTagSet("ComputerScience", "Mathematics")),
+            new Book(new BookName("The Little Book of Semaphores"), new Isbn("4992719864"),
+                getAuthorList(),
+                getTagSet("ComputerScience", "Technology")),
+            new Book(new BookName("The Maze Runner"), new Isbn("1-474-59282-1"),
+                getAuthorList("James Dashner1", "James Dashner2", "James Dashner3"),
+                getTagSet("Adventure", "Romance", "Scifi")),
+            new Book(new BookName("Artificial Intelligence: A Modern Approach"), new Isbn("9780131038059"),
+                getAuthorList("Peter Norvig", "Stuart J. Russell"),
+                getTagSet("Technology")),
+            new Book(new BookName("Cinderella"), new Isbn("9781409580454"),
+                getAuthorList(),
+                getTagSet())
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (Book sampleBook : getSampleBooks()) {
+            sampleAb.addBook(sampleBook);
         }
         return sampleAb;
     }
@@ -57,4 +91,12 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns a list of authors containing the list of strings given.
+     */
+    public static ArrayList<Author> getAuthorList(String... strings) {
+        return Arrays.stream(strings)
+                .map(Author::new)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
 }
