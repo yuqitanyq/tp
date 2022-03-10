@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
@@ -74,12 +73,12 @@ public class BookCard extends UiPart<Region> {
 
         // Book status check to properly render relevant tags -- Not Implemented yet.
 
-//        if (book.isAvailable()) {
-//            bookAvailableTag.getChildren().add(new Label("Available"));
-//        } else {
-//            Collections.addAll(bookBorrowTag.getChildren(), new Label("Borrowed"),
-//                    new Label(book.getDate()));
-//        }
+        //        if (book.isAvailable()) {
+        //            bookAvailableTag.getChildren().add(new Label("Available"));
+        //        } else {
+        //            Collections.addAll(bookBorrowTag.getChildren(), new Label("Borrowed"),
+        //                    new Label(book.getDate()));
+        //        }
     }
 
     @Override
