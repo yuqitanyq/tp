@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Patron;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -50,7 +50,6 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getId().value);
         email.setText(person.getEmail().value);
 
         // Remove the hardcoded student ID during integration -- NOT SAFE for deployment

@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Patron;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.BookList;
+import seedu.address.model.person.Patron;
 import seedu.address.model.person.UniquePersonList;
 
 /**

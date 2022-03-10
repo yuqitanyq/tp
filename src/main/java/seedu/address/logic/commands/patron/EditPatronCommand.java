@@ -1,8 +1,8 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.patron;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -17,23 +17,23 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Id;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Patron;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing patron in the address book.
  */
-public class EditCommand extends Command {
+public class EditPatronCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patron identified "
+    public static final String MESSAGE_USAGE = EDIT_COMMAND_WORD + ": Edits the details of the patron identified "
             + "by the index number used in the displayed patron list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -42,7 +42,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ID + "ID] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + EDIT_COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
@@ -54,10 +54,10 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the patron in the filtered patron list to edit
+     * @param editPersonDescriptor details to edit the patron with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditPatronCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
@@ -110,12 +110,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof seedu.address.logic.commands.patron.EditPatronCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        seedu.address.logic.commands.patron.EditPatronCommand e = (EditPatronCommand) other;
         return index.equals(e.index)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
@@ -214,7 +214,7 @@ public class EditCommand extends Command {
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            seedu.address.logic.commands.patron.EditPatronCommand.EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
