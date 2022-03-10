@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.book.Book;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,6 +14,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Book> PREDICATE_SHOW_ALL_BOOKS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -58,10 +60,21 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a book with the same identity as {@code book} exists in the address book.
+     */
+    boolean hasBook(Book book);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
+
+    /**
+     * Deletes the given book.
+     * The book must exist in the address book.
+     */
+    void deleteBook(Book target);
 
     /**
      * Adds the given person.
@@ -70,18 +83,39 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Adds the given book.
+     */
+    void addBook(Book book);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Replaces the given book {@code target} with {@code editedBook}.
+     * {@code target} must exist in the address book.
+     * The book identity of {@code editedBook} must not be the same as another existing book in the address book.
+     */
+    void setBook(Book target, Book editedBook);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered book list */
+    ObservableList<Book> getFilteredBookList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filter of the filtered book list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredBookList(Predicate<Book> predicate);
 }
