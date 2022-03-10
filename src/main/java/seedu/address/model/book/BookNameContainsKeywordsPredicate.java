@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Tests that a {@code Book}'s {@code BookName} matches any of the keywords given.
@@ -19,7 +18,7 @@ public class BookNameContainsKeywordsPredicate implements Predicate<Book> {
     @Override
     public boolean test(Book book) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(book.getBookName().fullBookName, keyword ));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(book.getBookName().fullBookName, keyword));
     }
 
     @Override
