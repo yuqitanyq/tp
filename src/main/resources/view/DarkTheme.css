@@ -132,6 +132,18 @@
     -fx-text-fill: #010504;
 }
 
+.cell_panel_title_panel {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #F2F3F5;
+}
+
+.cell_panel {
+     -fx-background-color: derive(#808080, 20%);
+     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-border-top-width: 1px;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }
@@ -337,14 +349,57 @@
     -fx-background-radius: 0;
 }
 
-#tags {
+/** Different style classes for different types of tags **/
+#patronRoleTags {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
-#tags .label {
+#patronRoleTags .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#bookCategoryTags {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#bookCategoryTags .label {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#bookAvailableTag {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#bookAvailableTag .label {
+    -fx-text-fill: white;
+    -fx-background-color: #00D100;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#bookBorrowTag {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#bookBorrowTag .label {
+    -fx-text-fill: white;
+    -fx-background-color: #880808;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;

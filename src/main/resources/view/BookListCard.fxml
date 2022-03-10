@@ -27,10 +27,11 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true" />
       </HBox>
-      <FlowPane fx:id="patronRoleTags" />
-      <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true" />
+      <FlowPane fx:id="bookCategoryTags" />
+      <Label fx:id="authors" styleClass="cell_small_label" visible="false" managed="false" wrapText="true" />
+      <Label fx:id="isbn" styleClass="cell_small_label" text="\$isbn" />
+      <FlowPane fx:id="bookAvailableTag" />
+      <FlowPane fx:id="bookBorrowTag" />
     </VBox>
   </GridPane>
 </HBox>
