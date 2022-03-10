@@ -29,8 +29,8 @@ public class AddressTest {
         assertFalse(Id.isValidId(" ")); // spaces only
 
         // valid addresses
-        assertTrue(Id.isValidId("Blk 456, Den Road, #01-355"));
-        assertTrue(Id.isValidId("-")); // one character
-        assertTrue(Id.isValidId("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Id.isValidId("A0123456H"));
+        assertTrue(Id.isValidId("A0123457H"));
+        assertTrue(Id.isValidId("A0123458H"));
     }
 }

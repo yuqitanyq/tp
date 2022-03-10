@@ -66,8 +66,8 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setId(new Id(address));
+    public EditPersonDescriptorBuilder withId(String id) {
+        descriptor.setId(new Id(id));
         return this;
     }
 

@@ -24,29 +24,29 @@ import seedu.address.model.person.Patron;
 public class TypicalPersons {
 
     public static final Patron ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withId("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+            .withId("A0123456H").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends").build();
     public static final Patron BENSON = new PersonBuilder().withName("Benson Meier")
-            .withId("311, Clementi Ave 2, #02-25")
+            .withId("A0123456H")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
     public static final Patron CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withId("wall street").build();
+            .withEmail("heinz@example.com").withId("A0123456H").build();
     public static final Patron DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withId("10th street").withTags("friends").build();
+            .withEmail("cornelia@example.com").withId("A0123456H").withTags("friends").build();
     public static final Patron ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withId("michegan ave").build();
+            .withEmail("werner@example.com").withId("A0123456H").build();
     public static final Patron FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withId("little tokyo").build();
+            .withEmail("lydia@example.com").withId("A0123456H").build();
     public static final Patron GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withId("4th street").build();
+            .withEmail("anna@example.com").withId("A0123456H").build();
 
     // Manually added
     public static final Patron HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withId("little india").build();
+            .withEmail("stefan@example.com").withId("A0123456H").build();
     public static final Patron IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withId("chicago ave").build();
+            .withEmail("hans@example.com").withId("A0123456H").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Patron AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
