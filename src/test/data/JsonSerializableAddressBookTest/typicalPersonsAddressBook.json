@@ -42,5 +42,33 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tagged" : [ ]
-  } ]
+  } ],
+  "books" : [{
+    "bookName" : "Introduction to Algorithms",
+    "isbn" : "978-03-71-88850-6",
+    "tagged" : [ "ComputerScience", "Mathematics" ],
+    "authors" : [ "Cormen", "Leiserson", "Rivest", "Stein" ]
+  }, {
+    "bookName" : "The Little Book of Semaphores",
+    "isbn" : "4992719864",
+    "tagged" : [ "ComputerScience", "Technology" ],
+    "authors" : [ ]
+  }, {
+    "bookName" : "The Maze Runner",
+    "isbn" : "1-474-59282-1",
+    "tagged" : [ ],
+    "authors" : [ "James Dashner1", "James Dashner2", "James Dashner3" ]
+  }, {
+    "bookName" : "Artificial Intelligence: A Modern Approach",
+    "isbn" : "9780131038059",
+    "tagged" : [ "Technology" ],
+    "authors" : [ "Peter Norvig", "Stuart J. Russell" ]
+  }, {
+    "bookName" : "Cinderella",
+    "isbn" : "9781409580454",
+    "tagged" : [ ],
+    "authors" : [ ]
+  }
+  ]
 }
+
