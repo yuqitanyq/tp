@@ -14,8 +14,6 @@ import seedu.address.model.book.Author;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.BookName;
 import seedu.address.model.book.Isbn;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -79,7 +77,7 @@ class JsonAdaptedBook {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 BookName.class.getSimpleName()));
         }
-        if (!Name.isValidName(bookName)) {
+        if (!BookName.isValidBookName(bookName)) {
             throw new IllegalValueException(BookName.MESSAGE_CONSTRAINTS);
         }
         final BookName modelName = new BookName(bookName);
@@ -88,7 +86,7 @@ class JsonAdaptedBook {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Isbn.class.getSimpleName()));
         }
         if (!Isbn.isValidIsbn(isbn)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Isbn.MESSAGE_CONSTRAINTS);
         }
         final Isbn modelIsbn = new Isbn(isbn);
 
