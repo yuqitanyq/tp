@@ -71,6 +71,7 @@ public class BookCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> bookCategoryTags.getChildren().add(new Label(tag.tagName)));
 
+
         // Book status check to properly render relevant tags -- Not Implemented yet.
 
         //        if (book.isAvailable()) {
@@ -79,6 +80,9 @@ public class BookCard extends UiPart<Region> {
         //            Collections.addAll(bookBorrowTag.getChildren(), new Label("Borrowed"),
         //                    new Label(book.getDate()));
         //        }
+
+        // For now, all books will be rendered as available
+        bookAvailableTag.getChildren().add(new Label("Available"));
     }
 
     @Override
