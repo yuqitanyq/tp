@@ -59,17 +59,6 @@ public class TypicalPersons {
 
     private TypicalPersons() {} // prevents instantiation
 
-    /**
-     * Returns an {@code AddressBook} with all the typical persons.
-     */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Patron person : getTypicalPersons()) {
-            ab.addPerson(person);
-        }
-        return ab;
-    }
-
     public static List<Patron> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
