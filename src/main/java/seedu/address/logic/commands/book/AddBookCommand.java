@@ -54,8 +54,17 @@ public class AddBookCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddBookCommand // instanceof handles nulls
-                && toAdd.equals(((AddBookCommand) other).toAdd));
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof AddBookCommand)) {
+            return false;
+        }
+        Book otherToAdd = ((AddBookCommand) other).toAdd;
+        // Compare without timeAdded attribute of Book
+        return otherToAdd.getBookName().equals(toAdd.getBookName())
+                && otherToAdd.getIsbn().equals(toAdd.getIsbn())
+                && otherToAdd.getTags().equals(toAdd.getTags())
+                && otherToAdd.getAuthors().equals(toAdd.getAuthors());
     }
 }

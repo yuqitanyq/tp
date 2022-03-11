@@ -64,6 +64,11 @@ public class AddBookCommandTest {
 
         // different book -> returns false
         assertFalse(addHarryPotterCommand.equals(addHungerGamesCommand));
+
+        // different timeAdded for book -> returns true
+        Book harryPotter2 = new BookBuilder(harryPotter).withTimeAdded(0).build();
+        AddBookCommand addHarryPotterCommand2 = new AddBookCommand(harryPotter2);
+        assertTrue(addHarryPotterCommand.equals(addHarryPotterCommand2));
     }
 
     /**

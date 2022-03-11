@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -47,7 +48,7 @@ public class AddBookCommandParser implements Parser<AddBookCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         List<Author> authorList = ParserUtil.parseAuthors(argMultimap.getAllValues(PREFIX_AUTHOR));
 
-        Book book = new Book(bookName, isbn, authorList, tagList);
+        Book book = new Book(bookName, isbn, authorList, tagList, new Date().getTime());
 
         return new AddBookCommand(book);
     }
