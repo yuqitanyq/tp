@@ -16,7 +16,7 @@ public class TypicalAddressBook {
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Patron person : getTypicalPersons()) {
-            ab.addPerson(person);
+            ab.addPatron(person);
         }
         for (Book book : getTypicalBooks()) {
             ab.addBook(book);

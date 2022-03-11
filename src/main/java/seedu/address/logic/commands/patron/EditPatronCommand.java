@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATRONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -33,7 +33,8 @@ import seedu.address.model.tag.Tag;
  */
 public class EditPatronCommand extends Command {
 
-    public static final String MESSAGE_USAGE = EDIT_COMMAND_WORD + ": Edits the details of the patron identified "
+    public static final String MESSAGE_USAGE = PATRON_COMMAND_GROUP + EDIT_COMMAND_WORD
+            + ": Edits the details of the patron identified "
             + "by the index number used in the displayed patron list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -42,62 +43,62 @@ public class EditPatronCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ID + "ID] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + EDIT_COMMAND_WORD + " 1 "
+            + "Example: " + PATRON_COMMAND_GROUP + EDIT_COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Patron: %1$s";
+    public static final String MESSAGE_EDIT_PATRON_SUCCESS = "Edited Patron: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This patron already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PATRON = "This patron already exists in the address book.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditPersonDescriptor editPatronDescriptor;
 
     /**
      * @param index of the patron in the filtered patron list to edit
-     * @param editPersonDescriptor details to edit the patron with
+     * @param editPatronDescriptor details to edit the patron with
      */
-    public EditPatronCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditPatronCommand(Index index, EditPersonDescriptor editPatronDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editPatronDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editPatronDescriptor = new EditPersonDescriptor(editPatronDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Patron> lastShownList = model.getFilteredPersonList();
+        List<Patron> lastShownList = model.getFilteredPatronList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PATRON_DISPLAYED_INDEX);
         }
 
-        Patron personToEdit = lastShownList.get(index.getZeroBased());
-        Patron editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Patron patronToEdit = lastShownList.get(index.getZeroBased());
+        Patron editedPatron = createEditedPatron(patronToEdit, editPatronDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!patronToEdit.isSamePatron(editedPatron) && model.hasPatron(editedPatron)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PATRON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        model.setPatron(patronToEdit, editedPatron);
+        model.updateFilteredPatronList(PREDICATE_SHOW_ALL_PATRONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PATRON_SUCCESS, editedPatron));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code patronToEdit}
+     * edited with {@code editPatronDescriptor}.
      */
-    private static Patron createEditedPerson(Patron personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Patron createEditedPatron(Patron patronToEdit, EditPersonDescriptor editPatronDescriptor) {
+        assert patronToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Id updatedId = editPersonDescriptor.getId().orElse(personToEdit.getId());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editPatronDescriptor.getName().orElse(patronToEdit.getName());
+        Phone updatedPhone = editPatronDescriptor.getPhone().orElse(patronToEdit.getPhone());
+        Email updatedEmail = editPatronDescriptor.getEmail().orElse(patronToEdit.getEmail());
+        Id updatedId = editPatronDescriptor.getId().orElse(patronToEdit.getId());
+        Set<Tag> updatedTags = editPatronDescriptor.getTags().orElse(patronToEdit.getTags());
 
         return new Patron(updatedName, updatedPhone, updatedEmail, updatedId, updatedTags);
     }
@@ -110,14 +111,14 @@ public class EditPatronCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.logic.commands.patron.EditPatronCommand)) {
+        if (!(other instanceof EditPatronCommand)) {
             return false;
         }
 
         // state check
-        seedu.address.logic.commands.patron.EditPatronCommand e = (EditPatronCommand) other;
+        EditPatronCommand e = (EditPatronCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editPatronDescriptor.equals(e.editPatronDescriptor);
     }
 
     /**
@@ -214,7 +215,7 @@ public class EditPatronCommand extends Command {
             }
 
             // state check
-            seedu.address.logic.commands.patron.EditPatronCommand.EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())

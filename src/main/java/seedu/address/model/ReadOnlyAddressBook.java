@@ -10,10 +10,10 @@ import seedu.address.model.person.Patron;
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the patrons list.
+     * This list will not contain any duplicate patrons.
      */
-    ObservableList<Patron> getPersonList();
+    ObservableList<Patron> getPatronList();
 
     /**
      * Returns an unmodifiable view of the books list.

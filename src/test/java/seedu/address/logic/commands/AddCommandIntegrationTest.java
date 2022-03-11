@@ -31,7 +31,7 @@ public class AddCommandIntegrationTest {
         Patron validPerson = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        expectedModel.addPatron(validPerson);
 
         assertCommandSuccess(new AddPatronCommand(validPerson), model,
                 String.format(AddPatronCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
@@ -39,8 +39,8 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Patron personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddPatronCommand(personInList), model, AddPatronCommand.MESSAGE_DUPLICATE_PERSON);
+        Patron personInList = model.getAddressBook().getPatronList().get(0);
+        assertCommandFailure(new AddPatronCommand(personInList), model, AddPatronCommand.MESSAGE_DUPLICATE_PATRON);
     }
 
 }

@@ -12,15 +12,15 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of patrons that enforces uniqueness between its elements and does not allow nulls.
+ * A patron is considered unique by comparing using {@code Patron#isSamePatron(Patron)}. As such, adding and updating of
+ * patrons uses Patron#isSamePatron(Patron) for equality so as to ensure that the patron being added or updated is
+ * unique in terms of identity in the UniquePatronList. However, the removal of a patron uses Patron#equals(Object) so
+ * as to ensure that the patron with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Patron#isSamePerson(Patron)
+ * @see Patron#isSamePatron(Patron)
  */
 public class UniquePersonList implements Iterable<Patron> {
 
@@ -29,16 +29,16 @@ public class UniquePersonList implements Iterable<Patron> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent patron as the given argument.
      */
     public boolean contains(Patron toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSamePatron);
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a patron to the list.
+     * The patron must not already exist in the list.
      */
     public void add(Patron toAdd) {
         requireNonNull(toAdd);
@@ -49,23 +49,23 @@ public class UniquePersonList implements Iterable<Patron> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the patron {@code target} in the list with {@code editedPatron}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The patron identity of {@code editedPatron} must not be the same as another existing patron in the list.
      */
-    public void setPerson(Patron target, Patron editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setPerson(Patron target, Patron editedPatron) {
+        requireAllNonNull(target, editedPatron);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+        if (!target.isSamePatron(editedPatron) && contains(editedPatron)) {
             throw new DuplicatePersonException();
         }
 
-        internalList.set(index, editedPerson);
+        internalList.set(index, editedPatron);
     }
 
     /**
@@ -79,22 +79,22 @@ public class UniquePersonList implements Iterable<Patron> {
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setPatrons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code patrons}.
+     * {@code patrons} must not contain duplicate patrons.
      */
-    public void setPersons(List<Patron> persons) {
-        requireAllNonNull(persons);
-        if (!personsAreUnique(persons)) {
+    public void setPatrons(List<Patron> patrons) {
+        requireAllNonNull(patrons);
+        if (!patronsAreUnique(patrons)) {
             throw new DuplicatePersonException();
         }
 
-        internalList.setAll(persons);
+        internalList.setAll(patrons);
     }
 
     /**
@@ -122,12 +122,12 @@ public class UniquePersonList implements Iterable<Patron> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code patrons} contains only unique patrons.
      */
-    private boolean personsAreUnique(List<Patron> persons) {
-        for (int i = 0; i < persons.size() - 1; i++) {
-            for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
+    private boolean patronsAreUnique(List<Patron> patrons) {
+        for (int i = 0; i < patrons.size() - 1; i++) {
+            for (int j = i + 1; j < patrons.size(); j++) {
+                if (patrons.get(i).isSamePatron(patrons.get(j))) {
                     return false;
                 }
             }

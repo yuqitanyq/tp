@@ -49,9 +49,9 @@ public class AddPatronCommandParser implements Parser<AddPatronCommand> {
         Id id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Patron person = new Patron(name, phone, email, id, tagList);
+        Patron patron = new Patron(name, phone, email, id, tagList);
 
-        return new AddPatronCommand(person);
+        return new AddPatronCommand(patron);
     }
 
     /**

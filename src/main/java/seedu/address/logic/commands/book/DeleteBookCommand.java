@@ -38,7 +38,7 @@ public class DeleteBookCommand extends Command {
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             // TODO : Change this message
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PATRON_DISPLAYED_INDEX);
         }
 
         Book bookToDelete = lastShownList.get(targetIndex.getZeroBased());

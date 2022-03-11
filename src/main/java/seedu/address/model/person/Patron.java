@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Patron in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Patron {
@@ -61,21 +61,21 @@ public class Patron {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both patrons have the same name.
+     * This defines a weaker notion of equality between two patrons.
      */
-    public boolean isSamePerson(Patron otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSamePatron(Patron otherPatron) {
+        if (otherPatron == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPatron != null
+                && otherPatron.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both patrons have the same identity and data fields.
+     * This defines a stronger notion of equality between two patrons.
      */
     @Override
     public boolean equals(Object other) {
@@ -87,12 +87,12 @@ public class Patron {
             return false;
         }
 
-        Patron otherPerson = (Patron) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getId().equals(getId())
-                && otherPerson.getTags().equals(getTags());
+        Patron otherPatron = (Patron) other;
+        return otherPatron.getName().equals(getName())
+                && otherPatron.getPhone().equals(getPhone())
+                && otherPatron.getEmail().equals(getEmail())
+                && otherPatron.getId().equals(getId())
+                && otherPatron.getTags().equals(getTags());
     }
 
     @Override

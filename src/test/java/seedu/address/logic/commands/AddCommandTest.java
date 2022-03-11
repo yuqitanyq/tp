@@ -49,7 +49,7 @@ public class AddCommandTest {
         AddPatronCommand addCommand = new AddPatronCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddPatronCommand.MESSAGE_DUPLICATE_PERSON, () ->
+        assertThrows(CommandException.class, AddPatronCommand.MESSAGE_DUPLICATE_PATRON, () ->
             addCommand.execute(modelStub));
     }
 
@@ -112,7 +112,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Patron person) {
+        public void addPatron(Patron patron) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -132,7 +132,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Patron person) {
+        public boolean hasPatron(Patron person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -142,7 +142,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deletePerson(Patron target) {
+        public void deletePatron(Patron target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -152,7 +152,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setPerson(Patron target, Patron editedPerson) {
+        public void setPatron(Patron target, Patron editedPatron) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -162,12 +162,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Patron> getFilteredPersonList() {
+        public ObservableList<Patron> getFilteredPatronList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Patron> predicate) {
+        public void updateFilteredPatronList(Predicate<Patron> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -194,9 +194,9 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Patron person) {
+        public boolean hasPatron(Patron person) {
             requireNonNull(person);
-            return this.person.isSamePerson(person);
+            return this.person.isSamePatron(person);
         }
     }
 
@@ -207,15 +207,15 @@ public class AddCommandTest {
         final ArrayList<Patron> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Patron person) {
+        public boolean hasPatron(Patron person) {
             requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+            return personsAdded.stream().anyMatch(person::isSamePatron);
         }
 
         @Override
-        public void addPerson(Patron person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addPatron(Patron patron) {
+            requireNonNull(patron);
+            personsAdded.add(patron);
         }
 
         @Override

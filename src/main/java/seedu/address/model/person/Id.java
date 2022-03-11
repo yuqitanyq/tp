@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's address in the address book.
+ * Represents a Patron's id in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidId(String)}
  */
 public class Id {
@@ -12,7 +12,7 @@ public class Id {
     public static final String MESSAGE_CONSTRAINTS = "Ids must be of format AXXXXXXXX, and should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the id must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
@@ -20,9 +20,9 @@ public class Id {
     public final String value;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs an {@code Id}.
      *
-     * @param id A valid address.
+     * @param id A valid id.
      */
     public Id(String id) {
         requireNonNull(id);
@@ -31,7 +31,7 @@ public class Id {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid id.
      */
     public static boolean isValidId(String test) {
         String[] idArray = test.split("");
