@@ -1,26 +1,23 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.patron;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.Command.CLEAR_COMMAND_WORD;
-import static seedu.address.logic.commands.Command.EXIT_COMMAND_WORD;
-import static seedu.address.logic.commands.Command.HELP_COMMAND_WORD;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.parser.book.BookCommandParser;
+import seedu.address.logic.commands.patron.ListPatronCommand;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.patron.PatronCommandParser;
 
 /**
- * Parses user input.
+ * Parses user input that is already processed by AddressBookParser into a Command object
+ *
+ * @see seedu.address.logic.parser.AddressBookParser
  */
-public class AddressBookParser {
+public class PatronCommandParser implements Parser<Command> {
 
     /**
      * Used for initial separation of command word and args.
@@ -30,11 +27,11 @@ public class AddressBookParser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
+     * @param userInput user input string that is alaready processed by {@code AddressBookParser}
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parse(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -45,24 +42,23 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case Command.PATRON_COMMAND_GROUP:
-            return new PatronCommandParser().parse(arguments);
+        case Command.ADD_COMMAND_WORD:
+            return new AddPatronCommandParser().parse(arguments);
 
-        case Command.BOOK_COMMAND_GROUP:
-            return new BookCommandParser().parse(arguments);
+        case Command.EDIT_COMMAND_WORD:
+            return new EditPatronCommandParser().parse(arguments);
 
-        case CLEAR_COMMAND_WORD:
-            return new ClearCommand();
+        case Command.DELETE_COMMAND_WORD:
+            return new DeletePatronCommandParser().parse(arguments);
 
-        case EXIT_COMMAND_WORD:
-            return new ExitCommand();
+        case Command.FIND_COMMAND_WORD:
+            return new FindPatronCommandParser().parse(arguments);
 
-        case HELP_COMMAND_WORD:
-            return new HelpCommand();
+        case Command.LIST_COMMAND_WORD:
+            return new ListPatronCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

@@ -5,7 +5,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.book.Book;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Patron;
 
 public class TypicalAddressBook {
     /**
@@ -15,7 +15,7 @@ public class TypicalAddressBook {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
+        for (Patron person : getTypicalPersons()) {
             ab.addPerson(person);
         }
         for (Book book : getTypicalBooks()) {
