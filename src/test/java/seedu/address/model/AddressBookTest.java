@@ -3,9 +3,9 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AUTHOR_SUZANNE_COLLINS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOK_NAME_HUNGER_GAMES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIFI;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.book.Book;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Patron;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.BookBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -53,9 +53,9 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Patron editedAlice = new PersonBuilder(ALICE).withId(VALID_ID_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
+        List<Patron> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons, new ArrayList<>());
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
@@ -80,7 +80,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Patron editedAlice = new PersonBuilder(ALICE).withId(VALID_ID_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -126,16 +126,16 @@ public class AddressBookTest {
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Patron> persons = FXCollections.observableArrayList();
         private final ObservableList<Book> books = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<Book> books) {
+        AddressBookStub(Collection<Patron> persons, Collection<Book> books) {
             this.persons.setAll(persons);
             this.books.setAll(books);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
+        public ObservableList<Patron> getPersonList() {
             return persons;
         }
 

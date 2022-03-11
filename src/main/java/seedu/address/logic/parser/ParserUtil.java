@@ -14,8 +14,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.book.Author;
 import seedu.address.model.book.BookName;
 import seedu.address.model.book.Isbn;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -92,13 +92,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
+    public static Id parseId(String address) throws ParseException {
         requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        String trimmedId = address.trim();
+        if (!Id.isValidId(trimmedId)) {
+            throw new ParseException(Id.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Id(trimmedId);
     }
 
     /**
