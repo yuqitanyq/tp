@@ -207,9 +207,9 @@ public class AddCommandTest {
         final ArrayList<Patron> patronsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPatron(Patron person) {
-            requireNonNull(person);
-            return patronsAdded.stream().anyMatch(person::isSamePatron);
+        public boolean hasPatron(Patron patron) {
+            requireNonNull(patron);
+            return patronsAdded.stream().anyMatch(patron::isSamePatron);
         }
 
         @Override
