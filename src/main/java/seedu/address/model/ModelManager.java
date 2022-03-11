@@ -11,7 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.book.Book;
+import seedu.address.model.person.Patron;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +22,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Patron> filteredPersons;
+    private final FilteredList<Book> filteredBooks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredBooks = new FilteredList<>(this.addressBook.getBookList());
     }
 
     public ModelManager() {
@@ -88,27 +91,51 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
+    public boolean hasPerson(Patron person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
     }
 
     @Override
-    public void deletePerson(Person target) {
+    public boolean hasBook(Book book) {
+        requireNonNull(book);
+        return addressBook.hasBook(book);
+    }
+
+    @Override
+    public void deletePerson(Patron target) {
         addressBook.removePerson(target);
     }
 
     @Override
-    public void addPerson(Person person) {
+    public void deleteBook(Book target) {
+        addressBook.removeBook(target);
+    }
+
+    @Override
+    public void addPerson(Patron person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
+    public void addBook(Book book) {
+        addressBook.addBook(book);
+        updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
+    }
+
+    @Override
+    public void setPerson(Patron target, Patron editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setBook(Book target, Book editedBook) {
+        requireAllNonNull(target, editedBook);
+
+        addressBook.setBook(target, editedBook);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -118,14 +145,29 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Patron> getFilteredPersonList() {
         return filteredPersons;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Book} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public ObservableList<Book> getFilteredBookList() {
+        return filteredBooks;
+    }
+
+    @Override
+    public void updateFilteredPersonList(Predicate<Patron> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredBookList(Predicate<Book> predicate) {
+        requireNonNull(predicate);
+        filteredBooks.setPredicate(predicate);
     }
 
     @Override
@@ -144,7 +186,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredBooks.equals(other.filteredBooks);
     }
 
 }
