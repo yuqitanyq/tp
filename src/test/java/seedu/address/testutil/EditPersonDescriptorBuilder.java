@@ -29,15 +29,15 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditPersonDescriptor} with fields containing {@code patron}'s details
      */
-    public EditPersonDescriptorBuilder(Patron person) {
+    public EditPersonDescriptorBuilder(Patron patron) {
         descriptor = new EditPersonDescriptor();
-        descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
-        descriptor.setEmail(person.getEmail());
-        descriptor.setId(person.getId());
-        descriptor.setTags(person.getTags());
+        descriptor.setName(patron.getName());
+        descriptor.setPhone(patron.getPhone());
+        descriptor.setEmail(patron.getEmail());
+        descriptor.setId(patron.getId());
+        descriptor.setTags(patron.getTags());
     }
 
     /**
@@ -65,7 +65,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Id} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withId(String id) {
         descriptor.setId(new Id(id));

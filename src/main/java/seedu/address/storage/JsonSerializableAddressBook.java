@@ -20,7 +20,7 @@ import seedu.address.model.person.Patron;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Patrons list contains duplicate person(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedBook> books = new ArrayList<>();
@@ -53,11 +53,11 @@ class JsonSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Patron person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPatron(person)) {
+            Patron patron = jsonAdaptedPerson.toModelType();
+            if (addressBook.hasPatron(patron)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPatron(person);
+            addressBook.addPatron(patron);
         }
         for (JsonAdaptedBook jsonAdaptedBook : books) {
             Book book = jsonAdaptedBook.toModelType();

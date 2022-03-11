@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Patron;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of patrons.
  */
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
@@ -23,25 +23,25 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Patron> personList) {
+    public PersonListPanel(ObservableList<Patron> patronList) {
         super(FXML);
-        personListView.setItems(personList);
+        personListView.setItems(patronList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Patron} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Patron> {
         @Override
-        protected void updateItem(Patron person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(Patron patron, boolean empty) {
+            super.updateItem(patron, empty);
 
-            if (empty || person == null) {
+            if (empty || patron == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new PersonCard(patron, getIndex() + 1).getRoot());
             }
         }
     }

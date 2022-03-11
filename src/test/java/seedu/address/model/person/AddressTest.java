@@ -14,21 +14,21 @@ public class AddressTest {
     }
 
     @Test
-    public void constructor_invalidAddress_throwsIllegalArgumentException() {
-        String invalidAddress = "";
-        assertThrows(IllegalArgumentException.class, () -> new Id(invalidAddress));
+    public void constructor_invalidId_throwsIllegalArgumentException() {
+        String invalidId = "";
+        assertThrows(IllegalArgumentException.class, () -> new Id(invalidId));
     }
 
     @Test
-    public void isValidAddress() {
-        // null address
+    public void isValidId() {
+        // null id
         assertThrows(NullPointerException.class, () -> Id.isValidId(null));
 
-        // invalid addresses
+        // invalid id
         assertFalse(Id.isValidId("")); // empty string
         assertFalse(Id.isValidId(" ")); // spaces only
 
-        // valid addresses
+        // valid id
         assertTrue(Id.isValidId("A0123456H"));
         assertTrue(Id.isValidId("A0123457H"));
         assertTrue(Id.isValidId("A0123458H"));

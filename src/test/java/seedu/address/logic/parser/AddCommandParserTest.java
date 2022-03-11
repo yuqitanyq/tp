@@ -46,27 +46,27 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Patron expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Patron expectedPatron = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ID_DESC_BOB + TAG_DESC_FRIEND, new AddPatronCommand(expectedPerson));
+                + ID_DESC_BOB + TAG_DESC_FRIEND, new AddPatronCommand(expectedPatron));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ID_DESC_BOB + TAG_DESC_FRIEND, new AddPatronCommand(expectedPerson));
+                + ID_DESC_BOB + TAG_DESC_FRIEND, new AddPatronCommand(expectedPatron));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ID_DESC_BOB + TAG_DESC_FRIEND, new AddPatronCommand(expectedPerson));
+                + ID_DESC_BOB + TAG_DESC_FRIEND, new AddPatronCommand(expectedPatron));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ID_DESC_BOB + TAG_DESC_FRIEND, new AddPatronCommand(expectedPerson));
+                + ID_DESC_BOB + TAG_DESC_FRIEND, new AddPatronCommand(expectedPatron));
 
-        // multiple addresses - last address accepted
+        // multiple ids - last id accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ID_DESC_AMY
-                + ID_DESC_BOB + TAG_DESC_FRIEND, new AddPatronCommand(expectedPerson));
+                + ID_DESC_BOB + TAG_DESC_FRIEND, new AddPatronCommand(expectedPatron));
 
         // multiple tags - all accepted
         Patron expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
@@ -78,9 +78,9 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Patron expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Patron expectedPatron = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ID_DESC_AMY,
-                new AddPatronCommand(expectedPerson));
+                new AddPatronCommand(expectedPatron));
     }
 
     @Test
@@ -99,7 +99,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ID_DESC_BOB,
                 expectedMessage);
 
-        // missing address prefix
+        // missing id prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ID_BOB,
                 expectedMessage);
 
@@ -122,7 +122,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ID_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
-        // invalid address
+        // invalid id
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ID_DESC
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Id.MESSAGE_CONSTRAINTS);
 

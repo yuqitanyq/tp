@@ -37,35 +37,35 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Patron editedPerson = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        Patron editedPatron = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPatron).build();
         EditPatronCommand editCommand = new EditPatronCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPatron);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPatron(model.getFilteredPatronList().get(0), editedPerson);
+        expectedModel.setPatron(model.getFilteredPatronList().get(0), editedPatron);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPatronList().size());
-        Patron lastPerson = model.getFilteredPatronList().get(indexLastPerson.getZeroBased());
+        Index indexLastPatron = Index.fromOneBased(model.getFilteredPatronList().size());
+        Patron lastPatron = model.getFilteredPatronList().get(indexLastPatron.getZeroBased());
 
-        PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Patron editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        PersonBuilder patronInList = new PersonBuilder(lastPatron);
+        Patron editedPerson = patronInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditPatronCommand editCommand = new EditPatronCommand(indexLastPerson, descriptor);
+        EditPatronCommand editCommand = new EditPatronCommand(indexLastPatron, descriptor);
 
         String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPatron(lastPerson, editedPerson);
+        expectedModel.setPatron(lastPatron, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -73,9 +73,9 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditPatronCommand editCommand = new EditPatronCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
-        Patron editedPerson = model.getFilteredPatronList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Patron editedPatron = model.getFilteredPatronList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPatron);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -87,22 +87,22 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Patron personInFilteredList = model.getFilteredPatronList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Patron editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
+        Patron editedPatron = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
         EditPatronCommand editCommand = new EditPatronCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPatron);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPatron(model.getFilteredPatronList().get(0), editedPerson);
+        expectedModel.setPatron(model.getFilteredPatronList().get(0), editedPatron);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Patron firstPerson = model.getFilteredPatronList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
+        Patron firstPatron = model.getFilteredPatronList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPatron).build();
         EditPatronCommand editCommand = new EditPatronCommand(INDEX_SECOND_PERSON, descriptor);
 
         assertCommandFailure(editCommand, model, EditPatronCommand.MESSAGE_DUPLICATE_PATRON);
@@ -113,9 +113,9 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in address book
-        Patron personInList = model.getAddressBook().getPatronList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Patron patronInList = model.getAddressBook().getPatronList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditPatronCommand editCommand = new EditPatronCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder(personInList).build());
+                new EditPersonDescriptorBuilder(patronInList).build());
 
         assertCommandFailure(editCommand, model, EditPatronCommand.MESSAGE_DUPLICATE_PATRON);
     }

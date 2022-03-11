@@ -53,7 +53,7 @@ public class UniquePersonList implements Iterable<Patron> {
      * {@code target} must exist in the list.
      * The patron identity of {@code editedPatron} must not be the same as another existing patron in the list.
      */
-    public void setPerson(Patron target, Patron editedPatron) {
+    public void setPatron(Patron target, Patron editedPatron) {
         requireAllNonNull(target, editedPatron);
 
         int index = internalList.indexOf(target);

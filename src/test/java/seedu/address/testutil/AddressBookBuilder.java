@@ -21,10 +21,10 @@ public class AddressBookBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Patron} to the {@code AddressBook} that we are building.
      */
-    public AddressBookBuilder withPerson(Patron person) {
-        addressBook.addPatron(person);
+    public AddressBookBuilder withPatron(Patron patron) {
+        addressBook.addPatron(patron);
         return this;
     }
 

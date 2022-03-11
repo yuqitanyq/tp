@@ -29,13 +29,13 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Patron personToDelete = model.getFilteredPatronList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Patron patronToDelete = model.getFilteredPatronList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeletePatronCommand deleteCommand = new DeletePatronCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeletePatronCommand.MESSAGE_DELETE_PATRON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeletePatronCommand.MESSAGE_DELETE_PATRON_SUCCESS, patronToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePatron(personToDelete);
+        expectedModel.deletePatron(patronToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -52,13 +52,13 @@ public class DeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Patron personToDelete = model.getFilteredPatronList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Patron patronToDelete = model.getFilteredPatronList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeletePatronCommand deleteCommand = new DeletePatronCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeletePatronCommand.MESSAGE_DELETE_PATRON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeletePatronCommand.MESSAGE_DELETE_PATRON_SUCCESS, patronToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePatron(personToDelete);
+        expectedModel.deletePatron(patronToDelete);
         showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);

@@ -110,7 +110,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPatron(Patron target, Patron editedPatron) {
         requireNonNull(editedPatron);
 
-        patrons.setPerson(target, editedPatron);
+        patrons.setPatron(target, editedPatron);
     }
 
     /**

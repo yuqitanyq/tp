@@ -35,19 +35,19 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Patron validPerson = new PersonBuilder().build();
+        Patron validPatron = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddPatronCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddPatronCommand(validPatron).execute(modelStub);
 
-        assertEquals(String.format(AddPatronCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(AddPatronCommand.MESSAGE_SUCCESS, validPatron), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPatron), modelStub.patronsAdded);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Patron validPerson = new PersonBuilder().build();
-        AddPatronCommand addCommand = new AddPatronCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        Patron validPatron = new PersonBuilder().build();
+        AddPatronCommand addCommand = new AddPatronCommand(validPatron);
+        ModelStub modelStub = new ModelStubWithPerson(validPatron);
 
         assertThrows(CommandException.class, AddPatronCommand.MESSAGE_DUPLICATE_PATRON, () ->
             addCommand.execute(modelStub));
@@ -186,17 +186,17 @@ public class AddCommandTest {
      * A Model stub that contains a single person.
      */
     private class ModelStubWithPerson extends ModelStub {
-        private final Patron person;
+        private final Patron patron;
 
-        ModelStubWithPerson(Patron person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithPerson(Patron patron) {
+            requireNonNull(patron);
+            this.patron = patron;
         }
 
         @Override
-        public boolean hasPatron(Patron person) {
-            requireNonNull(person);
-            return this.person.isSamePatron(person);
+        public boolean hasPatron(Patron patron) {
+            requireNonNull(patron);
+            return this.patron.isSamePatron(patron);
         }
     }
 
@@ -204,18 +204,18 @@ public class AddCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Patron> personsAdded = new ArrayList<>();
+        final ArrayList<Patron> patronsAdded = new ArrayList<>();
 
         @Override
         public boolean hasPatron(Patron person) {
             requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePatron);
+            return patronsAdded.stream().anyMatch(person::isSamePatron);
         }
 
         @Override
         public void addPatron(Patron patron) {
             requireNonNull(patron);
-            personsAdded.add(patron);
+            patronsAdded.add(patron);
         }
 
         @Override

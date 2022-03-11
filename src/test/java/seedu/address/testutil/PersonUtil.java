@@ -15,27 +15,27 @@ import seedu.address.model.person.Patron;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class for Person.
+ * A utility class for Patron.
  */
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code patron}.
      */
-    public static String getAddCommand(Patron person) {
-        return PATRON_COMMAND_GROUP + " " + Command.ADD_COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCommand(Patron patron) {
+        return PATRON_COMMAND_GROUP + " " + Command.ADD_COMMAND_WORD + " " + getPatronDetails(patron);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code patron}'s details.
      */
-    public static String getPersonDetails(Patron person) {
+    public static String getPatronDetails(Patron patron) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ID + person.getId().value + " ");
-        person.getTags().stream().forEach(
+        sb.append(PREFIX_NAME + patron.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + patron.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + patron.getEmail().value + " ");
+        sb.append(PREFIX_ID + patron.getId().value + " ");
+        patron.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
@@ -44,7 +44,7 @@ public class PersonUtil {
     /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPatronCommand.EditPersonDescriptor descriptor) {
+    public static String getEditPatronDescriptorDetails(EditPatronCommand.EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

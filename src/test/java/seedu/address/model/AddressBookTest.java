@@ -55,8 +55,8 @@ public class AddressBookTest {
         // Two persons with the same identity fields
         Patron editedAlice = new PersonBuilder(ALICE).withId(VALID_ID_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Patron> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons, new ArrayList<>());
+        List<Patron> newPatrons = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newPatrons, new ArrayList<>());
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -126,17 +126,17 @@ public class AddressBookTest {
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Patron> persons = FXCollections.observableArrayList();
+        private final ObservableList<Patron> patrons = FXCollections.observableArrayList();
         private final ObservableList<Book> books = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Patron> persons, Collection<Book> books) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<Patron> patrons, Collection<Book> books) {
+            this.patrons.setAll(patrons);
             this.books.setAll(books);
         }
 
         @Override
         public ObservableList<Patron> getPatronList() {
-            return persons;
+            return patrons;
         }
 
         @Override

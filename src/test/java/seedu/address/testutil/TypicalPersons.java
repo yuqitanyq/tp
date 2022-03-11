@@ -18,7 +18,7 @@ import java.util.List;
 import seedu.address.model.person.Patron;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Patron} objects to be used in tests.
  */
 public class TypicalPersons {
 
@@ -47,7 +47,7 @@ public class TypicalPersons {
     public static final Patron IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withId("A0123456H").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
+    // Manually added - Patron's details found in {@code CommandTestUtil}
     public static final Patron AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withId(VALID_ID_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Patron BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
