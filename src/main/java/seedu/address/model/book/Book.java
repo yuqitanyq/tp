@@ -20,6 +20,7 @@ public class Book {
     // Identity fields
     private final BookName bookName;
     private final Isbn isbn;
+    //private final long timeAdded;
 
     // Data fields
     private final List<Author> authors = new ArrayList<Author>();
@@ -34,6 +35,7 @@ public class Book {
         this.isbn = isbn;
         this.authors.addAll(authors);
         this.tags.addAll(tags);
+        //this.timeAdded = new Date().getTime();
     }
 
     public BookName getBookName() {

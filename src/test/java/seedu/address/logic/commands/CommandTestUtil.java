@@ -2,8 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AUTHOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -18,6 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.patron.EditPatronCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.book.Book;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Patron;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -61,11 +64,27 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String BOOK_NAME_DESC_HARRY_POTTER = " " + PREFIX_NAME + VALID_BOOK_NAME_HARRY_POTTER;
+    public static final String BOOK_NAME_DESC_HUNGER_GAMES = " " + PREFIX_NAME + VALID_BOOK_NAME_HUNGER_GAMES;
+    public static final String ISBN_DESC_HARRY_POTTER = " " + PREFIX_ISBN + VALID_ISBN_HARRY_POTTER;
+    public static final String ISBN_DESC_HUNGER_GAMES = " " + PREFIX_ISBN + VALID_ISBN_HUNGER_GAMES;
+    public static final String ISBN_DESC_HARRY_POTTER_2 = " " + PREFIX_ISBN + VALID_ISBN_HARRY_POTTER_2;
+    public static final String AUTHOR_DESC_JK_ROWLING = " " + PREFIX_AUTHOR + VALID_AUTHOR_JK_ROWLING;
+    public static final String AUTHOR_DESC_SUZANNE_COLLINS = " " + PREFIX_AUTHOR + VALID_AUTHOR_SUZANNE_COLLINS;
+    public static final String TAG_DESC_ADVENTURE = " " + PREFIX_TAG + VALID_TAG_ADVENTURE;
+    public static final String TAG_DESC_MAGIC = " " + PREFIX_TAG + VALID_TAG_MAGIC;
+    public static final String TAG_DESC_THRILLER = " " + PREFIX_TAG + VALID_TAG_THRILLER;
+    public static final String TAG_DESC_SCIFI = " " + PREFIX_TAG + VALID_TAG_SCIFI;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ID_DESC = " " + PREFIX_ID; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String INVALID_BOOK_NAME_DESC = " " + PREFIX_NAME + "@HarryPotter"; // '@' not allowed in names
+    public static final String INVALID_ISBN_DESC = " " + PREFIX_ISBN + "911a";
+    public static final String INVALID_AUTHOR_DESC = " " + PREFIX_AUTHOR + "@@@"; // '@' not allowed for author
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -136,6 +155,19 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the book at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showBookAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredBookList().size());
+
+        Book book = model.getFilteredBookList().get(targetIndex.getZeroBased());
+        model.updateFilteredBookList(x -> x.equals(book));
+
+        assertEquals(1, model.getFilteredBookList().size());
     }
 
 }

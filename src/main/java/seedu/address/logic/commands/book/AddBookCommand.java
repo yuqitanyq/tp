@@ -1,6 +1,10 @@
 package seedu.address.logic.commands.book;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AUTHOR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -14,8 +18,19 @@ import seedu.address.model.book.Book;
 public class AddBookCommand extends Command {
 
     // TODO : Improve messages
-    public static final String MESSAGE_USAGE = PATRON_COMMAND_GROUP + " " + ADD_COMMAND_WORD
-            + ": Adds a book to LibTask. ";
+    public static final String MESSAGE_USAGE = BOOK_COMMAND_GROUP + " " + ADD_COMMAND_WORD
+            + ": Adds a book to LibTask. "
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_ISBN + "ISBN "
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_AUTHOR + "AUTHOR]...\n"
+            + "Example: " + BOOK_COMMAND_GROUP + " " + ADD_COMMAND_WORD + " "
+            + PREFIX_NAME + "Harry Potter "
+            + PREFIX_ISBN + "978-71617-018-8-5 "
+            + PREFIX_AUTHOR + "J. K. Rowling "
+            + PREFIX_TAG + "Adventure "
+            + PREFIX_TAG + "Magic";
 
     public static final String MESSAGE_SUCCESS = "New book added: %1$s";
 
