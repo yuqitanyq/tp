@@ -25,14 +25,16 @@ class JsonAdaptedBook {
     private final String bookName;
     private final List<JsonAdaptedAuthor> authors = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String timeAdded;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedPatron} with the given patron details.
      */
     @JsonCreator
     public JsonAdaptedBook(@JsonProperty("bookName") String bookName, @JsonProperty("isbn") String isbn,
         @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-        @JsonProperty("authors") List<JsonAdaptedAuthor> authors) {
+        @JsonProperty("authors") List<JsonAdaptedAuthor> authors,
+        @JsonProperty("timeAdded") String timeAdded) {
         this.bookName = bookName;
         this.isbn = isbn;
         if (tagged != null) {
@@ -41,6 +43,7 @@ class JsonAdaptedBook {
         if (authors != null) {
             this.authors.addAll(authors);
         }
+        this.timeAdded = timeAdded;
     }
 
     /**
@@ -55,6 +58,7 @@ class JsonAdaptedBook {
         authors.addAll(source.getAuthors().stream()
                 .map(JsonAdaptedAuthor::new)
                 .collect(Collectors.toList()));
+        timeAdded = Long.toString(source.getTimeAdded());
     }
 
     /**
@@ -91,6 +95,15 @@ class JsonAdaptedBook {
         final Isbn modelIsbn = new Isbn(isbn);
 
         final Set<Tag> modelTags = new HashSet<>(bookTags);
-        return new Book(modelName, modelIsbn, bookAuthors, modelTags);
+
+        if (timeAdded == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Long.class.getSimpleName()));
+        }
+        try {
+            final long timeBookAdded = Long.parseLong(timeAdded);
+            return new Book(modelName, modelIsbn, bookAuthors, modelTags, timeBookAdded);
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException(Book.TIME_ADDED_MESSAGE_CONSTRAINTS);
+        }
     }
 }
