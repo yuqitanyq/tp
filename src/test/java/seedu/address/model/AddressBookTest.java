@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIFI;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPatrons.ALICE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,10 +23,10 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.book.Book;
-import seedu.address.model.person.Patron;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.patron.Patron;
+import seedu.address.model.patron.exceptions.DuplicatePatronException;
 import seedu.address.testutil.BookBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PatronBuilder;
 import seedu.address.testutil.TypicalAddressBook;
 
 public class AddressBookTest {
@@ -35,7 +35,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getPatronList());
     }
 
     @Test
@@ -51,43 +51,43 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Patron editedAlice = new PersonBuilder(ALICE).withId(VALID_ID_BOB).withTags(VALID_TAG_HUSBAND)
+    public void resetData_withDuplicatePatrons_throwsDuplicatePatronException() {
+        // Two patrons with the same identity fields
+        Patron editedAlice = new PatronBuilder(ALICE).withId(VALID_ID_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Patron> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons, new ArrayList<>());
+        List<Patron> newPatrons = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newPatrons, new ArrayList<>());
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePatronException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+    public void hasPatron_nullPatron_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasPatron(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasPatron_patronNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasPatron(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasPatron_patronInAddressBook_returnsTrue() {
+        addressBook.addPatron(ALICE);
+        assertTrue(addressBook.hasPatron(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Patron editedAlice = new PersonBuilder(ALICE).withId(VALID_ID_BOB).withTags(VALID_TAG_HUSBAND)
+    public void hasPatron_patronWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addPatron(ALICE);
+        Patron editedAlice = new PatronBuilder(ALICE).withId(VALID_ID_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasPatron(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    public void getPatronList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPatronList().remove(0));
     }
 
     @Test
@@ -123,20 +123,20 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose patrons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Patron> persons = FXCollections.observableArrayList();
+        private final ObservableList<Patron> patrons = FXCollections.observableArrayList();
         private final ObservableList<Book> books = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Patron> persons, Collection<Book> books) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<Patron> patrons, Collection<Book> books) {
+            this.patrons.setAll(patrons);
             this.books.setAll(books);
         }
 
         @Override
-        public ObservableList<Patron> getPersonList() {
-            return persons;
+        public ObservableList<Patron> getPatronList() {
+            return patrons;
         }
 
         @Override

@@ -22,10 +22,10 @@ import seedu.address.logic.commands.patron.EditPatronCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Patron;
+import seedu.address.model.patron.NameContainsKeywordsPredicate;
+import seedu.address.model.patron.Patron;
 import seedu.address.testutil.EditBookDescriptorBuilder;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditPatronDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -81,7 +81,7 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ID_DESC = " " + PREFIX_ID; // empty string not allowed for addresses
+    public static final String INVALID_ID_DESC = " " + PREFIX_ID; // empty string not allowed for ids
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String INVALID_BOOK_NAME_DESC = " " + PREFIX_NAME + "@HarryPotter"; // '@' not allowed in names
@@ -91,16 +91,16 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditPatronCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditPatronCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditPatronCommand.EditPatronDescriptor DESC_AMY;
+    public static final EditPatronCommand.EditPatronDescriptor DESC_BOB;
     public static final EditBookCommand.EditBookDescriptor DESC_HARRY_POTTER;
     public static final EditBookCommand.EditBookDescriptor DESC_HUNGER_GAMES;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditPatronDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withId(VALID_ID_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new EditPatronDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withId(VALID_ID_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         DESC_HARRY_POTTER = new EditBookDescriptorBuilder().withBookName(VALID_BOOK_NAME_HARRY_POTTER)
@@ -141,31 +141,31 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the address book, filtered patron list and selected patron in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Patron> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Patron> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPatronList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredList, actualModel.getFilteredPatronList());
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the patron at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+    public static void showPatronAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredPatronList().size());
 
-        Patron person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Patron patron = model.getFilteredPatronList().get(targetIndex.getZeroBased());
+        final String[] splitName = patron.getName().fullName.split("\\s+");
+        model.updateFilteredPatronList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredPatronList().size());
     }
 
     /**

@@ -9,7 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.book.Book;
-import seedu.address.model.person.Patron;
+import seedu.address.model.patron.Patron;
 
 /**
  * API of the Logic component
@@ -31,8 +31,8 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Patron> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of patrons */
+    ObservableList<Patron> getFilteredPatronList();
 
     /** Returns an unmodifiable view of the filtered list of books */
     ObservableList<Book> getFilteredBookList();
