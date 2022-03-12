@@ -106,7 +106,7 @@ public class AddBookCommandTest {
         }
 
         @Override
-        public void addPerson(Patron patron) {
+        public void addPatron(Patron patron) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -126,7 +126,7 @@ public class AddBookCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Patron patron) {
+        public boolean hasPatron(Patron patron) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -136,7 +136,7 @@ public class AddBookCommandTest {
         }
 
         @Override
-        public void deletePerson(Patron target) {
+        public void deletePatron(Patron target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -146,7 +146,7 @@ public class AddBookCommandTest {
         }
 
         @Override
-        public void setPerson(Patron target, Patron editedPatron) {
+        public void setPatron(Patron target, Patron editedPatron) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -156,12 +156,12 @@ public class AddBookCommandTest {
         }
 
         @Override
-        public ObservableList<Patron> getFilteredPersonList() {
+        public ObservableList<Patron> getFilteredPatronList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Patron> predicate) {
+        public void updateFilteredPatronList(Predicate<Patron> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
