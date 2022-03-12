@@ -11,10 +11,10 @@ import seedu.address.model.book.Author;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.BookName;
 import seedu.address.model.book.Isbn;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Patron;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -22,25 +22,28 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
+
+    public static final long SAMPLE_BOOK_CREATED_TIME = 1646989653388L;
+
+    public static Patron[] getSamplePersons() {
+        return new Patron[] {
+            new Patron(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+                new Id("A0123456H"),
                 getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+            new Patron(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+                new Id("A0123456H"),
                 getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+            new Patron(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+                new Id("A0123456H"),
                 getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+            new Patron(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+                new Id("A0123456H"),
                 getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
+            new Patron(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+                new Id("A0123456H"),
                 getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
+            new Patron(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+                new Id("A0123456H"),
                 getTagSet("colleagues"))
         };
     }
@@ -49,31 +52,31 @@ public class SampleDataUtil {
         return new Book[] {
             new Book(new BookName("Harry Potter and The Philosopher's Stone"), new Isbn("978-71617-018-8-5"),
                 getAuthorList("J. K. Rowling"),
-                getTagSet("Adventure", "Magic")),
+                getTagSet("Adventure", "Magic"), SAMPLE_BOOK_CREATED_TIME),
             new Book(new BookName("The Hunger Games: MockingJay"), new Isbn("9786029293883"),
                 getAuthorList("Suzanne Collins"),
-                getTagSet("Thriller", "Scifi", "Adventure")),
+                getTagSet("Thriller", "Scifi", "Adventure"), SAMPLE_BOOK_CREATED_TIME),
             new Book(new BookName("Introduction to Algorithms"), new Isbn("978-03-71-88850-6"),
                 getAuthorList("Cormen", "Leiserson", "Rivest", "Stein"),
-                getTagSet("ComputerScience", "Mathematics")),
+                getTagSet("ComputerScience", "Mathematics"), SAMPLE_BOOK_CREATED_TIME),
             new Book(new BookName("The Little Book of Semaphores"), new Isbn("4992719864"),
                 getAuthorList(),
-                getTagSet("ComputerScience", "Technology")),
+                getTagSet("ComputerScience", "Technology"), SAMPLE_BOOK_CREATED_TIME),
             new Book(new BookName("The Maze Runner"), new Isbn("1-474-59282-1"),
                 getAuthorList("James Dashner1", "James Dashner2", "James Dashner3"),
-                getTagSet("Adventure", "Romance", "Scifi")),
+                getTagSet("Adventure", "Romance", "Scifi"), SAMPLE_BOOK_CREATED_TIME),
             new Book(new BookName("Artificial Intelligence: A Modern Approach"), new Isbn("9780131038059"),
                 getAuthorList("Peter Norvig", "Stuart J. Russell"),
-                getTagSet("Technology")),
+                getTagSet("Technology"), SAMPLE_BOOK_CREATED_TIME),
             new Book(new BookName("Cinderella"), new Isbn("9781409580454"),
                 getAuthorList(),
-                getTagSet())
+                getTagSet(), SAMPLE_BOOK_CREATED_TIME)
         };
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
+        for (Patron samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
         for (Book sampleBook : getSampleBooks()) {

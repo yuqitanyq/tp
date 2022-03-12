@@ -11,18 +11,15 @@ import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PreviousCommand;
 import seedu.address.logic.parser.book.BookCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.patron.PatronCommandParser;
 
 /**
  * Parses user input.
@@ -73,35 +70,14 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
 
         case Command.PATRON_COMMAND_GROUP:
-            // TODO : ADITI please do something like "return new PatronCommandParser().parse(arguments);"
-            return null;
+            return new PatronCommandParser().parse(arguments);
 
         case Command.BOOK_COMMAND_GROUP:
             return new BookCommandParser().parse(arguments);
-
-        // TODO : ADITI please move add, edit, del, find, list into your new PatronCommandParser class in new package
-        // TODO : CHANGE TO "case ADD_COMMAND_WORD", import static "ADD_COMMAND_WORD" from Command class
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        // TODO : CHANGE TO "case EDIT_COMMAND_WORD", import static "EDIT_COMMAND_WORD" from Command class
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        // TODO : CHANGE TO "case DELETE_COMMAND_WORD", import static "DELETE_COMMAND_WORD" from Command class
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        // TODO : CHANGE TO "case FIND_COMMAND_WORD", import static "FIND_COMMAND_WORD" from Command class
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
-        // TODO : CHANGE TO "case LIST_COMMAND_WORD", import static "LIST_COMMAND_WORD" from Command class
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
 
         case CLEAR_COMMAND_WORD:
             return new ClearCommand();
