@@ -47,7 +47,10 @@ public class BookCommandParser implements Parser<Command> {
         case Command.DELETE_COMMAND_WORD:
             return new DeleteBookCommandParser().parse(arguments);
 
-        // TODO : Add cases for Edit, List and Find
+        case Command.EDIT_COMMAND_WORD:
+            return new EditBookCommandParser().parse(arguments);
+
+        // TODO : Add cases for List and Find
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

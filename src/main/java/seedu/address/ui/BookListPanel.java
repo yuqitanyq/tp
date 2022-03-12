@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.book.Book;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of patrons.
  */
 public class BookListPanel extends UiPart<Region> {
     private static final String FXML = "BookListPanel.fxml";

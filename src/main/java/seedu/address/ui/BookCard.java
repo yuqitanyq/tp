@@ -12,7 +12,7 @@ import seedu.address.model.book.Author;
 import seedu.address.model.book.Book;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Patron}.
  */
 public class BookCard extends UiPart<Region> {
 

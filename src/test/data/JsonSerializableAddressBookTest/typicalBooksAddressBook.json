@@ -5,27 +5,32 @@
     "bookName" : "Introduction to Algorithms",
     "isbn" : "978-03-71-88850-6",
     "tagged" : [ "ComputerScience", "Mathematics" ],
-    "authors" : [ "Cormen", "Leiserson", "Rivest", "Stein" ]
+    "authors" : [ "Cormen", "Leiserson", "Rivest", "Stein" ],
+    "timeAdded" : "1646989653388"
   }, {
     "bookName" : "The Little Book of Semaphores",
     "isbn" : "4992719864",
     "tagged" : [ "ComputerScience", "Technology" ],
-    "authors" : [ ]
+    "authors" : [ ],
+    "timeAdded" : "1646989653388"
   }, {
     "bookName" : "The Maze Runner",
     "isbn" : "1-474-59282-1",
     "tagged" : [ ],
-    "authors" : [ "James Dashner1", "James Dashner2", "James Dashner3" ]
+    "authors" : [ "James Dashner1", "James Dashner2", "James Dashner3" ],
+    "timeAdded" : "1646989653388"
   }, {
     "bookName" : "Artificial Intelligence: A Modern Approach",
     "isbn" : "9780131038059",
     "tagged" : [ "Technology" ],
-    "authors" : [ "Peter Norvig", "Stuart J. Russell" ]
+    "authors" : [ "Peter Norvig", "Stuart J. Russell" ],
+    "timeAdded" : "1646989653388"
   }, {
     "bookName" : "Cinderella",
     "isbn" : "9781409580454",
     "tagged" : [ ],
-    "authors" : [ ]
+    "authors" : [ ],
+    "timeAdded" : "1646989653388"
   }
   ]
 }

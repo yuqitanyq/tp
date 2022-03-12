@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.model.util.SampleDataUtil.SAMPLE_BOOK_CREATED_TIME;
 import static seedu.address.storage.JsonAdaptedBook.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBooks.ALGORITHM;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.book.Book;
 import seedu.address.model.book.BookName;
 import seedu.address.model.book.Isbn;
 
@@ -20,6 +22,7 @@ public class JsonAdaptedBookTest {
     private static final String INVALID_ISBN = "+97829812";
     private static final String INVALID_TAG = "#Adventure";
     private static final String INVALID_AUTHOR = "J!KRowling";
+    private static final String INVALID_TIME_ADDED = "askdj";
 
     private static final String VALID_BOOK_NAME = ALGORITHM.getBookName().fullBookName;
     private static final String VALID_ISBN = ALGORITHM.getIsbn().toString();
@@ -29,6 +32,7 @@ public class JsonAdaptedBookTest {
     private static final List<JsonAdaptedAuthor> VALID_AUTHORS = ALGORITHM.getAuthors().stream()
             .map(JsonAdaptedAuthor::new)
             .collect(Collectors.toList());
+    private static final String SAMPLE_CREATED_TIME = Long.toString(SAMPLE_BOOK_CREATED_TIME);
 
     @Test
     public void toModelType_validBookDetails_returnsBook() throws Exception {
@@ -39,14 +43,15 @@ public class JsonAdaptedBookTest {
     @Test
     public void toModelType_invalidBookName_throwsIllegalValueException() {
         JsonAdaptedBook book =
-                new JsonAdaptedBook(INVALID_BOOK_NAME, VALID_ISBN, VALID_TAGS, VALID_AUTHORS);
+                new JsonAdaptedBook(INVALID_BOOK_NAME, VALID_ISBN, VALID_TAGS, VALID_AUTHORS, SAMPLE_CREATED_TIME);
         String expectedMessage = BookName.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, book::toModelType);
     }
 
     @Test
     public void toModelType_nullBookName_throwsIllegalValueException() {
-        JsonAdaptedBook book = new JsonAdaptedBook(null, VALID_ISBN, VALID_TAGS, VALID_AUTHORS);
+        JsonAdaptedBook book = new JsonAdaptedBook(null, VALID_ISBN, VALID_TAGS, VALID_AUTHORS,
+                SAMPLE_CREATED_TIME);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, BookName.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, book::toModelType);
     }
@@ -54,14 +59,15 @@ public class JsonAdaptedBookTest {
     @Test
     public void toModelType_invalidIsbn_throwsIllegalValueException() {
         JsonAdaptedBook book =
-                new JsonAdaptedBook(VALID_BOOK_NAME, INVALID_ISBN, VALID_TAGS, VALID_AUTHORS);
+                new JsonAdaptedBook(VALID_BOOK_NAME, INVALID_ISBN, VALID_TAGS, VALID_AUTHORS, SAMPLE_CREATED_TIME);
         String expectedMessage = Isbn.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, book::toModelType);
     }
 
     @Test
     public void toModelType_nullIsbn_throwsIllegalValueException() {
-        JsonAdaptedBook book = new JsonAdaptedBook(VALID_BOOK_NAME, null, VALID_TAGS, VALID_AUTHORS);
+        JsonAdaptedBook book = new JsonAdaptedBook(VALID_BOOK_NAME, null, VALID_TAGS, VALID_AUTHORS,
+                SAMPLE_CREATED_TIME);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Isbn.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, book::toModelType);
     }
@@ -71,7 +77,7 @@ public class JsonAdaptedBookTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedBook book =
-                new JsonAdaptedBook(VALID_BOOK_NAME, VALID_ISBN, invalidTags, VALID_AUTHORS);
+                new JsonAdaptedBook(VALID_BOOK_NAME, VALID_ISBN, invalidTags, VALID_AUTHORS, SAMPLE_CREATED_TIME);
         assertThrows(IllegalValueException.class, book::toModelType);
     }
 
@@ -80,7 +86,15 @@ public class JsonAdaptedBookTest {
         List<JsonAdaptedAuthor> invalidAuthors = new ArrayList<>(VALID_AUTHORS);
         invalidAuthors.add(new JsonAdaptedAuthor(INVALID_AUTHOR));
         JsonAdaptedBook book =
-                new JsonAdaptedBook(VALID_BOOK_NAME, VALID_ISBN, VALID_TAGS, invalidAuthors);
+                new JsonAdaptedBook(VALID_BOOK_NAME, VALID_ISBN, VALID_TAGS, invalidAuthors, SAMPLE_CREATED_TIME);
         assertThrows(IllegalValueException.class, book::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTimeAdded_throwsIllegalValueException() {
+        JsonAdaptedBook book =
+                new JsonAdaptedBook(VALID_BOOK_NAME, VALID_ISBN, VALID_TAGS, VALID_AUTHORS, INVALID_TIME_ADDED);
+        String expectedMessage = Book.TIME_ADDED_MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, book::toModelType);
     }
 }
