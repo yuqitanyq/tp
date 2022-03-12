@@ -17,9 +17,12 @@ import seedu.address.model.tag.Tag;
  */
 public class Book {
 
+    public static final String TIME_ADDED_MESSAGE_CONSTRAINTS = "Time added should be able to be parsed to long.\n";
+
     // Identity fields
     private final BookName bookName;
     private final Isbn isbn;
+    private final long timeAdded;
 
     // Data fields
     private final List<Author> authors = new ArrayList<Author>();
@@ -28,12 +31,13 @@ public class Book {
     /**
      * Every field must be present and not null.
      */
-    public Book(BookName bookName, Isbn isbn, List<Author> authors, Set<Tag> tags) {
+    public Book(BookName bookName, Isbn isbn, List<Author> authors, Set<Tag> tags, long timeAdded) {
         requireAllNonNull(bookName, isbn, authors, tags);
         this.bookName = bookName;
         this.isbn = isbn;
         this.authors.addAll(authors);
         this.tags.addAll(tags);
+        this.timeAdded = timeAdded;
     }
 
     public BookName getBookName() {
@@ -42,6 +46,10 @@ public class Book {
 
     public Isbn getIsbn() {
         return isbn;
+    }
+
+    public long getTimeAdded() {
+        return timeAdded;
     }
 
     public List<Author> getAuthors() {
@@ -86,13 +94,14 @@ public class Book {
         return otherBook.getBookName().equals(getBookName())
                 && otherBook.getAuthors().equals(getAuthors())
                 && otherBook.getTags().equals(getTags())
-                && otherBook.getIsbn().equals(getIsbn());
+                && otherBook.getIsbn().equals(getIsbn())
+                && otherBook.timeAdded == timeAdded;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(bookName, isbn, authors, tags);
+        return Objects.hash(bookName, isbn, authors, tags, timeAdded);
     }
 
     @Override

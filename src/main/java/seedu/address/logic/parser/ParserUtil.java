@@ -57,21 +57,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String bookName} into a {@code BookName}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code bookName} is invalid.
-     */
-    public static BookName parseBookName(String bookName) throws ParseException {
-        requireNonNull(bookName);
-        String trimmedName = bookName.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-        }
-        return new BookName(trimmedName);
-    }
-
-    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -144,33 +129,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String isbn} into an {@code Isbn}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code isbn} is invalid.
-     */
-    public static Isbn parseIsbn(String isbn) throws ParseException {
-        requireNonNull(isbn);
-        String trimmedIsbn = isbn.trim();
-        if (!Isbn.isValidIsbn(trimmedIsbn)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-        }
-        return new Isbn(trimmedIsbn);
-    }
-
-    /**
-     * Parses {@code Collection<String> authors} into a {@code List<Author>}.
-     */
-    public static List<Author> parseAuthors(Collection<String> authors) throws ParseException {
-        requireNonNull(authors);
-        final List<Author> authorList = new ArrayList<>();
-        for (String author : authors) {
-            authorList.add(parseAuthor(author));
-        }
-        return authorList;
-    }
-
-    /**
      * Parses a {@code String author} into a {@code Author}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -183,6 +141,49 @@ public class ParserUtil {
             throw new ParseException(Author.MESSAGE_CONSTRAINTS);
         }
         return new Author(trimmedAuthor);
+    }
+
+    /**
+     * Parses {@code Collection<String> authors} into a {@code List<Author>}.
+     */
+    public static List<Author> parseAuthors(Collection<String> authors) throws ParseException {
+        requireNonNull(authors);
+        final List<Author> authorList = new ArrayList<>();
+
+        for (String authorName : authors) {
+            authorList.add(parseAuthor(authorName));
+        }
+        return authorList;
+    }
+
+    /**
+     * Parses a {@code String bookName} into a {@code BookName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code bookName} is invalid.
+     */
+    public static BookName parseBookName(String bookName) throws ParseException {
+        requireNonNull(bookName);
+        String trimmedBookName = bookName.trim();
+        if (!BookName.isValidBookName(trimmedBookName)) {
+            throw new ParseException(BookName.MESSAGE_CONSTRAINTS);
+        }
+        return new BookName(trimmedBookName);
+    }
+
+    /**
+     * Parses a {@code String isbn} into a {@code Isbn}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code isbn} is invalid.
+     */
+    public static Isbn parseIsbn(String isbn) throws ParseException {
+        requireNonNull(isbn);
+        String trimmedIsbn = isbn.trim();
+        if (!Isbn.isValidIsbn(trimmedIsbn)) {
+            throw new ParseException(Isbn.MESSAGE_CONSTRAINTS);
+        }
+        return new Isbn(trimmedIsbn);
     }
 }
 

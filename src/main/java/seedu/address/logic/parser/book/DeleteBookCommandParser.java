@@ -1,11 +1,11 @@
 package seedu.address.logic.parser.book;
 
-import java.util.stream.Stream;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.book.DeleteBookCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -19,17 +19,12 @@ public class DeleteBookCommandParser implements Parser<DeleteBookCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteBookCommand parse(String args) throws ParseException {
-
-        // TODO : Implement parse function
-
-        return null;
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        try {
+            Index index = ParserUtil.parseIndex(args);
+            return new DeleteBookCommand(index);
+        } catch (ParseException pe) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteBookCommand.MESSAGE_USAGE), pe);
+        }
     }
 }
