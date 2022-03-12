@@ -46,7 +46,7 @@ public class AddressBookParser {
         if (previousCommands == null || previousCommands.size() == 0) {
             return "";
         }
-        return previousCommands.pop();
+        return previousCommands.poll();
     }
 
     /**
@@ -56,7 +56,7 @@ public class AddressBookParser {
         if (command.equals(PREVIOUS_COMMAND_WORD)) {
             return;
         }
-        previousCommands.addLast(command);
+        previousCommands.push(command);
     }
 
     /**
