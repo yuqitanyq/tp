@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.book.EditBookCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.patron.EditPatronCommand;
 import seedu.address.model.AddressBook;
@@ -23,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.book.Book;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Patron;
+import seedu.address.testutil.EditBookDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -91,6 +93,8 @@ public class CommandTestUtil {
 
     public static final EditPatronCommand.EditPersonDescriptor DESC_AMY;
     public static final EditPatronCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditBookCommand.EditBookDescriptor DESC_HARRY_POTTER;
+    public static final EditBookCommand.EditBookDescriptor DESC_HUNGER_GAMES;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -99,6 +103,12 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withId(VALID_ID_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_HARRY_POTTER = new EditBookDescriptorBuilder().withBookName(VALID_BOOK_NAME_HARRY_POTTER)
+                .withIsbn(VALID_ISBN_HARRY_POTTER).withAuthors(VALID_AUTHOR_JK_ROWLING)
+                .withTags(VALID_TAG_THRILLER, VALID_TAG_MAGIC).build();
+        DESC_HUNGER_GAMES = new EditBookDescriptorBuilder().withBookName(VALID_BOOK_NAME_HUNGER_GAMES)
+                .withIsbn(VALID_ISBN_HUNGER_GAMES).withAuthors(VALID_AUTHOR_SUZANNE_COLLINS)
+                .withTags(VALID_TAG_THRILLER).build();
     }
 
     /**
@@ -143,6 +153,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPatronList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
