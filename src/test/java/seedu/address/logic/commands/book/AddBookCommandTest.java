@@ -21,7 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.book.Book;
-import seedu.address.model.person.Patron;
+import seedu.address.model.patron.Patron;
 import seedu.address.testutil.BookBuilder;
 
 public class AddBookCommandTest {

@@ -7,8 +7,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATRONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPatrons.ALICE;
+import static seedu.address.testutil.TypicalPatrons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.book.BookNameContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.patron.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -76,7 +76,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasPatron_nullPatron_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPatron(null));
     }
 
@@ -86,7 +86,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPatron_patronNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPatron(ALICE));
     }
 
@@ -96,7 +96,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPatron_patronInAddressBook_returnsTrue() {
         modelManager.addPatron(ALICE);
         assertTrue(modelManager.hasPatron(ALICE));
     }
@@ -108,7 +108,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredPatronList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPatronList().remove(0));
     }
 
@@ -140,7 +140,7 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
-        // different filteredPersonList -> returns false
+        // different filteredPatronList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPatronList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));

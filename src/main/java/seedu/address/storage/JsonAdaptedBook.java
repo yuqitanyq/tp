@@ -28,7 +28,7 @@ class JsonAdaptedBook {
     private final String timeAdded;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedPatron} with the given patron details.
      */
     @JsonCreator
     public JsonAdaptedBook(@JsonProperty("bookName") String bookName, @JsonProperty("isbn") String isbn,

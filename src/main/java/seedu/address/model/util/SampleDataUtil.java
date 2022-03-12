@@ -11,11 +11,11 @@ import seedu.address.model.book.Author;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.BookName;
 import seedu.address.model.book.Isbn;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Patron;
-import seedu.address.model.person.Phone;
+import seedu.address.model.patron.Email;
+import seedu.address.model.patron.Id;
+import seedu.address.model.patron.Name;
+import seedu.address.model.patron.Patron;
+import seedu.address.model.patron.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -76,8 +76,8 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Patron samplePerson : getSamplePatrons()) {
-            sampleAb.addPatron(samplePerson);
+        for (Patron samplePatron : getSamplePatrons()) {
+            sampleAb.addPatron(samplePatron);
         }
         for (Book sampleBook : getSampleBooks()) {
             sampleAb.addBook(sampleBook);

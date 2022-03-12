@@ -11,7 +11,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Patron;
+import seedu.address.model.patron.Patron;
 
 /**
  * Adds a patron to the address book.
@@ -42,9 +42,9 @@ public class AddPatronCommand extends Command {
     /**
      * Creates an AddPatronCommand to add the specified {@code Patron}
      */
-    public AddPatronCommand(Patron person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddPatronCommand(Patron patron) {
+        requireNonNull(patron);
+        toAdd = patron;
     }
 
     @Override

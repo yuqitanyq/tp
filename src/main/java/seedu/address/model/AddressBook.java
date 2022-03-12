@@ -8,16 +8,16 @@ import java.util.Objects;
 import javafx.collections.ObservableList;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.BookList;
-import seedu.address.model.person.Patron;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.patron.Patron;
+import seedu.address.model.patron.UniquePatronList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSamePatron comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList patrons;
+    private final UniquePatronList patrons;
     private final BookList books;
 
     /*
@@ -28,7 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        patrons = new UniquePersonList();
+        patrons = new UniquePatronList();
         books = new BookList();
     }
 
@@ -45,7 +45,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code patrons}.
+     * Replaces the contents of the patron list with {@code patrons}.
      * {@code patrons} must not contain duplicate patrons.
      */
     public void setPatrons(List<Patron> patrons) {
@@ -69,7 +69,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setBooks(newData.getBookList());
     }
 
-    //// person-level operations
+    //// patron-level operations
 
     /**
      * Returns true if a patron with the same identity as {@code patron} exists in the address book.
@@ -143,7 +143,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return patrons.asUnmodifiableObservableList().size() + " persons";
+        return patrons.asUnmodifiableObservableList().size() + " patrons";
         // TODO: refine later
     }
 

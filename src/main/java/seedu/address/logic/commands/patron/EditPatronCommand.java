@@ -21,11 +21,11 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Patron;
-import seedu.address.model.person.Phone;
+import seedu.address.model.patron.Email;
+import seedu.address.model.patron.Id;
+import seedu.address.model.patron.Name;
+import seedu.address.model.patron.Patron;
+import seedu.address.model.patron.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -52,18 +52,18 @@ public class EditPatronCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PATRON = "This patron already exists in the address book.";
 
     private final Index index;
-    private final EditPersonDescriptor editPatronDescriptor;
+    private final EditPatronDescriptor editPatronDescriptor;
 
     /**
      * @param index of the patron in the filtered patron list to edit
      * @param editPatronDescriptor details to edit the patron with
      */
-    public EditPatronCommand(Index index, EditPersonDescriptor editPatronDescriptor) {
+    public EditPatronCommand(Index index, EditPatronDescriptor editPatronDescriptor) {
         requireNonNull(index);
         requireNonNull(editPatronDescriptor);
 
         this.index = index;
-        this.editPatronDescriptor = new EditPersonDescriptor(editPatronDescriptor);
+        this.editPatronDescriptor = new EditPatronDescriptor(editPatronDescriptor);
     }
 
     @Override
@@ -88,10 +88,10 @@ public class EditPatronCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code patronToEdit}
+     * Creates and returns a {@code Patron} with the details of {@code patronToEdit}
      * edited with {@code editPatronDescriptor}.
      */
-    private static Patron createEditedPatron(Patron patronToEdit, EditPersonDescriptor editPatronDescriptor) {
+    private static Patron createEditedPatron(Patron patronToEdit, EditPatronDescriptor editPatronDescriptor) {
         assert patronToEdit != null;
 
         Name updatedName = editPatronDescriptor.getName().orElse(patronToEdit.getName());
@@ -122,23 +122,23 @@ public class EditPatronCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the patron with. Each non-empty field value will replace the
+     * corresponding field value of the patron.
      */
-    public static class EditPersonDescriptor {
+    public static class EditPatronDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private Id id;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditPatronDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditPatronDescriptor(EditPatronDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -210,12 +210,12 @@ public class EditPatronCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditPatronDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditPatronDescriptor e = (EditPatronDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())

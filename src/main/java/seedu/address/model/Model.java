@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.book.Book;
-import seedu.address.model.person.Patron;
+import seedu.address.model.patron.Patron;
 
 /**
  * The API of the Model component.

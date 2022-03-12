@@ -14,10 +14,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.book.Author;
 import seedu.address.model.book.BookName;
 import seedu.address.model.book.Isbn;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.patron.Email;
+import seedu.address.model.patron.Id;
+import seedu.address.model.patron.Name;
+import seedu.address.model.patron.Phone;
 import seedu.address.model.tag.Tag;
 
 /**

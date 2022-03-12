@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.book.Book;
-import seedu.address.model.person.Patron;
+import seedu.address.model.patron.Patron;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,7 +22,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Patron> filteredPersons;
+    private final FilteredList<Patron> filteredPatrons;
     private final FilteredList<Book> filteredBooks;
 
     /**
@@ -35,7 +35,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPatronList());
+        filteredPatrons = new FilteredList<>(this.addressBook.getPatronList());
         filteredBooks = new FilteredList<>(this.addressBook.getBookList());
     }
 
@@ -91,9 +91,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPatron(Patron person) {
-        requireNonNull(person);
-        return addressBook.hasPatron(person);
+    public boolean hasPatron(Patron patron) {
+        requireNonNull(patron);
+        return addressBook.hasPatron(patron);
     }
 
     @Override
@@ -138,15 +138,15 @@ public class ModelManager implements Model {
         addressBook.setBook(target, editedBook);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Patron List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Patron} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
     public ObservableList<Patron> getFilteredPatronList() {
-        return filteredPersons;
+        return filteredPatrons;
     }
 
     /**
@@ -161,7 +161,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPatronList(Predicate<Patron> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredPatrons.setPredicate(predicate);
     }
 
     @Override
@@ -186,7 +186,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons)
+                && filteredPatrons.equals(other.filteredPatrons)
                 && filteredBooks.equals(other.filteredBooks);
     }
 
