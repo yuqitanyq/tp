@@ -93,8 +93,9 @@ public class EditBookCommand extends Command {
         Isbn updatedIsbn = editBookDescriptor.getIsbn().orElse(bookToEdit.getIsbn());
         List<Author> updatedAuthor = editBookDescriptor.getAuthors().orElse(bookToEdit.getAuthors());
         Set<Tag> updatedTags = editBookDescriptor.getTags().orElse(bookToEdit.getTags());
+        long updatedTimeAdded = editBookDescriptor.getTimeAdded().orElse(bookToEdit.getTimeAdded());
 
-        return new Book(updatedName, updatedIsbn, updatedAuthor, updatedTags);
+        return new Book(updatedName, updatedIsbn, updatedAuthor, updatedTags, updatedTimeAdded);
     }
 
     @Override
@@ -124,6 +125,7 @@ public class EditBookCommand extends Command {
         private Isbn isbn;
         private List<Author> authors;
         private Set<Tag> tags;
+        private long timeAdded;
 
         public EditBookDescriptor() {
         }
@@ -137,6 +139,7 @@ public class EditBookCommand extends Command {
             setIsbn(toCopy.isbn);
             setAuthors(toCopy.authors);
             setTags(toCopy.tags);
+            setTimeAdded(toCopy.timeAdded);
         }
 
         /**
@@ -160,6 +163,14 @@ public class EditBookCommand extends Command {
 
         public Optional<Isbn> getIsbn() {
             return Optional.ofNullable(isbn);
+        }
+
+        public void setTimeAdded(long timeAdded) {
+            this.timeAdded = timeAdded;
+        }
+
+        public Optional<Long> getTimeAdded() {
+            return Optional.ofNullable(timeAdded);
         }
 
         public void setAuthors(List<Author> authors) {
