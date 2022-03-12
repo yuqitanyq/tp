@@ -37,7 +37,7 @@ public class BookNameContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different patron -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 

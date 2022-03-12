@@ -6,14 +6,14 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.book.Book;
-import seedu.address.model.person.Patron;
+import seedu.address.model.patron.Patron;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Patron> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Patron> PREDICATE_SHOW_ALL_PATRONS = unused -> true;
     Predicate<Book> PREDICATE_SHOW_ALL_BOOKS = unused -> true;
 
     /**
@@ -55,9 +55,9 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a patron with the same identity as {@code patron} exists in the address book.
      */
-    boolean hasPerson(Patron person);
+    boolean hasPatron(Patron patron);
 
     /**
      * Returns true if a book with the same identity as {@code book} exists in the address book.
@@ -65,10 +65,10 @@ public interface Model {
     boolean hasBook(Book book);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given patron.
+     * The patron must exist in the address book.
      */
-    void deletePerson(Patron target);
+    void deletePatron(Patron target);
 
     /**
      * Deletes the given book.
@@ -77,10 +77,10 @@ public interface Model {
     void deleteBook(Book target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given patron.
+     * {@code patron} must not already exist in the address book.
      */
-    void addPerson(Patron person);
+    void addPatron(Patron patron);
 
     /**
      * Adds the given book.
@@ -88,11 +88,11 @@ public interface Model {
     void addBook(Book book);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given patron {@code target} with {@code editedPatron}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The patron identity of {@code editedPatron} must not be the same as another existing patron in the address book.
      */
-    void setPerson(Patron target, Patron editedPerson);
+    void setPatron(Patron target, Patron editedPatron);
 
     /**
      * Replaces the given book {@code target} with {@code editedBook}.
@@ -101,17 +101,17 @@ public interface Model {
      */
     void setBook(Book target, Book editedBook);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Patron> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered patron list */
+    ObservableList<Patron> getFilteredPatronList();
 
     /** Returns an unmodifiable view of the filtered book list */
     ObservableList<Book> getFilteredBookList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered patron list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Patron> predicate);
+    void updateFilteredPatronList(Predicate<Patron> predicate);
 
     /**
      * Updates the filter of the filtered book list to filter by the given {@code predicate}.
