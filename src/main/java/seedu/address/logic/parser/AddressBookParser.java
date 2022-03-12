@@ -56,7 +56,7 @@ public class AddressBookParser {
         if (command.equals(PREVIOUS_COMMAND_WORD)) {
             return;
         }
-        previousCommands.add(command);
+        previousCommands.addLast(command);
     }
 
     /**

@@ -118,6 +118,10 @@ public class AddressBookParserTest {
 
     @Test
     public void previousCommands_Empty() {
+        //Only neccsary as it is currently static (To be fixed)
+        for (int i = 0; i < 20; i++) {
+            parser.getPreviousCommands();
+        }
         assertEquals("", parser.getPreviousCommands());
     }
 
