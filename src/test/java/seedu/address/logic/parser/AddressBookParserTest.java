@@ -10,11 +10,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATRON;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
@@ -100,7 +98,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_PreviousCommand() throws Exception {
+    public void parseCommand_previousCommand() throws Exception {
         assertTrue(parser.parseCommand(PREVIOUS_COMMAND_WORD) instanceof PreviousCommand);
     }
 
@@ -117,7 +115,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void previousCommands_Empty() {
+    public void previousCommands_empty() {
         //Only neccsary as it is currently static (To be fixed)
         for (int i = 0; i < 20; i++) {
             parser.getPreviousCommands();
@@ -126,7 +124,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void previousCommands_NonEmpty() {
+    public void previousCommands_nonEmpty() {
         AddressBookParser parserWithCommands = new AddressBookParser();
         parserWithCommands.addCommand("list");
         assertEquals("list", parserWithCommands.getPreviousCommands());
