@@ -2,17 +2,22 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.book.Author;
+import seedu.address.model.book.BookName;
+import seedu.address.model.book.Isbn;
+import seedu.address.model.patron.Email;
+import seedu.address.model.patron.Id;
+import seedu.address.model.patron.Name;
+import seedu.address.model.patron.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,8 +28,9 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code String oneBasedIndex} into an {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -66,10 +72,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String id} into an {@code Id}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code id} is invalid.
      */
     public static Id parseId(String address) throws ParseException {
         requireNonNull(address);
@@ -121,4 +127,63 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String author} into a {@code Author}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code author} is invalid.
+     */
+    public static Author parseAuthor(String author) throws ParseException {
+        requireNonNull(author);
+        String trimmedAuthor = author.trim();
+        if (!Author.isValidAuthor(trimmedAuthor)) {
+            throw new ParseException(Author.MESSAGE_CONSTRAINTS);
+        }
+        return new Author(trimmedAuthor);
+    }
+
+    /**
+     * Parses {@code Collection<String> authors} into a {@code List<Author>}.
+     */
+    public static List<Author> parseAuthors(Collection<String> authors) throws ParseException {
+        requireNonNull(authors);
+        final List<Author> authorList = new ArrayList<>();
+
+        for (String authorName : authors) {
+            authorList.add(parseAuthor(authorName));
+        }
+        return authorList;
+    }
+
+    /**
+     * Parses a {@code String bookName} into a {@code BookName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code bookName} is invalid.
+     */
+    public static BookName parseBookName(String bookName) throws ParseException {
+        requireNonNull(bookName);
+        String trimmedBookName = bookName.trim();
+        if (!BookName.isValidBookName(trimmedBookName)) {
+            throw new ParseException(BookName.MESSAGE_CONSTRAINTS);
+        }
+        return new BookName(trimmedBookName);
+    }
+
+    /**
+     * Parses a {@code String isbn} into a {@code Isbn}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code isbn} is invalid.
+     */
+    public static Isbn parseIsbn(String isbn) throws ParseException {
+        requireNonNull(isbn);
+        String trimmedIsbn = isbn.trim();
+        if (!Isbn.isValidIsbn(trimmedIsbn)) {
+            throw new ParseException(Isbn.MESSAGE_CONSTRAINTS);
+        }
+        return new Isbn(trimmedIsbn);
+    }
 }
+

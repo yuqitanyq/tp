@@ -17,11 +17,11 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Patron;
-import seedu.address.model.person.Phone;
+import seedu.address.model.patron.Email;
+import seedu.address.model.patron.Id;
+import seedu.address.model.patron.Name;
+import seedu.address.model.patron.Patron;
+import seedu.address.model.patron.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -49,9 +49,9 @@ public class AddPatronCommandParser implements Parser<AddPatronCommand> {
         Id id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Patron person = new Patron(name, phone, email, id, tagList);
+        Patron patron = new Patron(name, phone, email, id, tagList);
 
-        return new AddPatronCommand(person);
+        return new AddPatronCommand(patron);
     }
 
     /**

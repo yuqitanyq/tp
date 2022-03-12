@@ -61,7 +61,7 @@
               <Label alignment="CENTER" maxWidth="Infinity" prefWidth="450.0" styleClass="cell_panel_title_panel" text="Book List" textAlignment="CENTER" VBox.vgrow="NEVER" />
             </VBox>
 
-            <VBox fx:id="personList" minWidth="450.0" styleClass="pane-with-border" GridPane.columnIndex="0" GridPane.rowIndex="1" VBox.vgrow="ALWAYS">
+            <VBox fx:id="patronList" minWidth="450.0" styleClass="pane-with-border" GridPane.columnIndex="0" GridPane.rowIndex="1" VBox.vgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
