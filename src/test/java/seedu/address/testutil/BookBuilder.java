@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.util.SampleDataUtil.SAMPLE_BOOK_CREATED_TIME;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -19,11 +21,13 @@ public class BookBuilder {
 
     public static final String DEFAULT_NAME = "Harry Potter";
     public static final String DEFAULT_ISBN = "9780747532743";
+    public static final long DEFAULT_TIME_ADDED = SAMPLE_BOOK_CREATED_TIME;
 
     private BookName bookName;
     private Isbn isbn;
     private List<Author> authors;
     private Set<Tag> tags;
+    private long timeAdded;
 
     /**
      * Creates a {@code BookBuilder} with the default details.
@@ -33,6 +37,7 @@ public class BookBuilder {
         isbn = new Isbn(DEFAULT_ISBN);
         authors = new ArrayList<Author>();
         tags = new HashSet<Tag>();
+        timeAdded = DEFAULT_TIME_ADDED;
     }
 
     /**
@@ -43,6 +48,7 @@ public class BookBuilder {
         isbn = bookToCopy.getIsbn();
         authors = new ArrayList<Author>(bookToCopy.getAuthors());
         tags = new HashSet<Tag>(bookToCopy.getTags());
+        timeAdded = bookToCopy.getTimeAdded();
     }
 
     /**
@@ -77,7 +83,15 @@ public class BookBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code timeAdded} of the {@code Book} that we are building.
+     */
+    public BookBuilder withTimeAdded(long timeAdded) {
+        this.timeAdded = timeAdded;
+        return this;
+    }
+
     public Book build() {
-        return new Book(bookName, isbn, authors, tags);
+        return new Book(bookName, isbn, authors, tags, timeAdded);
     }
 }

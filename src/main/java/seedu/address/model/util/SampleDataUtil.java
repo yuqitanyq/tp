@@ -22,6 +22,9 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
+    public static final long SAMPLE_BOOK_CREATED_TIME = 1646989653388L;
+
     public static Patron[] getSamplePersons() {
         return new Patron[] {
             new Patron(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -49,25 +52,25 @@ public class SampleDataUtil {
         return new Book[] {
             new Book(new BookName("Harry Potter and The Philosopher's Stone"), new Isbn("978-71617-018-8-5"),
                 getAuthorList("J. K. Rowling"),
-                getTagSet("Adventure", "Magic")),
+                getTagSet("Adventure", "Magic"), SAMPLE_BOOK_CREATED_TIME),
             new Book(new BookName("The Hunger Games: MockingJay"), new Isbn("9786029293883"),
                 getAuthorList("Suzanne Collins"),
-                getTagSet("Thriller", "Scifi", "Adventure")),
+                getTagSet("Thriller", "Scifi", "Adventure"), SAMPLE_BOOK_CREATED_TIME),
             new Book(new BookName("Introduction to Algorithms"), new Isbn("978-03-71-88850-6"),
                 getAuthorList("Cormen", "Leiserson", "Rivest", "Stein"),
-                getTagSet("ComputerScience", "Mathematics")),
+                getTagSet("ComputerScience", "Mathematics"), SAMPLE_BOOK_CREATED_TIME),
             new Book(new BookName("The Little Book of Semaphores"), new Isbn("4992719864"),
                 getAuthorList(),
-                getTagSet("ComputerScience", "Technology")),
+                getTagSet("ComputerScience", "Technology"), SAMPLE_BOOK_CREATED_TIME),
             new Book(new BookName("The Maze Runner"), new Isbn("1-474-59282-1"),
                 getAuthorList("James Dashner1", "James Dashner2", "James Dashner3"),
-                getTagSet("Adventure", "Romance", "Scifi")),
+                getTagSet("Adventure", "Romance", "Scifi"), SAMPLE_BOOK_CREATED_TIME),
             new Book(new BookName("Artificial Intelligence: A Modern Approach"), new Isbn("9780131038059"),
                 getAuthorList("Peter Norvig", "Stuart J. Russell"),
-                getTagSet("Technology")),
+                getTagSet("Technology"), SAMPLE_BOOK_CREATED_TIME),
             new Book(new BookName("Cinderella"), new Isbn("9781409580454"),
                 getAuthorList(),
-                getTagSet())
+                getTagSet(), SAMPLE_BOOK_CREATED_TIME)
         };
     }
 
