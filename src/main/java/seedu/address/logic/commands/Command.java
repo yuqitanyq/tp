@@ -19,6 +19,7 @@ public abstract class Command {
     public static final String HELP_COMMAND_WORD = "help";
     public static final String EXIT_COMMAND_WORD = "exit";
     public static final String CLEAR_COMMAND_WORD = "clear";
+    public static final String PREVIOUS_COMMAND_WORD = "u";
 
     /**
      * Executes the command and returns the result message.
