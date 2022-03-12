@@ -31,9 +31,9 @@ public class PatronCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label patronDisplayCardId;
     @FXML
-    private Label studentId;
+    private Label patronId;
     @FXML
     private Label phone;
     @FXML
@@ -47,13 +47,9 @@ public class PatronCard extends UiPart<Region> {
     public PatronCard(Patron patron, int displayedIndex) {
         super(FXML);
         this.patron = patron;
-        id.setText(displayedIndex + ". ");
+        patronDisplayCardId.setText(displayedIndex + ". ");
         name.setText(patron.getName().fullName);
-        phone.setText(patron.getPhone().value);
-        email.setText(patron.getEmail().value);
-
-        // Remove the hardcoded student ID during integration -- NOT SAFE for deployment
-        studentId.setText("Student ID: " + "A1234567X");
+        patronId.setText("ID: " + patron.getId().value);
         phone.setText("Phone: " + patron.getPhone().value);
         email.setText("Email: " + patron.getEmail().value);
         patron.getTags().stream()
@@ -75,7 +71,7 @@ public class PatronCard extends UiPart<Region> {
 
         // state check
         PatronCard card = (PatronCard) other;
-        return id.getText().equals(card.id.getText())
+        return patronDisplayCardId.getText().equals(card.patronDisplayCardId.getText())
                 && patron.equals(card.patron);
     }
 }

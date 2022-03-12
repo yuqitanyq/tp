@@ -12,7 +12,7 @@ import seedu.address.model.book.Author;
 import seedu.address.model.book.Book;
 
 /**
- * An UI component that displays information of a {@code Patron}.
+ * An UI component that displays information of a {@code Book}.
  */
 public class BookCard extends UiPart<Region> {
 
@@ -33,7 +33,7 @@ public class BookCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label bookCardDisplayId;
     @FXML
     private Label authors;
     @FXML
@@ -51,7 +51,7 @@ public class BookCard extends UiPart<Region> {
     public BookCard(Book book, int displayedIndex) {
         super(FXML);
         this.book = book;
-        id.setText(displayedIndex + ". ");
+        bookCardDisplayId.setText(displayedIndex + ". ");
         name.setText(book.getBookName().toString());
 
         // Author check needed since author is an optional parameter in book command
@@ -99,7 +99,7 @@ public class BookCard extends UiPart<Region> {
 
         // state check
         BookCard card = (BookCard) other;
-        return id.getText().equals(card.id.getText())
+        return bookCardDisplayId.getText().equals(card.bookCardDisplayId.getText())
                 && book.equals(card.book);
     }
 }
