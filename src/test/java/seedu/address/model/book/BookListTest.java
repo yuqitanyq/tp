@@ -39,7 +39,7 @@ public class BookListTest {
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_patronWithSameIdentityFieldsInList_returnsTrue() {
         bookList.add(HARRY_POTTER);
         Book editedHarryPotter = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES)
                 .withAuthors(VALID_AUTHOR_SUZANNE_COLLINS)

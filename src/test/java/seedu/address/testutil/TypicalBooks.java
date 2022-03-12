@@ -19,7 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.book.Book;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Patron} objects to be used in tests.
  */
 public class TypicalBooks {
 

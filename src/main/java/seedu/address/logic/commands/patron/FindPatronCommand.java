@@ -6,7 +6,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.patron.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all patrons in address book whose name contains any of the argument keywords.
@@ -14,10 +14,11 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  */
 public class FindPatronCommand extends Command {
 
-    public static final String MESSAGE_USAGE = FIND_COMMAND_WORD + ": Finds all patrons whose names contain any of "
+    public static final String MESSAGE_USAGE = PATRON_COMMAND_GROUP + FIND_COMMAND_WORD
+            + ": Finds all patrons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + FIND_COMMAND_WORD + " alice bob charlie";
+            + "Example: " + PATRON_COMMAND_GROUP + FIND_COMMAND_WORD + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -28,9 +29,9 @@ public class FindPatronCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredPatronList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PATRONS_LISTED_OVERVIEW, model.getFilteredPatronList().size()));
     }
 
     @Override

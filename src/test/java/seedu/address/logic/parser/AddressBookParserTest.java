@@ -7,7 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.Command.PATRON_COMMAND_GROUP;
 import static seedu.address.logic.commands.Command.PREVIOUS_COMMAND_WORD;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATRON;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -25,15 +25,15 @@ import seedu.address.logic.commands.PreviousCommand;
 import seedu.address.logic.commands.patron.AddPatronCommand;
 import seedu.address.logic.commands.patron.DeletePatronCommand;
 import seedu.address.logic.commands.patron.EditPatronCommand;
-import seedu.address.logic.commands.patron.EditPatronCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.patron.EditPatronCommand.EditPatronDescriptor;
 import seedu.address.logic.commands.patron.FindPatronCommand;
 import seedu.address.logic.commands.patron.ListPatronCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Patron;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.model.patron.NameContainsKeywordsPredicate;
+import seedu.address.model.patron.Patron;
+import seedu.address.testutil.EditPatronDescriptorBuilder;
+import seedu.address.testutil.PatronBuilder;
+import seedu.address.testutil.PatronUtil;
 
 public class AddressBookParserTest {
 
@@ -41,9 +41,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Patron person = new PersonBuilder().build();
-        AddPatronCommand command = (AddPatronCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddPatronCommand(person), command);
+        Patron patron = new PatronBuilder().build();
+        AddPatronCommand command = (AddPatronCommand) parser.parseCommand(PatronUtil.getAddCommand(patron));
+        assertEquals(new AddPatronCommand(patron), command);
     }
 
     @Test
@@ -56,18 +56,18 @@ public class AddressBookParserTest {
     public void parseCommand_delete() throws Exception {
         DeletePatronCommand command = (DeletePatronCommand) parser.parseCommand(
                 PATRON_COMMAND_GROUP + " " + Command.DELETE_COMMAND_WORD + " "
-                        + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeletePatronCommand(INDEX_FIRST_PERSON), command);
+                        + INDEX_FIRST_PATRON.getOneBased());
+        assertEquals(new DeletePatronCommand(INDEX_FIRST_PATRON), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Patron person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Patron patron = new PatronBuilder().build();
+        EditPatronDescriptor descriptor = new EditPatronDescriptorBuilder(patron).build();
         EditPatronCommand command = (EditPatronCommand) parser.parseCommand(PATRON_COMMAND_GROUP + " "
                 + Command.EDIT_COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditPatronCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_PATRON.getOneBased() + " " + PatronUtil.getEditPatronDescriptorDetails(descriptor));
+        assertEquals(new EditPatronCommand(INDEX_FIRST_PATRON, descriptor), command);
     }
 
     @Test

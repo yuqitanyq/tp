@@ -11,11 +11,11 @@ import seedu.address.model.book.Author;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.BookName;
 import seedu.address.model.book.Isbn;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Patron;
-import seedu.address.model.person.Phone;
+import seedu.address.model.patron.Email;
+import seedu.address.model.patron.Id;
+import seedu.address.model.patron.Name;
+import seedu.address.model.patron.Patron;
+import seedu.address.model.patron.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,7 +25,7 @@ public class SampleDataUtil {
 
     public static final long SAMPLE_BOOK_CREATED_TIME = 1646989653388L;
 
-    public static Patron[] getSamplePersons() {
+    public static Patron[] getSamplePatrons() {
         return new Patron[] {
             new Patron(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Id("A0123456H"),
@@ -76,8 +76,8 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Patron samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+        for (Patron samplePatron : getSamplePatrons()) {
+            sampleAb.addPatron(samplePatron);
         }
         for (Book sampleBook : getSampleBooks()) {
             sampleAb.addBook(sampleBook);
