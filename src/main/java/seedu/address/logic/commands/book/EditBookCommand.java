@@ -31,9 +31,9 @@ import seedu.address.model.tag.Tag;
  * Edits the details of an existing book in the address book.
  */
 public class EditBookCommand extends Command {
-    public static final String COMMAND_WORD = "book edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the book at a specified index "
+    public static final String MESSAGE_USAGE = BOOK_COMMAND_GROUP + " " + EDIT_COMMAND_WORD
+            + ": Edits the details of the book at a specified index "
             + "by the index number used in the displayed book list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -41,7 +41,7 @@ public class EditBookCommand extends Command {
             + "[" + PREFIX_ISBN + "ISBN] "
             + "[" + PREFIX_AUTHOR + "AUTHOR] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + BOOK_COMMAND_GROUP + " " + EDIT_COMMAND_WORD + " 1 "
             + PREFIX_NAME + "John Doe "
             + PREFIX_ISBN + "9780747532743"
             + PREFIX_AUTHOR + "JK Rowling"
@@ -93,7 +93,7 @@ public class EditBookCommand extends Command {
         Isbn updatedIsbn = editBookDescriptor.getIsbn().orElse(bookToEdit.getIsbn());
         List<Author> updatedAuthor = editBookDescriptor.getAuthors().orElse(bookToEdit.getAuthors());
         Set<Tag> updatedTags = editBookDescriptor.getTags().orElse(bookToEdit.getTags());
-        long updatedTimeAdded = editBookDescriptor.getTimeAdded().orElse(bookToEdit.getTimeAdded());
+        long updatedTimeAdded = bookToEdit.getTimeAdded();
 
         return new Book(updatedName, updatedIsbn, updatedAuthor, updatedTags, updatedTimeAdded);
     }
@@ -125,7 +125,6 @@ public class EditBookCommand extends Command {
         private Isbn isbn;
         private List<Author> authors;
         private Set<Tag> tags;
-        private long timeAdded;
 
         public EditBookDescriptor() {
         }
@@ -139,7 +138,6 @@ public class EditBookCommand extends Command {
             setIsbn(toCopy.isbn);
             setAuthors(toCopy.authors);
             setTags(toCopy.tags);
-            setTimeAdded(toCopy.timeAdded);
         }
 
         /**
@@ -163,14 +161,6 @@ public class EditBookCommand extends Command {
 
         public Optional<Isbn> getIsbn() {
             return Optional.ofNullable(isbn);
-        }
-
-        public void setTimeAdded(long timeAdded) {
-            this.timeAdded = timeAdded;
-        }
-
-        public Optional<Long> getTimeAdded() {
-            return Optional.ofNullable(timeAdded);
         }
 
         public void setAuthors(List<Author> authors) {

@@ -15,6 +15,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showBookAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -35,7 +36,12 @@ import seedu.address.testutil.TypicalAddressBook;
  */
 public class EditBookCommandTest {
 
-    private Model model = new ModelManager(TypicalAddressBook.getTypicalAddressBook(), new UserPrefs());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(TypicalAddressBook.getTypicalAddressBook(), new UserPrefs());
+    }
 
     @Test
     public void execute_allBookFieldsSpecifiedUnfilteredList_success() {
@@ -238,6 +244,5 @@ public class EditBookCommandTest {
         //different descriptor -> returns false
         assertFalse(standardBookCommand.equals(new EditBookCommand(INDEX_FIRST_BOOK, DESC_HUNGER_GAMES)));
     }
-
 
 }
