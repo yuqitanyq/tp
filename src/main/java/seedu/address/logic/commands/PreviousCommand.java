@@ -15,7 +15,7 @@ public class PreviousCommand extends Command {
      * @return a String of past commands
      */
     String getPreviousCommands() {
-        return AddressBookParser.getpreviousCommands();
+        return AddressBookParser.getPreviousCommands();
     }
 
     @Override

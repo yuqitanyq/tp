@@ -15,7 +15,6 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PreviousCommand;
 import seedu.address.logic.parser.book.BookCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -41,15 +40,11 @@ public class AddressBookParser {
      *
      * @return a String of the past commands
      */
-    public static String getpreviousCommands() {
-        String commands = "";
-        if (previousCommands.size() == 0) {
-            commands = " ";
-        } else {
-            commands = previousCommands.getLast();
+    public static String getPreviousCommands() {
+        if (previousCommands == null || previousCommands.size() == 0) {
+            return "";
         }
-        previousCommands.removeLast();
-        return commands;
+        return previousCommands.pop();
     }
 
     /**
