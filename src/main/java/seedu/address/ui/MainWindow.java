@@ -1,10 +1,6 @@
 package seedu.address.ui;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +14,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -27,9 +22,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-
-    public static final Pattern SPLIT_PREVIOUS_TEXT =
-            Pattern.compile("(?<previousCommand>.*\\|+)(?<previousCommandResultText>.*)");
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -194,15 +186,14 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
 
-//            if (commandResult.isPreviousCommand()) {
-//                final Matcher matcher = SPLIT_PREVIOUS_TEXT.matcher(commandText.trim());
-//                final String previousCommandResultText = matcher.group("previousCommandResultText");
-//                resultDisplay.setFeedbackToUser(previousCommandResultText);
-//                return commandResult;
-//            }
-//
-//            logic.storePreviousCommand(commandText);
-//            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            if (commandResult.isPrevious()) {
+                final String previousCommandResultText = commandResult.getFeedbackToUser().split("\\|+")[1];
+                resultDisplay.setFeedbackToUser(previousCommandResultText);
+                return commandResult;
+            }
+
+            logic.storePreviousCommand(commandText);
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
