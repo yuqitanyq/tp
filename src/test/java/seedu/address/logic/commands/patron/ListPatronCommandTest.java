@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.testutil.TypicalAddressBook;
+import seedu.address.testutil.TypicalLibTask;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -22,7 +22,7 @@ public class ListPatronCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalAddressBook.getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(TypicalLibTask.getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
 

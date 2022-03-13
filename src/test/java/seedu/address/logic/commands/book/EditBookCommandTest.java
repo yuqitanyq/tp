@@ -22,14 +22,14 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.book.EditBookCommand.EditBookDescriptor;
-import seedu.address.model.AddressBook;
+import seedu.address.model.LibTask;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.book.Book;
 import seedu.address.testutil.BookBuilder;
 import seedu.address.testutil.EditBookDescriptorBuilder;
-import seedu.address.testutil.TypicalAddressBook;
+import seedu.address.testutil.TypicalLibTask;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditBookCommand.
@@ -40,7 +40,7 @@ public class EditBookCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalAddressBook.getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(TypicalLibTask.getTypicalAddressBook(), new UserPrefs());
     }
 
     @Test
@@ -51,7 +51,7 @@ public class EditBookCommandTest {
 
         String expectedMessage = String.format(EditBookCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LibTask(model.getAddressBook()), new UserPrefs());
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
 
         assertCommandSuccess(editBookCommand, model, expectedMessage, expectedModel);
@@ -71,7 +71,7 @@ public class EditBookCommandTest {
 
         String expectedMessage = String.format(EditBookCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LibTask(model.getAddressBook()), new UserPrefs());
         expectedModel.setBook(lastBook, editedBook);
 
         assertCommandSuccess(editBookCommand, model, expectedMessage, expectedModel);
@@ -91,7 +91,7 @@ public class EditBookCommandTest {
 
         String expectedMessage = String.format(EditBookCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LibTask(model.getAddressBook()), new UserPrefs());
         expectedModel.setBook(lastBook, editedBook);
 
         assertCommandSuccess(editBookCommand, model, expectedMessage, expectedModel);
@@ -111,7 +111,7 @@ public class EditBookCommandTest {
 
         String expectedMessage = String.format(EditBookCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LibTask(model.getAddressBook()), new UserPrefs());
         expectedModel.setBook(lastBook, editedBook);
 
         assertCommandSuccess(editBookCommand, model, expectedMessage, expectedModel);
@@ -131,7 +131,7 @@ public class EditBookCommandTest {
 
         String expectedMessage = String.format(EditBookCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LibTask(model.getAddressBook()), new UserPrefs());
         expectedModel.setBook(lastBook, editedBook);
 
         assertCommandSuccess(editBookCommand, model, expectedMessage, expectedModel);
@@ -144,7 +144,7 @@ public class EditBookCommandTest {
 
         String expectedMessage = String.format(EditBookCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LibTask(model.getAddressBook()), new UserPrefs());
 
         assertCommandSuccess(editBookCommand, model, expectedMessage, expectedModel);
     }
@@ -160,7 +160,7 @@ public class EditBookCommandTest {
 
         String expectedMessage = String.format(EditBookCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LibTask(model.getAddressBook()), new UserPrefs());
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
 
         assertCommandSuccess(editBookCommand, model, expectedMessage, expectedModel);
@@ -175,7 +175,7 @@ public class EditBookCommandTest {
 
         String expectedMessage = String.format(EditBookCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LibTask(model.getAddressBook()), new UserPrefs());
         expectedModel.setBook(model.getFilteredBookList().get(1), editedBook);
 
         assertCommandSuccess(editBookCommand, model, expectedMessage, expectedModel);
@@ -192,7 +192,7 @@ public class EditBookCommandTest {
 
         String expectedMessage = String.format(EditBookCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LibTask(model.getAddressBook()), new UserPrefs());
         expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
 
         assertCommandSuccess(editBookCommand, model, expectedMessage, expectedModel);

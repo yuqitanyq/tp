@@ -12,10 +12,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.LibTaskParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLibTask;
 import seedu.address.model.book.Book;
 import seedu.address.model.patron.Patron;
 import seedu.address.storage.Storage;
@@ -29,7 +29,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final LibTaskParser libTaskParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -37,14 +37,14 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        libTaskParser = new LibTaskParser();
     }
 
     @Override
     public void storePreviousCommand(String previousCommand) {
         requireNonNull(previousCommand);
 
-        addressBookParser.storePreviousCommand(previousCommand);
+        libTaskParser.storePreviousCommand(previousCommand);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = libTaskParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
@@ -65,7 +65,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyLibTask getAddressBook() {
         return model.getAddressBook();
     }
 
@@ -95,7 +95,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public AddressBookParser getAddressBookParser() {
-        return addressBookParser;
+    public LibTaskParser getAddressBookParser() {
+        return libTaskParser;
     }
 }

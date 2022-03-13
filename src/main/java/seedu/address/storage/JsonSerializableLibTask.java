@@ -9,16 +9,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.LibTask;
+import seedu.address.model.ReadOnlyLibTask;
 import seedu.address.model.book.Book;
 import seedu.address.model.patron.Patron;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable LibTask that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+class JsonSerializableLibTask {
 
     public static final String MESSAGE_DUPLICATE_PATRON = "Patrons list contains duplicate patron(s).";
 
@@ -26,44 +26,44 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedBook> books = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given patrons.
+     * Constructs a {@code JsonSerializableLibTask} with the given patrons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("patrons") List<JsonAdaptedPatron> patrons,
-                                       @JsonProperty("books") List<JsonAdaptedBook> books) {
+    public JsonSerializableLibTask(@JsonProperty("patrons") List<JsonAdaptedPatron> patrons,
+                                   @JsonProperty("books") List<JsonAdaptedBook> books) {
         this.patrons.addAll(patrons);
         this.books.addAll(books);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyLibTask} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableLibTask}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableLibTask(ReadOnlyLibTask source) {
         patrons.addAll(source.getPatronList().stream().map(JsonAdaptedPatron::new).collect(Collectors.toList()));
         books.addAll(source.getBookList().stream().map(JsonAdaptedBook::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code LibTask} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public LibTask toModelType() throws IllegalValueException {
+        LibTask libTask = new LibTask();
         for (JsonAdaptedPatron jsonAdaptedPatron : patrons) {
             Patron patron = jsonAdaptedPatron.toModelType();
-            if (addressBook.hasPatron(patron)) {
+            if (libTask.hasPatron(patron)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PATRON);
             }
-            addressBook.addPatron(patron);
+            libTask.addPatron(patron);
         }
         for (JsonAdaptedBook jsonAdaptedBook : books) {
             Book book = jsonAdaptedBook.toModelType();
-            addressBook.addBook(book);
+            libTask.addBook(book);
         }
-        return addressBook;
+        return libTask;
     }
 
 }

@@ -33,9 +33,9 @@ import seedu.address.testutil.EditPatronDescriptorBuilder;
 import seedu.address.testutil.PatronBuilder;
 import seedu.address.testutil.PatronUtil;
 
-public class AddressBookParserTest {
+public class LibTaskParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final LibTaskParser parser = new LibTaskParser();
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -122,14 +122,14 @@ public class AddressBookParserTest {
 
     @Test
     public void getPreviousCommand_previousCommandsNotEmpty_returnsPreviousString() {
-        AddressBookParser parserWithCommands = new AddressBookParser();
+        LibTaskParser parserWithCommands = new LibTaskParser();
         parserWithCommands.storePreviousCommand("list");
         assertEquals("list", parserWithCommands.getPreviousCommand());
     }
 
     @Test
     public void storePreviousCommand() {
-        AddressBookParser parserAddCommands = new AddressBookParser();
+        LibTaskParser parserAddCommands = new LibTaskParser();
         parserAddCommands.storePreviousCommand("list");
         assertEquals("list", parserAddCommands.getPreviousCommand());
     }

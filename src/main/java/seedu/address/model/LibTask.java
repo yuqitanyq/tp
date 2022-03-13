@@ -15,7 +15,7 @@ import seedu.address.model.patron.UniquePatronList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePatron comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class LibTask implements ReadOnlyLibTask {
 
     private final UniquePatronList patrons;
     private final BookList books;
@@ -32,12 +32,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         books = new BookList();
     }
 
-    public AddressBook() {}
+    public LibTask() {}
 
     /**
-     * Creates an AddressBook using the Patrons in the {@code toBeCopied}
+     * Creates an LibTask using the Patrons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public LibTask(ReadOnlyLibTask toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -60,9 +60,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code LibTask} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyLibTask newData) {
         requireNonNull(newData);
 
         setPatrons(newData.getPatronList());
@@ -124,7 +124,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code LibTask}.
      * {@code key} must exist in the address book.
      */
     public void removePatron(Patron key) {
@@ -132,7 +132,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code LibTask}.
      * {@code key} must exist in the address book.
      */
     public void removeBook(Book key) {
@@ -160,9 +160,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && patrons.equals(((AddressBook) other).patrons)
-                && books.equals(((AddressBook) other).books));
+                || (other instanceof LibTask // instanceof handles nulls
+                && patrons.equals(((LibTask) other).patrons)
+                && books.equals(((LibTask) other).books));
     }
 
     @Override

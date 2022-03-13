@@ -9,13 +9,14 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.book.ListBookCommand;
+import seedu.address.logic.parser.LibTaskParser;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses user input that is already processed by AddressBookParser into a Command object
+ * Parses user input that is already processed by LibTaskParser into a Command object
  *
- * @see seedu.address.logic.parser.AddressBookParser
+ * @see LibTaskParser
  */
 public class BookCommandParser implements Parser<Command> {
 
@@ -27,7 +28,7 @@ public class BookCommandParser implements Parser<Command> {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput user input string that is alaready processed by {@code AddressBookParser}
+     * @param userInput user input string that is alaready processed by {@code LibTaskParser}
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */

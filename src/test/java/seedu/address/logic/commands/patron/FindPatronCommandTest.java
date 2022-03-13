@@ -18,14 +18,14 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.patron.NameContainsKeywordsPredicate;
-import seedu.address.testutil.TypicalAddressBook;
+import seedu.address.testutil.TypicalLibTask;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindPatronCommandTest {
-    private Model model = new ModelManager(TypicalAddressBook.getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(TypicalAddressBook.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalLibTask.getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(TypicalLibTask.getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {

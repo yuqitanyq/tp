@@ -26,27 +26,27 @@ import seedu.address.model.patron.Patron;
 import seedu.address.model.patron.exceptions.DuplicatePatronException;
 import seedu.address.testutil.BookBuilder;
 import seedu.address.testutil.PatronBuilder;
-import seedu.address.testutil.TypicalAddressBook;
+import seedu.address.testutil.TypicalLibTask;
 
-public class AddressBookTest {
+public class LibTaskTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final LibTask libTask = new LibTask();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPatronList());
+        assertEquals(Collections.emptyList(), libTask.getPatronList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> libTask.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = TypicalAddressBook.getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        LibTask newData = TypicalLibTask.getTypicalAddressBook();
+        libTask.resetData(newData);
+        assertEquals(newData, libTask);
     }
 
     @Test
@@ -55,80 +55,80 @@ public class AddressBookTest {
         Patron editedAlice = new PatronBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Patron> newPatrons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPatrons, new ArrayList<>());
+        LibTaskStub newData = new LibTaskStub(newPatrons, new ArrayList<>());
 
-        assertThrows(DuplicatePatronException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePatronException.class, () -> libTask.resetData(newData));
     }
 
     @Test
     public void hasPatron_nullPatron_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPatron(null));
+        assertThrows(NullPointerException.class, () -> libTask.hasPatron(null));
     }
 
     @Test
     public void hasPatron_patronNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPatron(ALICE));
+        assertFalse(libTask.hasPatron(ALICE));
     }
 
     @Test
     public void hasPatron_patronInAddressBook_returnsTrue() {
-        addressBook.addPatron(ALICE);
-        assertTrue(addressBook.hasPatron(ALICE));
+        libTask.addPatron(ALICE);
+        assertTrue(libTask.hasPatron(ALICE));
     }
 
     @Test
     public void hasPatron_patronWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPatron(ALICE);
+        libTask.addPatron(ALICE);
         Patron editedAlice = new PatronBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPatron(editedAlice));
+        assertTrue(libTask.hasPatron(editedAlice));
     }
 
     @Test
     public void getPatronList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPatronList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> libTask.getPatronList().remove(0));
     }
 
     @Test
     public void hasBook_nullBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasBook(null));
+        assertThrows(NullPointerException.class, () -> libTask.hasBook(null));
     }
 
     @Test
     public void hasBook_bookNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasBook(HARRY_POTTER));
+        assertFalse(libTask.hasBook(HARRY_POTTER));
     }
 
     @Test
     public void hasBook_bookInAddressBook_returnsTrue() {
-        addressBook.addBook(HARRY_POTTER);
-        assertTrue(addressBook.hasBook(HARRY_POTTER));
+        libTask.addBook(HARRY_POTTER);
+        assertTrue(libTask.hasBook(HARRY_POTTER));
     }
 
     @Test
     public void hasBook_bookWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addBook(HARRY_POTTER);
+        libTask.addBook(HARRY_POTTER);
         Book editedHarryPotter = new BookBuilder(HARRY_POTTER)
                 .withName(VALID_BOOK_NAME_HUNGER_GAMES)
                 .withAuthors(VALID_AUTHOR_SUZANNE_COLLINS)
                 .withTags(VALID_TAG_SCIFI)
                 .build();
-        assertTrue(addressBook.hasBook(editedHarryPotter));
+        assertTrue(libTask.hasBook(editedHarryPotter));
     }
 
     @Test
     public void getBookList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getBookList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> libTask.getBookList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose patrons list can violate interface constraints.
+     * A stub ReadOnlyLibTask whose patrons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class LibTaskStub implements ReadOnlyLibTask {
         private final ObservableList<Patron> patrons = FXCollections.observableArrayList();
         private final ObservableList<Book> books = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Patron> patrons, Collection<Book> books) {
+        LibTaskStub(Collection<Patron> patrons, Collection<Book> books) {
             this.patrons.setAll(patrons);
             this.books.setAll(books);
         }

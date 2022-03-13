@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.LibTask;
 import seedu.address.model.book.Book;
 
 /**
@@ -54,10 +54,10 @@ public class TypicalBooks {
     private TypicalBooks() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical books.
+     * Returns an {@code LibTask} with all the typical books.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static LibTask getTypicalAddressBook() {
+        LibTask ab = new LibTask();
         for (Book book : getTypicalBooks()) {
             ab.addBook(book);
         }
