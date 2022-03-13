@@ -6,7 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class AddressTest {
+public class IdTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -27,10 +27,14 @@ public class AddressTest {
         // invalid id
         assertFalse(Id.isValidId("")); // empty string
         assertFalse(Id.isValidId(" ")); // spaces only
+        assertFalse(Id.isValidId("K0123456H")); //id not starting with A
+        assertFalse(Id.isValidId("M0123452346H")); //id longer than 9 characters
+        assertFalse(Id.isValidId("L01256H")); //id shorter than 9 characters
+
 
         // valid id
         assertTrue(Id.isValidId("A0123456H"));
-        assertTrue(Id.isValidId("A0123457H"));
-        assertTrue(Id.isValidId("A0123458H"));
+        assertTrue(Id.isValidId("A0123457K"));
+        assertTrue(Id.isValidId("A0123458L"));
     }
 }
