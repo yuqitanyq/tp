@@ -31,13 +31,17 @@ public class PatronTest {
         // null -> returns false
         assertFalse(ALICE.isSamePatron(null));
 
-        // same name, all other attributes different -> returns true
+        // same name and id, all other attributes different -> returns true
         Patron editedAlice = new PatronBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withId(VALID_ID_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePatron(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new PatronBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.isSamePatron(editedAlice));
+
+        // different id, all other attributes same -> returns false
+        editedAlice = new PatronBuilder(ALICE).withId(VALID_ID_BOB).build();
         assertFalse(ALICE.isSamePatron(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
@@ -76,11 +80,11 @@ public class PatronTest {
         editedAlice = new PatronBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different id -> returns false
+        // different email -> returns false
         editedAlice = new PatronBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
+        // different id -> returns false
         editedAlice = new PatronBuilder(ALICE).withId(VALID_ID_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 

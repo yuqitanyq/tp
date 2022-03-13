@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AUTHOR_SUZANNE_COLLINS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOK_NAME_HUNGER_GAMES;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIFI;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -53,7 +52,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePatrons_throwsDuplicatePatronException() {
         // Two patrons with the same identity fields
-        Patron editedAlice = new PatronBuilder(ALICE).withId(VALID_ID_BOB).withTags(VALID_TAG_HUSBAND)
+        Patron editedAlice = new PatronBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Patron> newPatrons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPatrons, new ArrayList<>());
@@ -80,7 +79,7 @@ public class AddressBookTest {
     @Test
     public void hasPatron_patronWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPatron(ALICE);
-        Patron editedAlice = new PatronBuilder(ALICE).withId(VALID_ID_BOB).withTags(VALID_TAG_HUSBAND)
+        Patron editedAlice = new PatronBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPatron(editedAlice));
     }

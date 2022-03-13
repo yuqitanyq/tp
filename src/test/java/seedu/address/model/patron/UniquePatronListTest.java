@@ -42,7 +42,7 @@ public class UniquePatronListTest {
     @Test
     public void contains_patronWithSameIdentityFieldsInList_returnsTrue() {
         uniquePatronList.add(ALICE);
-        Patron editedAlice = new PatronBuilder(ALICE).withId(VALID_ID_BOB).withTags(VALID_TAG_HUSBAND)
+        Patron editedAlice = new PatronBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniquePatronList.contains(editedAlice));
     }
