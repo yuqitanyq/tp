@@ -1,6 +1,6 @@
 {
   "_comment": "AddressBook save file which contains the same Book values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [ ],
+  "patrons" : [ ],
   "books" : [{
     "bookName" : "Introduction to Algorithms",
     "isbn" : "978-03-71-88850-6",

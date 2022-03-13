@@ -1,5 +1,5 @@
 {
-  "persons": [ ],
+  "patrons": [ ],
   "books" : [{
     "bookName" : "Harry Potter",
     "isbn" : "000-03-71-88850-6",

@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.book.ListBookCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -49,6 +50,9 @@ public class BookCommandParser implements Parser<Command> {
 
         case Command.EDIT_COMMAND_WORD:
             return new EditBookCommandParser().parse(arguments);
+
+        case Command.LIST_COMMAND_WORD:
+            return new ListBookCommand();
 
         // TODO : Add cases for List and Find
 
