@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.book.Book;
@@ -31,6 +32,13 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
+    /**
+     * Returns the AddressBookParser.
+     *
+     * @see seedu.address.logic.parser.AddressBookParser
+     */
+    AddressBookParser getAddressBookParser();
+
     /** Returns an unmodifiable view of the filtered list of patrons */
     ObservableList<Patron> getFilteredPatronList();
 
@@ -51,4 +59,9 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Stores previous command.
+     */
+    void storePreviousCommand(String previousCommand);
 }

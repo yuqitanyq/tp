@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.Command.PATRON_COMMAND_GROUP;
+import static seedu.address.logic.commands.Command.PREVIOUS_COMMAND_WORD;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATRON;
 
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.PreviousCommand;
 import seedu.address.logic.commands.patron.AddPatronCommand;
 import seedu.address.logic.commands.patron.DeletePatronCommand;
 import seedu.address.logic.commands.patron.EditPatronCommand;
@@ -96,6 +98,11 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_previousCommand() throws Exception {
+        assertTrue(parser.parseCommand(PREVIOUS_COMMAND_WORD) instanceof PreviousCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
@@ -105,5 +112,25 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
             parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void getPreviousCommand_previousCommandsEmpty_returnsEmptyString() {
+        String previousCommand = parser.getPreviousCommand();
+        assertEquals("", previousCommand);
+    }
+
+    @Test
+    public void getPreviousCommand_previousCommandsNotEmpty_returnsPreviousString() {
+        AddressBookParser parserWithCommands = new AddressBookParser();
+        parserWithCommands.storePreviousCommand("list");
+        assertEquals("list", parserWithCommands.getPreviousCommand());
+    }
+
+    @Test
+    public void storePreviousCommand() {
+        AddressBookParser parserAddCommands = new AddressBookParser();
+        parserAddCommands.storePreviousCommand("list");
+        assertEquals("list", parserAddCommands.getPreviousCommand());
     }
 }

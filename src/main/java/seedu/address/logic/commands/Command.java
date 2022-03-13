@@ -19,6 +19,7 @@ public abstract class Command {
     public static final String DELETE_COMMAND_WORD = "delete";
     public static final String FIND_COMMAND_WORD = "find";
     public static final String LIST_COMMAND_WORD = "list";
+    public static final String PREVIOUS_COMMAND_WORD = "u";
 
     /**
      * Executes the command and returns the result message.
