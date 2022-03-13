@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import static seedu.address.ui.MainWindow.SPLIT_PREVIOUS_TEXT;
+
+import java.util.regex.Matcher;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -42,8 +46,17 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
-            commandExecutor.execute(commandText);
+            CommandResult commandResult = commandExecutor.execute(commandText);
+
+            // Waiting for previous command
+//            if (commandResult.isPreviousCommand()) {
+//                final Matcher matcher = SPLIT_PREVIOUS_TEXT.matcher(commandText.trim());
+//                final String previousCommandResultText = matcher.group("previousCommandResultText");
+//                commandTextField.setText("");
+//                return;
+//            }
             commandTextField.setText("");
+            return;
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
