@@ -179,10 +179,20 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
+
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
+
+            if (commandResult.isPrevious()) {
+                final String previousCommandResultText = commandResult.getFeedbackToUser().split("\\|+")[1];
+                resultDisplay.setFeedbackToUser(previousCommandResultText);
+                return commandResult;
+            }
+
+            logic.storePreviousCommand(commandText);
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
