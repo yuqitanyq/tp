@@ -21,14 +21,14 @@ public class AddBookCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalLibTask.getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
     }
 
     @Test
     public void execute_newBook_success() {
         Book validBook = new BookBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getLibTask(), new UserPrefs());
         expectedModel.addBook(validBook);
 
         assertCommandSuccess(new AddBookCommand(validBook), model,

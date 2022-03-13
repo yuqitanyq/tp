@@ -14,12 +14,12 @@ import seedu.address.model.Model;
 import seedu.address.model.patron.Patron;
 
 /**
- * Adds a patron to the address book.
+ * Adds a patron to LibTask.
  */
 public class AddPatronCommand extends Command {
 
     public static final String MESSAGE_USAGE = PATRON_COMMAND_GROUP + ADD_COMMAND_WORD
-            + ": Adds a patron to the address book. "
+            + ": Adds a patron to LibTask. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -35,7 +35,7 @@ public class AddPatronCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New patron added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PATRON = "This patron already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PATRON = "This patron already exists in LibTask";
 
     private final Patron toAdd;
 

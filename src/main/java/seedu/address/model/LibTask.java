@@ -12,7 +12,7 @@ import seedu.address.model.patron.Patron;
 import seedu.address.model.patron.UniquePatronList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the LibTask level
  * Duplicates are not allowed (by .isSamePatron comparison)
  */
 public class LibTask implements ReadOnlyLibTask {
@@ -72,7 +72,7 @@ public class LibTask implements ReadOnlyLibTask {
     //// patron-level operations
 
     /**
-     * Returns true if a patron with the same identity as {@code patron} exists in the address book.
+     * Returns true if a patron with the same identity as {@code patron} exists in LibTask.
      */
     public boolean hasPatron(Patron patron) {
         requireNonNull(patron);
@@ -80,7 +80,7 @@ public class LibTask implements ReadOnlyLibTask {
     }
 
     /**
-     * Returns true if a book with the same identity as {@code book} exists in the address book.
+     * Returns true if a book with the same identity as {@code book} exists in LibTask.
      */
     public boolean hasBook(Book book) {
         requireNonNull(book);
@@ -88,15 +88,15 @@ public class LibTask implements ReadOnlyLibTask {
     }
 
     /**
-     * Adds a patron to the address book.
-     * The patron must not already exist in the address book.
+     * Adds a patron to LibTask.
+     * The patron must not already exist in LibTask.
      */
     public void addPatron(Patron p) {
         patrons.add(p);
     }
 
     /**
-     * Adds a book to the address book.
+     * Adds a book to LibTask.
      */
     public void addBook(Book book) {
         books.add(book);
@@ -104,8 +104,8 @@ public class LibTask implements ReadOnlyLibTask {
 
     /**
      * Replaces the given patron {@code target} in the list with {@code editedPatron}.
-     * {@code target} must exist in the address book.
-     * The patron identity of {@code editedPatron} must not be the same as another existing patron in the address book.
+     * {@code target} must exist in LibTask.
+     * The patron identity of {@code editedPatron} must not be the same as another existing patron in LibTask.
      */
     public void setPatron(Patron target, Patron editedPatron) {
         requireNonNull(editedPatron);
@@ -115,7 +115,7 @@ public class LibTask implements ReadOnlyLibTask {
 
     /**
      * Replaces the given book {@code target} in the list with {@code editedBook}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in LibTask.
      */
     public void setBook(Book target, Book editedBook) {
         requireNonNull(editedBook);
@@ -125,7 +125,7 @@ public class LibTask implements ReadOnlyLibTask {
 
     /**
      * Removes {@code key} from this {@code LibTask}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in LibTask.
      */
     public void removePatron(Patron key) {
         patrons.remove(key);
@@ -133,7 +133,7 @@ public class LibTask implements ReadOnlyLibTask {
 
     /**
      * Removes {@code key} from this {@code LibTask}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in LibTask.
      */
     public void removeBook(Book key) {
         books.remove(key);

@@ -5,7 +5,7 @@ import seedu.address.model.book.Book;
 import seedu.address.model.patron.Patron;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of LibTask
  */
 public interface ReadOnlyLibTask {
 

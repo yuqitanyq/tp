@@ -29,7 +29,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new LibTask(), new LibTask(modelManager.getAddressBook()));
+        assertEquals(new LibTask(), new LibTask(modelManager.getLibTask()));
     }
 
     @Test
@@ -40,14 +40,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setLibTaskFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setLibTaskFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -64,15 +64,15 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setLibTaskFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setLibTaskFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setLibTaskFilePath_validPath_setsLibTaskFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setLibTaskFilePath(path);
+        assertEquals(path, modelManager.getLibTaskFilePath());
     }
 
     @Test
@@ -86,23 +86,23 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPatron_patronNotInAddressBook_returnsFalse() {
+    public void hasPatron_patronNotInLibTask_returnsFalse() {
         assertFalse(modelManager.hasPatron(ALICE));
     }
 
     @Test
-    public void hasBook_bookNotInAddressBook_returnsFalse() {
+    public void hasBook_bookNotInLibTask_returnsFalse() {
         assertFalse(modelManager.hasBook(HARRY_POTTER));
     }
 
     @Test
-    public void hasPatron_patronInAddressBook_returnsTrue() {
+    public void hasPatron_patronInLibTask_returnsTrue() {
         modelManager.addPatron(ALICE);
         assertTrue(modelManager.hasPatron(ALICE));
     }
 
     @Test
-    public void hasBook_bookInAddressBook_returnsTrue() {
+    public void hasBook_bookInLibTask_returnsTrue() {
         modelManager.addBook(HARRY_POTTER);
         assertTrue(modelManager.hasBook(HARRY_POTTER));
     }
@@ -158,7 +158,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setLibTaskFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(libTask, differentUserPrefs)));
     }
 }

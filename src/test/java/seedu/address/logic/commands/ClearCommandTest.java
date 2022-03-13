@@ -13,7 +13,7 @@ import seedu.address.testutil.TypicalLibTask;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyLibTask_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,10 +21,10 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(TypicalLibTask.getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(TypicalLibTask.getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new LibTask());
+    public void execute_nonEmptyLibTask_success() {
+        Model model = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
+        expectedModel.setLibTask(new LibTask());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

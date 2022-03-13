@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonLibTaskStorage addressBookStorage = new JsonLibTaskStorage(getTempFilePath("ab"));
+        JsonLibTaskStorage libTaskStorage = new JsonLibTaskStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(libTaskStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,21 +48,21 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void libTaskReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonLibTaskStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonLibTaskStorageTest} class.
          */
-        LibTask original = TypicalLibTask.getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyLibTask retrieved = storageManager.readAddressBook().get();
+        LibTask original = TypicalLibTask.getTypicalLibTask();
+        storageManager.saveLibTask(original);
+        ReadOnlyLibTask retrieved = storageManager.readLibTask().get();
         assertEquals(original, new LibTask(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getLibTaskFilePath());
     }
 
 }

@@ -26,12 +26,12 @@ public class JsonLibTaskStorageTest {
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readLibTask_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readLibTask(null));
     }
 
-    private java.util.Optional<ReadOnlyLibTask> readAddressBook(String filePath) throws Exception {
-        return new JsonLibTaskStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+    private java.util.Optional<ReadOnlyLibTask> readLibTask(String filePath) throws Exception {
+        return new JsonLibTaskStorage(Paths.get(filePath)).readLibTask(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -42,69 +42,69 @@ public class JsonLibTaskStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readLibTask("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatLibTask.json"));
+        assertThrows(DataConversionException.class, () -> readLibTask("notJsonFormatLibTask.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPatronAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPatronLibTask.json"));
+    public void readLibTask_invalidPatronLibTask_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readLibTask("invalidPatronLibTask.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPatronAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPatronLibTask.json"));
+    public void readLibTask_invalidAndValidPatronLibTask_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readLibTask("invalidAndValidPatronLibTask.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
-        LibTask original = TypicalLibTask.getTypicalAddressBook();
+    public void readAndSaveLibTask_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempLibTask.json");
+        LibTask original = TypicalLibTask.getTypicalLibTask();
         JsonLibTaskStorage jsonLibTaskStorage = new JsonLibTaskStorage(filePath);
 
         // Save in new file and read back
-        jsonLibTaskStorage.saveAddressBook(original, filePath);
-        ReadOnlyLibTask readBack = jsonLibTaskStorage.readAddressBook(filePath).get();
+        jsonLibTaskStorage.saveLibTask(original, filePath);
+        ReadOnlyLibTask readBack = jsonLibTaskStorage.readLibTask(filePath).get();
         assertEquals(original, new LibTask(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addPatron(HOON);
         original.removePatron(ALICE);
-        jsonLibTaskStorage.saveAddressBook(original, filePath);
-        readBack = jsonLibTaskStorage.readAddressBook(filePath).get();
+        jsonLibTaskStorage.saveLibTask(original, filePath);
+        readBack = jsonLibTaskStorage.readLibTask(filePath).get();
         assertEquals(original, new LibTask(readBack));
 
         // Save and read without specifying file path
         original.addPatron(IDA);
-        jsonLibTaskStorage.saveAddressBook(original); // file path not specified
-        readBack = jsonLibTaskStorage.readAddressBook().get(); // file path not specified
+        jsonLibTaskStorage.saveLibTask(original); // file path not specified
+        readBack = jsonLibTaskStorage.readLibTask().get(); // file path not specified
         assertEquals(original, new LibTask(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveLibTask_nullLibTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveLibTask(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code libTask} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyLibTask addressBook, String filePath) {
+    private void saveLibTask(ReadOnlyLibTask libTask, String filePath) {
         try {
             new JsonLibTaskStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveLibTask(libTask, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new LibTask(), null));
+    public void saveLibTask_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveLibTask(new LibTask(), null));
     }
 }

@@ -24,7 +24,7 @@ import seedu.address.testutil.TypicalLibTask;
  */
 public class DeletePatronCommandTest {
 
-    private Model model = new ModelManager(TypicalLibTask.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +33,7 @@ public class DeletePatronCommandTest {
 
         String expectedMessage = String.format(DeletePatronCommand.MESSAGE_DELETE_PATRON_SUCCESS, patronToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getLibTask(), new UserPrefs());
         expectedModel.deletePatron(patronToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -56,7 +56,7 @@ public class DeletePatronCommandTest {
 
         String expectedMessage = String.format(DeletePatronCommand.MESSAGE_DELETE_PATRON_SUCCESS, patronToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getLibTask(), new UserPrefs());
         expectedModel.deletePatron(patronToDelete);
         showNoPatron(expectedModel);
 
@@ -69,7 +69,7 @@ public class DeletePatronCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_PATRON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPatronList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getLibTask().getPatronList().size());
 
         DeletePatronCommand deleteCommand = new DeletePatronCommand(outOfBoundIndex);
 

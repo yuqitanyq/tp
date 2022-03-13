@@ -22,8 +22,8 @@ public class ListPatronCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalLibTask.getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
+        expectedModel = new ModelManager(model.getLibTask(), new UserPrefs());
     }
 
     @Test

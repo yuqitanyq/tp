@@ -13,7 +13,6 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.LibTask;
 import seedu.address.testutil.LengthyBooks;
 import seedu.address.testutil.TypicalLibTask;
-import seedu.address.testutil.TypicalBooks;
 
 public class JsonSerializableLibTaskTest {
 
@@ -30,7 +29,7 @@ public class JsonSerializableLibTaskTest {
         JsonSerializableLibTask dataFromFile = JsonUtil.readJsonFile(TYPICAL_PATRONS_FILE,
                 JsonSerializableLibTask.class).get();
         LibTask libTaskFromFile = dataFromFile.toModelType();
-        LibTask typicalPatronsLibTask = TypicalLibTask.getTypicalAddressBook();
+        LibTask typicalPatronsLibTask = TypicalLibTask.getTypicalLibTask();
         assertEquals(libTaskFromFile, typicalPatronsLibTask);
     }
 
@@ -54,7 +53,7 @@ public class JsonSerializableLibTaskTest {
         JsonSerializableLibTask dataFromFile = JsonUtil.readJsonFile(TYPICAL_BOOKS_FILE,
                 JsonSerializableLibTask.class).get();
         LibTask libTaskFromFile = dataFromFile.toModelType();
-        LibTask typicalBooksLibTask = TypicalBooks.getTypicalAddressBook();
+        LibTask typicalBooksLibTask = TypicalLibTask.getTypicalLibTask();
         assertEquals(libTaskFromFile, typicalBooksLibTask);
     }
 
@@ -70,7 +69,7 @@ public class JsonSerializableLibTaskTest {
         JsonSerializableLibTask dataFromFile = JsonUtil.readJsonFile(LENGTHY_BOOK_FILE,
                 JsonSerializableLibTask.class).get();
         LibTask libTaskFromFile = dataFromFile.toModelType();
-        LibTask lengthyBooksLibTask = LengthyBooks.getLengthyAddressBook();
+        LibTask lengthyBooksLibTask = LengthyBooks.getLengthyLibTask();
         assertEquals(libTaskFromFile, lengthyBooksLibTask);
     }
 

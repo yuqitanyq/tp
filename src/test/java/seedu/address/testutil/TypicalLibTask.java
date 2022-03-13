@@ -13,7 +13,7 @@ public class TypicalLibTask {
      *
      * @return An {@code LibTask} with all the typical patrons and books.
      */
-    public static LibTask getTypicalAddressBook() {
+    public static LibTask getTypicalLibTask() {
         LibTask ab = new LibTask();
         for (Patron patron : getTypicalPatrons()) {
             ab.addPatron(patron);

@@ -74,7 +74,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyLibTask getSampleAddressBook() {
+    public static ReadOnlyLibTask getSampleLibTask() {
         LibTask sampleAb = new LibTask();
         for (Patron samplePatron : getSamplePatrons()) {
             sampleAb.addPatron(samplePatron);

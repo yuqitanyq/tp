@@ -24,8 +24,8 @@ import seedu.address.testutil.TypicalLibTask;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindPatronCommandTest {
-    private Model model = new ModelManager(TypicalLibTask.getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(TypicalLibTask.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
+    private Model expectedModel = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
 
     @Test
     public void equals() {

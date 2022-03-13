@@ -9,5 +9,5 @@
       "z" : 99
     }
   },
-  "addressBookFilePath" : "libtask.json"
+  "libTaskFilePath" : "libtask.json"
 }

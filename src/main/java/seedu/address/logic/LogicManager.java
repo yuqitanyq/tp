@@ -56,7 +56,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveLibTask(model.getLibTask());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -65,8 +65,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyLibTask getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyLibTask getLibTask() {
+        return model.getLibTask();
     }
 
     @Override
@@ -80,8 +80,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getLibTaskFilePath() {
+        return model.getLibTaskFilePath();
     }
 
     @Override
@@ -95,7 +95,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public LibTaskParser getAddressBookParser() {
+    public LibTaskParser getLibTaskParser() {
         return libTaskParser;
     }
 }

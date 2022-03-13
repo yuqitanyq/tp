@@ -43,8 +43,8 @@ public class LibTaskTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        LibTask newData = TypicalLibTask.getTypicalAddressBook();
+    public void resetData_withValidReadOnlyLibTask_replacesData() {
+        LibTask newData = TypicalLibTask.getTypicalLibTask();
         libTask.resetData(newData);
         assertEquals(newData, libTask);
     }
@@ -66,18 +66,18 @@ public class LibTaskTest {
     }
 
     @Test
-    public void hasPatron_patronNotInAddressBook_returnsFalse() {
+    public void hasPatron_patronNotInLibTask_returnsFalse() {
         assertFalse(libTask.hasPatron(ALICE));
     }
 
     @Test
-    public void hasPatron_patronInAddressBook_returnsTrue() {
+    public void hasPatron_patronInLibTask_returnsTrue() {
         libTask.addPatron(ALICE);
         assertTrue(libTask.hasPatron(ALICE));
     }
 
     @Test
-    public void hasPatron_patronWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPatron_patronWithSameIdentityFieldsInLibTask_returnsTrue() {
         libTask.addPatron(ALICE);
         Patron editedAlice = new PatronBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -95,18 +95,18 @@ public class LibTaskTest {
     }
 
     @Test
-    public void hasBook_bookNotInAddressBook_returnsFalse() {
+    public void hasBook_bookNotInLibTask_returnsFalse() {
         assertFalse(libTask.hasBook(HARRY_POTTER));
     }
 
     @Test
-    public void hasBook_bookInAddressBook_returnsTrue() {
+    public void hasBook_bookInLibTask_returnsTrue() {
         libTask.addBook(HARRY_POTTER);
         assertTrue(libTask.hasBook(HARRY_POTTER));
     }
 
     @Test
-    public void hasBook_bookWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasBook_bookWithSameIdentityFieldsInLibTask_returnsTrue() {
         libTask.addBook(HARRY_POTTER);
         Book editedHarryPotter = new BookBuilder(HARRY_POTTER)
                 .withName(VALID_BOOK_NAME_HUNGER_GAMES)

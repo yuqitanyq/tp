@@ -96,12 +96,12 @@ public class AddBookCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getLibTaskFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setLibTaskFilePath(Path libTaskFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -116,12 +116,12 @@ public class AddBookCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyLibTask newData) {
+        public void setLibTask(ReadOnlyLibTask newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyLibTask getAddressBook() {
+        public ReadOnlyLibTask getLibTask() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -213,7 +213,7 @@ public class AddBookCommandTest {
         }
 
         @Override
-        public ReadOnlyLibTask getAddressBook() {
+        public ReadOnlyLibTask getLibTask() {
             return new LibTask();
         }
     }

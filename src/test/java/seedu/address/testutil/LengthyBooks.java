@@ -72,7 +72,7 @@ public class LengthyBooks {
     /**
      * Returns an {@code LibTask} with all the lengthy books.
      */
-    public static LibTask getLengthyAddressBook() {
+    public static LibTask getLengthyLibTask() {
         LibTask ab = new LibTask();
         for (Book book : getLengthyBooks()) {
             ab.addBook(book);

@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Patron in the address book.
+ * Represents a Patron in LibTask.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Patron {

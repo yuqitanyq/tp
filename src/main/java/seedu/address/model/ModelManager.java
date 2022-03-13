@@ -15,7 +15,7 @@ import seedu.address.model.book.Book;
 import seedu.address.model.patron.Patron;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of LibTask data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -28,12 +28,12 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given libTask and userPrefs.
      */
-    public ModelManager(ReadOnlyLibTask addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyLibTask libTask, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(libTask, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with LibTask: " + libTask + " and user prefs " + userPrefs);
 
-        this.libTask = new LibTask(addressBook);
+        this.libTask = new LibTask(libTask);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPatrons = new FilteredList<>(this.libTask.getPatronList());
         filteredBooks = new FilteredList<>(this.libTask.getBookList());
@@ -68,25 +68,25 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getLibTaskFilePath() {
+        return userPrefs.getLibTaskFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setLibTaskFilePath(Path libTaskFilePath) {
+        requireNonNull(libTaskFilePath);
+        userPrefs.setLibTaskFilePath(libTaskFilePath);
     }
 
     //=========== LibTask ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyLibTask addressBook) {
-        this.libTask.resetData(addressBook);
+    public void setLibTask(ReadOnlyLibTask libTask) {
+        this.libTask.resetData(libTask);
     }
 
     @Override
-    public ReadOnlyLibTask getAddressBook() {
+    public ReadOnlyLibTask getLibTask() {
         return libTask;
     }
 

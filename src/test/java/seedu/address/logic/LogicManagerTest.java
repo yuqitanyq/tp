@@ -44,10 +44,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonLibTaskStorage addressBookStorage =
+        JsonLibTaskStorage libTaskStorage =
                 new JsonLibTaskStorage(temporaryFolder.resolve("libtask.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(libTaskStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -72,11 +72,11 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonLibTaskIoExceptionThrowingStub
-        JsonLibTaskStorage addressBookStorage =
-                new JsonLibTaskIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonLibTaskStorage libTaskStorage =
+                new JsonLibTaskIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionLibTask.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(libTaskStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -100,9 +100,9 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void storePreviousCommand_validInput_storesInputInAddressBook() {
+    public void storePreviousCommand_validInput_storesInputInLibTask() {
         logic.storePreviousCommand("test");
-        assertEquals("test", logic.getAddressBookParser().getPreviousCommand());
+        assertEquals("test", logic.getLibTaskParser().getPreviousCommand());
     }
 
     /**
@@ -141,7 +141,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getLibTask(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -167,7 +167,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyLibTask addressBook, Path filePath) throws IOException {
+        public void saveLibTask(ReadOnlyLibTask libTask, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

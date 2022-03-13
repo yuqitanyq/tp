@@ -28,16 +28,16 @@ public interface Logic {
     /**
      * Returns the LibTask.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getLibTask()
      */
-    ReadOnlyLibTask getAddressBook();
+    ReadOnlyLibTask getLibTask();
 
     /**
      * Returns the LibTaskParser.
      *
      * @see LibTaskParser
      */
-    LibTaskParser getAddressBookParser();
+    LibTaskParser getLibTaskParser();
 
     /** Returns an unmodifiable view of the filtered list of patrons */
     ObservableList<Patron> getFilteredPatronList();
@@ -46,9 +46,9 @@ public interface Logic {
     ObservableList<Book> getFilteredBookList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' LibTask file path.
      */
-    Path getAddressBookFilePath();
+    Path getLibTaskFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

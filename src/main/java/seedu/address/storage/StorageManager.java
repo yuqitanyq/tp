@@ -49,30 +49,30 @@ public class StorageManager implements Storage {
     // ================ LibTask methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return libTaskStorage.getAddressBookFilePath();
+    public Path getLibTaskFilePath() {
+        return libTaskStorage.getLibTaskFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyLibTask> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(libTaskStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyLibTask> readLibTask() throws DataConversionException, IOException {
+        return readLibTask(libTaskStorage.getLibTaskFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyLibTask> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyLibTask> readLibTask(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return libTaskStorage.readAddressBook(filePath);
+        return libTaskStorage.readLibTask(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyLibTask addressBook) throws IOException {
-        saveAddressBook(addressBook, libTaskStorage.getAddressBookFilePath());
+    public void saveLibTask(ReadOnlyLibTask libTask) throws IOException {
+        saveLibTask(libTask, libTaskStorage.getLibTaskFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyLibTask addressBook, Path filePath) throws IOException {
+    public void saveLibTask(ReadOnlyLibTask libTask, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        libTaskStorage.saveAddressBook(addressBook, filePath);
+        libTaskStorage.saveLibTask(libTask, filePath);
     }
 
 }

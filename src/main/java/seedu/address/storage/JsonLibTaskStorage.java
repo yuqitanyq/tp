@@ -27,32 +27,32 @@ public class JsonLibTaskStorage implements LibTaskStorage {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getLibTaskFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyLibTask> readAddressBook() throws DataConversionException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyLibTask> readLibTask() throws DataConversionException {
+        return readLibTask(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readLibTask()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyLibTask> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyLibTask> readLibTask(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableLibTask> jsonAddressBook = JsonUtil.readJsonFile(
+        Optional<JsonSerializableLibTask> jsonLibTask = JsonUtil.readJsonFile(
                 filePath, JsonSerializableLibTask.class);
-        if (!jsonAddressBook.isPresent()) {
+        if (!jsonLibTask.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonLibTask.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -60,21 +60,21 @@ public class JsonLibTaskStorage implements LibTaskStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyLibTask addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveLibTask(ReadOnlyLibTask libTask) throws IOException {
+        saveLibTask(libTask, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyLibTask)}.
+     * Similar to {@link #saveLibTask(ReadOnlyLibTask)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyLibTask addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveLibTask(ReadOnlyLibTask libTask, Path filePath) throws IOException {
+        requireNonNull(libTask);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableLibTask(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableLibTask(libTask), filePath);
     }
 
 }

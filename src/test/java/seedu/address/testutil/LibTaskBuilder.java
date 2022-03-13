@@ -4,7 +4,7 @@ import seedu.address.model.LibTask;
 import seedu.address.model.patron.Patron;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building LibTask objects.
  * Example usage: <br>
  *     {@code LibTask ab = new LibTaskBuilder().withPatron("John", "Doe").build();}
  */

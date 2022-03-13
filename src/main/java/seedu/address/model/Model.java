@@ -37,48 +37,48 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user preLibTask file path.
      */
-    Path getAddressBookFilePath();
+    Path getLibTaskFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user preLibTask file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setLibTaskFilePath(Path libTaskFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replace LibTask data with the data in {@code libTask}.
      */
-    void setAddressBook(ReadOnlyLibTask addressBook);
+    void setLibTask(ReadOnlyLibTask libTask);
 
     /** Returns the LibTask */
-    ReadOnlyLibTask getAddressBook();
+    ReadOnlyLibTask getLibTask();
 
     /**
-     * Returns true if a patron with the same identity as {@code patron} exists in the address book.
+     * Returns true if a patron with the same identity as {@code patron} exists in LibTask.
      */
     boolean hasPatron(Patron patron);
 
     /**
-     * Returns true if a book with the same identity as {@code book} exists in the address book.
+     * Returns true if a book with the same identity as {@code book} exists in LibTask.
      */
     boolean hasBook(Book book);
 
     /**
      * Deletes the given patron.
-     * The patron must exist in the address book.
+     * The patron must exist in LibTask.
      */
     void deletePatron(Patron target);
 
     /**
      * Deletes the given book.
-     * The book must exist in the address book.
+     * The book must exist in LibTask.
      */
     void deleteBook(Book target);
 
     /**
      * Adds the given patron.
-     * {@code patron} must not already exist in the address book.
+     * {@code patron} must not already exist in LibTask.
      */
     void addPatron(Patron patron);
 
@@ -89,15 +89,15 @@ public interface Model {
 
     /**
      * Replaces the given patron {@code target} with {@code editedPatron}.
-     * {@code target} must exist in the address book.
-     * The patron identity of {@code editedPatron} must not be the same as another existing patron in the address book.
+     * {@code target} must exist in LibTask.
+     * The patron identity of {@code editedPatron} must not be the same as another existing patron in LibTask.
      */
     void setPatron(Patron target, Patron editedPatron);
 
     /**
      * Replaces the given book {@code target} with {@code editedBook}.
-     * {@code target} must exist in the address book.
-     * The book identity of {@code editedBook} must not be the same as another existing book in the address book.
+     * {@code target} must exist in LibTask.
+     * The book identity of {@code editedBook} must not be the same as another existing book in LibTask.
      */
     void setBook(Book target, Book editedBook);
 

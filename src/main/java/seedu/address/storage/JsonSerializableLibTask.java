@@ -17,7 +17,7 @@ import seedu.address.model.patron.Patron;
 /**
  * An Immutable LibTask that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "libTask")
 class JsonSerializableLibTask {
 
     public static final String MESSAGE_DUPLICATE_PATRON = "Patrons list contains duplicate patron(s).";
@@ -46,7 +46,7 @@ class JsonSerializableLibTask {
     }
 
     /**
-     * Converts this address book into the model's {@code LibTask} object.
+     * Converts this LibTask into the model's {@code LibTask} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

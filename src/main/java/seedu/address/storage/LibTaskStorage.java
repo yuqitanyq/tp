@@ -16,7 +16,7 @@ public interface LibTaskStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getLibTaskFilePath();
 
     /**
      * Returns LibTask data as a {@link ReadOnlyLibTask}.
@@ -24,23 +24,23 @@ public interface LibTaskStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyLibTask> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyLibTask> readLibTask() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getLibTaskFilePath()
      */
-    Optional<ReadOnlyLibTask> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyLibTask> readLibTask(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyLibTask} to the storage.
-     * @param addressBook cannot be null.
+     * @param libTask cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyLibTask addressBook) throws IOException;
+    void saveLibTask(ReadOnlyLibTask libTask) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyLibTask)
+     * @see #saveLibTask(ReadOnlyLibTask)
      */
-    void saveAddressBook(ReadOnlyLibTask addressBook, Path filePath) throws IOException;
+    void saveLibTask(ReadOnlyLibTask libTask, Path filePath) throws IOException;
 
 }

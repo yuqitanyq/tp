@@ -21,12 +21,12 @@ public interface Storage extends LibTaskStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getLibTaskFilePath();
 
     @Override
-    Optional<ReadOnlyLibTask> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyLibTask> readLibTask() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyLibTask addressBook) throws IOException;
+    void saveLibTask(ReadOnlyLibTask libTask) throws IOException;
 
 }

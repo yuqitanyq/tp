@@ -8,7 +8,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 
 /**
- * Lists all patrons in the address book to the user.
+ * Lists all patrons in LibTask to the user.
  */
 public class ListPatronCommand extends Command {
 
