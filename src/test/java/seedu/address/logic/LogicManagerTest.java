@@ -94,6 +94,17 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPatronList().remove(0));
     }
 
+    @Test
+    public void storePreviousCommand_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> logic.storePreviousCommand(null));
+    }
+
+    @Test
+    public void storePreviousCommand_validInput_storesInputInAddressBook() {
+        logic.storePreviousCommand("test");
+        assertEquals("test", logic.getAddressBookParser().getPreviousCommand());
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
