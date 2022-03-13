@@ -115,25 +115,22 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void previousCommands_empty() {
-        //Only neccsary as it is currently static (To be fixed)
-        for (int i = 0; i < 20; i++) {
-            parser.getPreviousCommands();
-        }
-        assertEquals("", parser.getPreviousCommands());
+    public void getPreviousCommand_previousCommandsEmpty_returnsEmptyString() {
+        String previousCommand = parser.getPreviousCommand();
+        assertEquals("", previousCommand);
     }
 
     @Test
-    public void previousCommands_nonEmpty() {
+    public void getPreviousCommand_previousCommandsNotEmpty_returnsPreviousString() {
         AddressBookParser parserWithCommands = new AddressBookParser();
-        parserWithCommands.addCommand("list");
-        assertEquals("list", parserWithCommands.getPreviousCommands());
+        parserWithCommands.storePreviousCommand("list");
+        assertEquals("list", parserWithCommands.getPreviousCommand());
     }
 
     @Test
-    public void addCommand() {
+    public void storePreviousCommand() {
         AddressBookParser parserAddCommands = new AddressBookParser();
-        parserAddCommands.addCommand("list");
-        assertEquals("list", parserAddCommands.getPreviousCommands());
+        parserAddCommands.storePreviousCommand("list");
+        assertEquals("list", parserAddCommands.getPreviousCommand());
     }
 }

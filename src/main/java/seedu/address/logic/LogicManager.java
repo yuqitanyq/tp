@@ -1,5 +1,7 @@
 package seedu.address.logic;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
@@ -36,6 +38,13 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+    }
+
+    @Override
+    public void storePreviousCommand(String previousCommand) {
+        requireNonNull(previousCommand);
+
+        addressBookParser.storePreviousCommand(previousCommand);
     }
 
     @Override
@@ -83,5 +92,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public AddressBookParser getAddressBookParser() {
+        return addressBookParser;
     }
 }
