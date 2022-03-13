@@ -70,7 +70,8 @@ public class Patron {
         }
 
         return otherPatron != null
-                && otherPatron.getName().equals(getName());
+                && otherPatron.getName().equals(getName())
+                && otherPatron.getId().equals(getId());
     }
 
     /**
