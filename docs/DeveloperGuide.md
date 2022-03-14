@@ -100,7 +100,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("patron delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `patron delete 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -121,8 +121,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the libtask data i.e., all `Patron` objects (which are contained in a `UniquePatronList` object).
-* stores the currently 'selected' `Patron` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patron>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the libtask data i.e., all `Patron` objects (which are contained in a `UniquePatronList` object) and `Book` objects (which are contained in a `UniqueBookList` object).
+* stores the currently 'selected' `Patron` and `Book` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patron>` abd `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -153,71 +153,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `LibTask` with an undo/redo history, stored internally as an `libTaskStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current libTask state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous libTask state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone libTask state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitLibTask()`, `Model#undoLibTask()` and `Model#redoLibTask()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial libTask state, and the `currentStatePointer` pointing to that single libTask state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `patron delete 5` command to delete the 5th patron in the libTask. The `patron delete` command calls `Model#commitLibTask()`, causing the modified state of the libTask after the `patron delete 5` command executes to be saved in the `libTaskStateList`, and the `currentStatePointer` is shifted to the newly inserted libTask state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `patron add n/David …​` to add a new patron. The `patron add` command also calls `Model#commitLibTask()`, causing another modified libTask state to be saved into the `libTaskStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitLibTask()`, so the libTask state will not be saved into the `libTaskStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the patron was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoLibTask()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous libTask state, and restores the libTask to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial LibTask state, then there are no previous LibTask states to restore. The `undo` command uses `Model#canUndoLibTask()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoLibTask()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the libTask to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `libTaskStateList.size() - 1`, pointing to the latest libTask state, then there are no undone LibTask states to restore. The `redo` command uses `Model#canRedoLibTask()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `patron list` or `book list`. Commands that do not modify libTask, such as `patron list` and `book list`, will usually not call `Model#commitLibTask()`, `Model#undoLibTask()` or `Model#redoLibTask()`. Thus, the `libTaskStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitLibTask()`. Since the `currentStatePointer` is not pointing at the end of the `libTaskStateList`, all libTask states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `patron add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
 
