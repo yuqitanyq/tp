@@ -40,14 +40,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setLibTaskFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setLibTaskFilePath(Paths.get("lib/task/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setLibTaskFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setLibTaskFilePath(Paths.get("new/lib/task/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -70,7 +70,7 @@ public class ModelManagerTest {
 
     @Test
     public void setLibTaskFilePath_validPath_setsLibTaskFilePath() {
-        Path path = Paths.get("address/book/file/path");
+        Path path = Paths.get("lib/task/file/path");
         modelManager.setLibTaskFilePath(path);
         assertEquals(path, modelManager.getLibTaskFilePath());
     }
