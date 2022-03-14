@@ -7,5 +7,5 @@
       "y" : 100
     }
   },
-  "addressBookFilePath" : "libtask.json"
+  "libTaskFilePath" : "libtask.json"
 }

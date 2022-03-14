@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.book.Book;
 
 /**
@@ -52,17 +51,6 @@ public class TypicalBooks {
             .withTags(VALID_TAG_THRILLER, VALID_TAG_SCIFI, VALID_TAG_ADVENTURE).build();
 
     private TypicalBooks() {} // prevents instantiation
-
-    /**
-     * Returns an {@code AddressBook} with all the typical books.
-     */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Book book : getTypicalBooks()) {
-            ab.addBook(book);
-        }
-        return ab;
-    }
 
     public static List<Book> getTypicalBooks() {
         return new ArrayList<>(Arrays.asList(ALGORITHM, SEMAPHORE, MAZE_RUNNER, AI, CINDERELLA));

@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "_comment": "LibTask save file which contains the same Patron and Book values as in TypicalLibTask#getTypicalLibTask()",
   "patrons" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
@@ -76,4 +76,3 @@
   }
   ]
 }
-

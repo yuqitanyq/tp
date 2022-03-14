@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.LibTask;
+import seedu.address.model.ReadOnlyLibTask;
 import seedu.address.model.book.Author;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.BookName;
@@ -19,7 +19,7 @@ import seedu.address.model.patron.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code LibTask} with sample data.
  */
 public class SampleDataUtil {
 
@@ -74,8 +74,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyLibTask getSampleLibTask() {
+        LibTask sampleAb = new LibTask();
         for (Patron samplePatron : getSamplePatrons()) {
             sampleAb.addPatron(samplePatron);
         }

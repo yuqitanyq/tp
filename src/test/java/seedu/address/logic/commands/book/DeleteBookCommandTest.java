@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.book.Book;
-import seedu.address.testutil.TypicalAddressBook;
+import seedu.address.testutil.TypicalLibTask;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -24,7 +24,7 @@ import seedu.address.testutil.TypicalAddressBook;
  */
 public class DeleteBookCommandTest {
 
-    private Model model = new ModelManager(TypicalAddressBook.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +33,7 @@ public class DeleteBookCommandTest {
 
         String expectedMessage = String.format(DeleteBookCommand.MESSAGE_DELETE_BOOK_SUCCESS, bookToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getLibTask(), new UserPrefs());
         expectedModel.deleteBook(bookToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -56,7 +56,7 @@ public class DeleteBookCommandTest {
 
         String expectedMessage = String.format(DeleteBookCommand.MESSAGE_DELETE_BOOK_SUCCESS, bookToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getLibTask(), new UserPrefs());
         expectedModel.deleteBook(bookToDelete);
         showNoBook(expectedModel);
 
@@ -68,8 +68,8 @@ public class DeleteBookCommandTest {
         showBookAtIndex(model, INDEX_FIRST_BOOK);
 
         Index outOfBoundIndex = INDEX_SECOND_BOOK;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getBookList().size());
+        // ensures that outOfBoundIndex is still in bounds of book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getLibTask().getBookList().size());
 
         DeleteBookCommand deleteCommand = new DeleteBookCommand(outOfBoundIndex);
 

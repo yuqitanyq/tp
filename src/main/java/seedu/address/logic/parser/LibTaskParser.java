@@ -23,7 +23,7 @@ import seedu.address.logic.parser.patron.PatronCommandParser;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class LibTaskParser {
 
     /**
      * Used for initial separation of command word and args.
