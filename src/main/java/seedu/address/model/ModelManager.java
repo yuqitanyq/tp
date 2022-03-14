@@ -15,32 +15,32 @@ import seedu.address.model.book.Book;
 import seedu.address.model.patron.Patron;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of LibTask data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final LibTask libTask;
     private final UserPrefs userPrefs;
     private final FilteredList<Patron> filteredPatrons;
     private final FilteredList<Book> filteredBooks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given libTask and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyLibTask libTask, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(libTask, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with LibTask: " + libTask + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.libTask = new LibTask(libTask);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPatrons = new FilteredList<>(this.addressBook.getPatronList());
-        filteredBooks = new FilteredList<>(this.addressBook.getBookList());
+        filteredPatrons = new FilteredList<>(this.libTask.getPatronList());
+        filteredBooks = new FilteredList<>(this.libTask.getBookList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new LibTask(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -68,59 +68,59 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getLibTaskFilePath() {
+        return userPrefs.getLibTaskFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setLibTaskFilePath(Path libTaskFilePath) {
+        requireNonNull(libTaskFilePath);
+        userPrefs.setLibTaskFilePath(libTaskFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== LibTask ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setLibTask(ReadOnlyLibTask libTask) {
+        this.libTask.resetData(libTask);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyLibTask getLibTask() {
+        return libTask;
     }
 
     @Override
     public boolean hasPatron(Patron patron) {
         requireNonNull(patron);
-        return addressBook.hasPatron(patron);
+        return libTask.hasPatron(patron);
     }
 
     @Override
     public boolean hasBook(Book book) {
         requireNonNull(book);
-        return addressBook.hasBook(book);
+        return libTask.hasBook(book);
     }
 
     @Override
     public void deletePatron(Patron target) {
-        addressBook.removePatron(target);
+        libTask.removePatron(target);
     }
 
     @Override
     public void deleteBook(Book target) {
-        addressBook.removeBook(target);
+        libTask.removeBook(target);
     }
 
     @Override
     public void addPatron(Patron patron) {
-        addressBook.addPatron(patron);
+        libTask.addPatron(patron);
         updateFilteredPatronList(PREDICATE_SHOW_ALL_PATRONS);
     }
 
     @Override
     public void addBook(Book book) {
-        addressBook.addBook(book);
+        libTask.addBook(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
     }
 
@@ -128,14 +128,14 @@ public class ModelManager implements Model {
     public void setPatron(Patron target, Patron editedPatron) {
         requireAllNonNull(target, editedPatron);
 
-        addressBook.setPatron(target, editedPatron);
+        libTask.setPatron(target, editedPatron);
     }
 
     @Override
     public void setBook(Book target, Book editedBook) {
         requireAllNonNull(target, editedBook);
 
-        addressBook.setBook(target, editedBook);
+        libTask.setBook(target, editedBook);
     }
 
     //=========== Filtered Patron List Accessors =============================================================
@@ -184,7 +184,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return libTask.equals(other.libTask)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPatrons.equals(other.filteredPatrons)
                 && filteredBooks.equals(other.filteredBooks);

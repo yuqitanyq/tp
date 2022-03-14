@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.testutil.TypicalAddressBook;
+import seedu.address.testutil.TypicalLibTask;
 
 /**
  * Contains Integration tests (interaction with the Model) and unit tests for ListBookCommand.
@@ -23,8 +23,8 @@ public class ListBookCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalAddressBook.getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
+        expectedModel = new ModelManager(model.getLibTask(), new UserPrefs());
     }
 
     @Test

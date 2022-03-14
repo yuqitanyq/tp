@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Book values as in LengthyBooks#getLengthyAddressBook(), take note that the email field might will be needed when updated",
+  "_comment": "LibTask save file which contains the same Book values as in LengthyBooks#getLengthyLibTask(), take note that the email field might will be needed when updated",
   "patrons" : [],
   "books" : [{
 

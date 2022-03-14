@@ -5,9 +5,9 @@ import seedu.address.model.book.Book;
 import seedu.address.model.patron.Patron;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of LibTask
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyLibTask {
 
     /**
      * Returns an unmodifiable view of the patrons list.

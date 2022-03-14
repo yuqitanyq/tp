@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.patron.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all patrons in address book whose name contains any of the argument keywords.
+ * Finds and lists all patrons in LibTask whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindPatronCommand extends Command {

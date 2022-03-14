@@ -19,7 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.book.EditBookCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.patron.EditPatronCommand;
-import seedu.address.model.AddressBook;
+import seedu.address.model.LibTask;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;
 import seedu.address.model.patron.NameContainsKeywordsPredicate;
@@ -141,22 +141,22 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered patron list and selected patron in {@code actualModel} remain unchanged
+     * - the LibTask, filtered patron list and selected patron in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        LibTask expectedLibTask = new LibTask(actualModel.getLibTask());
         List<Patron> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPatronList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedLibTask, actualModel.getLibTask());
         assertEquals(expectedFilteredList, actualModel.getFilteredPatronList());
     }
 
     /**
      * Updates {@code model}'s filtered list to show only the patron at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s LibTask.
      */
     public static void showPatronAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPatronList().size());
@@ -170,7 +170,7 @@ public class CommandTestUtil {
 
     /**
      * Updates {@code model}'s filtered list to show only the book at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s LibTask.
      */
     public static void showBookAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredBookList().size());

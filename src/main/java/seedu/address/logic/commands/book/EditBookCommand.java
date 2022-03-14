@@ -28,7 +28,7 @@ import seedu.address.model.book.Isbn;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing book in the address book.
+ * Edits the details of an existing book in LibTask.
  */
 public class EditBookCommand extends Command {
 

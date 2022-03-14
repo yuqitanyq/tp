@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.patron.Patron;
 
 /**
- * Deletes a patron identified using it's displayed index from the address book.
+ * Deletes a patron identified using it's displayed index from LibTask.
  */
 public class DeletePatronCommand extends Command {
 
