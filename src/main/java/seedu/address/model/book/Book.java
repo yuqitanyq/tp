@@ -27,17 +27,20 @@ public class Book {
     // Data fields
     private final List<Author> authors = new ArrayList<Author>();
     private final Set<Tag> tags = new HashSet<Tag>();
+    private final BookStatus bookStatus;
 
     /**
      * Every field must be present and not null.
      */
-    public Book(BookName bookName, Isbn isbn, List<Author> authors, Set<Tag> tags, long timeAdded) {
-        requireAllNonNull(bookName, isbn, authors, tags);
+    public Book(BookName bookName, Isbn isbn, List<Author> authors, Set<Tag> tags, long timeAdded,
+                BookStatus bookStatus) {
+        requireAllNonNull(bookName, isbn, authors, tags, bookStatus);
         this.bookName = bookName;
         this.isbn = isbn;
         this.authors.addAll(authors);
         this.tags.addAll(tags);
         this.timeAdded = timeAdded;
+        this.bookStatus = bookStatus;
     }
 
     public BookName getBookName() {
@@ -62,6 +65,39 @@ public class Book {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public BookStatus getBookStatus() {
+        return bookStatus;
+    }
+
+    /**
+     * Returns a String representing the borrow date of this book, or an empty string if this book is not borrowed.
+     */
+    public String getBorrowDateString() {
+        return bookStatus.getBorrowDateString();
+    }
+
+    /**
+     * Returns a String representing the return date of this book, or an empty string if this book is not borrowed.
+     */
+    public String getReturnDateString() {
+        return bookStatus.getReturnDateString();
+    }
+
+    /**
+     * Returns a String representing the borrower's name of this book, or an empty string if this book is not borrowed.
+     */
+    public String getBorrowerName() {
+        return bookStatus.getBorrowerName();
+    }
+
+    public boolean isAvailable() {
+        return bookStatus.isAvailable();
+    }
+
+    public boolean isBorrowed() {
+        return bookStatus.isBorrowed();
     }
 
     /**
@@ -95,13 +131,14 @@ public class Book {
                 && otherBook.getAuthors().equals(getAuthors())
                 && otherBook.getTags().equals(getTags())
                 && otherBook.getIsbn().equals(getIsbn())
-                && otherBook.timeAdded == timeAdded;
+                && otherBook.timeAdded == timeAdded
+                && otherBook.bookStatus.equals(bookStatus);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(bookName, isbn, authors, tags, timeAdded);
+        return Objects.hash(bookName, isbn, authors, tags, timeAdded, bookStatus);
     }
 
     @Override
@@ -122,6 +159,7 @@ public class Book {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+        builder.append("; Status: ").append(bookStatus.toString());
         return builder.toString();
     }
 }

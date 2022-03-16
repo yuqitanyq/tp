@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOK_NAME_HUNGE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_HARRY_POTTER_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_HUNGER_GAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIFI;
+import static seedu.address.model.util.SampleDataUtil.getSampleBorrowedStatus;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.address.testutil.TypicalBooks.SEMAPHORE;
@@ -74,6 +75,14 @@ public class BookTest {
 
         // different tags -> returns false
         editedHarryPotter = new BookBuilder(HARRY_POTTER).withTags(VALID_TAG_SCIFI).build();
+        assertFalse(HARRY_POTTER.equals(editedHarryPotter));
+
+        // different timeAdded -> returns false
+        editedHarryPotter = new BookBuilder(HARRY_POTTER).withTimeAdded(0).build();
+        assertFalse(HARRY_POTTER.equals(editedHarryPotter));
+
+        // different status -> returns false
+        editedHarryPotter = new BookBuilder(HARRY_POTTER).withBookStatus(getSampleBorrowedStatus()).build();
         assertFalse(HARRY_POTTER.equals(editedHarryPotter));
     }
 }
