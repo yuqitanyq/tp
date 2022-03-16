@@ -13,5 +13,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_PATRON_DISPLAYED_INDEX = "The patron index provided is invalid";
     public static final String MESSAGE_PATRONS_LISTED_OVERVIEW = "%1$d patrons listed!";
     public static final String MESSAGE_BOOK_ALREADY_BORROWED = "%1$s is already borrowed!";
+    public static final String MESSAGE_RETURN_DATE_TOO_EARLY = "Return date must be later than today's date!";
 
 }

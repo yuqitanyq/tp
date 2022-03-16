@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 public class BorrowCommandParser implements Parser<BorrowCommand> {
 
-    private static final String VALIDATION_REGEX = "^\\d+\\s+\\d+\\s+\\d{2}-[a-zA-Z]{3}-\\d{4}$" ;
+    private static final String VALIDATION_REGEX = "^\\d+\\s+\\d+\\s+\\d{2}-[a-zA-Z]{3}-\\d{4}$";
     /**
      * Parses the given {@code String} of arguments in the context of the BorrowCommand
      * and returns an BorrowCommand object for execution.

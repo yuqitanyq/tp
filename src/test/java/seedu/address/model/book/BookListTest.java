@@ -5,17 +5,21 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AUTHOR_SUZANNE_COLLINS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOK_NAME_HUNGER_GAMES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RETURN_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIFI;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.address.testutil.TypicalBooks.HUNGER_GAMES;
+import static seedu.address.testutil.TypicalPatrons.ALICE;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.book.exceptions.BookNotFoundException;
+import seedu.address.model.patron.Patron;
 import seedu.address.testutil.BookBuilder;
 
 public class BookListTest {
@@ -96,6 +100,35 @@ public class BookListTest {
         BookList expectedBookList = new BookList();
         expectedBookList.add(HUNGER_GAMES);
         assertEquals(expectedBookList, bookList);
+    }
+
+    @Test
+    public void borrowBook_someFieldsNull_throwsBookNotFoundException() {
+        bookList.add(HARRY_POTTER);
+        // null borrower
+        assertThrows(NullPointerException.class, () ->
+                bookList.borrowBook(null, HARRY_POTTER, VALID_RETURN_DATE));
+        // null borrower
+        assertThrows(NullPointerException.class, () ->
+                bookList.borrowBook(ALICE, null, VALID_RETURN_DATE));
+        // null return date
+        assertThrows(NullPointerException.class, () ->
+                bookList.borrowBook(ALICE, HARRY_POTTER, null));
+    }
+
+    @Test
+    public void borrowBook_validInputs_success() {
+        bookList.add(HARRY_POTTER);
+        Patron borrower = ALICE;
+        BookStatus borrowedStatus = new BookStatus(BookStatusType.BORROWED,
+                Optional.of(borrower), Optional.of(BookStatus.getCurrentDateString()), Optional.of(VALID_RETURN_DATE));
+        Book editedHarryPotter = new BookBuilder(HARRY_POTTER).withBookStatus(borrowedStatus).build();
+        bookList.borrowBook(borrower, HARRY_POTTER, VALID_RETURN_DATE);
+
+        // no longer contains the old available book
+        assertFalse(bookList.asUnmodifiableObservableList().contains(HARRY_POTTER));
+        // contains the new borrowed book
+        assertTrue(bookList.asUnmodifiableObservableList().contains(editedHarryPotter));
     }
 
     @Test
