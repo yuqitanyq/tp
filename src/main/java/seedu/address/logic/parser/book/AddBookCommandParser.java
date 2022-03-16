@@ -21,6 +21,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.book.Author;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.BookName;
+import seedu.address.model.book.BookStatus;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.tag.Tag;
 
@@ -47,8 +48,9 @@ public class AddBookCommandParser implements Parser<AddBookCommand> {
         Isbn isbn = ParserUtil.parseIsbn(argMultimap.getValue(PREFIX_ISBN).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         List<Author> authorList = ParserUtil.parseAuthors(argMultimap.getAllValues(PREFIX_AUTHOR));
+        BookStatus availableStatus = BookStatus.createAvailableBookStatus();
 
-        Book book = new Book(bookName, isbn, authorList, tagList, new Date().getTime());
+        Book book = new Book(bookName, isbn, authorList, tagList, new Date().getTime(), availableStatus);
 
         return new AddBookCommand(book);
     }

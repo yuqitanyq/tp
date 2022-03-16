@@ -48,32 +48,55 @@
     "isbn" : "978-03-71-88850-6",
     "tagged" : [ "ComputerScience", "Mathematics" ],
     "authors" : [ "Cormen", "Leiserson", "Rivest", "Stein" ],
-    "timeAdded" : "1646989653388"
+    "timeAdded" : "1646989653388",
+    "bookStatus" : {
+      "bookStatusType" : "Available"
+    }
   }, {
     "bookName" : "The Little Book of Semaphores",
     "isbn" : "4992719864",
     "tagged" : [ "ComputerScience", "Technology" ],
     "authors" : [ ],
-    "timeAdded" : "1646989653388"
+    "timeAdded" : "1646989653388",
+    "bookStatus" : {
+      "bookStatusType" : "Available"
+    }
   }, {
     "bookName" : "The Maze Runner",
     "isbn" : "1-474-59282-1",
     "tagged" : [ ],
     "authors" : [ "James Dashner1", "James Dashner2", "James Dashner3" ],
-    "timeAdded" : "1646989653388"
+    "timeAdded" : "1646989653388",
+    "bookStatus" : {
+      "bookStatusType" : "Available"
+    }
   }, {
     "bookName" : "Artificial Intelligence: A Modern Approach",
     "isbn" : "9780131038059",
     "tagged" : [ "Technology" ],
     "authors" : [ "Peter Norvig", "Stuart J. Russell" ],
-    "timeAdded" : "1646989653388"
+    "timeAdded" : "1646989653388",
+    "bookStatus" : {
+      "bookStatusType" : "Borrowed",
+      "borrower" : {
+        "name" : "Alice Pauline",
+        "phone" : "94351253",
+        "email" : "alice@example.com",
+        "id" : "A0123456H",
+        "tagged" : [ "friends" ]
+      },
+      "borrowDate" : "14-Feb-2022",
+      "returnDate" : "28-Feb-2022"
+    }
   }, {
     "bookName" : "Cinderella",
     "isbn" : "9781409580454",
     "tagged" : [ ],
     "authors" : [ ],
-    "timeAdded" : "1646989653388"
+    "timeAdded" : "1646989653388",
+    "bookStatus" : {
+      "bookStatusType" : "Available"
+    }
   }
   ]
 }
-

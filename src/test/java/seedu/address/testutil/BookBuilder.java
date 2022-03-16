@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.util.SampleDataUtil.SAMPLE_AVAILABLE_STATUS;
 import static seedu.address.model.util.SampleDataUtil.SAMPLE_BOOK_CREATED_TIME;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Set;
 import seedu.address.model.book.Author;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.BookName;
+import seedu.address.model.book.BookStatus;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -22,12 +24,14 @@ public class BookBuilder {
     public static final String DEFAULT_NAME = "Harry Potter";
     public static final String DEFAULT_ISBN = "9780747532743";
     public static final long DEFAULT_TIME_ADDED = SAMPLE_BOOK_CREATED_TIME;
+    public static final BookStatus DEFAULT_BOOK_STATUS = SAMPLE_AVAILABLE_STATUS;
 
     private BookName bookName;
     private Isbn isbn;
     private List<Author> authors;
     private Set<Tag> tags;
     private long timeAdded;
+    private BookStatus bookStatus;
 
     /**
      * Creates a {@code BookBuilder} with the default details.
@@ -38,6 +42,7 @@ public class BookBuilder {
         authors = new ArrayList<Author>();
         tags = new HashSet<Tag>();
         timeAdded = DEFAULT_TIME_ADDED;
+        bookStatus = DEFAULT_BOOK_STATUS;
     }
 
     /**
@@ -49,6 +54,7 @@ public class BookBuilder {
         authors = new ArrayList<Author>(bookToCopy.getAuthors());
         tags = new HashSet<Tag>(bookToCopy.getTags());
         timeAdded = bookToCopy.getTimeAdded();
+        bookStatus = bookToCopy.getBookStatus();
     }
 
     /**
@@ -91,7 +97,15 @@ public class BookBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code bookStatus} of the {@code Book} that we are building.
+     */
+    public BookBuilder withBookStatus(BookStatus bookStatus) {
+        this.bookStatus = bookStatus;
+        return this;
+    }
+
     public Book build() {
-        return new Book(bookName, isbn, authors, tags, timeAdded);
+        return new Book(bookName, isbn, authors, tags, timeAdded, bookStatus);
     }
 }
