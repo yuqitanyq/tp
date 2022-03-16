@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.book.exceptions.BookNotFoundException;
+import seedu.address.model.patron.Patron;
 
 /**
  * A list of persons that does not allow nulls.
@@ -51,7 +52,6 @@ public class BookList implements Iterable<Book> {
         if (index == -1) {
             throw new BookNotFoundException();
         }
-
         internalList.set(index, editedBook);
     }
 
@@ -78,6 +78,27 @@ public class BookList implements Iterable<Book> {
     public void setBooks(List<Book> books) {
         requireAllNonNull(books);
         internalList.setAll(books);
+    }
+
+    /**
+     * Replaces all books borrowed by {@code borrower} with the same book, but with available status in this book list.
+     */
+    public void returnAllBorrowedBooks(Patron borrower) {
+        for (Book book : internalList) {
+            if (!book.isBorrowedBy(borrower)) {
+                continue;
+            }
+            Book updatedAvailableBook = new Book(book, BookStatus.createAvailableBookStatus());
+            setBook(book, updatedAvailableBook);
+        }
+    }
+
+    /**
+     * Returns true if the specified patron is currently borrowing at least one book.
+     */
+    public boolean isBorrowingSomeBook(Patron borrower) {
+        requireNonNull(borrower);
+        return internalList.stream().anyMatch(book -> book.isBorrowedBy(borrower));
     }
 
     /**

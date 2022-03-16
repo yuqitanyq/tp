@@ -7,8 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_AUTHOR_SUZANNE_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOK_NAME_HUNGER_GAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIFI;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalBooks.AI;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.address.testutil.TypicalBooks.HUNGER_GAMES;
+import static seedu.address.testutil.TypicalPatrons.getTypicalPatrons;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.book.exceptions.BookNotFoundException;
+import seedu.address.model.patron.Patron;
 import seedu.address.testutil.BookBuilder;
 
 public class BookListTest {
@@ -96,6 +99,36 @@ public class BookListTest {
         BookList expectedBookList = new BookList();
         expectedBookList.add(HUNGER_GAMES);
         assertEquals(expectedBookList, bookList);
+    }
+
+    @Test
+    public void returnAllBorrowedBooks() {
+        bookList.add(HARRY_POTTER);
+        bookList.add(AI);
+        BookList expectedBookList = new BookList();
+        expectedBookList.add(HARRY_POTTER);
+        expectedBookList.add(new Book(AI, BookStatus.createAvailableBookStatus()));
+        bookList.returnAllBorrowedBooks(getTypicalPatrons().get(0));
+        assertEquals(expectedBookList, bookList);
+    }
+
+    @Test
+    public void isBorrowingSomeBook_nullBorrower_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> bookList.isBorrowingSomeBook(null));
+    }
+
+    @Test
+    public void isBorrowingSomeBook_borrowsNothing_returnsFalse() {
+        Patron borrower = getTypicalPatrons().get(2);
+        bookList.add(HARRY_POTTER);
+        assertFalse(bookList.isBorrowingSomeBook(borrower));
+    }
+
+    @Test
+    public void isBorrowingSomeBook_hasBorrowedBook_returnsTrue() {
+        Patron borrower = getTypicalPatrons().get(0);
+        bookList.add(AI);
+        assertTrue(bookList.isBorrowingSomeBook(borrower));
     }
 
     @Test

@@ -101,6 +101,16 @@ public interface Model {
      */
     void setBook(Book target, Book editedBook);
 
+    /**
+     * Replaces all books borrowed by {@code borrower} with the same book, but with available status in LibTask.
+     */
+    void returnAllBorrowedBooks(Patron borrower);
+
+    /**
+     * Returns true if the specified patron is currently borrowing at least one book.
+     */
+    boolean isBorrowingSomeBook(Patron borrower);
+
     /** Returns an unmodifiable view of the filtered patron list */
     ObservableList<Patron> getFilteredPatronList();
 

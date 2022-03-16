@@ -138,6 +138,18 @@ public class ModelManager implements Model {
         libTask.setBook(target, editedBook);
     }
 
+    @Override
+    public void returnAllBorrowedBooks(Patron borrower) {
+        requireNonNull(borrower);
+        libTask.returnAllBorrowedBooks(borrower);
+    }
+
+    @Override
+    public boolean isBorrowingSomeBook(Patron borrower) {
+        requireNonNull(borrower);
+        return libTask.isBorrowingSomeBook(borrower);
+    }
+
     //=========== Filtered Patron List Accessors =============================================================
 
     /**

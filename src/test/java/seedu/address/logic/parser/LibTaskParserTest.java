@@ -6,7 +6,10 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.Command.PATRON_COMMAND_GROUP;
 import static seedu.address.logic.commands.Command.PREVIOUS_COMMAND_WORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PATRON;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATRON;
 
 import java.util.Arrays;
@@ -20,6 +23,8 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.PreviousCommand;
+import seedu.address.logic.commands.ReturnAllBooksCommand;
+import seedu.address.logic.commands.ReturnOneBookCommand;
 import seedu.address.logic.commands.patron.AddPatronCommand;
 import seedu.address.logic.commands.patron.DeletePatronCommand;
 import seedu.address.logic.commands.patron.EditPatronCommand;
@@ -56,6 +61,22 @@ public class LibTaskParserTest {
                 PATRON_COMMAND_GROUP + " " + Command.DELETE_COMMAND_WORD + " "
                         + INDEX_FIRST_PATRON.getOneBased());
         assertEquals(new DeletePatronCommand(INDEX_FIRST_PATRON), command);
+    }
+
+    @Test
+    public void parseCommand_returnOneBook() throws Exception {
+        ReturnOneBookCommand command = (ReturnOneBookCommand) parser.parseCommand(
+                 Command.RETURN_COMMAND_WORD + " " + PREFIX_BOOK
+                        + INDEX_FIRST_BOOK.getOneBased());
+        assertEquals(new ReturnOneBookCommand(INDEX_FIRST_BOOK), command);
+    }
+
+    @Test
+    public void parseCommand_returnAllBooks() throws Exception {
+        ReturnAllBooksCommand command = (ReturnAllBooksCommand) parser.parseCommand(
+                Command.RETURN_COMMAND_WORD + " " + PREFIX_PATRON
+                        + INDEX_FIRST_PATRON.getOneBased());
+        assertEquals(new ReturnAllBooksCommand(INDEX_FIRST_PATRON), command);
     }
 
     @Test

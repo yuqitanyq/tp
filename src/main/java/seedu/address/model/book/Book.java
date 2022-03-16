@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.patron.Patron;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -41,6 +42,14 @@ public class Book {
         this.tags.addAll(tags);
         this.timeAdded = timeAdded;
         this.bookStatus = bookStatus;
+    }
+
+    /**
+     * Constructs a Book that is same as {@code originalBook} in every aspect except book status.
+     */
+    public Book(Book originalBook, BookStatus updatedBookStatus) {
+        this (originalBook.getBookName(), originalBook.getIsbn(), originalBook.getAuthors(),
+                originalBook.getTags(), originalBook.getTimeAdded(), updatedBookStatus);
     }
 
     public BookName getBookName() {
@@ -98,6 +107,16 @@ public class Book {
 
     public boolean isBorrowed() {
         return bookStatus.isBorrowed();
+    }
+
+    /**
+     * Returns true if this book is borrowed by the specified patron.
+     */
+    public boolean isBorrowedBy(Patron patron) {
+        if (!isBorrowed()) {
+            return false;
+        }
+        return bookStatus.getBorrower().map(p -> p.equals(patron)).orElse(false);
     }
 
     /**
