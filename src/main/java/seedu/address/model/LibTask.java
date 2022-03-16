@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -121,6 +122,20 @@ public class LibTask implements ReadOnlyLibTask {
         requireNonNull(editedBook);
 
         books.setBook(target, editedBook);
+    }
+
+    /**
+     * Replaces the given book {@code bookToBorrow} with a new book with all same fields except status.
+     * The new status will be {@link seedu.address.model.book.BookStatusType#BORROWED} status
+     * with {@code borrower} as the borrower and {@returnDate} as the returnDate.
+     *
+     * Both {@code borrower} {@code bookToBorrow} must exist in LibTask,
+     * and {@code returnDate} must be in dd-MMM-yyyy format.
+     */
+    public void borrowBook(Patron borrower, Book bookToBorrow, String returnDate) {
+        requireAllNonNull(borrower, bookToBorrow, returnDate);
+
+        books.borrowBook(borrower, bookToBorrow, returnDate);
     }
 
     /**
