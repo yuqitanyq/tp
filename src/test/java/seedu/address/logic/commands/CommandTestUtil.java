@@ -54,6 +54,9 @@ public class CommandTestUtil {
     public static final String VALID_TAG_MAGIC = "Magic";
     public static final String VALID_TAG_THRILLER = "Thriller";
     public static final String VALID_TAG_SCIFI = "Scifi";
+    public static final String VALID_BORROW_DATE = "14-Fec-2022";
+    public static final String VALID_RETURN_DATE = "28-Feb-2023";
+    public static final String VALID_RETURN_DATE_2 = "28-Dec-2022";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -87,6 +90,7 @@ public class CommandTestUtil {
     public static final String INVALID_BOOK_NAME_DESC = " " + PREFIX_NAME + "@HarryPotter"; // '@' not allowed in names
     public static final String INVALID_ISBN_DESC = " " + PREFIX_ISBN + "911a";
     public static final String INVALID_AUTHOR_DESC = " " + PREFIX_AUTHOR + "@@@"; // '@' not allowed for author
+    public static final String INVALID_DATE = "28Feb2022";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

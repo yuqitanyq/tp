@@ -53,7 +53,7 @@ public class JsonAdaptedBookStatusTest {
         String expectedMessage = BookStatus.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, bookStatus::toModelType);
 
-        // invalid return date tha does not match regex
+        // invalid return date that does not match regex
         bookStatus =
                 new JsonAdaptedBookStatus(VALID_TYPE_BORROWED, VALID_BORROWER, VALID_RETURN_DATE, INVALID_DATE_1);
         assertThrows(IllegalValueException.class, expectedMessage, bookStatus::toModelType);
