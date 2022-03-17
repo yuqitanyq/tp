@@ -102,6 +102,16 @@ public interface Model {
     void setBook(Book target, Book editedBook);
 
     /**
+     * Replaces all books borrowed by {@code borrower} with the same book, but with available status in LibTask.
+     */
+    void returnAllBorrowedBooks(Patron borrower);
+
+    /**
+     * Returns true if the specified patron is currently borrowing at least one book.
+     */
+    boolean isBorrowingSomeBook(Patron borrower);
+
+    /**
      * Replaces the given book {@code bookToBorrow} with a new book with all same fields except status.
      * The new status will be {@link seedu.address.model.book.BookStatusType#BORROWED} status
      * with {@code borrower} as the borrower and {@returnDate} as the returnDate.

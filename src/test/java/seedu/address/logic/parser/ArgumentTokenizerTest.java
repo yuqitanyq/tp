@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 public class ArgumentTokenizerTest {
@@ -134,6 +137,46 @@ public class ArgumentTokenizerTest {
         assertArgumentAbsent(argMultimap, pSlash);
         assertArgumentPresent(argMultimap, dashT, "not joined^Qjoined");
         assertArgumentAbsent(argMultimap, hatQ);
+    }
+
+    @Test
+    public void hasExactlyOneValue() {
+        String argsString = " p/test p/test1";
+        Prefix queryPrefix = new Prefix("p/");
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, queryPrefix);
+        assertFalse(argMultimap.hasExactlyOneValue(new Prefix("p/")));
+
+        argsString = " p/ test";
+        argMultimap = ArgumentTokenizer.tokenize(argsString, queryPrefix);
+        assertTrue(argMultimap.hasExactlyOneValue(queryPrefix));
+    }
+
+    @Test
+    public void hasExactlyOneQueriedPrefix() {
+        String argsString = " p/test t/test1";
+        Prefix queryPrefix1 = new Prefix("p/");
+        Prefix queryPrefix2 = new Prefix("t/");
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, queryPrefix1, queryPrefix2);
+        assertFalse(argMultimap.hasExactlyOneQueriedPrefix(queryPrefix1, queryPrefix2));
+        assertTrue(argMultimap.hasExactlyOneQueriedPrefix(queryPrefix1));
+
+        argsString = " p/test";
+        argMultimap = ArgumentTokenizer.tokenize(argsString, queryPrefix1, queryPrefix2);
+        assertTrue(argMultimap.hasExactlyOneQueriedPrefix(queryPrefix1, queryPrefix2));
+    }
+
+    @Test
+    public void getNonEmptyPrefixes() {
+        List<Prefix> prefixes = new ArrayList<>();
+        prefixes.add(pSlash);
+        prefixes.add(hatQ);
+        prefixes.add(dashT);
+
+        String argsString = " p/test -a ds";
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, hatQ, dashT);
+        List<Prefix> expected = new ArrayList<>();
+        expected.add(pSlash);
+        assertEquals(argMultimap.getNonEmptyPrefixes(pSlash, hatQ, dashT), expected);
     }
 
     @Test

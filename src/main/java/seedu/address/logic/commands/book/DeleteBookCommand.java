@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.book.Book;
 
 /**
- * Deletes a book identified using it's displayed index from LibTask.
+ * Deletes a book identified using its displayed index from LibTask.
  */
 public class DeleteBookCommand extends Command {
 
