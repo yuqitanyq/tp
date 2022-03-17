@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,10 @@ public class BookCard extends UiPart<Region> {
     private FlowPane bookAvailableTag;
     @FXML
     private FlowPane bookBorrowTag;
+    @FXML
+    private Label borrower;
+    @FXML
+    private Label bookReturnDate;
 
     /**
      * Creates a {@code Book} with the given {@code Book} and index to display.
@@ -71,18 +76,23 @@ public class BookCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> bookCategoryTags.getChildren().add(new Label(tag.tagName)));
 
+        // Book status checker to render as according
+        if (book.isAvailable()) {
+            bookAvailableTag.getChildren().add(new Label("Available"));
+        } else {
+            // borrower and book return date labels will be set to visible as by default its hidden
+            borrower.setVisible(true);
+            borrower.setManaged(true);
+            bookReturnDate.setVisible(true);
+            bookReturnDate.setManaged(true);
 
-        // Book status check to properly render relevant tags -- Not Implemented yet.
+            // Borrowed tag will be rendered
+            Collections.addAll(bookBorrowTag.getChildren(), new Label("Borrowed"));
 
-        //        if (book.isAvailable()) {
-        //            bookAvailableTag.getChildren().add(new Label("Available"));
-        //        } else {
-        //            Collections.addAll(bookBorrowTag.getChildren(), new Label("Borrowed"),
-        //                    new Label(book.getDate()));
-        //        }
+            borrower.setText("Borrower: " + book.getBorrowerName());
+            bookReturnDate.setText("Return date: " + book.getReturnDateString());
 
-        // For now, all books will be rendered as available
-        bookAvailableTag.getChildren().add(new Label("Available"));
+        }
     }
 
     @Override
