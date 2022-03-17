@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,10 @@ public class BookCard extends UiPart<Region> {
     private FlowPane bookAvailableTag;
     @FXML
     private FlowPane bookBorrowTag;
+    @FXML
+    private Label borrower;
+    @FXML
+    private Label bookReturnDate;
 
     /**
      * Creates a {@code Book} with the given {@code Book} and index to display.
@@ -53,7 +58,30 @@ public class BookCard extends UiPart<Region> {
         this.book = book;
         bookCardDisplayId.setText(displayedIndex + ". ");
         name.setText(book.getBookName().toString());
+        setBookCategoryTags(book);
+        setAuthor(book);
+        isbn.setText("ISBN: " + book.getIsbn());
+        setBookStatusDetails(book);
+    }
 
+    /**
+     * Sorts and sets the FXML book category tags with the category data from the supplied book object.
+     *
+     * @param book {@code Book} which the book object to obtain the category tags from.
+     */
+    public void setBookCategoryTags(Book book) {
+        book.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> bookCategoryTags.getChildren().add(new Label(tag.tagName)));
+    }
+
+
+    /**
+     * Sorts and sets the FXML author label with the author data from the supplied book object.
+     *
+     * @param book {@code Book} which the book object to obtain the author data from.
+     */
+    public void setAuthor(Book book) {
         // Author check needed since author is an optional parameter in book command
         if (!book.getAuthors().isEmpty()) {
             authors.setVisible(true);
@@ -64,25 +92,32 @@ public class BookCard extends UiPart<Region> {
                     .collect(Collectors.joining(", "));
             authors.setText("Author: " + authorsString);
         }
+    }
 
-        isbn.setText("ISBN: " + book.getIsbn());
+    /**
+     * Sets the FXML book status labels based on the availability status of the supplied book object.
+     *
+     * @param book {@code Book} which the book object to obtain availability status, borrower and book return date.
+     */
+    public void setBookStatusDetails(Book book) {
+        if (book.isAvailable()) {
+            // hide borrower and book return date details as book is available
+            borrower.setVisible(false);
+            borrower.setManaged(false);
+            bookReturnDate.setVisible(false);
+            bookReturnDate.setManaged(false);
+            bookAvailableTag.getChildren().add(new Label("Available"));
+        } else {
+            // borrower and book return date labels will be set to visible as by default its hidden
+            borrower.setVisible(true);
+            borrower.setManaged(true);
+            bookReturnDate.setVisible(true);
+            bookReturnDate.setManaged(true);
 
-        book.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> bookCategoryTags.getChildren().add(new Label(tag.tagName)));
-
-
-        // Book status check to properly render relevant tags -- Not Implemented yet.
-
-        //        if (book.isAvailable()) {
-        //            bookAvailableTag.getChildren().add(new Label("Available"));
-        //        } else {
-        //            Collections.addAll(bookBorrowTag.getChildren(), new Label("Borrowed"),
-        //                    new Label(book.getDate()));
-        //        }
-
-        // For now, all books will be rendered as available
-        bookAvailableTag.getChildren().add(new Label("Available"));
+            Collections.addAll(bookBorrowTag.getChildren(), new Label("Borrowed"));
+            borrower.setText("Borrower: " + book.getBorrowerName());
+            bookReturnDate.setText("Return date: " + book.getReturnDateString());
+        }
     }
 
     @Override
