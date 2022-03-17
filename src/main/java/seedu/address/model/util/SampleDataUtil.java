@@ -41,22 +41,22 @@ public class SampleDataUtil {
         return new Patron[] {
             new Patron(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Id("A0123456H"),
-                getTagSet("friends")),
+                getTagSet("computing")),
             new Patron(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Id("A0123456H"),
-                getTagSet("colleagues", "friends")),
+                getTagSet("science", "graduate")),
             new Patron(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Id("A0123456H"),
-                getTagSet("neighbours")),
+                getTagSet("business")),
             new Patron(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Id("A0123456H"),
-                getTagSet("family")),
+                getTagSet("fass")),
             new Patron(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Id("A0123456H"),
-                getTagSet("classmates")),
+                getTagSet("computing")),
             new Patron(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Id("A0123456H"),
-                getTagSet("colleagues"))
+                getTagSet("science"))
         };
     }
 
