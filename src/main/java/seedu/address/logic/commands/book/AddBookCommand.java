@@ -17,7 +17,6 @@ import seedu.address.model.book.Book;
  */
 public class AddBookCommand extends Command {
 
-    // TODO : Improve messages
     public static final String MESSAGE_USAGE = BOOK_COMMAND_GROUP + " " + ADD_COMMAND_WORD
             + ": Adds a book to LibTask. "
             + "Parameters: "

@@ -43,6 +43,14 @@ public class Book {
         this.bookStatus = bookStatus;
     }
 
+    /**
+     * Constructs a Book that is same as {@code originalBook} in every aspect except book status.
+     */
+    public Book(Book originalBook, BookStatus updatedBookStatus) {
+        this (originalBook.getBookName(), originalBook.getIsbn(), originalBook.getAuthors(),
+                originalBook.getTags(), originalBook.getTimeAdded(), updatedBookStatus);
+    }
+
     public BookName getBookName() {
         return bookName;
     }
