@@ -139,6 +139,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void returnAllBorrowedBooks(Patron borrower) {
+        requireNonNull(borrower);
+        libTask.returnAllBorrowedBooks(borrower);
+    }
+
+    @Override
+    public boolean isBorrowingSomeBook(Patron borrower) {
+        requireNonNull(borrower);
+        return libTask.isBorrowingSomeBook(borrower);
+    }
+
+    @Override
     public void borrowBook(Patron borrower, Book bookToBorrow, String returnDate) {
         requireAllNonNull(borrower, bookToBorrow, returnDate);
 

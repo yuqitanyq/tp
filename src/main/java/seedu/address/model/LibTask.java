@@ -125,6 +125,23 @@ public class LibTask implements ReadOnlyLibTask {
     }
 
     /**
+     * Replaces all books borrowed by {@code borrower} with the same book, but with available status in LibTask.
+     */
+    public void returnAllBorrowedBooks(Patron borrower) {
+        requireNonNull(borrower);
+
+        books.returnAllBorrowedBooks(borrower);
+    }
+
+    /**
+     * Returns true if the specified patron is currently borrowing at least one book.
+     */
+    public boolean isBorrowingSomeBook(Patron borrower) {
+        requireNonNull(borrower);
+        return books.isBorrowingSomeBook(borrower);
+    }
+
+    /**
      * Replaces the given book {@code bookToBorrow} with a new book with all same fields except status.
      * The new status will be {@link seedu.address.model.book.BookStatusType#BORROWED} status
      * with {@code borrower} as the borrower and {@returnDate} as the returnDate.
