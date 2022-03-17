@@ -172,6 +172,11 @@ public class AddPatronCommandTest {
         }
 
         @Override
+        public void borrowBook(Patron borrower, Book bookToBorrow, String returnDate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Patron> getFilteredPatronList() {
             throw new AssertionError("This method should not be called.");
         }

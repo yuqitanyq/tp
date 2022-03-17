@@ -83,6 +83,9 @@ public class LibTaskParser {
         case Command.BOOK_COMMAND_GROUP:
             return new BookCommandParser().parse(arguments);
 
+        case Command.BORROW_COMMAND_WORD:
+            return new BorrowCommandParser().parse(arguments);
+
         case CLEAR_COMMAND_WORD:
             return new ClearCommand();
 

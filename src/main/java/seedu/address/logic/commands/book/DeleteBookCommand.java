@@ -26,6 +26,9 @@ public class DeleteBookCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates an DeleteBookCommand to delete the specified {@code Book}
+     */
     public DeleteBookCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }

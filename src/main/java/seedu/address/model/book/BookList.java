@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -99,6 +100,22 @@ public class BookList implements Iterable<Book> {
     public boolean isBorrowingSomeBook(Patron borrower) {
         requireNonNull(borrower);
         return internalList.stream().anyMatch(book -> book.isBorrowedBy(borrower));
+    }
+
+    /**
+     * Replaces the given book {@code bookToBorrow} with a new book with all same fields except status.
+     * The new status will be {@link seedu.address.model.book.BookStatusType#BORROWED} status
+     * with {@code borrower} as the borrower and {@returnDate} as the returnDate.
+     *
+     * Both {@code borrower} {@code bookToBorrow} must exist in LibTask,
+     * and {@code returnDate} must be in dd-MMM-yyyy format.
+     */
+    public void borrowBook(Patron borrower, Book bookToBorrow, String returnDate) {
+        requireAllNonNull(borrower, bookToBorrow, returnDate);
+        BookStatus borrowedStatus = new BookStatus(BookStatusType.BORROWED,
+                Optional.of(borrower), Optional.of(BookStatus.getCurrentDateString()), Optional.of(returnDate));
+        Book updatedBook = new Book(bookToBorrow, borrowedStatus);
+        setBook(bookToBorrow, updatedBook);
     }
 
     /**

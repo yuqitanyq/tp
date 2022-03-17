@@ -57,6 +57,10 @@ public class BookStatus {
                 Optional.empty());
     }
 
+    public static String getCurrentDateString() {
+        return STATUS_DATE_FORMAT.format(new Date());
+    }
+
     /**
      * Returns true if a given parameters can be converted to a valid book status.
      */

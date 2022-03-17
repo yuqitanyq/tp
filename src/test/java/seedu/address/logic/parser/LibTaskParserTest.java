@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.BorrowCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
@@ -125,8 +126,9 @@ public class LibTaskParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(""));
     }
 
     @Test
@@ -153,5 +155,25 @@ public class LibTaskParserTest {
         LibTaskParser parserAddCommands = new LibTaskParser();
         parserAddCommands.storePreviousCommand("list");
         assertEquals("list", parserAddCommands.getPreviousCommand());
+    }
+
+    @Test
+    public void parseCommand_borrow() throws Exception {
+        String returnDateString = "28-Feb-2022";
+        BorrowCommand command = (BorrowCommand) parser.parseCommand(
+                 Command.BORROW_COMMAND_WORD + " "
+                        + INDEX_FIRST_PATRON.getOneBased() + " "
+                        + INDEX_FIRST_BOOK.getOneBased() + " "
+                        + returnDateString);
+        assertEquals(new BorrowCommand(INDEX_FIRST_PATRON, INDEX_FIRST_BOOK, returnDateString), command);
+    }
+
+    @Test
+    public void parseCommand_invalidReturnDate_throwsParseException() {
+        String invalidDateString = "28Feb-2022";
+        String commandString = Command.BORROW_COMMAND_WORD + " " + INDEX_FIRST_PATRON.getOneBased() + " "
+                + INDEX_FIRST_BOOK.getOneBased() + " " + invalidDateString;
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        BorrowCommand.MESSAGE_USAGE), () -> parser.parseCommand(commandString));
     }
 }

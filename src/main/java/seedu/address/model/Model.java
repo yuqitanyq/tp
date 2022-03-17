@@ -111,6 +111,16 @@ public interface Model {
      */
     boolean isBorrowingSomeBook(Patron borrower);
 
+    /**
+     * Replaces the given book {@code bookToBorrow} with a new book with all same fields except status.
+     * The new status will be {@link seedu.address.model.book.BookStatusType#BORROWED} status
+     * with {@code borrower} as the borrower and {@returnDate} as the returnDate.
+     *
+     * Both {@code borrower} {@code bookToBorrow} must exist in LibTask,
+     * and {@code returnDate} must be in dd-MMM-yyyy format.
+     */
+    void borrowBook(Patron borrower, Book bookToBorrow, String returnDate);
+
     /** Returns an unmodifiable view of the filtered patron list */
     ObservableList<Patron> getFilteredPatronList();
 

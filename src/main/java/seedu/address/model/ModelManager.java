@@ -150,6 +150,13 @@ public class ModelManager implements Model {
         return libTask.isBorrowingSomeBook(borrower);
     }
 
+    @Override
+    public void borrowBook(Patron borrower, Book bookToBorrow, String returnDate) {
+        requireAllNonNull(borrower, bookToBorrow, returnDate);
+
+        libTask.borrowBook(borrower, bookToBorrow, returnDate);
+    }
+
     //=========== Filtered Patron List Accessors =============================================================
 
     /**
