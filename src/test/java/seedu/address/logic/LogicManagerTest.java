@@ -95,6 +95,11 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getFilteredBookList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredBookList().remove(0));
+    }
+
+    @Test
     public void storePreviousCommand_nullInput_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> logic.storePreviousCommand(null));
     }
