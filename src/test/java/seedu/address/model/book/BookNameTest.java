@@ -31,6 +31,12 @@ public class BookNameTest {
         assertFalse(BookName.isValidBookName("Harry&Potter")); // contains non-alphanumeric characters not : or '
         assertFalse(BookName.isValidBookName(" HarryPotter")); // starts with non-alphanumeric character
 
+        // invalid book name but should be valid books
+        assertFalse(BookName.isValidBookName("Who Moved My Cheese?")); // ends with "?"
+        assertFalse(BookName.isValidBookName("4.50_from_Paddington")); // contains "."
+        assertFalse(BookName.isValidBookName("11/22/63")); // contains "/"
+        assertFalse(BookName.isValidBookName("Winnie-the-Pooh")); // contains "-"
+
         // valid name
         assertTrue(BookName.isValidBookName("Harry Potter")); //alphabets only
         assertTrue(BookName.isValidBookName("123")); // numbers only
