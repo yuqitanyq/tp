@@ -1,0 +1,149 @@
+{
+  "_comment": "LibTask save file which contains as many patrons as in ManyPatrons#getManyPatrons()",
+  "patrons" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "id" : "A0123422H",
+    "tagged" : [ "Student" ]
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "id" : "A0123412H",
+    "tagged" : [ "Student" ]
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "id" : "A0123450H",
+    "tagged" : [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "id" : "A0123451H",
+    "tagged" : [ "Student" ]
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "id" : "A0123452H",
+    "tagged" : [ ]
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "id" : "A0123454H",
+    "tagged" : [ ]
+  }, {
+    "name" : "George Best",
+    "phone" : "94824421",
+    "email" : "george@example.com",
+    "id" : "A0123455H",
+    "tagged" : [ ]
+  }, {
+    "name" : "Amy",
+    "phone" : "94824452",
+    "email" : "amy@example.com",
+    "id" : "A0123457H",
+    "tagged" : [ ]
+  }, {
+    "name" : "Robert",
+    "phone" : "91234412",
+    "email" : "robert99@example.com",
+    "id" : "A1231231X",
+    "tagged" : [ "Student" ]
+  }, {
+    "name" : "Jean",
+    "phone" : "91234416",
+    "email" : "jean199@example.com",
+    "id" : "A0012125Y",
+    "tagged" : [ "Student" ]
+  }, {
+    "name" : "Thomas",
+    "phone" : "91234013",
+    "email" : "thomas1212@example.com",
+    "id" : "A0002105Y",
+    "tagged" : [ "Student" ]
+  }, {
+    "name" : "Tommy Goh",
+    "phone" : "91234013",
+    "email" : "tommyGoh1919@example.com",
+    "id" : "A0001234G",
+    "tagged" : [ "Student" ]
+  }, {
+    "name" : "Tommy Lim",
+    "phone" : "91234543",
+    "email" : "tomlim121@example.com",
+    "id" : "A0001111G",
+    "tagged" : [ "Student" ]
+  }, {
+    "name" : "Alice Maker",
+    "phone" : "94354443",
+    "email" : "aliceMaker1221@example.com",
+    "id" : "A0129090H",
+    "tagged" : [ "Student" ]
+  }, {
+    "name" : "Benson Toh",
+    "phone" : "90120991",
+    "email" : "bensontoh@example.com",
+    "id" : "A0123400F",
+    "tagged" : [ "Student" ]
+  }, {
+    "name" : "Carl Karl",
+    "phone" : "81118222",
+    "email" : "KarlKarl11@example.com",
+    "id" : "A1234111Y",
+    "tagged" : [ ]
+  }, {
+    "name" : "Daniel Ng",
+    "phone" : "87652533",
+    "email" : "DanielNgWarrior11@example.com",
+    "id" : "A4343123H",
+    "tagged" : [ "Student" ]
+  }, {
+    "name" : "Mashmallow",
+    "phone" : "80001234",
+    "email" : "mashmallowFire@example.com",
+    "id" : "A8889991H",
+    "tagged" : [ ]
+  }, {
+    "name" : "Fiona Rain",
+    "phone" : "99911122",
+    "email" : "FionaRain1143@example.com",
+    "id" : "A0012345E",
+    "tagged" : [ ]
+  }, {
+    "name" : "Georger Wong",
+    "phone" : "99911123",
+    "email" : "GeorgerWong99@example.com",
+    "id" : "A1212126T",
+    "tagged" : [ ]
+  }, {
+    "name" : "Amy Low",
+    "phone" : "97876565",
+    "email" : "amylow66@example.com",
+    "id" : "A1234432R",
+    "tagged" : [ ]
+  }, {
+    "name" : "Robert Hook",
+    "phone" : "98001234",
+    "email" : "robertHook11@example.com",
+    "id" : "A5454121U",
+    "tagged" : [ "Student" ]
+  }, {
+    "name" : "Jean Chua",
+    "phone" : "98019022",
+    "email" : "jeanChua11@example.com",
+    "id" : "A1122334C",
+    "tagged" : [ "Student" ]
+  }, {
+    "name" : "Thomas Tan",
+    "phone" : "97616467",
+    "email" : "thomastan222@example.com",
+    "id" : "A9898123Y",
+    "tagged" : [ "Student" ]
+  }],
+  "books" : []
+}
