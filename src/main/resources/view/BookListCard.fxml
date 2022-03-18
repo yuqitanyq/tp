@@ -28,10 +28,14 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true" />
       </HBox>
       <FlowPane fx:id="bookCategoryTags" />
+      <!-- Ensures that the author line will not be rendered if the book doesn't have an author-->
       <Label fx:id="authors" styleClass="cell_small_label" visible="false" managed="false" wrapText="true" />
       <Label fx:id="isbn" styleClass="cell_small_label" text="\$isbn" />
       <FlowPane fx:id="bookAvailableTag" />
       <FlowPane fx:id="bookBorrowTag" />
+      <!-- Ensures that the borrower and book return date line will not be rendered if the book is not borrowed-->
+      <Label fx:id="borrower" styleClass="cell_small_label" visible="false" managed="false" wrapText="true" />
+      <Label fx:id="bookReturnDate" styleClass="cell_small_label" visible="false" managed="false" wrapText="true" />
     </VBox>
   </GridPane>
 </HBox>

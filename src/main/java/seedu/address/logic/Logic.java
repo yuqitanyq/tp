@@ -6,9 +6,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.LibTaskParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLibTask;
 import seedu.address.model.book.Book;
 import seedu.address.model.patron.Patron;
 
@@ -26,18 +26,18 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the LibTask.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getLibTask()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyLibTask getLibTask();
 
     /**
-     * Returns the AddressBookParser.
+     * Returns the LibTaskParser.
      *
-     * @see seedu.address.logic.parser.AddressBookParser
+     * @see LibTaskParser
      */
-    AddressBookParser getAddressBookParser();
+    LibTaskParser getLibTaskParser();
 
     /** Returns an unmodifiable view of the filtered list of patrons */
     ObservableList<Patron> getFilteredPatronList();
@@ -46,9 +46,9 @@ public interface Logic {
     ObservableList<Book> getFilteredBookList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' LibTask file path.
      */
-    Path getAddressBookFilePath();
+    Path getLibTaskFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

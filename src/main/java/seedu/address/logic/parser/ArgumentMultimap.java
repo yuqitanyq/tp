@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Stores mapping of prefixes to their respective arguments.
@@ -56,5 +58,29 @@ public class ArgumentMultimap {
      */
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
+    }
+
+    /**
+     * Returns true if and only if the prefix queried has exactly one value.
+     */
+    public boolean hasExactlyOneValue(Prefix queryPrefix) {
+        return getAllValues(queryPrefix).size() == 1;
+    }
+
+    /**
+     * Returns true if and only if exactly one prefix has non-empty value among all queried prefixes.
+     */
+    public boolean hasExactlyOneQueriedPrefix(Prefix... queryPrefixes) {
+        return getNonEmptyPrefixes(queryPrefixes).size() == 1;
+    }
+
+    /**
+     * Returns a list of prefixes that have values, among all the queried prefixes.
+     *
+     * @param prefixes The list of prefixes to query
+     */
+    public List<Prefix> getNonEmptyPrefixes(Prefix... prefixes) {
+        return Stream.of(prefixes).filter(prefix -> getValue(prefix).isPresent())
+                .collect(Collectors.toList());
     }
 }

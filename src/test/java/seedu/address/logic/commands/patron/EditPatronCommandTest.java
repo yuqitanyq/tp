@@ -19,21 +19,21 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.patron.EditPatronCommand.EditPatronDescriptor;
-import seedu.address.model.AddressBook;
+import seedu.address.model.LibTask;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.patron.Patron;
 import seedu.address.testutil.EditPatronDescriptorBuilder;
 import seedu.address.testutil.PatronBuilder;
-import seedu.address.testutil.TypicalAddressBook;
+import seedu.address.testutil.TypicalLibTask;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditPatronCommandTest {
 
-    private Model model = new ModelManager(TypicalAddressBook.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -43,7 +43,7 @@ public class EditPatronCommandTest {
 
         String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPatron);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LibTask(model.getLibTask()), new UserPrefs());
         expectedModel.setPatron(model.getFilteredPatronList().get(0), editedPatron);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -64,7 +64,7 @@ public class EditPatronCommandTest {
 
         String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPatron);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LibTask(model.getLibTask()), new UserPrefs());
         expectedModel.setPatron(lastPatron, editedPatron);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -78,7 +78,7 @@ public class EditPatronCommandTest {
 
         String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPatron);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LibTask(model.getLibTask()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -94,7 +94,7 @@ public class EditPatronCommandTest {
 
         String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPatron);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new LibTask(model.getLibTask()), new UserPrefs());
         expectedModel.setPatron(model.getFilteredPatronList().get(0), editedPatron);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -113,8 +113,8 @@ public class EditPatronCommandTest {
     public void execute_duplicatePatronFilteredList_failure() {
         showPatronAtIndex(model, INDEX_FIRST_PATRON);
 
-        // edit patron in filtered list into a duplicate in address book
-        Patron patronInList = model.getAddressBook().getPatronList().get(INDEX_SECOND_PATRON.getZeroBased());
+        // edit patron in filtered list into a duplicate in LibTask
+        Patron patronInList = model.getLibTask().getPatronList().get(INDEX_SECOND_PATRON.getZeroBased());
         EditPatronCommand editCommand = new EditPatronCommand(INDEX_FIRST_PATRON,
                 new EditPatronDescriptorBuilder(patronInList).build());
 
@@ -133,14 +133,14 @@ public class EditPatronCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of LibTask
      */
     @Test
     public void execute_invalidPatronIndexFilteredList_failure() {
         showPatronAtIndex(model, INDEX_FIRST_PATRON);
         Index outOfBoundIndex = INDEX_SECOND_PATRON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPatronList().size());
+        // ensures that outOfBoundIndex is still in bounds of LibTask list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getLibTask().getPatronList().size());
 
         EditPatronCommand editCommand = new EditPatronCommand(outOfBoundIndex,
                 new EditPatronDescriptorBuilder().withName(VALID_NAME_BOB).build());

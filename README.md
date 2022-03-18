@@ -1,6 +1,7 @@
 # LibTask
 
 [![CI Status](https://github.com/AY2122S2-CS2103T-W14-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-W14-1/tp/actions)
+[![codecov](https://codecov.io/gh/AY2122S2-CS2103T-W14-1/tp/branch/master/graph/badge.svg?token=XNUDJ0U08U)](https://codecov.io/gh/AY2122S2-CS2103T-W14-1/tp)
 
 ![Ui](docs/images/Ui.png)
 

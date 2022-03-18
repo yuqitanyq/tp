@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Patron's id in the address book.
+ * Represents a Patron's id in LibTask.
  * Guarantees: immutable; is valid as declared in {@link #isValidId(String)}
  */
 public class Id {

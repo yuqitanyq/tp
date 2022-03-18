@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.book.Author;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.BookName;
+import seedu.address.model.book.BookStatus;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.tag.Tag;
 
@@ -26,15 +27,17 @@ class JsonAdaptedBook {
     private final List<JsonAdaptedAuthor> authors = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String timeAdded;
+    private final JsonAdaptedBookStatus bookStatus;
 
     /**
-     * Constructs a {@code JsonAdaptedPatron} with the given patron details.
+     * Constructs a {@code JsonAdaptedBook} with the given book details.
      */
     @JsonCreator
     public JsonAdaptedBook(@JsonProperty("bookName") String bookName, @JsonProperty("isbn") String isbn,
         @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
         @JsonProperty("authors") List<JsonAdaptedAuthor> authors,
-        @JsonProperty("timeAdded") String timeAdded) {
+        @JsonProperty("timeAdded") String timeAdded,
+        @JsonProperty("bookStatus") JsonAdaptedBookStatus bookStatus) {
         this.bookName = bookName;
         this.isbn = isbn;
         if (tagged != null) {
@@ -43,6 +46,7 @@ class JsonAdaptedBook {
         if (authors != null) {
             this.authors.addAll(authors);
         }
+        this.bookStatus = bookStatus;
         this.timeAdded = timeAdded;
     }
 
@@ -59,6 +63,7 @@ class JsonAdaptedBook {
                 .map(JsonAdaptedAuthor::new)
                 .collect(Collectors.toList()));
         timeAdded = Long.toString(source.getTimeAdded());
+        bookStatus = new JsonAdaptedBookStatus(source.getBookStatus());
     }
 
     /**
@@ -96,12 +101,18 @@ class JsonAdaptedBook {
 
         final Set<Tag> modelTags = new HashSet<>(bookTags);
 
+        if (bookStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    BookStatus.class.getSimpleName()));
+        }
+        final BookStatus modelBookStatus = bookStatus.toModelType();
+
         if (timeAdded == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Long.class.getSimpleName()));
         }
         try {
             final long timeBookAdded = Long.parseLong(timeAdded);
-            return new Book(modelName, modelIsbn, bookAuthors, modelTags, timeBookAdded);
+            return new Book(modelName, modelIsbn, bookAuthors, modelTags, timeBookAdded, modelBookStatus);
         } catch (NumberFormatException e) {
             throw new IllegalValueException(Book.TIME_ADDED_MESSAGE_CONSTRAINTS);
         }

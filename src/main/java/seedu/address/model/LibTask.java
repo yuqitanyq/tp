@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,10 +13,10 @@ import seedu.address.model.patron.Patron;
 import seedu.address.model.patron.UniquePatronList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the LibTask level
  * Duplicates are not allowed (by .isSamePatron comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class LibTask implements ReadOnlyLibTask {
 
     private final UniquePatronList patrons;
     private final BookList books;
@@ -32,12 +33,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         books = new BookList();
     }
 
-    public AddressBook() {}
+    public LibTask() {}
 
     /**
-     * Creates an AddressBook using the Patrons in the {@code toBeCopied}
+     * Creates an LibTask using the Patrons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public LibTask(ReadOnlyLibTask toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -60,9 +61,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code LibTask} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyLibTask newData) {
         requireNonNull(newData);
 
         setPatrons(newData.getPatronList());
@@ -72,7 +73,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// patron-level operations
 
     /**
-     * Returns true if a patron with the same identity as {@code patron} exists in the address book.
+     * Returns true if a patron with the same identity as {@code patron} exists in LibTask.
      */
     public boolean hasPatron(Patron patron) {
         requireNonNull(patron);
@@ -80,7 +81,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a book with the same identity as {@code book} exists in the address book.
+     * Returns true if a book with the same identity as {@code book} exists in LibTask.
      */
     public boolean hasBook(Book book) {
         requireNonNull(book);
@@ -88,15 +89,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a patron to the address book.
-     * The patron must not already exist in the address book.
+     * Adds a patron to LibTask.
+     * The patron must not already exist in LibTask.
      */
     public void addPatron(Patron p) {
         patrons.add(p);
     }
 
     /**
-     * Adds a book to the address book.
+     * Adds a book to LibTask.
      */
     public void addBook(Book book) {
         books.add(book);
@@ -104,8 +105,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given patron {@code target} in the list with {@code editedPatron}.
-     * {@code target} must exist in the address book.
-     * The patron identity of {@code editedPatron} must not be the same as another existing patron in the address book.
+     * {@code target} must exist in LibTask.
+     * The patron identity of {@code editedPatron} must not be the same as another existing patron in LibTask.
      */
     public void setPatron(Patron target, Patron editedPatron) {
         requireNonNull(editedPatron);
@@ -115,7 +116,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given book {@code target} in the list with {@code editedBook}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in LibTask.
      */
     public void setBook(Book target, Book editedBook) {
         requireNonNull(editedBook);
@@ -124,16 +125,47 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Replaces all books borrowed by {@code borrower} with the same book, but with available status in LibTask.
+     */
+    public void returnAllBorrowedBooks(Patron borrower) {
+        requireNonNull(borrower);
+
+        books.returnAllBorrowedBooks(borrower);
+    }
+
+    /**
+     * Returns true if the specified patron is currently borrowing at least one book.
+     */
+    public boolean isBorrowingSomeBook(Patron borrower) {
+        requireNonNull(borrower);
+        return books.isBorrowingSomeBook(borrower);
+    }
+
+    /**
+     * Replaces the given book {@code bookToBorrow} with a new book with all same fields except status.
+     * The new status will be {@link seedu.address.model.book.BookStatusType#BORROWED} status
+     * with {@code borrower} as the borrower and {@returnDate} as the returnDate.
+     *
+     * Both {@code borrower} {@code bookToBorrow} must exist in LibTask,
+     * and {@code returnDate} must be in dd-MMM-yyyy format.
+     */
+    public void borrowBook(Patron borrower, Book bookToBorrow, String returnDate) {
+        requireAllNonNull(borrower, bookToBorrow, returnDate);
+
+        books.borrowBook(borrower, bookToBorrow, returnDate);
+    }
+
+    /**
+     * Removes {@code key} from this {@code LibTask}.
+     * {@code key} must exist in LibTask.
      */
     public void removePatron(Patron key) {
         patrons.remove(key);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code LibTask}.
+     * {@code key} must exist in LibTask.
      */
     public void removeBook(Book key) {
         books.remove(key);
@@ -160,9 +192,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && patrons.equals(((AddressBook) other).patrons)
-                && books.equals(((AddressBook) other).books));
+                || (other instanceof LibTask // instanceof handles nulls
+                && patrons.equals(((LibTask) other).patrons)
+                && books.equals(((LibTask) other).books));
     }
 
     @Override

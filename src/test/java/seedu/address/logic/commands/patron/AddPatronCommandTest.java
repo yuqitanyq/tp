@@ -17,9 +17,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.LibTask;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLibTask;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.book.Book;
 import seedu.address.model.patron.Patron;
@@ -102,12 +102,12 @@ public class AddPatronCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getLibTaskFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setLibTaskFilePath(Path libTaskFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -122,12 +122,12 @@ public class AddPatronCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setLibTask(ReadOnlyLibTask newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyLibTask getLibTask() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -158,6 +158,21 @@ public class AddPatronCommandTest {
 
         @Override
         public void setBook(Book target, Book editedBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void returnAllBorrowedBooks(Patron borrower) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isBorrowingSomeBook(Patron borrower) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void borrowBook(Patron borrower, Book bookToBorrow, String returnDate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -219,8 +234,8 @@ public class AddPatronCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyLibTask getLibTask() {
+            return new LibTask();
         }
     }
 

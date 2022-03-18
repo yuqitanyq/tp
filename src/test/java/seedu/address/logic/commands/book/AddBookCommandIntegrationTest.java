@@ -10,7 +10,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.book.Book;
 import seedu.address.testutil.BookBuilder;
-import seedu.address.testutil.TypicalAddressBook;
+import seedu.address.testutil.TypicalLibTask;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddBookCommand}.
@@ -21,14 +21,14 @@ public class AddBookCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalAddressBook.getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
     }
 
     @Test
     public void execute_newBook_success() {
         Book validBook = new BookBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getLibTask(), new UserPrefs());
         expectedModel.addBook(validBook);
 
         assertCommandSuccess(new AddBookCommand(validBook), model,

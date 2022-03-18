@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.Command.CLEAR_COMMAND_WORD;
 import static seedu.address.logic.commands.Command.EXIT_COMMAND_WORD;
 import static seedu.address.logic.commands.Command.HELP_COMMAND_WORD;
 import static seedu.address.logic.commands.Command.PREVIOUS_COMMAND_WORD;
+import static seedu.address.logic.commands.Command.RETURN_COMMAND_WORD;
 
 import java.util.LinkedList;
 import java.util.regex.Matcher;
@@ -23,7 +24,7 @@ import seedu.address.logic.parser.patron.PatronCommandParser;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class LibTaskParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -82,6 +83,9 @@ public class AddressBookParser {
         case Command.BOOK_COMMAND_GROUP:
             return new BookCommandParser().parse(arguments);
 
+        case Command.BORROW_COMMAND_WORD:
+            return new BorrowCommandParser().parse(arguments);
+
         case CLEAR_COMMAND_WORD:
             return new ClearCommand();
 
@@ -93,6 +97,9 @@ public class AddressBookParser {
 
         case PREVIOUS_COMMAND_WORD:
             return new PreviousCommand(getPreviousCommand());
+
+        case RETURN_COMMAND_WORD:
+            return new ReturnCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
