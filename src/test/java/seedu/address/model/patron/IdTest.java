@@ -31,10 +31,13 @@ public class IdTest {
         assertFalse(Id.isValidId("M0123452346H")); //id longer than 9 characters
         assertFalse(Id.isValidId("L01256H")); //id shorter than 9 characters
 
-
         // valid id
         assertTrue(Id.isValidId("A0123456H"));
         assertTrue(Id.isValidId("A0123457K"));
         assertTrue(Id.isValidId("A0123458L"));
+
+        // valid id but will need to check again in the future
+        assertTrue(Id.isValidId("ABCDEFGHI")); // starts with A and only contains letters
+        assertTrue(Id.isValidId("A00000000")); // starts with A followed by 8 digits
     }
 }
