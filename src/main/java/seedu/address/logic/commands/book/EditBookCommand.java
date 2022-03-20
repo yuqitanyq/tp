@@ -24,11 +24,12 @@ import seedu.address.model.Model;
 import seedu.address.model.book.Author;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.BookName;
+import seedu.address.model.book.BookStatus;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing book in the address book.
+ * Edits the details of an existing book in LibTask.
  */
 public class EditBookCommand extends Command {
 
@@ -94,8 +95,9 @@ public class EditBookCommand extends Command {
         List<Author> updatedAuthor = editBookDescriptor.getAuthors().orElse(bookToEdit.getAuthors());
         Set<Tag> updatedTags = editBookDescriptor.getTags().orElse(bookToEdit.getTags());
         long updatedTimeAdded = bookToEdit.getTimeAdded();
+        BookStatus bookStatus = bookToEdit.getBookStatus();
 
-        return new Book(updatedName, updatedIsbn, updatedAuthor, updatedTags, updatedTimeAdded);
+        return new Book(updatedName, updatedIsbn, updatedAuthor, updatedTags, updatedTimeAdded, bookStatus);
     }
 
     @Override

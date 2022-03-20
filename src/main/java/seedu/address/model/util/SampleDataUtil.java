@@ -1,50 +1,62 @@
 package seedu.address.model.util;
 
+import static seedu.address.model.book.BookStatusType.BORROWED;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.LibTask;
+import seedu.address.model.ReadOnlyLibTask;
 import seedu.address.model.book.Author;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.BookName;
+import seedu.address.model.book.BookStatus;
 import seedu.address.model.book.Isbn;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Patron;
-import seedu.address.model.person.Phone;
+import seedu.address.model.patron.Email;
+import seedu.address.model.patron.Id;
+import seedu.address.model.patron.Name;
+import seedu.address.model.patron.Patron;
+import seedu.address.model.patron.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code LibTask} with sample data.
  */
 public class SampleDataUtil {
 
     public static final long SAMPLE_BOOK_CREATED_TIME = 1646989653388L;
+    public static final BookStatus SAMPLE_AVAILABLE_STATUS = BookStatus.createAvailableBookStatus();
 
-    public static Patron[] getSamplePersons() {
+    public static BookStatus getSampleBorrowedStatus() {
+        return new BookStatus(BORROWED,
+                Optional.ofNullable(getSamplePatrons()[0]),
+                Optional.ofNullable("14-Feb-2022"),
+                Optional.ofNullable("28-Feb-2022"));
+    }
+
+    public static Patron[] getSamplePatrons() {
         return new Patron[] {
             new Patron(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Id("A0123456H"),
-                getTagSet("friends")),
+                getTagSet("computing")),
             new Patron(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Id("A0123456H"),
-                getTagSet("colleagues", "friends")),
+                getTagSet("science", "graduate")),
             new Patron(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Id("A0123456H"),
-                getTagSet("neighbours")),
+                getTagSet("business")),
             new Patron(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Id("A0123456H"),
-                getTagSet("family")),
+                getTagSet("fass")),
             new Patron(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Id("A0123456H"),
-                getTagSet("classmates")),
+                getTagSet("computing")),
             new Patron(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Id("A0123456H"),
-                getTagSet("colleagues"))
+                getTagSet("science"))
         };
     }
 
@@ -52,32 +64,39 @@ public class SampleDataUtil {
         return new Book[] {
             new Book(new BookName("Harry Potter and The Philosopher's Stone"), new Isbn("978-71617-018-8-5"),
                 getAuthorList("J. K. Rowling"),
-                getTagSet("Adventure", "Magic"), SAMPLE_BOOK_CREATED_TIME),
+                getTagSet("Adventure", "Magic"), SAMPLE_BOOK_CREATED_TIME,
+                    SAMPLE_AVAILABLE_STATUS),
             new Book(new BookName("The Hunger Games: MockingJay"), new Isbn("9786029293883"),
                 getAuthorList("Suzanne Collins"),
-                getTagSet("Thriller", "Scifi", "Adventure"), SAMPLE_BOOK_CREATED_TIME),
+                getTagSet("Thriller", "Scifi", "Adventure"), SAMPLE_BOOK_CREATED_TIME,
+                    getSampleBorrowedStatus()),
             new Book(new BookName("Introduction to Algorithms"), new Isbn("978-03-71-88850-6"),
                 getAuthorList("Cormen", "Leiserson", "Rivest", "Stein"),
-                getTagSet("ComputerScience", "Mathematics"), SAMPLE_BOOK_CREATED_TIME),
+                getTagSet("ComputerScience", "Mathematics"), SAMPLE_BOOK_CREATED_TIME,
+                    SAMPLE_AVAILABLE_STATUS),
             new Book(new BookName("The Little Book of Semaphores"), new Isbn("4992719864"),
                 getAuthorList(),
-                getTagSet("ComputerScience", "Technology"), SAMPLE_BOOK_CREATED_TIME),
+                getTagSet("ComputerScience", "Technology"), SAMPLE_BOOK_CREATED_TIME,
+                    getSampleBorrowedStatus()),
             new Book(new BookName("The Maze Runner"), new Isbn("1-474-59282-1"),
                 getAuthorList("James Dashner1", "James Dashner2", "James Dashner3"),
-                getTagSet("Adventure", "Romance", "Scifi"), SAMPLE_BOOK_CREATED_TIME),
+                getTagSet("Adventure", "Romance", "Scifi"), SAMPLE_BOOK_CREATED_TIME,
+                    SAMPLE_AVAILABLE_STATUS),
             new Book(new BookName("Artificial Intelligence: A Modern Approach"), new Isbn("9780131038059"),
                 getAuthorList("Peter Norvig", "Stuart J. Russell"),
-                getTagSet("Technology"), SAMPLE_BOOK_CREATED_TIME),
+                getTagSet("Technology"), SAMPLE_BOOK_CREATED_TIME,
+                    SAMPLE_AVAILABLE_STATUS),
             new Book(new BookName("Cinderella"), new Isbn("9781409580454"),
                 getAuthorList(),
-                getTagSet(), SAMPLE_BOOK_CREATED_TIME)
+                getTagSet(), SAMPLE_BOOK_CREATED_TIME,
+                    getSampleBorrowedStatus())
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Patron samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+    public static ReadOnlyLibTask getSampleLibTask() {
+        LibTask sampleAb = new LibTask();
+        for (Patron samplePatron : getSamplePatrons()) {
+            sampleAb.addPatron(samplePatron);
         }
         for (Book sampleBook : getSampleBooks()) {
             sampleAb.addBook(sampleBook);

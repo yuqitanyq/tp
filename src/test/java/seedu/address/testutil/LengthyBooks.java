@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.LibTask;
 import seedu.address.model.book.Book;
 
 /**
@@ -70,10 +70,10 @@ public class LengthyBooks {
     private LengthyBooks() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the lengthy books.
+     * Returns an {@code LibTask} with all the lengthy books.
      */
-    public static AddressBook getLengthyAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static LibTask getLengthyLibTask() {
+        LibTask ab = new LibTask();
         for (Book book : getLengthyBooks()) {
             ab.addBook(book);
         }

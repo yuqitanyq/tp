@@ -11,21 +11,22 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Patron;
+import seedu.address.model.patron.Patron;
 
 /**
- * Adds a patron to the address book.
+ * Adds a patron to LibTask.
  */
 public class AddPatronCommand extends Command {
 
-    public static final String MESSAGE_USAGE = ADD_COMMAND_WORD + ": Adds a patron to the address book. "
+    public static final String MESSAGE_USAGE = PATRON_COMMAND_GROUP + ADD_COMMAND_WORD
+            + ": Adds a patron to LibTask. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ID + "ID "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + ADD_COMMAND_WORD + " "
+            + "Example: " + PATRON_COMMAND_GROUP + ADD_COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
@@ -34,34 +35,34 @@ public class AddPatronCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New patron added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This patron already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PATRON = "This patron already exists in LibTask";
 
     private final Patron toAdd;
 
     /**
      * Creates an AddPatronCommand to add the specified {@code Patron}
      */
-    public AddPatronCommand(Patron person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddPatronCommand(Patron patron) {
+        requireNonNull(patron);
+        toAdd = patron;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasPatron(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PATRON);
         }
 
-        model.addPerson(toAdd);
+        model.addPatron(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.logic.commands.patron.AddPatronCommand // instanceof handles nulls
-                && toAdd.equals(((seedu.address.logic.commands.patron.AddPatronCommand) other).toAdd));
+                || (other instanceof AddPatronCommand // instanceof handles nulls
+                && toAdd.equals(((AddPatronCommand) other).toAdd));
     }
 }
