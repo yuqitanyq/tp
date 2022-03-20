@@ -140,4 +140,20 @@ public class BookTest {
         editedHarryPotter = new BookBuilder(HARRY_POTTER).withBookStatus(getSampleBorrowedStatus()).build();
         assertFalse(HARRY_POTTER.equals(editedHarryPotter));
     }
+
+    @Test
+    public void isBookAvailable_bookAvailable_returnsTrue() {
+
+        // Book available -> returns true
+        assertTrue(() -> new Book(VALID_BOOK_NAME, VALID_ISBN, VALID_AUTHORS, VALID_TAGS, SAMPLE_BOOK_CREATED_TIME,
+                VALID_AVAILABLE_STATUS).isAvailable());
+    }
+
+    @Test
+    public void isBooKAvailable_bookBorrowed_returnsFalse() {
+        // book borrowed -> return false
+        assertFalse(() -> new Book(VALID_BOOK_NAME, VALID_ISBN, VALID_AUTHORS, VALID_TAGS, SAMPLE_BOOK_CREATED_TIME,
+                VALID_BORROWED_STATUS).isAvailable());
+    }
+
 }
