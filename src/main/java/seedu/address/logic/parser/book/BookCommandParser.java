@@ -55,6 +55,8 @@ public class BookCommandParser implements Parser<Command> {
         case Command.LIST_COMMAND_WORD:
             return new ListBookCommand();
 
+        case Command.RELATED_COMMAND_WORD:
+            return new RelatedBookCommandParser().parse(arguments);
         // TODO : Add cases for List and Find
 
         default:
