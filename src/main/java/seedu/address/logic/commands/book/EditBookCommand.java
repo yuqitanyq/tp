@@ -43,10 +43,10 @@ public class EditBookCommand extends Command {
             + "[" + PREFIX_AUTHOR + "AUTHOR] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + BOOK_COMMAND_GROUP + " " + EDIT_COMMAND_WORD + " 1 "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_ISBN + "9780747532743"
-            + PREFIX_AUTHOR + "JK Rowling"
-            + PREFIX_TAG + "Fiction";
+            + PREFIX_NAME + "Harry Potter "
+            + PREFIX_ISBN + "978-71617-018-8-5 "
+            + PREFIX_AUTHOR + "J. K. Rowling "
+            + PREFIX_TAG + "Magic";
 
     public static final String MESSAGE_EDIT_BOOK_SUCCESS = "Edited Book: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least ISBN, author or category must be provided.";
