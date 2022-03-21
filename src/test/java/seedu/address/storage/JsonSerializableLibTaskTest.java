@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.LibTask;
 import seedu.address.testutil.LengthyBooks;
+import seedu.address.testutil.ManyPatrons;
 import seedu.address.testutil.TypicalLibTask;
 
 public class JsonSerializableLibTaskTest {
@@ -23,6 +24,7 @@ public class JsonSerializableLibTaskTest {
     private static final Path TYPICAL_BOOKS_FILE = TEST_DATA_FOLDER.resolve("typicalBooksLibTask.json");
     private static final Path INVALID_BOOK_FILE = TEST_DATA_FOLDER.resolve("invalidBookLibTask.json");
     private static final Path LENGTHY_BOOK_FILE = TEST_DATA_FOLDER.resolve("lengthyBooksLibTask.json");
+    private static final Path MANY_PATRONS_FILE = TEST_DATA_FOLDER.resolve("ManyPatronsLibTask.json");
 
     @Test
     public void toModelType_typicalPatronsFile_success() throws Exception {
@@ -71,6 +73,16 @@ public class JsonSerializableLibTaskTest {
         LibTask libTaskFromFile = dataFromFile.toModelType();
         LibTask lengthyBooksLibTask = LengthyBooks.getLengthyLibTask();
         assertEquals(libTaskFromFile, lengthyBooksLibTask);
+    }
+
+    @Test
+    public void toModelType_manyPatronsFile_success() throws Exception {
+        JsonSerializableLibTask dataFromFile = JsonUtil.readJsonFile(MANY_PATRONS_FILE,
+                JsonSerializableLibTask.class).get();
+
+        LibTask libTaskFromFile = dataFromFile.toModelType();
+        LibTask manyPatronsLibTask = ManyPatrons.getManyPatronsLibTask();
+        assertEquals(libTaskFromFile, manyPatronsLibTask);
     }
 
 }

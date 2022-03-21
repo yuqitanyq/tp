@@ -22,6 +22,7 @@ public abstract class Command {
     public static final String PREVIOUS_COMMAND_WORD = "u";
     public static final String RETURN_COMMAND_WORD = "return";
     public static final String BORROW_COMMAND_WORD = "borrow";
+    public static final String RELATED_COMMAND_WORD = "related";
 
     /**
      * Executes the command and returns the result message.
