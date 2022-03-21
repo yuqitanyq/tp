@@ -165,11 +165,13 @@ public class LibTask implements ReadOnlyLibTask {
 
     /**
      * Replaces all books borrowed by {@code borrower} with the same book, but with available status in LibTask.
+     *
+     * @return The list of available books that were returned by {@code borrower}
      */
-    public void returnAllBorrowedBooks(Patron borrower) {
+    public List<Book> returnAllBorrowedBooks(Patron borrower) {
         requireNonNull(borrower);
 
-        books.returnAllBorrowedBooks(borrower);
+        return books.returnAllBorrowedBooks(borrower);
     }
 
     /**

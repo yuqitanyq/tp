@@ -244,7 +244,7 @@ public class AddBookCommandTest {
         }
 
         @Override
-        public void returnAllBorrowedBooks(Patron borrower) {
+        public List<Book> returnAllBorrowedBooks(Patron borrower) {
             throw new AssertionError("This method should not be called.");
         }
 

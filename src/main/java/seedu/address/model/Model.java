@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -131,8 +132,10 @@ public interface Model {
 
     /**
      * Replaces all books borrowed by {@code borrower} with the same book, but with available status in LibTask.
+     *
+     * @return The list of available books that were returned by {@code borrower}
      */
-    void returnAllBorrowedBooks(Patron borrower);
+    List<Book> returnAllBorrowedBooks(Patron borrower);
 
     /**
      * Returns true if the specified patron is currently borrowing at least one book.

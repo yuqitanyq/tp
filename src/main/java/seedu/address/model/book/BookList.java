@@ -3,6 +3,7 @@ package seedu.address.model.book;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -110,15 +111,20 @@ public class BookList implements Iterable<Book> {
 
     /**
      * Replaces all books borrowed by {@code borrower} with the same book, but with available status in this book list.
+     *
+     * @return The list of available books that were returned by {@code borrower}
      */
-    public void returnAllBorrowedBooks(Patron borrower) {
+    public List<Book> returnAllBorrowedBooks(Patron borrower) {
+        ArrayList<Book> returnedBooks = new ArrayList<>();
         for (Book book : internalList) {
             if (!book.isBorrowedBy(borrower)) {
                 continue;
             }
             Book updatedAvailableBook = new Book(book, BookStatus.createAvailableBookStatus());
             setBook(book, updatedAvailableBook);
+            returnedBooks.add(updatedAvailableBook);
         }
+        return returnedBooks;
     }
 
     /**
