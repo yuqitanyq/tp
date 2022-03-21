@@ -132,6 +132,26 @@ public class Book {
     }
 
     /**
+     * Returns true if both books have the same set of authors.
+     * Authors are considered to be equal based on {@link Author#equals(Object)}
+     */
+    public boolean hasSameAuthors(Book other) {
+        HashSet<Author> thisAuthors = new HashSet<>();
+        thisAuthors.addAll(authors);
+        HashSet<Author> otherAuthors = new HashSet<>();
+        otherAuthors.addAll(other.authors);
+        return thisAuthors.equals(otherAuthors);
+    }
+
+    /**
+     * Returns true if both books have the same isbn.
+     * Isbn are considered to be equal based on {@link Isbn#equals(Object)}
+     */
+    public boolean hasSameIsbn(Book other) {
+        return isbn.equals(other.isbn);
+    }
+
+    /**
      * Returns true if both books have the same identity and data fields.
      * This defines a stronger notion of equality between two books.
      */
@@ -147,7 +167,7 @@ public class Book {
 
         Book otherBook = (Book) other;
         return otherBook.getBookName().equals(getBookName())
-                && otherBook.getAuthors().equals(getAuthors())
+                && hasSameAuthors(otherBook)
                 && otherBook.getTags().equals(getTags())
                 && otherBook.getIsbn().equals(getIsbn())
                 && otherBook.timeAdded == timeAdded

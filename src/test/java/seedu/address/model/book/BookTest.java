@@ -139,6 +139,16 @@ public class BookTest {
         // different status -> returns false
         editedHarryPotter = new BookBuilder(HARRY_POTTER).withBookStatus(getSampleBorrowedStatus()).build();
         assertFalse(HARRY_POTTER.equals(editedHarryPotter));
+
+        // same authors but with spacing, letter case, and ordering difference -> returns true
+        Book book1 = new BookBuilder(HARRY_POTTER).withAuthors("author 1", "author 2").build();
+        Book book2 = new BookBuilder(HARRY_POTTER).withAuthors("Author2", "Author1").build();
+        assertTrue(book1.equals(book2));
+
+        // same book name but with spacing and letter case difference -> returns true
+        book1 = new BookBuilder(HARRY_POTTER).withName("harry potter").build();
+        book2 = new BookBuilder(HARRY_POTTER).withName("HarryPotter").build();
+        assertTrue(book1.equals(book2));
     }
 
     @Test
