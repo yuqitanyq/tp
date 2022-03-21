@@ -89,6 +89,25 @@ public class LibTask implements ReadOnlyLibTask {
     }
 
     /**
+     * Returns true if there is some book in this LibTask's book list with the same isbn, but different book name or
+     * different set of authors as {@code bookToCheck}.
+     */
+    public boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck) {
+        requireNonNull(bookToCheck);
+        return books.hasSameIsbnDiffAuthorsOrName(bookToCheck);
+    }
+
+    /**
+     * Removes all book requests from all books in this LibTask's book list that has the same isbn as any book in
+     * {@param booksToDelete}.
+     *
+     * @return A message string representing the notifications for distinct book request that were deleted.
+     */
+    public String deleteAllRequests(Book ... booksToDelete) {
+        return books.deleteAllRequests(booksToDelete);
+    }
+
+    /**
      * Adds a patron to LibTask.
      * The patron must not already exist in LibTask.
      */

@@ -1,11 +1,16 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.book.Book;
+import seedu.address.model.book.Isbn;
 import seedu.address.model.patron.Patron;
 
 /**
@@ -63,6 +68,20 @@ public interface Model {
      * Returns true if a book with the same identity as {@code book} exists in LibTask.
      */
     boolean hasBook(Book book);
+
+    /**
+     * Returns true if there is some book in this model's book list with the same isbn, but different book name or
+     * different set of authors as {@code bookToCheck}.
+     */
+    boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck);
+
+    /**
+     * Removes all book requests from all books in this model's book list that has the same isbn as any book in
+     * {@param books}.
+     *
+     * @return A message string representing the notifications for distinct book request that were deleted.
+     */
+    String deleteAllRequests(Book ... books);
 
     /**
      * Deletes the given patron.

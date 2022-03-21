@@ -142,6 +142,16 @@ public class AddPatronCommandTest {
         }
 
         @Override
+        public boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String deleteAllRequests(Book ... books) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePatron(Patron target) {
             throw new AssertionError("This method should not be called.");
         }

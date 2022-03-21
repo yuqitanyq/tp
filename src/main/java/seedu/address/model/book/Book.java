@@ -54,6 +54,14 @@ public class Book {
                 originalBook.getTags(), originalBook.getTimeAdded(), updatedBookStatus, originalBook.getRequesters());
     }
 
+    /**
+     * Returns a Book that is same as {@code originalBook} in every aspect, but with no requesters.
+     */
+    public Book getBookWithEmptyRequest() {
+        return new Book(getBookName(), getIsbn(), getAuthors(), getTags(), getTimeAdded(), getBookStatus(),
+                new HashSet<>());
+    }
+
     public BookName getBookName() {
         return bookName;
     }
@@ -169,6 +177,14 @@ public class Book {
     }
 
     /**
+     * Returns true if both books have the same book name.
+     * Book names are considered to be equal based on {@link BookName#equals(Object)}
+     */
+    public boolean hasSameName(Book other) {
+        return bookName.equals(other.bookName);
+    }
+
+    /**
      * Returns true if both books have the same identity and data fields.
      * This defines a stronger notion of equality between two books.
      */
@@ -208,7 +224,7 @@ public class Book {
         List<Author> authors = getAuthors();
         if (!authors.isEmpty()) {
             builder.append("; Authors: ");
-            authors.forEach(builder::append);
+            authors.forEach(author -> builder.append(author.toString() + " "));
         }
 
         Set<Tag> tags = getTags();

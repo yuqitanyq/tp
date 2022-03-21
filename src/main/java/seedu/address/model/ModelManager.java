@@ -103,6 +103,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck) {
+        requireNonNull(bookToCheck);
+        return libTask.hasSameIsbnDiffAuthorsOrName(bookToCheck);
+    }
+
+    @Override
+    public String deleteAllRequests(Book ... books) {
+        return libTask.deleteAllRequests(books);
+    }
+
+    @Override
     public void deletePatron(Patron target) {
         libTask.removePatron(target);
     }

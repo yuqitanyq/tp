@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AUTHOR_SUZANNE_COLLINS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOK_NAME_HUNGER_GAMES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_HUNGER_GAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RETURN_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIFI;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -113,6 +114,23 @@ public class BookListTest {
         expectedBookList.add(new Book(AI, BookStatus.createAvailableBookStatus()));
         bookList.returnAllBorrowedBooks(getTypicalPatrons().get(0));
         assertEquals(expectedBookList, bookList);
+    }
+
+    @Test
+    public void hasSameIsbnDiffAuthorsOrName() {
+        bookList.add(HARRY_POTTER);
+
+        // same isbn but different name -> returns true
+        Book book2 = new BookBuilder(HARRY_POTTER).withName("diff name").build();
+        assertTrue(bookList.hasSameIsbnDiffAuthorsOrName(book2));
+
+        // same isbn but different authors -> returns true
+        book2 = new BookBuilder(HARRY_POTTER).withAuthors("some author").build();
+        assertTrue(bookList.hasSameIsbnDiffAuthorsOrName(book2));
+
+        // different isbn, but same authors and book name is allowed -> returns false
+        book2 = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
+        assertFalse(bookList.hasSameIsbnDiffAuthorsOrName(book2));
     }
 
     @Test

@@ -31,7 +31,9 @@ public class AddBookCommand extends Command {
             + PREFIX_TAG + "Adventure "
             + PREFIX_TAG + "Magic";
 
-    public static final String MESSAGE_SUCCESS = "New book added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New book added: %1$s.\n";
+    public static final String MESSAGE_SAME_ISBN_INCONSISTENT = "There already exists a book with isbn %1$s, "
+            + "but has different authors or name!\n";
 
     private final Book toAdd;
 
@@ -46,9 +48,13 @@ public class AddBookCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
+        if (model.hasSameIsbnDiffAuthorsOrName(toAdd)) {
+            throw new CommandException(String.format(MESSAGE_SAME_ISBN_INCONSISTENT, toAdd.getIsbn()));
+        }
+        // Remove all requests for this isbn and notify all requesters who requested for a book with toAdd's isbn
+        String notification = model.deleteAllRequests(toAdd);
         model.addBook(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + notification);
     }
 
     @Override

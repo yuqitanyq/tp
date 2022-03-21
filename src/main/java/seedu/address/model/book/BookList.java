@@ -3,9 +3,12 @@ package seedu.address.model.book;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -95,6 +98,34 @@ public class BookList implements Iterable<Book> {
     }
 
     /**
+     * Returns true if there is some book in this book list with the same isbn, but different book name or
+     * different set of authors as {@code bookToCheck}.
+     */
+    public boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck) {
+        return internalList.stream().anyMatch(book -> book.hasSameIsbn(bookToCheck) &&
+                (!book.hasSameAuthors(bookToCheck) || !book.hasSameName(bookToCheck)));
+    }
+
+    /**
+     * Removes all book requests from all books in this book list that has the same isbn as any book in {@param books}
+     *
+     * @return A message string representing the notifications for distinct book request that were deleted.
+     */
+    public String deleteAllRequests(Book ... books) {
+        HashSet<Isbn> notifiedBooks = new HashSet<>(); // To prevent adding the same notification multiple times
+        StringBuilder builder = new StringBuilder();
+        List<Book> booksToProcess = Arrays.stream(books).collect(Collectors.toList());
+        for (Book book : booksToProcess) {
+            if (notifiedBooks.contains(book.getIsbn())) {
+                continue;
+            }
+            notifiedBooks.add(book.getIsbn());
+            builder.append(deleteRequestSingleBook(book));
+        }
+        return builder.toString();
+    }
+
+    /**
      * Returns true if the specified patron is currently borrowing at least one book.
      */
     public boolean isBorrowingSomeBook(Patron borrower) {
@@ -140,5 +171,24 @@ public class BookList implements Iterable<Book> {
     @Override
     public int hashCode() {
         return internalList.hashCode();
+    }
+
+    private String deleteRequestSingleBook(Book bookToDelete) {
+        StringBuilder builder = new StringBuilder();
+        boolean hasNotified = false; // flag to prevent appending the same notification many times
+        for (Book book : internalList) {
+            if (!book.hasSameIsbn(bookToDelete) || book.getRequesters().isEmpty()) {
+                continue;
+            }
+            if (!hasNotified) {
+                book.getRequesters().stream().forEach(requester ->
+                        builder.append(String.format("You should notify %s about availability of %s\n",
+                                requester.getName(), book.getBookName())));
+                hasNotified = true;
+            }
+            Book updatedBookEmptyRequest = book.getBookWithEmptyRequest();
+            setBook(book, updatedBookEmptyRequest);
+        }
+        return builder.toString();
     }
 }
