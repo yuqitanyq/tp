@@ -139,7 +139,7 @@ public class BookStatus {
         final StringBuilder builder = new StringBuilder();
         builder.append(bookStatusType.toString());
         if (isBorrowed()) {
-            builder.append("; Borrowed by: ").append(borrower.map(Patron::toString).get());
+            builder.append("; Borrowed by: ").append(borrower.map(b -> b.getName()).get());
             builder.append("; Borrow Date: ").append(borrowDate.map(date -> STATUS_DATE_FORMAT.format(date)).get());
             builder.append("; Return Date: ").append(returnDate.map(date -> STATUS_DATE_FORMAT.format(date)).get());
         }

@@ -23,6 +23,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.patron.Patron;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.BookBuilder;
 
@@ -33,41 +34,48 @@ public class BookTest {
     private static final List<Author> VALID_AUTHORS = new ArrayList<>();
     private static final Set<Tag> VALID_TAGS = new HashSet<>();
     private static final BookStatus VALID_BORROWED_STATUS = getSampleBorrowedStatus();
+    private static final Set<Patron> VALID_REQUESTERS = new HashSet<>();
 
     @Test
     public void constructor_nullBookName_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Book(null, VALID_ISBN, VALID_AUTHORS, VALID_TAGS,
-                SAMPLE_BOOK_CREATED_TIME, VALID_AVAILABLE_STATUS));
+                SAMPLE_BOOK_CREATED_TIME, VALID_AVAILABLE_STATUS, VALID_REQUESTERS));
     }
 
     @Test
     public void constructor_nullIsbn_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Book(VALID_BOOK_NAME, null, VALID_AUTHORS, VALID_TAGS,
-                SAMPLE_BOOK_CREATED_TIME, VALID_AVAILABLE_STATUS));
+                SAMPLE_BOOK_CREATED_TIME, VALID_AVAILABLE_STATUS, VALID_REQUESTERS));
     }
 
     @Test
     public void constructor_nullAuthors_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Book(VALID_BOOK_NAME, VALID_ISBN, null, VALID_TAGS,
-                SAMPLE_BOOK_CREATED_TIME, VALID_AVAILABLE_STATUS));
+                SAMPLE_BOOK_CREATED_TIME, VALID_AVAILABLE_STATUS, VALID_REQUESTERS));
     }
 
     @Test
     public void constructor_nullTags_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Book(VALID_BOOK_NAME, VALID_ISBN, VALID_AUTHORS, null,
-                SAMPLE_BOOK_CREATED_TIME, VALID_AVAILABLE_STATUS));
+                SAMPLE_BOOK_CREATED_TIME, VALID_AVAILABLE_STATUS, VALID_REQUESTERS));
     }
 
     @Test
     public void constructor_nullBookStatus_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Book(VALID_BOOK_NAME, VALID_ISBN, VALID_AUTHORS, VALID_TAGS,
-                SAMPLE_BOOK_CREATED_TIME, null));
+                SAMPLE_BOOK_CREATED_TIME, null, VALID_REQUESTERS));
+    }
+
+    @Test
+    public void constructor_nullRequesters_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Book(VALID_BOOK_NAME, VALID_ISBN, VALID_AUTHORS, VALID_TAGS,
+                SAMPLE_BOOK_CREATED_TIME, VALID_AVAILABLE_STATUS, null));
     }
 
     @Test
     public void constructor_copyFromOriginalBook_changesBookStatus() {
         Book originalBook = new Book(VALID_BOOK_NAME, VALID_ISBN, VALID_AUTHORS, VALID_TAGS,
-                SAMPLE_BOOK_CREATED_TIME, VALID_AVAILABLE_STATUS);
+                SAMPLE_BOOK_CREATED_TIME, VALID_AVAILABLE_STATUS, VALID_REQUESTERS);
         Book newBook = new Book(originalBook, VALID_BORROWED_STATUS);
         Book expectedBook = new BookBuilder(originalBook).withBookStatus(VALID_BORROWED_STATUS).build();
         assertEquals(newBook, expectedBook);
@@ -77,6 +85,8 @@ public class BookTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Book book = new BookBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> book.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> book.getAuthors().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> book.getRequesters().remove(0));
     }
 
     @Test
@@ -156,14 +166,29 @@ public class BookTest {
 
         // Book available -> returns true
         assertTrue(() -> new Book(VALID_BOOK_NAME, VALID_ISBN, VALID_AUTHORS, VALID_TAGS, SAMPLE_BOOK_CREATED_TIME,
-                VALID_AVAILABLE_STATUS).isAvailable());
+                VALID_AVAILABLE_STATUS, VALID_REQUESTERS).isAvailable());
     }
 
     @Test
     public void isBooKAvailable_bookBorrowed_returnsFalse() {
         // book borrowed -> return false
         assertFalse(() -> new Book(VALID_BOOK_NAME, VALID_ISBN, VALID_AUTHORS, VALID_TAGS, SAMPLE_BOOK_CREATED_TIME,
-                VALID_BORROWED_STATUS).isAvailable());
+                VALID_BORROWED_STATUS, VALID_REQUESTERS).isAvailable());
+    }
+
+    @Test
+    public void hasSameAuthors() {
+        // same authors but with spacing, letter case, and ordering difference -> returns true
+        Book book1 = new BookBuilder(HARRY_POTTER).withAuthors("author 1", "author 2").build();
+        Book book2 = new BookBuilder(HARRY_POTTER).withAuthors("Author2", "Author1").build();
+        assertTrue(book1.equals(book2));
+    }
+
+    @Test
+    public void hasSameIsbn() {
+        // same isbn but different hyphen positions -> returns true
+        Book editedHarryPotter = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HARRY_POTTER_2).build();
+        assertTrue(HARRY_POTTER.equals(editedHarryPotter));
     }
 
 }

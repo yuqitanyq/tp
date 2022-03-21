@@ -74,6 +74,10 @@ public class Patron {
                 && otherPatron.getId().equals(getId());
     }
 
+    public Patron copy() {
+        return new Patron(name, phone, email, id, getTags());
+    }
+
     /**
      * Returns true if both patrons have the same identity and data fields.
      * This defines a stronger notion of equality between two patrons.

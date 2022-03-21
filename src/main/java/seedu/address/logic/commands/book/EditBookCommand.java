@@ -26,6 +26,7 @@ import seedu.address.model.book.Book;
 import seedu.address.model.book.BookName;
 import seedu.address.model.book.BookStatus;
 import seedu.address.model.book.Isbn;
+import seedu.address.model.patron.Patron;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,8 +97,9 @@ public class EditBookCommand extends Command {
         Set<Tag> updatedTags = editBookDescriptor.getTags().orElse(bookToEdit.getTags());
         long updatedTimeAdded = bookToEdit.getTimeAdded();
         BookStatus bookStatus = bookToEdit.getBookStatus();
+        Set<Patron> requesters = bookToEdit.getRequesters();
 
-        return new Book(updatedName, updatedIsbn, updatedAuthor, updatedTags, updatedTimeAdded, bookStatus);
+        return new Book(updatedName, updatedIsbn, updatedAuthor, updatedTags, updatedTimeAdded, bookStatus, requesters);
     }
 
     @Override

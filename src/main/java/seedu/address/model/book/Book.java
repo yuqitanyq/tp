@@ -29,19 +29,21 @@ public class Book {
     private final List<Author> authors = new ArrayList<Author>();
     private final Set<Tag> tags = new HashSet<Tag>();
     private final BookStatus bookStatus;
+    private final Set<Patron> requesters = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Book(BookName bookName, Isbn isbn, List<Author> authors, Set<Tag> tags, long timeAdded,
-                BookStatus bookStatus) {
-        requireAllNonNull(bookName, isbn, authors, tags, bookStatus);
+                BookStatus bookStatus, Set<Patron> requesters) {
+        requireAllNonNull(bookName, isbn, authors, tags, bookStatus, requesters);
         this.bookName = bookName;
         this.isbn = isbn;
         this.authors.addAll(authors);
         this.tags.addAll(tags);
         this.timeAdded = timeAdded;
         this.bookStatus = bookStatus;
+        this.requesters.addAll(requesters);
     }
 
     /**
@@ -49,7 +51,7 @@ public class Book {
      */
     public Book(Book originalBook, BookStatus updatedBookStatus) {
         this (originalBook.getBookName(), originalBook.getIsbn(), originalBook.getAuthors(),
-                originalBook.getTags(), originalBook.getTimeAdded(), updatedBookStatus);
+                originalBook.getTags(), originalBook.getTimeAdded(), updatedBookStatus, originalBook.getRequesters());
     }
 
     public BookName getBookName() {
@@ -74,6 +76,14 @@ public class Book {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable requester set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Patron> getRequesters() {
+        return Collections.unmodifiableSet(requesters);
     }
 
     public BookStatus getBookStatus() {
@@ -117,6 +127,13 @@ public class Book {
             return false;
         }
         return bookStatus.getBorrower().map(p -> p.equals(patron)).orElse(false);
+    }
+
+    /**
+     * Returns true if this book is requested by the specified patron.
+     */
+    public boolean isRequestedBy(Patron patron) {
+        return requesters.contains(patron);
     }
 
     /**
@@ -171,13 +188,14 @@ public class Book {
                 && otherBook.getTags().equals(getTags())
                 && otherBook.getIsbn().equals(getIsbn())
                 && otherBook.timeAdded == timeAdded
-                && otherBook.bookStatus.equals(bookStatus);
+                && otherBook.bookStatus.equals(bookStatus)
+                && otherBook.requesters.equals(requesters);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(bookName, isbn, authors, tags, timeAdded, bookStatus);
+        return Objects.hash(bookName, isbn, authors, tags, timeAdded, bookStatus, requesters);
     }
 
     @Override
@@ -199,6 +217,10 @@ public class Book {
             tags.forEach(builder::append);
         }
         builder.append("; Status: ").append(bookStatus.toString());
+        if (!requesters.isEmpty()) {
+            builder.append("; Requested by: ");
+            requesters.forEach(r -> builder.append(r.getName()));
+        }
         return builder.toString();
     }
 }

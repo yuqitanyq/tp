@@ -4,6 +4,7 @@ import static seedu.address.model.book.BookStatusType.BORROWED;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -65,31 +66,31 @@ public class SampleDataUtil {
             new Book(new BookName("Harry Potter and The Philosopher's Stone"), new Isbn("978-71617-018-8-5"),
                 getAuthorList("J. K. Rowling"),
                 getTagSet("Adventure", "Magic"), SAMPLE_BOOK_CREATED_TIME,
-                    SAMPLE_AVAILABLE_STATUS),
+                    SAMPLE_AVAILABLE_STATUS, new HashSet<>()),
             new Book(new BookName("The Hunger Games: MockingJay"), new Isbn("9786029293883"),
                 getAuthorList("Suzanne Collins"),
                 getTagSet("Thriller", "Scifi", "Adventure"), SAMPLE_BOOK_CREATED_TIME,
-                    getSampleBorrowedStatus()),
+                    getSampleBorrowedStatus(), new HashSet<>()),
             new Book(new BookName("Introduction to Algorithms"), new Isbn("978-03-71-88850-6"),
                 getAuthorList("Cormen", "Leiserson", "Rivest", "Stein"),
                 getTagSet("ComputerScience", "Mathematics"), SAMPLE_BOOK_CREATED_TIME,
-                    SAMPLE_AVAILABLE_STATUS),
+                    SAMPLE_AVAILABLE_STATUS, new HashSet<>()),
             new Book(new BookName("The Little Book of Semaphores"), new Isbn("4992719864"),
                 getAuthorList(),
                 getTagSet("ComputerScience", "Technology"), SAMPLE_BOOK_CREATED_TIME,
-                    getSampleBorrowedStatus()),
+                    getSampleBorrowedStatus(), new HashSet<>()),
             new Book(new BookName("The Maze Runner"), new Isbn("1-474-59282-1"),
                 getAuthorList("James Dashner1", "James Dashner2", "James Dashner3"),
                 getTagSet("Adventure", "Romance", "Scifi"), SAMPLE_BOOK_CREATED_TIME,
-                    SAMPLE_AVAILABLE_STATUS),
+                    SAMPLE_AVAILABLE_STATUS, new HashSet<>()),
             new Book(new BookName("Artificial Intelligence: A Modern Approach"), new Isbn("9780131038059"),
                 getAuthorList("Peter Norvig", "Stuart J. Russell"),
                 getTagSet("Technology"), SAMPLE_BOOK_CREATED_TIME,
-                    SAMPLE_AVAILABLE_STATUS),
+                    SAMPLE_AVAILABLE_STATUS, new HashSet<>()),
             new Book(new BookName("Cinderella"), new Isbn("9781409580454"),
                 getAuthorList(),
                 getTagSet(), SAMPLE_BOOK_CREATED_TIME,
-                    getSampleBorrowedStatus())
+                    getSampleBorrowedStatus(), new HashSet<>())
         };
     }
 
@@ -120,5 +121,14 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Author::new)
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Returns a requester set containing the list of requesters given.
+     */
+    public static Set<Patron> getRequesterSet(Patron... requesters) {
+        return Arrays.stream(requesters)
+                .map(r -> r.copy())
+                .collect(Collectors.toSet());
     }
 }
