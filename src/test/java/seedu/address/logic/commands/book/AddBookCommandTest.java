@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_SAME_ISBN_INCONSISTENT;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.commands.book.AddBookCommand.MESSAGE_SAME_ISBN_INCONSISTENT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPatrons.ALICE;
 import static seedu.address.testutil.TypicalPatrons.BOB;
@@ -209,6 +209,11 @@ public class AddBookCommandTest {
         }
 
         @Override
+        public boolean hasSameIsbn(Book bookToCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public String deleteAllRequests(Book ... books) {
             throw new AssertionError("This method should not be called.");
         }
@@ -230,6 +235,11 @@ public class AddBookCommandTest {
 
         @Override
         public void setBook(Book target, Book editedBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean setAndEditBook(Book target, Book editedBook) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -308,8 +318,8 @@ public class AddBookCommandTest {
         @Override
         public boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck) {
             requireNonNull(bookToCheck);
-            return booksAdded.stream().anyMatch(book -> book.hasSameIsbn(bookToCheck) &&
-                    (!book.hasSameAuthors(bookToCheck) || !book.hasSameName(bookToCheck)));
+            return booksAdded.stream().anyMatch(book -> book.hasSameIsbn(bookToCheck)
+                    && (!book.hasSameAuthors(bookToCheck) || !book.hasSameName(bookToCheck)));
         }
 
         @Override

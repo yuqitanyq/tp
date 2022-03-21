@@ -1,5 +1,6 @@
 package seedu.address.model.book;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -60,6 +61,16 @@ public class Book {
     public Book getBookWithEmptyRequest() {
         return new Book(getBookName(), getIsbn(), getAuthors(), getTags(), getTimeAdded(), getBookStatus(),
                 new HashSet<>());
+    }
+
+    /**
+     * Returns a Book that is consistent with {@code editedBook}, but has all other fields same as this book.
+     * Two books are consistent if they either do not have the same isbn, or have the same isbn, book name, and authors.
+     */
+    public Book getConsistentReplacement(Book editedBook) {
+        requireNonNull(editedBook);
+        return new Book(editedBook.getBookName(), editedBook.getIsbn(), editedBook.getAuthors(), getTags(),
+                getTimeAdded(), getBookStatus(), getRequesters());
     }
 
     public BookName getBookName() {

@@ -147,6 +147,11 @@ public class AddPatronCommandTest {
         }
 
         @Override
+        public boolean hasSameIsbn(Book bookToCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public String deleteAllRequests(Book ... books) {
             throw new AssertionError("This method should not be called.");
         }
@@ -168,6 +173,11 @@ public class AddPatronCommandTest {
 
         @Override
         public void setBook(Book target, Book editedBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean setAndEditBook(Book target, Book editedBook) {
             throw new AssertionError("This method should not be called.");
         }
 

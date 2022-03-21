@@ -49,8 +49,10 @@ public class EditBookCommand extends Command {
             + PREFIX_AUTHOR + "J. K. Rowling "
             + PREFIX_TAG + "Magic";
 
-    public static final String MESSAGE_EDIT_BOOK_SUCCESS = "Edited Book: %1$s";
+    public static final String MESSAGE_EDIT_BOOK_SUCCESS = "Edited Book: %1$s\n";
     public static final String MESSAGE_NOT_EDITED = "At least ISBN, author or category must be provided.";
+    public static final String MESSAGE_OTHER_BOOKS_EDITED = "Some other books with the same isbn are also edited.\n";
+    public static final String MESSAGE_SAME_ISBN = "You cannot change a book's isbn into another existing isbn!";
 
     private final Index index;
     private final EditBookDescriptor editBookDescriptor;
@@ -79,9 +81,16 @@ public class EditBookCommand extends Command {
         Book bookToEdit = lastShownList.get(index.getZeroBased()); //change to bookList
         Book editedBook = createEditedBook(bookToEdit, editBookDescriptor);
 
-        model.setBook(bookToEdit, editedBook);
+        // Do not allow editing isbn of this book if some other books already has the new isbn
+        if (!editedBook.hasSameIsbn(bookToEdit) && model.hasSameIsbn(editedBook)) {
+            throw new CommandException(MESSAGE_SAME_ISBN);
+        }
+
+        boolean hasSomeOtherBooksEdited = model.setAndEditBook(bookToEdit, editedBook);
+        String additionalInfo = hasSomeOtherBooksEdited ? MESSAGE_OTHER_BOOKS_EDITED : "";
+
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
-        return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook));
+        return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook) + additionalInfo);
     }
 
     /**

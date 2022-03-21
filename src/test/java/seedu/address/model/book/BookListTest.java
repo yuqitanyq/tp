@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOK_NAME_HUNGE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_HUNGER_GAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RETURN_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIFI;
+import static seedu.address.model.util.SampleDataUtil.getSampleBorrowedStatus;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBooks.AI;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
@@ -103,6 +104,21 @@ public class BookListTest {
         BookList expectedBookList = new BookList();
         expectedBookList.add(HUNGER_GAMES);
         assertEquals(expectedBookList, bookList);
+    }
+
+    @Test
+    public void hasSameIsbn_noSameIsbn_returnsFalse() {
+        bookList.add(HARRY_POTTER);
+        assertFalse(bookList.hasSameIsbn(HUNGER_GAMES));
+    }
+
+    @Test
+    public void hasSameIsbn_hasSameIsbn_returnsTrue() {
+        bookList.add(HARRY_POTTER);
+        Book allFieldsDifferentExceptIsbn = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES)
+                .withTags().withAuthors().withRequesters(ALICE).withBookStatus(getSampleBorrowedStatus())
+                .withTimeAdded(12345).build();
+        assertTrue(bookList.hasSameIsbn(allFieldsDifferentExceptIsbn));
     }
 
     @Test

@@ -1,16 +1,11 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.book.Book;
-import seedu.address.model.book.Isbn;
 import seedu.address.model.patron.Patron;
 
 /**
@@ -76,6 +71,11 @@ public interface Model {
     boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck);
 
     /**
+     * Returns true if there is some book in this model's book list with the same isbn as {@code bookToCheck}.
+     */
+    boolean hasSameIsbn(Book bookToCheck);
+
+    /**
      * Removes all book requests from all books in this model's book list that has the same isbn as any book in
      * {@param books}.
      *
@@ -119,6 +119,15 @@ public interface Model {
      * The book identity of {@code editedBook} must not be the same as another existing book in LibTask.
      */
     void setBook(Book target, Book editedBook);
+
+    /**
+     * Replaces the given book {@code target} with {@code editedBook}. If there are any other books with the same isbn
+     * as {@code target}, update the authors and names of all those books to ensure consistency about books.
+     * {@code target} must exist in LibTask.
+     *
+     * @return True if some other book other than target is modified for the sake of consistency.
+     */
+    boolean setAndEditBook(Book target, Book editedBook);
 
     /**
      * Replaces all books borrowed by {@code borrower} with the same book, but with available status in LibTask.

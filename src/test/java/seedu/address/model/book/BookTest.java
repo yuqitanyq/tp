@@ -14,6 +14,7 @@ import static seedu.address.model.util.SampleDataUtil.SAMPLE_BOOK_CREATED_TIME;
 import static seedu.address.model.util.SampleDataUtil.getSampleBorrowedStatus;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
+import static seedu.address.testutil.TypicalBooks.HUNGER_GAMES;
 import static seedu.address.testutil.TypicalBooks.SEMAPHORE;
 
 import java.util.ArrayList;
@@ -189,6 +190,18 @@ public class BookTest {
         // same isbn but different hyphen positions -> returns true
         Book editedHarryPotter = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HARRY_POTTER_2).build();
         assertTrue(HARRY_POTTER.equals(editedHarryPotter));
+    }
+
+    @Test
+    public void getConsistentReplacement_nullEditedBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> HARRY_POTTER.getConsistentReplacement(null));
+    }
+
+    @Test
+    public void getConsistentReplacement_differentIsbnNameAuthors_replacesAllThreeFields() {
+        Book expectedBook = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES)
+                .withName(VALID_BOOK_NAME_HUNGER_GAMES).withAuthors(VALID_AUTHOR_SUZANNE_COLLINS).build();
+        assertEquals(HARRY_POTTER.getConsistentReplacement(HUNGER_GAMES), expectedBook);
     }
 
 }

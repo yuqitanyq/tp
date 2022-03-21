@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showBookAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_BOOK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
 
 import org.junit.jupiter.api.Test;
@@ -74,6 +75,12 @@ public class DeleteBookCommandTest {
         DeleteBookCommand deleteCommand = new DeleteBookCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_deleteBorrowedBook_throwsCommandException() {
+        DeleteBookCommand deleteCommand = new DeleteBookCommand(INDEX_FOURTH_BOOK); // the fourth book is borrowed
+        assertCommandFailure(deleteCommand, model, DeleteBookCommand.MESSAGE_DELETE_BORROWED_BOOK);
     }
 
     @Test

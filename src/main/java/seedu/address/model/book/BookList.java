@@ -60,6 +60,30 @@ public class BookList implements Iterable<Book> {
     }
 
     /**
+     * Replaces the given book {@code target} with {@code editedBook}. If there are any other books with the same isbn
+     * as {@code target}, update the authors and names of all those books to ensure consistency about books.
+     * {@code target} must exist in LibTask.
+     *
+     * @return True if some other book other than target is modified for the sake of consistency.
+     */
+    public boolean setAndEditBook(Book target, Book editedBook) {
+        // setBook must be done first, otherwise tags will not be updated
+        setBook(target, editedBook);
+        boolean hasModifiedOtherBooks = false;
+        for (Book book : internalList) {
+            if (!book.hasSameIsbn(target) || book.equals(editedBook)) {
+                continue;
+            }
+            if (!book.hasSameIsbn(editedBook) || !book.hasSameName(editedBook) || !book.hasSameAuthors(editedBook)) {
+                Book updatedConsistentBook = book.getConsistentReplacement(editedBook);
+                setBook(book, updatedConsistentBook);
+                hasModifiedOtherBooks = true;
+            }
+        }
+        return hasModifiedOtherBooks;
+    }
+
+    /**
      * Removes the equivalent book from the list.
      * The book must exist in the list.
      */
@@ -98,12 +122,19 @@ public class BookList implements Iterable<Book> {
     }
 
     /**
-     * Returns true if there is some book in this book list with the same isbn, but different book name or
+     * Returns true if there is some other book in this book list with the same isbn, but different book name or
      * different set of authors as {@code bookToCheck}.
      */
     public boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck) {
-        return internalList.stream().anyMatch(book -> book.hasSameIsbn(bookToCheck) &&
-                (!book.hasSameAuthors(bookToCheck) || !book.hasSameName(bookToCheck)));
+        return internalList.stream().anyMatch(book -> book.hasSameIsbn(bookToCheck)
+                && (!book.hasSameAuthors(bookToCheck) || !book.hasSameName(bookToCheck)));
+    }
+
+    /**
+     * Returns true if there is some book in this book list with the same isbn as {@code bookToCheck}.
+     */
+    public boolean hasSameIsbn(Book bookToCheck) {
+        return internalList.stream().anyMatch(book -> book.hasSameIsbn(bookToCheck));
     }
 
     /**

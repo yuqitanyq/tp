@@ -109,6 +109,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasSameIsbn(Book bookToCheck) {
+        requireNonNull(bookToCheck);
+        return libTask.hasSameIsbn(bookToCheck);
+    }
+
+    @Override
     public String deleteAllRequests(Book ... books) {
         return libTask.deleteAllRequests(books);
     }
@@ -147,6 +153,12 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedBook);
 
         libTask.setBook(target, editedBook);
+    }
+
+    @Override
+    public boolean setAndEditBook(Book target, Book editedBook) {
+        requireAllNonNull(target, editedBook);
+        return libTask.setAndEditBook(target, editedBook);
     }
 
     @Override

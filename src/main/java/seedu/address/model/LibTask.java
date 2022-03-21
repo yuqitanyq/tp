@@ -98,6 +98,14 @@ public class LibTask implements ReadOnlyLibTask {
     }
 
     /**
+     * Returns true if there is some book in this LibTask's book list with the same isbn as {@code bookToCheck}.
+     */
+    public boolean hasSameIsbn(Book bookToCheck) {
+        requireNonNull(bookToCheck);
+        return books.hasSameIsbn(bookToCheck);
+    }
+
+    /**
      * Removes all book requests from all books in this LibTask's book list that has the same isbn as any book in
      * {@param booksToDelete}.
      *
@@ -141,6 +149,18 @@ public class LibTask implements ReadOnlyLibTask {
         requireNonNull(editedBook);
 
         books.setBook(target, editedBook);
+    }
+
+    /**
+     * Replaces the given book {@code target} with {@code editedBook}. If there are any other books with the same isbn
+     * as {@code target}, update the authors and names of all those books to ensure consistency about books.
+     * {@code target} must exist in LibTask.
+     *
+     * @return True if some other book other than target is modified for the sake of consistency.
+     */
+    public boolean setAndEditBook(Book target, Book editedBook) {
+        requireAllNonNull(target, editedBook);
+        return books.setAndEditBook(target, editedBook);
     }
 
     /**

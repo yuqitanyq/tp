@@ -8,8 +8,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOK_NAME_HUNGE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_HUNGER_GAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIFI;
+import static seedu.address.model.util.SampleDataUtil.getSampleBorrowedStatus;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
+import static seedu.address.testutil.TypicalBooks.HUNGER_GAMES;
 import static seedu.address.testutil.TypicalPatrons.ALICE;
 
 import java.util.ArrayList;
@@ -133,8 +135,33 @@ public class LibTaskTest {
     public void hasSameIsbnDiffAuthorsOrName_consistentBook_returnsFalse() {
         libTask.addBook(HARRY_POTTER);
         // book with same name but different isbn is consistent
-            Book consistentBook = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
+        Book consistentBook = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
         assertFalse(libTask.hasSameIsbnDiffAuthorsOrName(consistentBook));
+    }
+
+    @Test
+    public void setAndEditBook_nullTarget_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.setAndEditBook(null, HARRY_POTTER));
+    }
+
+    @Test
+    public void setAndEditBook_nullTEditedBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.setAndEditBook(HARRY_POTTER, null));
+    }
+
+    @Test
+    public void hasSameIsbn_noSameIsbn_returnsFalse() {
+        libTask.addBook(HARRY_POTTER);
+        assertFalse(libTask.hasSameIsbn(HUNGER_GAMES));
+    }
+
+    @Test
+    public void hasSameIsbn_hasSameIsbn_returnsTrue() {
+        libTask.addBook(HARRY_POTTER);
+        Book allFieldsDifferentExceptIsbn = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES)
+                .withTags().withAuthors().withRequesters(ALICE).withBookStatus(getSampleBorrowedStatus())
+                .withTimeAdded(12345).build();
+        assertTrue(libTask.hasSameIsbn(allFieldsDifferentExceptIsbn));
     }
 
     @Test

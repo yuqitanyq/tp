@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -32,8 +33,6 @@ public class AddBookCommand extends Command {
             + PREFIX_TAG + "Magic";
 
     public static final String MESSAGE_SUCCESS = "New book added: %1$s.\n";
-    public static final String MESSAGE_SAME_ISBN_INCONSISTENT = "There already exists a book with isbn %1$s, "
-            + "but has different authors or name!\n";
 
     private final Book toAdd;
 
@@ -49,7 +48,7 @@ public class AddBookCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (model.hasSameIsbnDiffAuthorsOrName(toAdd)) {
-            throw new CommandException(String.format(MESSAGE_SAME_ISBN_INCONSISTENT, toAdd.getIsbn()));
+            throw new CommandException(String.format(Messages.MESSAGE_SAME_ISBN_INCONSISTENT, toAdd.getIsbn()));
         }
         // Remove all requests for this isbn and notify all requesters who requested for a book with toAdd's isbn
         String notification = model.deleteAllRequests(toAdd);

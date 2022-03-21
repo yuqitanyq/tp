@@ -16,4 +16,6 @@ public class Messages {
     public static final String MESSAGE_NO_BOOKS_BORROWED = "Patron %1$s did not borrow any book!";
     public static final String MESSAGE_BOOK_ALREADY_BORROWED = "%1$s is already borrowed!";
     public static final String MESSAGE_RETURN_DATE_TOO_EARLY = "Return date must be later than today's date!";
+    public static final String MESSAGE_SAME_ISBN_INCONSISTENT = "There already exists a book with isbn %1$s, "
+            + "but has different authors or name!\n";
 }
