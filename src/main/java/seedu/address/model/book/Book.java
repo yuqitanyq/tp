@@ -8,8 +8,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.book.exceptions.BookNotFoundException;
 import seedu.address.model.patron.Patron;
 import seedu.address.model.tag.Tag;
 
@@ -71,6 +73,43 @@ public class Book {
         requireNonNull(editedBook);
         return new Book(editedBook.getBookName(), editedBook.getIsbn(), editedBook.getAuthors(), getTags(),
                 getTimeAdded(), getBookStatus(), getRequesters());
+    }
+
+    /**
+     * Returns a Book with the exact same fields as this book, but with the specified old requester replaced with
+     * the edited requester in its list of requesters.
+     *
+     * @param oldRequester The old requester in this book's requester list to be replaced. It must not be null.
+     * @param editedRequester The edited version of the old requester to replace the old requester in this book's
+     *                        requester list. It must not be null.
+     */
+    public Book editRequester(Patron oldRequester, Patron editedRequester) {
+        requireAllNonNull(oldRequester, editedRequester);
+        return updateRequester(oldRequester, Optional.of(editedRequester));
+    }
+
+    /**
+     * Returns a Book with the exact same fields as this book, but with the specified old requester deleted from its
+     * list of requesters.
+     *
+     * @param oldRequester The old requester in this book's requester list to be deleted. It must not be null.
+     */
+    public Book deleteRequester(Patron oldRequester) {
+        requireNonNull(oldRequester);
+        return updateRequester(oldRequester, Optional.empty());
+    }
+
+    /**
+     * Returns a Book with the exact same fields as this book, but with its borrower replaced with the edited borrower.
+     * This book must be borrowed before {@code editBorrower} is called.
+     *
+     * @param editedBorrower The updated version of borrower. It must not be null
+     */
+    public Book editBorrower(Patron editedBorrower) {
+        requireNonNull(editedBorrower);
+        assert isBorrowed();
+        BookStatus newStatus = bookStatus.editBorrower(editedBorrower);
+        return new Book(this, newStatus);
     }
 
     public BookName getBookName() {
@@ -249,5 +288,16 @@ public class Book {
             requesters.forEach(r -> builder.append(r.getName()));
         }
         return builder.toString();
+    }
+
+    private Book updateRequester(Patron oldRequester, Optional<Patron> editedRequester) {
+        requireAllNonNull(oldRequester, editedRequester);
+        assert isRequestedBy(oldRequester);
+        HashSet<Patron> newRequesters = new HashSet<>();
+        newRequesters.addAll(getRequesters());
+        newRequesters.remove(oldRequester);
+        editedRequester.ifPresent(newRequesters::add);
+        return new Book(getBookName(), getIsbn(), getAuthors(), getTags(), getTimeAdded(), getBookStatus(),
+                newRequesters);
     }
 }

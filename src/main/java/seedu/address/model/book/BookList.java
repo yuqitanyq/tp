@@ -85,6 +85,39 @@ public class BookList implements Iterable<Book> {
     }
 
     /**
+     * Replaces all books that are borrowed or requested by {@code target} with new book objects such that
+     * {@code target} is replaced by {@code editedPatron} in the new book's requesters list and borrower.
+     *
+     * @return A message string representing the notifications for the book updates.
+     */
+    public String updateBookAfterPatronEdit(Patron target, Patron editedPatron) {
+        requireAllNonNull(target, editedPatron);
+        return updatePatronBorrowedBooks(target, editedPatron) + updatePatronRequestedBooks(target, editedPatron);
+    }
+
+    /**
+     * Replaces all books that are borrowed or requested by {@code deletedPatron} with new book objects such that
+     * {@code deletedPatron} is removed from the new book's requesters list.
+     *
+     * @return A message string representing the notifications for the book updates.
+     */
+    public String updateBookAfterPatronDelete(Patron deletedPatron) {
+        requireNonNull(deletedPatron);
+        boolean hasModifiedSomeBooks = false;
+        for (Book book : internalList) {
+            if (!book.isRequestedBy(deletedPatron)) {
+                continue;
+            }
+            Book updatedBook = book.deleteRequester(deletedPatron);
+            setBook(book, updatedBook);
+            hasModifiedSomeBooks = true;
+        }
+        return hasModifiedSomeBooks
+                ? String.format("%s is also deleted from the requesters list of some books\n", deletedPatron.getName())
+                : "";
+    }
+
+    /**
      * Removes the equivalent book from the list.
      * The book must exist in the list.
      */
@@ -227,5 +260,37 @@ public class BookList implements Iterable<Book> {
             setBook(book, updatedBookEmptyRequest);
         }
         return builder.toString();
+    }
+
+    private String updatePatronBorrowedBooks(Patron target, Patron editedPatron) {
+        requireAllNonNull(target, editedPatron);
+        boolean hasModifiedSomeBooks = false;
+        for (Book book : internalList) {
+            if (!book.isBorrowedBy(target)) {
+                continue;
+            }
+            Book updatedBook = book.editBorrower(editedPatron);
+            setBook(book, updatedBook);
+            hasModifiedSomeBooks = true;
+        }
+        return hasModifiedSomeBooks
+                ? String.format("Borrower information of %s is also edited in some books\n", editedPatron.getName())
+                : "";
+    }
+
+    private String updatePatronRequestedBooks(Patron target, Patron editedPatron) {
+        requireAllNonNull(target, editedPatron);
+        boolean hasModifiedSomeBooks = false;
+        for (Book book : internalList) {
+            if (!book.isRequestedBy(target)) {
+                continue;
+            }
+            Book updatedBook = book.editRequester(target, editedPatron);
+            setBook(book, updatedBook);
+            hasModifiedSomeBooks = true;
+        }
+        return hasModifiedSomeBooks
+                ? String.format("Requester information of %s is also edited in some books\n", editedPatron.getName())
+                : "";
     }
 }

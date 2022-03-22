@@ -22,7 +22,8 @@ public class DeletePatronCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + PATRON_COMMAND_GROUP + DELETE_COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PATRON_SUCCESS = "Deleted Patron: %1$s";
+    public static final String MESSAGE_DELETE_PATRON_SUCCESS = "Deleted Patron: %1$s\n";
+    public static final String MESSAGE_HAS_BORROWED_BOOKS = "You cannot delete a patron that has unreturned books!";
 
     private final Index targetIndex;
 
@@ -40,8 +41,15 @@ public class DeletePatronCommand extends Command {
         }
 
         Patron deletePatron = lastShownList.get(targetIndex.getZeroBased());
+        if (model.isBorrowingSomeBook(deletePatron)) {
+            throw new CommandException(MESSAGE_HAS_BORROWED_BOOKS);
+        }
         model.deletePatron(deletePatron);
-        return new CommandResult(String.format(MESSAGE_DELETE_PATRON_SUCCESS, deletePatron));
+        String notification = model.updateBookAfterPatronDelete(deletePatron);
+        if (!notification.isEmpty()) {
+            model.updateFilteredBookList(Model.PREDICATE_SHOW_ALL_BOOKS);
+        }
+        return new CommandResult(String.format(MESSAGE_DELETE_PATRON_SUCCESS, deletePatron) + notification);
     }
 
     @Override

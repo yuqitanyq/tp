@@ -164,6 +164,28 @@ public class LibTask implements ReadOnlyLibTask {
     }
 
     /**
+     * Replaces all books that are borrowed or requested by {@code target} with new book objects such that
+     * {@code target} is replaced by {@code editedPatron} in the new book's requesters list and borrower.
+     *
+     * @return A message string representing the notifications for the book updates.
+     */
+    public String updateBookAfterPatronEdit(Patron target, Patron editedPatron) {
+        requireAllNonNull(target, editedPatron);
+        return books.updateBookAfterPatronEdit(target, editedPatron);
+    }
+
+    /**
+     * Replaces all books that are borrowed or requested by {@code deletedPatron} with new book objects such that
+     * {@code deletedPatron} is removed from the new book's requesters list.
+     *
+     * @return A message string representing the notifications for the book updates.
+     */
+    public String updateBookAfterPatronDelete(Patron deletedPatron) {
+        requireNonNull(deletedPatron);
+        return books.updateBookAfterPatronDelete(deletedPatron);
+    }
+
+    /**
      * Replaces all books borrowed by {@code borrower} with the same book, but with available status in LibTask.
      *
      * @return The list of available books that were returned by {@code borrower}

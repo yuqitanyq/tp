@@ -6,25 +6,34 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AUTHOR_SUZANNE_COLLINS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOK_NAME_HUNGER_GAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_HUNGER_GAMES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RETURN_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIFI;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.model.util.SampleDataUtil.getSampleBorrowedStatus;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBooks.AI;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.address.testutil.TypicalBooks.HUNGER_GAMES;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PATRON;
 import static seedu.address.testutil.TypicalPatrons.ALICE;
 import static seedu.address.testutil.TypicalPatrons.getTypicalPatrons;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.patron.EditPatronCommand;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.book.exceptions.BookNotFoundException;
 import seedu.address.model.patron.Patron;
 import seedu.address.testutil.BookBuilder;
+import seedu.address.testutil.EditPatronDescriptorBuilder;
+import seedu.address.testutil.PatronBuilder;
 
 public class BookListTest {
 
@@ -104,6 +113,73 @@ public class BookListTest {
         BookList expectedBookList = new BookList();
         expectedBookList.add(HUNGER_GAMES);
         assertEquals(expectedBookList, bookList);
+    }
+
+    @Test
+    public void updateBookAfterPatronEdit_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> bookList.updateBookAfterPatronEdit(null, ALICE));
+        assertThrows(NullPointerException.class, () -> bookList.updateBookAfterPatronEdit(ALICE,null));
+    }
+
+    @Test
+    public void updateBookAfterPatronEdit_editedPersonHasBorrowedBooks_booksUpdated() {
+        Patron patronToEdit = ALICE;
+        BookStatus dummyStatus = new BookStatus(BookStatusType.BORROWED, Optional.of(patronToEdit),
+                Optional.of("22-May-2022"), Optional.of("31-Dec-2022"));
+        Book borrowedBook = new BookBuilder(HARRY_POTTER).withBookStatus(dummyStatus).build();
+        bookList.add(borrowedBook);
+
+        Patron editedPatron = new PatronBuilder(patronToEdit).withName(VALID_NAME_BOB).build();
+        BookStatus updatedStatus = dummyStatus.editBorrower(editedPatron);
+        Book editedBorrowedBook = new BookBuilder(borrowedBook).withBookStatus(updatedStatus).build();
+
+        String expectedMessage = String.format("Borrower information of %s is also edited in some books\n",
+                editedPatron.getName());
+        BookList expectedBookList = new BookList();
+        expectedBookList.add(editedBorrowedBook);
+
+        assertEquals(bookList.updateBookAfterPatronEdit(patronToEdit, editedPatron),expectedMessage);
+        assertEquals(bookList, expectedBookList);
+    }
+
+    @Test
+    public void updateBookAfterPatronEdit_editedPersonHasRequestedBooks_booksUpdated() {
+        Patron patronToEdit = ALICE;
+        Book requestedBook = new BookBuilder(HARRY_POTTER).withRequesters(patronToEdit).build();
+        bookList.add(requestedBook);
+
+        Patron editedPatron = new PatronBuilder(patronToEdit).withName(VALID_NAME_BOB).build();
+        Book editedRequestedBook = new BookBuilder(requestedBook).withRequesters(editedPatron).build();
+
+        String expectedMessage = String.format("Requester information of %s is also edited in some books\n",
+                editedPatron.getName());
+        BookList expectedBookList = new BookList();
+        expectedBookList.add(editedRequestedBook);
+
+        assertEquals(bookList.updateBookAfterPatronEdit(patronToEdit, editedPatron),expectedMessage);
+        assertEquals(bookList, expectedBookList);
+    }
+
+    @Test
+    public void updateBookAfterPatronDelete_nullDeletedPatron_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> bookList.updateBookAfterPatronDelete(null));
+    }
+
+    @Test
+    public void updateBookAfterPatronDelete_deletedPatronHasRequestedBooks_booksUpdated() {
+        Patron patronToDelete = ALICE;
+        Book requestedBook = new BookBuilder(HARRY_POTTER).withRequesters(patronToDelete).build();
+        bookList.add(requestedBook);
+
+        Book editedRequestedBook = new BookBuilder(requestedBook).withRequesters().build();
+
+        String expectedMessage = String.format("%s is also deleted from the requesters list of some books\n",
+                patronToDelete.getName());
+        BookList expectedBookList = new BookList();
+        expectedBookList.add(editedRequestedBook);
+
+        assertEquals(bookList.updateBookAfterPatronDelete(patronToDelete),expectedMessage);
+        assertEquals(bookList, expectedBookList);
     }
 
     @Test

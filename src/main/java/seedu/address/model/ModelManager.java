@@ -163,6 +163,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String updateBookAfterPatronEdit(Patron target, Patron editedPatron) {
+        requireAllNonNull(target, editedPatron);
+        return libTask.updateBookAfterPatronEdit(target, editedPatron);
+    }
+
+    @Override
+    public String updateBookAfterPatronDelete(Patron deletedPatron) {
+        requireNonNull(deletedPatron);
+        return libTask.updateBookAfterPatronDelete(deletedPatron);
+    }
+
+    @Override
     public List<Book> returnAllBorrowedBooks(Patron borrower) {
         requireNonNull(borrower);
         return libTask.returnAllBorrowedBooks(borrower);

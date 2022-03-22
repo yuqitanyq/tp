@@ -1,5 +1,8 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
@@ -129,6 +132,22 @@ public interface Model {
      * @return True if some other book other than target is modified for the sake of consistency.
      */
     boolean setAndEditBook(Book target, Book editedBook);
+
+    /**
+     * Replaces all books that are borrowed or requested by {@code target} with new book objects such that
+     * {@code target} is replaced by {@code editedPatron} in the new book's requesters list and borrower.
+     *
+     * @return A message string representing the notifications for the book updates.
+     */
+    String updateBookAfterPatronEdit(Patron target, Patron editedPatron);
+
+    /**
+     * Replaces all books that are borrowed or requested by {@code deletedPatron} with new book objects such that
+     * {@code deletedPatron} is removed from the new book's requesters list.
+     *
+     * @return A message string representing the notifications for the book updates.
+     */
+    String updateBookAfterPatronDelete(Patron deletedPatron);
 
     /**
      * Replaces all books borrowed by {@code borrower} with the same book, but with available status in LibTask.

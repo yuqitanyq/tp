@@ -244,6 +244,16 @@ public class AddBookCommandTest {
         }
 
         @Override
+        public String updateBookAfterPatronEdit(Patron target, Patron editedPatron) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String updateBookAfterPatronDelete(Patron deletedPatron) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public List<Book> returnAllBorrowedBooks(Patron borrower) {
             throw new AssertionError("This method should not be called.");
         }

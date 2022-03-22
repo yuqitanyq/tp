@@ -150,6 +150,17 @@ public class LibTaskTest {
     }
 
     @Test
+    public void updateBookAfterPatronEdit_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.updateBookAfterPatronEdit(null, ALICE));
+        assertThrows(NullPointerException.class, () -> libTask.updateBookAfterPatronEdit(ALICE,null));
+    }
+
+    @Test
+    public void updateBookAfterPatronDelete_nullDeletedPatron_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.updateBookAfterPatronDelete(null));
+    }
+
+    @Test
     public void hasSameIsbn_noSameIsbn_returnsFalse() {
         libTask.addBook(HARRY_POTTER);
         assertFalse(libTask.hasSameIsbn(HUNGER_GAMES));

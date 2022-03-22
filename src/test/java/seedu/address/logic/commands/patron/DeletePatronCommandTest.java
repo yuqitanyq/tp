@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPatronAtIndex;
+import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATRON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PATRON;
 
@@ -15,7 +16,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.book.Book;
 import seedu.address.model.patron.Patron;
+import seedu.address.testutil.BookBuilder;
 import seedu.address.testutil.TypicalLibTask;
 
 /**
@@ -28,14 +31,39 @@ public class DeletePatronCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Patron patronToDelete = model.getFilteredPatronList().get(INDEX_FIRST_PATRON.getZeroBased());
-        DeletePatronCommand deleteCommand = new DeletePatronCommand(INDEX_FIRST_PATRON);
+        Patron patronToDelete = model.getFilteredPatronList().get(INDEX_SECOND_PATRON.getZeroBased());
+        DeletePatronCommand deleteCommand = new DeletePatronCommand(INDEX_SECOND_PATRON);
 
         String expectedMessage = String.format(DeletePatronCommand.MESSAGE_DELETE_PATRON_SUCCESS, patronToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getLibTask(), new UserPrefs());
         expectedModel.deletePatron(patronToDelete);
 
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_patronIsBorrowingSomeBooks_failure() {
+        // The first patron in sample data is borrowing some books
+        DeletePatronCommand deleteCommand = new DeletePatronCommand(INDEX_FIRST_PATRON);
+
+        assertCommandFailure(deleteCommand, model, DeletePatronCommand.MESSAGE_HAS_BORROWED_BOOKS);
+    }
+
+    @Test
+    public void execute_patronHasRequestedBooks_updateRequestedBooks() {
+        Patron patronToDelete = model.getFilteredPatronList().get(INDEX_SECOND_PATRON.getZeroBased());
+        Book requestedBook = new BookBuilder(HARRY_POTTER).withRequesters(patronToDelete).build();
+        Book notRequestedBook = new BookBuilder(requestedBook).withRequesters().build();
+        model.addBook(requestedBook);
+
+        DeletePatronCommand deleteCommand = new DeletePatronCommand(INDEX_SECOND_PATRON);
+        String expectedMessage = String.format(DeletePatronCommand.MESSAGE_DELETE_PATRON_SUCCESS, patronToDelete)
+                + String.format("%s is also deleted from the requesters list of some books\n", patronToDelete.getName());
+
+        ModelManager expectedModel = new ModelManager(model.getLibTask(), new UserPrefs());
+        expectedModel.deletePatron(patronToDelete);
+        expectedModel.setBook(requestedBook, notRequestedBook);
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
@@ -49,7 +77,7 @@ public class DeletePatronCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPatronAtIndex(model, INDEX_FIRST_PATRON);
+        showPatronAtIndex(model, INDEX_SECOND_PATRON);
 
         Patron patronToDelete = model.getFilteredPatronList().get(INDEX_FIRST_PATRON.getZeroBased());
         DeletePatronCommand deleteCommand = new DeletePatronCommand(INDEX_FIRST_PATRON);

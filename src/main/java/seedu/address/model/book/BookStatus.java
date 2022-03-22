@@ -1,5 +1,6 @@
 package seedu.address.model.book;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.book.BookStatusType.AVAILABLE;
@@ -41,8 +42,8 @@ public class BookStatus {
                       Optional<String> returnDate) {
         requireAllNonNull(bookStatusType, borrower, borrowDate, returnDate);
         checkArgument(isValidStatus(bookStatusType, borrower, borrowDate, returnDate), MESSAGE_CONSTRAINTS);
-        this.borrowDate = borrowDate.map(date -> parseToDate(date));
-        this.returnDate = returnDate.map(date -> parseToDate(date));
+        this.borrowDate = borrowDate.map(BookStatus::parseToDate);
+        this.returnDate = returnDate.map(BookStatus::parseToDate);
         this.bookStatusType = bookStatusType;
         this.borrower = borrower;
     }
@@ -55,6 +56,20 @@ public class BookStatus {
     public static BookStatus createAvailableBookStatus() {
         return new BookStatus(AVAILABLE, Optional.empty(), Optional.empty(),
                 Optional.empty());
+    }
+
+    /**
+     * Returns a BookStatus with the exact same fields as this book status, but with its borrower replaced with the
+     * edited borrower. This book status must be of borrowed type before {@code editBorrower} is called.
+     *
+     * @param editedBorrower The updated version of borrower. It must not be null
+     */
+    public BookStatus editBorrower(Patron editedBorrower) {
+        requireNonNull(editedBorrower);
+        assert isBorrowed();
+        Optional<String> borrowDateString = borrowDate.map(STATUS_DATE_FORMAT::format);
+        Optional<String> returnDateString = returnDate.map(STATUS_DATE_FORMAT::format);
+        return new BookStatus(bookStatusType, Optional.of(editedBorrower), borrowDateString, returnDateString);
     }
 
     public static String getCurrentDateString() {

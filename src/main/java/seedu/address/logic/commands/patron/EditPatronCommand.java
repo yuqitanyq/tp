@@ -47,7 +47,7 @@ public class EditPatronCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PATRON_SUCCESS = "Edited Patron: %1$s";
+    public static final String MESSAGE_EDIT_PATRON_SUCCESS = "Edited Patron: %1$s\n";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PATRON = "This patron already exists in LibTask.";
 
@@ -84,7 +84,12 @@ public class EditPatronCommand extends Command {
 
         model.setPatron(patronToEdit, editedPatron);
         model.updateFilteredPatronList(PREDICATE_SHOW_ALL_PATRONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PATRON_SUCCESS, editedPatron));
+
+        String notification = model.updateBookAfterPatronEdit(patronToEdit, editedPatron);
+        if (!notification.isEmpty()) {
+            model.updateFilteredBookList(Model.PREDICATE_SHOW_ALL_BOOKS);
+        }
+        return new CommandResult(String.format(MESSAGE_EDIT_PATRON_SUCCESS, editedPatron) + notification);
     }
 
     /**

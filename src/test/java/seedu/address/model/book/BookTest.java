@@ -16,6 +16,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.address.testutil.TypicalBooks.HUNGER_GAMES;
 import static seedu.address.testutil.TypicalBooks.SEMAPHORE;
+import static seedu.address.testutil.TypicalPatrons.ALICE;
+import static seedu.address.testutil.TypicalPatrons.BOB;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -175,6 +177,56 @@ public class BookTest {
         // book borrowed -> return false
         assertFalse(() -> new Book(VALID_BOOK_NAME, VALID_ISBN, VALID_AUTHORS, VALID_TAGS, SAMPLE_BOOK_CREATED_TIME,
                 VALID_BORROWED_STATUS, VALID_REQUESTERS).isAvailable());
+    }
+
+    @Test
+    public void editRequester_someFieldsNull_throwsNullPointerException() {
+        // old requester is null
+        assertThrows(NullPointerException.class, () -> HARRY_POTTER.editRequester(null, ALICE));
+
+        //edited requester is null
+        assertThrows(NullPointerException.class, () -> HARRY_POTTER.editRequester(ALICE, null));
+    }
+
+    @Test
+    public void editRequester_bookNotRequestedByOldRequester_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> HARRY_POTTER.editRequester(ALICE, BOB));
+    }
+
+    @Test
+    public void editRequester_bookRequestedByOldRequester_success() {
+        Book book = new BookBuilder(HARRY_POTTER).withRequesters(ALICE).build();
+        Book expectedBook = new BookBuilder(book).withRequesters(BOB).build();
+        assertEquals(book.editRequester(ALICE, BOB), expectedBook);
+    }
+
+    @Test
+    public void deleteRequester_nullOldRequester_throwsNullPointerException() {
+        // old requester is null
+        assertThrows(NullPointerException.class, () -> HARRY_POTTER.deleteRequester(null));
+    }
+
+    @Test
+    public void deleteRequester_bookNotRequestedByOldRequester_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> HARRY_POTTER.deleteRequester(ALICE));
+    }
+
+    @Test
+    public void deleteRequester_bookRequestedByOldRequester_success() {
+        Book book = new BookBuilder(HARRY_POTTER).withRequesters(ALICE).build();
+        assertEquals(book.deleteRequester(ALICE), HARRY_POTTER);
+    }
+
+    @Test
+    public void editBorrower_nullEditedBorrower_throwsNullPointerException() {
+        // edited borrower is null
+        assertThrows(NullPointerException.class, () -> HARRY_POTTER.editBorrower(null));
+    }
+
+    @Test
+    public void editBorrower_bookNotBorrowed_throwsAssertionError() {
+        // this book is not borrowed
+        assertThrows(AssertionError.class, () -> HARRY_POTTER.editBorrower(ALICE));
     }
 
     @Test

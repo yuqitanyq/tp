@@ -10,8 +10,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPatronAtIndex;
+import static seedu.address.model.util.SampleDataUtil.SAMPLE_AVAILABLE_STATUS;
+import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATRON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PATRON;
+
+import java.util.Date;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +28,11 @@ import seedu.address.model.LibTask;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.book.Book;
+import seedu.address.model.book.BookStatus;
+import seedu.address.model.book.BookStatusType;
 import seedu.address.model.patron.Patron;
+import seedu.address.testutil.BookBuilder;
 import seedu.address.testutil.EditPatronDescriptorBuilder;
 import seedu.address.testutil.PatronBuilder;
 import seedu.address.testutil.TypicalLibTask;
@@ -39,12 +48,12 @@ public class EditPatronCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Patron editedPatron = new PatronBuilder().build();
         EditPatronCommand.EditPatronDescriptor descriptor = new EditPatronDescriptorBuilder(editedPatron).build();
-        EditPatronCommand editCommand = new EditPatronCommand(INDEX_FIRST_PATRON, descriptor);
+        EditPatronCommand editCommand = new EditPatronCommand(INDEX_SECOND_PATRON, descriptor);
 
         String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPatron);
 
         Model expectedModel = new ModelManager(new LibTask(model.getLibTask()), new UserPrefs());
-        expectedModel.setPatron(model.getFilteredPatronList().get(0), editedPatron);
+        expectedModel.setPatron(model.getFilteredPatronList().get(1), editedPatron);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -72,9 +81,9 @@ public class EditPatronCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditPatronCommand editCommand = new EditPatronCommand(INDEX_FIRST_PATRON,
+        EditPatronCommand editCommand = new EditPatronCommand(INDEX_SECOND_PATRON,
                 new EditPatronCommand.EditPatronDescriptor());
-        Patron editedPatron = model.getFilteredPatronList().get(INDEX_FIRST_PATRON.getZeroBased());
+        Patron editedPatron = model.getFilteredPatronList().get(INDEX_SECOND_PATRON.getZeroBased());
 
         String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPatron);
 
@@ -85,7 +94,7 @@ public class EditPatronCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPatronAtIndex(model, INDEX_FIRST_PATRON);
+        showPatronAtIndex(model, INDEX_SECOND_PATRON);
 
         Patron patronInFilteredList = model.getFilteredPatronList().get(INDEX_FIRST_PATRON.getZeroBased());
         Patron editedPatron = new PatronBuilder(patronInFilteredList).withName(VALID_NAME_BOB).build();
@@ -97,6 +106,50 @@ public class EditPatronCommandTest {
         Model expectedModel = new ModelManager(new LibTask(model.getLibTask()), new UserPrefs());
         expectedModel.setPatron(model.getFilteredPatronList().get(0), editedPatron);
 
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_patronHasRequestedBooks_updateRequestedBooks() {
+        Patron patronToEdit = model.getFilteredPatronList().get(INDEX_SECOND_PATRON.getZeroBased());
+        Book requestedBook = new BookBuilder(HARRY_POTTER).withRequesters(patronToEdit).build();
+        model.addBook(requestedBook);
+
+        Patron editedPatron = new PatronBuilder(patronToEdit).withName(VALID_NAME_BOB).build();
+        Book editedRequestedBook = new BookBuilder(requestedBook).withRequesters(editedPatron).build();
+
+
+        EditPatronCommand editCommand = new EditPatronCommand(INDEX_SECOND_PATRON,
+                new EditPatronDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPatron)
+                + String.format("Requester information of %s is also edited in some books\n", editedPatron.getName());
+
+        ModelManager expectedModel = new ModelManager(model.getLibTask(), new UserPrefs());
+        expectedModel.setPatron(model.getFilteredPatronList().get(1), editedPatron);
+        expectedModel.setBook(requestedBook, editedRequestedBook);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_patronHasBorrowedBooks_updateBorrowedBooks() {
+        Patron patronToEdit = model.getFilteredPatronList().get(INDEX_SECOND_PATRON.getZeroBased());
+        BookStatus dummyStatus = new BookStatus(BookStatusType.BORROWED, Optional.of(patronToEdit),
+                Optional.of("22-May-2022"), Optional.of("31-Dec-2022"));
+        Book borrowedBook = new BookBuilder(HARRY_POTTER).withBookStatus(dummyStatus).build();
+        model.addBook(borrowedBook);
+
+        Patron editedPatron = new PatronBuilder(patronToEdit).withName(VALID_NAME_BOB).build();
+        BookStatus updatedStatus = dummyStatus.editBorrower(editedPatron);
+        Book editedBorrowedBook = new BookBuilder(borrowedBook).withBookStatus(updatedStatus).build();
+
+        EditPatronCommand editCommand = new EditPatronCommand(INDEX_SECOND_PATRON,
+                new EditPatronDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        String expectedMessage = String.format(EditPatronCommand.MESSAGE_EDIT_PATRON_SUCCESS, editedPatron)
+                + String.format("Borrower information of %s is also edited in some books\n", editedPatron.getName());
+
+        ModelManager expectedModel = new ModelManager(model.getLibTask(), new UserPrefs());
+        expectedModel.setPatron(model.getFilteredPatronList().get(1), editedPatron);
+        expectedModel.setBook(borrowedBook, editedBorrowedBook);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 

@@ -21,6 +21,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.BookNameContainsKeywordsPredicate;
 import seedu.address.model.patron.NameContainsKeywordsPredicate;
+import seedu.address.model.patron.Patron;
 import seedu.address.testutil.BookBuilder;
 import seedu.address.testutil.LibTaskBuilder;
 
@@ -128,6 +129,17 @@ public class ModelManagerTest {
         // book with same name but different isbn is consistent
         Book consistentBook = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
         assertFalse(modelManager.hasSameIsbnDiffAuthorsOrName(consistentBook));
+    }
+
+    @Test
+    public void updateBookAfterPatronEdit_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateBookAfterPatronEdit(null, ALICE));
+        assertThrows(NullPointerException.class, () -> modelManager.updateBookAfterPatronEdit(ALICE,null));
+    }
+
+    @Test
+    public void updateBookAfterPatronDelete_nullDeletedPatron_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateBookAfterPatronDelete(null));
     }
 
     @Test
