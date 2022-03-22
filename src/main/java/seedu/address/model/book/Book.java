@@ -100,6 +100,21 @@ public class Book {
     }
 
     /**
+     * Returns a Book with the exact same fields as this book, but with the specified requester added to its
+     * list of requesters.
+     *
+     * @param requester The requester to be added to this book's requester list. It must not be null.
+     */
+    public Book addRequester(Patron requester) {
+        requireNonNull(requester);
+        HashSet<Patron> newRequesters = new HashSet<>();
+        newRequesters.addAll(getRequesters());
+        newRequesters.add(requester);
+        return new Book(getBookName(), getIsbn(), getAuthors(), getTags(), getTimeAdded(), getBookStatus(),
+                newRequesters);
+    }
+
+    /**
      * Returns a Book with the exact same fields as this book, but with its borrower replaced with the edited borrower.
      * This book must be borrowed before {@code editBorrower} is called.
      *

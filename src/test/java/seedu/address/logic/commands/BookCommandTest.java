@@ -73,12 +73,22 @@ public class BookCommandTest {
     }
 
     @Test
-    public void execute_bookAlreadyBorrowed_throwsCommandException() {
+    public void execute_bookAlreadyBorrowedByOthers_throwsCommandException() {
         Index borrowedBookIndex = Index.fromZeroBased(BORROWED_BOOK_ONE_BASED_INDEX);
         Book alreadyBorrowedBook = model.getFilteredBookList().get(BORROWED_BOOK_ONE_BASED_INDEX);
-        BorrowCommand borrowCommand = new BorrowCommand(INDEX_FIRST_PATRON, borrowedBookIndex, VALID_RETURN_DATE);
+        BorrowCommand borrowCommand = new BorrowCommand(INDEX_SECOND_PATRON, borrowedBookIndex, VALID_RETURN_DATE);
         String expectedMessage = String.format(
                 Messages.MESSAGE_BOOK_ALREADY_BORROWED, alreadyBorrowedBook.getBookName());
+        assertCommandFailure(borrowCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_copyOfBookAlreadyBorrowedBySameBorrower_throwsCommandException() {
+        // The first patron has already borrowed the 3rd book
+        Index borrowedBookIndex = Index.fromZeroBased(BORROWED_BOOK_ONE_BASED_INDEX);
+        BorrowCommand borrowCommand = new BorrowCommand(INDEX_FIRST_PATRON, borrowedBookIndex, VALID_RETURN_DATE);
+        String expectedMessage = String.format(
+                BorrowCommand.MESSAGE_IS_BORROWING, model.getFilteredPatronList().get(0).getName());
         assertCommandFailure(borrowCommand, model, expectedMessage);
     }
 

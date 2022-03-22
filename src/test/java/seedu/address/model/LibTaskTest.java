@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.book.Book;
+import seedu.address.model.book.BookList;
 import seedu.address.model.patron.Patron;
 import seedu.address.model.patron.exceptions.DuplicatePatronException;
 import seedu.address.testutil.BookBuilder;
@@ -158,6 +159,72 @@ public class LibTaskTest {
     @Test
     public void updateBookAfterPatronDelete_nullDeletedPatron_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> libTask.updateBookAfterPatronDelete(null));
+    }
+
+    @Test
+    public void addRequest_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.addRequest(null, ALICE));
+        assertThrows(NullPointerException.class, () -> libTask.addRequest(HARRY_POTTER, null));
+    }
+
+    @Test
+    public void addRequest_hasBookWithDesiredIsbn_requestAdded() {
+        libTask.addBook(HARRY_POTTER);
+        Book bookWithRequest = new BookBuilder(HARRY_POTTER).withRequesters(ALICE).build();
+        LibTask expectedLibTask = new LibTask();
+        expectedLibTask.addBook(bookWithRequest);
+
+        Book bookWithSameIsbnOnly = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES).withTags()
+                .withAuthors(VALID_AUTHOR_SUZANNE_COLLINS).build();
+        libTask.addRequest(bookWithSameIsbnOnly, ALICE);
+        assertEquals(expectedLibTask, libTask);
+    }
+
+    @Test
+    public void addRequest_hasNoBookWithDesiredIsbn_requestNotAdded() {
+        libTask.addBook(HARRY_POTTER);
+        LibTask expectedLibTask = new LibTask();
+        expectedLibTask.addBook(HARRY_POTTER);
+
+        Book bookWithDifferentIsbn = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
+        libTask.addRequest(bookWithDifferentIsbn, ALICE);
+        assertEquals(expectedLibTask, libTask);
+    }
+
+    @Test
+    public void hasAvailableCopy_nullBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.hasAvailableCopy(null));
+    }
+
+    @Test
+    public void hasAvailableCopy_hasAvailableSameIsbnCopy_returnsTrue() {
+        // has available copy with same isbn -> returns true
+        Book bookWithSameIsbnOnly = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES).withTags()
+                .withAuthors(VALID_AUTHOR_SUZANNE_COLLINS).build();
+        libTask.addBook(bookWithSameIsbnOnly);
+        assertTrue(libTask.hasAvailableCopy(HARRY_POTTER));
+    }
+
+    @Test
+    public void hasAvailableCopy_hasAvailableDifferentIsbnCopy_returnsFalse() {
+        // has available copy with different isbn -> returns false
+        Book bookWithDifferentIsbn = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
+        libTask.addBook(bookWithDifferentIsbn);
+        assertFalse(libTask.hasAvailableCopy(HARRY_POTTER));
+    }
+
+    @Test
+    public void hasAvailableCopy_allCopiesBorrowed_returnsFalse() {
+        // has available copy with different isbn -> returns false
+        Book borrowedBookWithSameIsbn = new BookBuilder(HARRY_POTTER).withBookStatus(getSampleBorrowedStatus()).build();
+        libTask.addBook(borrowedBookWithSameIsbn);
+        assertFalse(libTask.hasAvailableCopy(HARRY_POTTER));
+    }
+
+    @Test
+    public void isBorrowing_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.isBorrowing(null, HARRY_POTTER));
+        assertThrows(NullPointerException.class, () -> libTask.isBorrowing(ALICE, null));
     }
 
     @Test

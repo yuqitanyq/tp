@@ -143,6 +143,23 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void addRequest_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addRequest(null, ALICE));
+        assertThrows(NullPointerException.class, () -> modelManager.addRequest(HARRY_POTTER, null));
+    }
+
+    @Test
+    public void hasAvailableCopy_nullBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasAvailableCopy(null));
+    }
+
+    @Test
+    public void isBorrowing_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.isBorrowing(null, HARRY_POTTER));
+        assertThrows(NullPointerException.class, () -> modelManager.isBorrowing(ALICE, null));
+    }
+
+    @Test
     public void getFilteredPatronList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPatronList().remove(0));
     }

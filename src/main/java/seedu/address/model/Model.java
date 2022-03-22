@@ -150,6 +150,23 @@ public interface Model {
     String updateBookAfterPatronDelete(Patron deletedPatron);
 
     /**
+     * Replaces all books that have the same isbn as {@code bookToRequest} with new book objects such that
+     * {@code requester} is added to the new book's requesters list.
+     */
+    void addRequest(Book bookToRequest, Patron requester);
+
+    /**
+     * Returns true if there is at least one available copy of book with the same isbn as {@code book}.
+     */
+    boolean hasAvailableCopy(Book book);
+
+    /**
+     * Returns true if the specified {@code patron} is currently borrowing a copy book with the same isbn as
+     * the specified {@code book}.
+     */
+    boolean isBorrowing(Patron patron, Book book);
+
+    /**
      * Replaces all books borrowed by {@code borrower} with the same book, but with available status in LibTask.
      *
      * @return The list of available books that were returned by {@code borrower}

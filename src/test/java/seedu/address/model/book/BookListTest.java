@@ -183,6 +183,72 @@ public class BookListTest {
     }
 
     @Test
+    public void addRequest_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> bookList.addRequest(null, ALICE));
+        assertThrows(NullPointerException.class, () -> bookList.addRequest(HARRY_POTTER, null));
+    }
+
+    @Test
+    public void addRequest_hasBookWithDesiredIsbn_requestAdded() {
+        bookList.add(HARRY_POTTER);
+        Book bookWithRequest = new BookBuilder(HARRY_POTTER).withRequesters(ALICE).build();
+        BookList expectedBookList = new BookList();
+        expectedBookList.add(bookWithRequest);
+
+        Book bookWithSameIsbnOnly = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES).withTags()
+                .withAuthors(VALID_AUTHOR_SUZANNE_COLLINS).build();
+        bookList.addRequest(bookWithSameIsbnOnly, ALICE);
+        assertEquals(expectedBookList, bookList);
+    }
+
+    @Test
+    public void addRequest_hasNoBookWithDesiredIsbn_requestNotAdded() {
+        bookList.add(HARRY_POTTER);
+        BookList expectedBookList = new BookList();
+        expectedBookList.add(HARRY_POTTER);
+
+        Book bookWithDifferentIsbn = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
+        bookList.addRequest(bookWithDifferentIsbn, ALICE);
+        assertEquals(expectedBookList, bookList);
+    }
+
+    @Test
+    public void hasAvailableCopy_nullBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> bookList.hasAvailableCopy(null));
+    }
+
+    @Test
+    public void hasAvailableCopy_hasAvailableSameIsbnCopy_returnsTrue() {
+        // has available copy with same isbn -> returns true
+        Book bookWithSameIsbnOnly = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES).withTags()
+                .withAuthors(VALID_AUTHOR_SUZANNE_COLLINS).build();
+        bookList.add(bookWithSameIsbnOnly);
+        assertTrue(bookList.hasAvailableCopy(HARRY_POTTER));
+    }
+
+    @Test
+    public void hasAvailableCopy_hasAvailableDifferentIsbnCopy_returnsFalse() {
+        // has available copy with different isbn -> returns false
+        Book bookWithDifferentIsbn = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
+        bookList.add(bookWithDifferentIsbn);
+        assertFalse(bookList.hasAvailableCopy(HARRY_POTTER));
+    }
+
+    @Test
+    public void hasAvailableCopy_allCopiesBorrowed_returnsFalse() {
+        // has available copy with different isbn -> returns false
+        Book borrowedBookWithSameIsbn = new BookBuilder(HARRY_POTTER).withBookStatus(getSampleBorrowedStatus()).build();
+        bookList.add(borrowedBookWithSameIsbn);
+        assertFalse(bookList.hasAvailableCopy(HARRY_POTTER));
+    }
+
+    @Test
+    public void isBorrowing_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> bookList.isBorrowing(null, HARRY_POTTER));
+        assertThrows(NullPointerException.class, () -> bookList.isBorrowing(ALICE, null));
+    }
+
+    @Test
     public void hasSameIsbn_noSameIsbn_returnsFalse() {
         bookList.add(HARRY_POTTER);
         assertFalse(bookList.hasSameIsbn(HUNGER_GAMES));

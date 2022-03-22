@@ -254,6 +254,21 @@ public class AddBookCommandTest {
         }
 
         @Override
+        public void addRequest(Book bookToRequest, Patron requester) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAvailableCopy(Book book) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isBorrowing(Patron patron, Book book) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public List<Book> returnAllBorrowedBooks(Patron borrower) {
             throw new AssertionError("This method should not be called.");
         }

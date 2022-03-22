@@ -118,6 +118,38 @@ public class BookList implements Iterable<Book> {
     }
 
     /**
+     * Replaces all books that have the same isbn as {@code bookToRequest} with new book objects such that
+     * {@code requester} is added to the new book's requesters list.
+     */
+    public void addRequest(Book bookToRequest, Patron requester) {
+        requireAllNonNull(bookToRequest, requester);
+        for (Book book : internalList) {
+            if (!book.hasSameIsbn(bookToRequest)) {
+                continue;
+            }
+            Book updatedBook = book.addRequester(requester);
+            setBook(book, updatedBook);
+        }
+    }
+
+    /**
+     * Returns true if there is at least one available copy of book with the same isbn as {@code book}
+     */
+    public boolean hasAvailableCopy(Book book) {
+        requireNonNull(book);
+        return internalList.stream().anyMatch(b -> b.hasSameIsbn(book) && b.isAvailable());
+    }
+
+    /**
+     * Returns true if the specified {@code patron} is currently borrowing a copy book with the same isbn as
+     * the specified {@code book}.
+     */
+    public boolean isBorrowing(Patron patron, Book book) {
+        requireAllNonNull(patron, book);
+        return internalList.stream().anyMatch(b -> b.hasSameIsbn(book) && b.isBorrowedBy(patron));
+    }
+
+    /**
      * Removes the equivalent book from the list.
      * The book must exist in the list.
      */
