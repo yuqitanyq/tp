@@ -36,6 +36,44 @@ public class CommandResultTest {
     }
 
     @Test
+    public void test_isShowHelp_returnsTrue() {
+        CommandResult commandResult = new CommandResult("Opened help window.", true, false, false);
+        assertTrue(commandResult.isShowHelp());
+    }
+
+    @Test
+    public void test_isShowHelp_returnFalse() {
+        CommandResult commandResult = new CommandResult("feedback", false, false, false);
+        assertFalse(commandResult.isShowHelp());
+    }
+
+    @Test
+    public void test_isExit_returnsTrue() {
+        CommandResult commandResult = new CommandResult("Exiting LibTask as requested ...", false,
+                true, false);
+        assertTrue(commandResult.isExit());
+    }
+
+    @Test
+    public void test_isExit_returnFalse() {
+        CommandResult commandResult = new CommandResult("feedback", false, false, false);
+        assertFalse(commandResult.isExit());
+    }
+
+    @Test
+    public void test_isPrevious_returnsTrue() {
+        CommandResult commandResult = new CommandResult("Here is your previous command.", false,
+                false, true);
+        assertTrue(commandResult.isPrevious());
+    }
+
+    @Test
+    public void test_isPrevious_returnFalse() {
+        CommandResult commandResult = new CommandResult("feedback", false, false, false);
+        assertFalse(commandResult.isPrevious());
+    }
+
+    @Test
     public void hashcode() {
         CommandResult commandResult = new CommandResult("feedback");
 
