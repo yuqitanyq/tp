@@ -135,6 +135,20 @@ public class BookStatus {
     }
 
     /**
+     * Returns true if a book is overdue.
+     */
+    public boolean isOverdue() {
+        if (!isBorrowed()) {
+            return false;
+        }
+        String returnDateString = getReturnDateString();
+        String currentDateString = STATUS_DATE_FORMAT.format(new Date());
+        Date currentDate = parseToDate(currentDateString);
+        Date returnDate = parseToDate(returnDateString);
+        return currentDate.after(returnDate);
+    }
+
+    /**
      * Returns a String representing the borrower's name of this book, or an empty string if this book is not borrowed.
      */
     public String getBorrowerName() {

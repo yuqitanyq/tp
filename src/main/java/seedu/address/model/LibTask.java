@@ -231,6 +231,14 @@ public class LibTask implements ReadOnlyLibTask {
     }
 
     /**
+     * Returns true if a specified patron has overdue books.
+     */
+    public boolean hasOverdueBooks(Patron patron) {
+        requireNonNull(patron);
+        return books.hasOverdueBooks(patron);
+    }
+
+    /**
      * Replaces the given book {@code bookToBorrow} with a new book with all same fields except status.
      * The new status will be {@link seedu.address.model.book.BookStatusType#BORROWED} status
      * with {@code borrower} as the borrower and {@returnDate} as the returnDate.

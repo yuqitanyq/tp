@@ -27,6 +27,8 @@ public class BookBuilder {
     public static final long DEFAULT_TIME_ADDED = SAMPLE_BOOK_CREATED_TIME;
     public static final BookStatus DEFAULT_BOOK_STATUS = SAMPLE_AVAILABLE_STATUS;
 
+    public static final BookStatus BORROWED_BOOK_STATUS = SampleDataUtil.getSampleBorrowedStatus();
+
     private BookName bookName;
     private Isbn isbn;
     private List<Author> authors;
@@ -59,6 +61,14 @@ public class BookBuilder {
         timeAdded = bookToCopy.getTimeAdded();
         bookStatus = bookToCopy.getBookStatus();
         requesters = bookToCopy.getRequesters();
+    }
+
+    /**
+     * Creates a {@code BookBuilder} with borrowed status and default details.
+     */
+    public static BookBuilder bookBuilderWithBorrowedStatus() {
+        BookBuilder bookBuilder = new BookBuilder();
+        return bookBuilder.withBookStatus(BORROWED_BOOK_STATUS);
     }
 
     /**

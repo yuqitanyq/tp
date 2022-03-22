@@ -176,6 +176,11 @@ public interface Model {
     boolean isBorrowingSomeBook(Patron borrower);
 
     /**
+     * Returns true if a specified patron has overdue books.
+     */
+    boolean hasOverdueBooks(Patron patron);
+
+    /**
      * Replaces the given book {@code bookToBorrow} with a new book with all same fields except status.
      * The new status will be {@link seedu.address.model.book.BookStatusType#BORROWED} status
      * with {@code borrower} as the borrower and {@returnDate} as the returnDate.
@@ -202,4 +207,5 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredBookList(Predicate<Book> predicate);
+
 }

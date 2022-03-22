@@ -173,7 +173,7 @@ public class BookTest {
     }
 
     @Test
-    public void isBooKAvailable_bookBorrowed_returnsFalse() {
+    public void isBookAvailable_bookBorrowed_returnsFalse() {
         // book borrowed -> return false
         assertFalse(() -> new Book(VALID_BOOK_NAME, VALID_ISBN, VALID_AUTHORS, VALID_TAGS, SAMPLE_BOOK_CREATED_TIME,
                 VALID_BORROWED_STATUS, VALID_REQUESTERS).isAvailable());

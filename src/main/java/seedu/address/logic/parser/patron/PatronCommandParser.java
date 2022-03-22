@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.patron.ListPatronCommand;
+import seedu.address.logic.commands.patron.OverduePatronCommand;
 import seedu.address.logic.parser.LibTaskParser;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -54,6 +55,9 @@ public class PatronCommandParser implements Parser<Command> {
 
         case Command.FIND_COMMAND_WORD:
             return new FindPatronCommandParser().parse(arguments);
+
+        case Command.OVERDUE_COMMAND_WORD:
+            return new OverduePatronCommand();
 
         case Command.LIST_COMMAND_WORD:
             return new ListPatronCommand();
