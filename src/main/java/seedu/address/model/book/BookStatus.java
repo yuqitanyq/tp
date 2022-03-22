@@ -135,7 +135,7 @@ public class BookStatus {
     }
 
     /**
-     * Returns true if a book is overdue.
+     * Returns true if this book is overdue.
      */
     public boolean isOverdue() {
         if (!isBorrowed()) {

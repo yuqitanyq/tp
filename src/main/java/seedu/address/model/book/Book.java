@@ -233,6 +233,13 @@ public class Book {
     }
 
     /**
+     * Returns true if this book is borrowed and is overdue.
+     */
+    public boolean isOverdue() {
+        return bookStatus.isOverdue();
+    }
+
+    /**
      * Returns true if both books have the same isbn.
      * Isbn are considered to be equal based on {@link Isbn#equals(Object)}
      */
