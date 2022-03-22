@@ -25,7 +25,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.book.Book;
-import seedu.address.model.book.BookList;
 import seedu.address.model.patron.Patron;
 import seedu.address.model.patron.exceptions.DuplicatePatronException;
 import seedu.address.testutil.BookBuilder;
@@ -153,7 +152,7 @@ public class LibTaskTest {
     @Test
     public void updateBookAfterPatronEdit_someFieldsNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> libTask.updateBookAfterPatronEdit(null, ALICE));
-        assertThrows(NullPointerException.class, () -> libTask.updateBookAfterPatronEdit(ALICE,null));
+        assertThrows(NullPointerException.class, () -> libTask.updateBookAfterPatronEdit(ALICE, null));
     }
 
     @Test

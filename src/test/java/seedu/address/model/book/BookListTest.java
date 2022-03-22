@@ -9,30 +9,23 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_HUNGER_GAM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RETURN_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIFI;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.model.util.SampleDataUtil.getSampleBorrowedStatus;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBooks.AI;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.address.testutil.TypicalBooks.HUNGER_GAMES;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PATRON;
 import static seedu.address.testutil.TypicalPatrons.ALICE;
 import static seedu.address.testutil.TypicalPatrons.getTypicalPatrons;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.patron.EditPatronCommand;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.book.exceptions.BookNotFoundException;
 import seedu.address.model.patron.Patron;
 import seedu.address.testutil.BookBuilder;
-import seedu.address.testutil.EditPatronDescriptorBuilder;
 import seedu.address.testutil.PatronBuilder;
 
 public class BookListTest {
@@ -118,7 +111,7 @@ public class BookListTest {
     @Test
     public void updateBookAfterPatronEdit_someFieldsNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> bookList.updateBookAfterPatronEdit(null, ALICE));
-        assertThrows(NullPointerException.class, () -> bookList.updateBookAfterPatronEdit(ALICE,null));
+        assertThrows(NullPointerException.class, () -> bookList.updateBookAfterPatronEdit(ALICE, null));
     }
 
     @Test
@@ -138,7 +131,7 @@ public class BookListTest {
         BookList expectedBookList = new BookList();
         expectedBookList.add(editedBorrowedBook);
 
-        assertEquals(bookList.updateBookAfterPatronEdit(patronToEdit, editedPatron),expectedMessage);
+        assertEquals(bookList.updateBookAfterPatronEdit(patronToEdit, editedPatron), expectedMessage);
         assertEquals(bookList, expectedBookList);
     }
 
@@ -156,7 +149,7 @@ public class BookListTest {
         BookList expectedBookList = new BookList();
         expectedBookList.add(editedRequestedBook);
 
-        assertEquals(bookList.updateBookAfterPatronEdit(patronToEdit, editedPatron),expectedMessage);
+        assertEquals(bookList.updateBookAfterPatronEdit(patronToEdit, editedPatron), expectedMessage);
         assertEquals(bookList, expectedBookList);
     }
 
@@ -178,7 +171,7 @@ public class BookListTest {
         BookList expectedBookList = new BookList();
         expectedBookList.add(editedRequestedBook);
 
-        assertEquals(bookList.updateBookAfterPatronDelete(patronToDelete),expectedMessage);
+        assertEquals(bookList.updateBookAfterPatronDelete(patronToDelete), expectedMessage);
         assertEquals(bookList, expectedBookList);
     }
 

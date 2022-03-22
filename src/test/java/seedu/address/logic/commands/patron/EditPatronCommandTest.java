@@ -10,12 +10,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPatronAtIndex;
-import static seedu.address.model.util.SampleDataUtil.SAMPLE_AVAILABLE_STATUS;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATRON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PATRON;
 
-import java.util.Date;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;

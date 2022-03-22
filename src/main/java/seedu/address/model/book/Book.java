@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.model.book.exceptions.BookNotFoundException;
 import seedu.address.model.patron.Patron;
 import seedu.address.model.tag.Tag;
 

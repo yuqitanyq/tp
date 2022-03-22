@@ -59,7 +59,8 @@ public class DeletePatronCommandTest {
 
         DeletePatronCommand deleteCommand = new DeletePatronCommand(INDEX_SECOND_PATRON);
         String expectedMessage = String.format(DeletePatronCommand.MESSAGE_DELETE_PATRON_SUCCESS, patronToDelete)
-                + String.format("%s is also deleted from the requesters list of some books\n", patronToDelete.getName());
+                + String.format("%s is also deleted from the requesters list of some books\n",
+                patronToDelete.getName());
 
         ModelManager expectedModel = new ModelManager(model.getLibTask(), new UserPrefs());
         expectedModel.deletePatron(patronToDelete);

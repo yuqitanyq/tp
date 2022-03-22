@@ -82,7 +82,7 @@ public class RequestBookCommandTest {
     public void execute_requesterAlreadyRequestedForSameBook_throwsCommandException() {
 
         Book bookToRequest = model.getFilteredBookList().get(INDEX_FOURTH_BOOK.getZeroBased());
-        Patron requester= model.getFilteredPatronList().get(INDEX_SECOND_PATRON.getZeroBased());
+        Patron requester = model.getFilteredPatronList().get(INDEX_SECOND_PATRON.getZeroBased());
         Book alreadyRequestedBook = new BookBuilder(bookToRequest).withRequesters(requester).build();
 
         // Modify the model so that the first book is already requested by the second patron
