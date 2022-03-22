@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -142,6 +143,21 @@ public class AddPatronCommandTest {
         }
 
         @Override
+        public boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSameIsbn(Book bookToCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String deleteAllRequests(Book ... books) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePatron(Patron target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -162,7 +178,37 @@ public class AddPatronCommandTest {
         }
 
         @Override
-        public void returnAllBorrowedBooks(Patron borrower) {
+        public boolean setAndEditBook(Book target, Book editedBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String updateBookAfterPatronEdit(Patron target, Patron editedPatron) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String updateBookAfterPatronDelete(Patron deletedPatron) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addRequest(Book bookToRequest, Patron requester) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAvailableCopy(Book book) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isBorrowing(Patron patron, Book book) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Book> returnAllBorrowedBooks(Patron borrower) {
             throw new AssertionError("This method should not be called.");
         }
 

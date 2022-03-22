@@ -7,7 +7,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 
 /**
- * Lists all patrons in LibTask to the user.
+ * Lists all patrons in LibTask that has overdue books to the user.
  */
 public class OverduePatronCommand extends Command {
 
@@ -17,7 +17,7 @@ public class OverduePatronCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPatronList(x -> model.hasOverdueBooks(x));
+        model.updateFilteredPatronList(model::hasOverdueBooks);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

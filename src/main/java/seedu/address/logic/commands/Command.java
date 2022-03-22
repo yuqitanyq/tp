@@ -24,6 +24,7 @@ public abstract class Command {
     public static final String RETURN_COMMAND_WORD = "return";
     public static final String BORROW_COMMAND_WORD = "borrow";
     public static final String RELATED_COMMAND_WORD = "related";
+    public static final String REQUEST_COMMAND_WORD = "request";
 
     /**
      * Executes the command and returns the result message.

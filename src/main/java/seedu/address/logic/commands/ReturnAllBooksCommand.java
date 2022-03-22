@@ -9,6 +9,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.book.Book;
 import seedu.address.model.patron.Patron;
 
 /**
@@ -16,7 +17,7 @@ import seedu.address.model.patron.Patron;
  */
 public class ReturnAllBooksCommand extends ReturnCommand {
 
-    public static final String MESSAGE_SUCCESS = "Returned all books borrowed by: %1$s";
+    public static final String MESSAGE_SUCCESS = "Returned all books borrowed by: %1$s\n";
 
     private final Index patronIndex;
 
@@ -39,10 +40,11 @@ public class ReturnAllBooksCommand extends ReturnCommand {
         if (!model.isBorrowingSomeBook(borrower)) {
             throw new CommandException(String.format(Messages.MESSAGE_NO_BOOKS_BORROWED, borrower.getName()));
         }
-        model.returnAllBorrowedBooks(borrower);
+        List<Book> returnedBooks = model.returnAllBorrowedBooks(borrower);
+        String notification = model.deleteAllRequests(returnedBooks.toArray(Book[]::new));
 
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, borrower.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, borrower.getName()) + notification);
     }
 
     @Override

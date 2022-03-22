@@ -15,6 +15,7 @@ import seedu.address.model.book.Book;
 import seedu.address.model.book.BookName;
 import seedu.address.model.book.BookStatus;
 import seedu.address.model.book.Isbn;
+import seedu.address.model.patron.Patron;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,6 +29,7 @@ class JsonAdaptedBook {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String timeAdded;
     private final JsonAdaptedBookStatus bookStatus;
+    private final List<JsonAdaptedPatron> requesters = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedBook} with the given book details.
@@ -37,7 +39,8 @@ class JsonAdaptedBook {
         @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
         @JsonProperty("authors") List<JsonAdaptedAuthor> authors,
         @JsonProperty("timeAdded") String timeAdded,
-        @JsonProperty("bookStatus") JsonAdaptedBookStatus bookStatus) {
+        @JsonProperty("bookStatus") JsonAdaptedBookStatus bookStatus,
+        @JsonProperty("requesters") List<JsonAdaptedPatron> requesters) {
         this.bookName = bookName;
         this.isbn = isbn;
         if (tagged != null) {
@@ -48,6 +51,9 @@ class JsonAdaptedBook {
         }
         this.bookStatus = bookStatus;
         this.timeAdded = timeAdded;
+        if (requesters != null) {
+            this.requesters.addAll(requesters);
+        }
     }
 
     /**
@@ -64,6 +70,9 @@ class JsonAdaptedBook {
                 .collect(Collectors.toList()));
         timeAdded = Long.toString(source.getTimeAdded());
         bookStatus = new JsonAdaptedBookStatus(source.getBookStatus());
+        requesters.addAll(source.getRequesters().stream()
+                .map(JsonAdaptedPatron::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -75,6 +84,10 @@ class JsonAdaptedBook {
         final List<Tag> bookTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             bookTags.add(tag.toModelType());
+        }
+        final List<Patron> bookRequesters = new ArrayList<>();
+        for (JsonAdaptedPatron requester : requesters) {
+            bookRequesters.add(requester.toModelType());
         }
 
         final List<Author> bookAuthors = new ArrayList<>();
@@ -100,6 +113,7 @@ class JsonAdaptedBook {
         final Isbn modelIsbn = new Isbn(isbn);
 
         final Set<Tag> modelTags = new HashSet<>(bookTags);
+        final Set<Patron> modelRequesters = new HashSet<>(bookRequesters);
 
         if (bookStatus == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -112,7 +126,8 @@ class JsonAdaptedBook {
         }
         try {
             final long timeBookAdded = Long.parseLong(timeAdded);
-            return new Book(modelName, modelIsbn, bookAuthors, modelTags, timeBookAdded, modelBookStatus);
+            return new Book(modelName, modelIsbn, bookAuthors, modelTags, timeBookAdded, modelBookStatus,
+                    modelRequesters);
         } catch (NumberFormatException e) {
             throw new IllegalValueException(Book.TIME_ADDED_MESSAGE_CONSTRAINTS);
         }
