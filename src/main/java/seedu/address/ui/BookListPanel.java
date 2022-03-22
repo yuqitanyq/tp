@@ -34,14 +34,14 @@ public class BookListPanel extends UiPart<Region> {
      */
     class BookListViewCell extends ListCell<Book> {
         @Override
-        protected void updateItem(Book bookStub, boolean empty) {
-            super.updateItem(bookStub, empty);
+        protected void updateItem(Book book, boolean empty) {
+            super.updateItem(book, empty);
 
-            if (empty || bookStub == null) {
+            if (empty || book == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new BookCard(bookStub, getIndex() + 1).getRoot());
+                setGraphic(new BookCard(book, getIndex() + 1).getRoot());
             }
         }
     }
