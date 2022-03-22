@@ -103,6 +103,14 @@ public class BookList implements Iterable<Book> {
     }
 
     /**
+     * Returns true if a specified patron has overdue books.
+     */
+    public boolean hasOverdueBooks(Patron patron) {
+        requireNonNull(patron);
+        return internalList.stream().anyMatch(book -> book.isBorrowedBy(patron) && book.getBookStatus().isOverdue());
+    }
+
+    /**
      * Replaces the given book {@code bookToBorrow} with a new book with all same fields except status.
      * The new status will be {@link seedu.address.model.book.BookStatusType#BORROWED} status
      * with {@code borrower} as the borrower and {@returnDate} as the returnDate.
@@ -141,4 +149,5 @@ public class BookList implements Iterable<Book> {
     public int hashCode() {
         return internalList.hashCode();
     }
+
 }

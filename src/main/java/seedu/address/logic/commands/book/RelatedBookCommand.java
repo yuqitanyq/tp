@@ -21,7 +21,7 @@ public class RelatedBookCommand extends Command {
     public static final String MESSAGE_USAGE = BOOK_COMMAND_GROUP + " " + RELATED_COMMAND_WORD
             + ": Lists all the books related to the patron at a specified index "
             + "by the index number used in the displayed patron list. \n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + BOOK_COMMAND_GROUP + " " + RELATED_COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_RELATED_BOOK_SUCCESS = "Listed all books related to patron %1$s";

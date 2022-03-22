@@ -151,6 +151,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasOverdueBooks(Patron patron) {
+        requireNonNull(patron);
+        return libTask.hasOverdueBooks(patron);
+    }
+
+    @Override
     public void borrowBook(Patron borrower, Book bookToBorrow, String returnDate) {
         requireAllNonNull(borrower, bookToBorrow, returnDate);
 
