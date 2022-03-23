@@ -52,6 +52,8 @@ public class BookCard extends UiPart<Region> {
     @FXML
     private Label bookReturnDate;
     @FXML
+    private FlowPane bookRequestTag;
+    @FXML
     private Label requestedBy;
 
     /**
@@ -136,15 +138,15 @@ public class BookCard extends UiPart<Region> {
     public void setRequestsDetails(Book book) {
         // Requester check needed since it is optional
         if (!book.getRequesters().isEmpty()) {
+            Collections.addAll(bookRequestTag.getChildren(), new Label("Requested By"));
             requestedBy.setVisible(true);
             requestedBy.setManaged(true);
-
             String requestersString = book.getRequesters().stream()
                     .sorted(Comparator.comparing(requester -> requester.getName().fullName))
                     .map(requester -> requester.getName().fullName)
                     .collect(Collectors.joining(", "));
 
-            requestedBy.setText("Requested by: " + requestersString);
+            requestedBy.setText("Requesters: " + requestersString);
             return;
         }
         requestedBy.setVisible(false);

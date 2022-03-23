@@ -37,6 +37,7 @@
       <Label fx:id="borrower" styleClass="cell_small_label" visible="false" managed="false" wrapText="true" />
       <Label fx:id="bookReturnDate" styleClass="cell_small_label" visible="false" managed="false" wrapText="true" />
       <!-- Ensures that the requesters label will not be rendered if the book is not requested by anyone-->
+      <FlowPane fx:id="bookRequestTag" />
       <Label fx:id="requestedBy" styleClass="cell_small_label" visible="false" managed="false" wrapText="true" />
     </VBox>
   </GridPane>
