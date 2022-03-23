@@ -87,7 +87,9 @@ Adds a patron to the library database.
 
 Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: 
+
+**Tip:**
 A patron can have any number of tags (including 0)
 </div>
 
@@ -157,7 +159,9 @@ Adds a book to LibTask database.
 
 Format: `book add n/NAME i/ISBN [a/AUTHOR …] [t/CATEGORY_TAG …] `
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+
+**Tip:**
 * ISBN must be 10 or 13 digits in length
 </div>
 
@@ -170,6 +174,20 @@ Examples:
 List all books in LibTask database.
 
 Format: `book list`
+
+### Finding books : `find`
+
+List books that satisfy the predicates given
+
+Format: `book find [n/Name] [t/Tag] [a/Author]`
+
+* Finds the books that match the predicate supplied.
+* Only one of the optional fields can be provided.
+
+Examples:
+* `book find n/Harry` Returns all books whose title contains the word Harry.
+* `book find t/Adventure` Returns all books which have a tag Adventure.
+
 
 ### Editing a book : `edit`
 
@@ -268,6 +286,15 @@ Exits the program.
 
 Format: `exit`
 
+### Retrieving previous command: `u`
+
+Retrieves the previous command back to the command box
+
+Format: `u`
+
+* Lets you look back at the previous commands successfully entered.
+* Only allows each command to be viewed once.
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -276,7 +303,8 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: 
+**Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
@@ -315,6 +343,7 @@ _Details coming soon ..._
 | **Borrow a book**                      | `borrow INDEX1 INDEX2`                                              |
 | **Return a book**                      | `return PREFIX/INDEX`                                               |
 | **Request a book**                     | `request INDEX1 INDEX2`                                             |
+| **Find a book**                        | `book find [n/Name] [t/Tag] [a/Author]`                             |
 | **List all books related to a patron** | `book related INDEX`                                                |
 
 ### Category: General Commands
@@ -324,4 +353,5 @@ _Details coming soon ..._
 | **Clear all entries**                      | `clear`                                                                    |
 | **Exit the program**                       | `exit`                                                                     |
 | **Show message to help page**              | `help`                                                                     |
+| **Show previous commands**                 | `u`                                                                        |
 | **Navigating the different patrons/books** | **Pressing the :arrow_up: and :arrow_down: arrows on keyboard :keyboard:** |
