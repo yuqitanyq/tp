@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -46,6 +48,7 @@ public class PatronCard extends UiPart<Region> {
      */
     public PatronCard(Patron patron, int displayedIndex) {
         super(FXML);
+        requireNonNull(patron);
         this.patron = patron;
         patronDisplayCardId.setText(displayedIndex + ". ");
         name.setText(patron.getName().fullName);

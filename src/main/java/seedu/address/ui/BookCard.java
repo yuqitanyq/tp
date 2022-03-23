@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -49,12 +51,15 @@ public class BookCard extends UiPart<Region> {
     private Label borrower;
     @FXML
     private Label bookReturnDate;
+    @FXML
+    private Label requestedBy;
 
     /**
      * Creates a {@code Book} with the given {@code Book} and index to display.
      */
     public BookCard(Book book, int displayedIndex) {
         super(FXML);
+        requireNonNull(book);
         this.book = book;
         bookCardDisplayId.setText(displayedIndex + ". ");
         name.setText(book.getBookName().toString());
@@ -62,6 +67,7 @@ public class BookCard extends UiPart<Region> {
         setAuthor(book);
         isbn.setText("ISBN: " + book.getIsbn());
         setBookStatusDetails(book);
+        setRequestsDetails(book);
     }
 
     /**
@@ -74,7 +80,6 @@ public class BookCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> bookCategoryTags.getChildren().add(new Label(tag.tagName)));
     }
-
 
     /**
      * Sorts and sets the FXML author label with the author data from the supplied book object.
@@ -91,7 +96,10 @@ public class BookCard extends UiPart<Region> {
                     .map(Author::toString)
                     .collect(Collectors.joining(", "));
             authors.setText("Author: " + authorsString);
+            return;
         }
+        authors.setVisible(false);
+        authors.setManaged(false);
     }
 
     /**
@@ -118,6 +126,30 @@ public class BookCard extends UiPart<Region> {
             borrower.setText("Borrower: " + book.getBorrowerName());
             bookReturnDate.setText("Return date: " + book.getReturnDateString());
         }
+    }
+
+    /**
+     * Sorts and sets the FXML book requesters with the requester data from the supplied book object.
+     *
+     * @param book {@code Book} which the book object to obtain the requesters from.
+     */
+    public void setRequestsDetails(Book book) {
+        // Requester check needed since it is optional
+        if (!book.getRequesters().isEmpty()) {
+            requestedBy.setVisible(true);
+            requestedBy.setManaged(true);
+
+            String requestersString = book.getRequesters().stream()
+                    .sorted(Comparator.comparing(requester -> requester.getName().fullName))
+                    .map(requester -> requester.getName().fullName)
+                    .collect(Collectors.joining(", "));
+
+            requestedBy.setText("Requested by: " + requestersString);
+            return;
+        }
+        requestedBy.setVisible(false);
+        requestedBy.setManaged(false);
+
     }
 
     @Override
