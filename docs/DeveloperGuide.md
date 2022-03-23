@@ -645,10 +645,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `book delete 1`<br>
       Expected: First book is deleted from the list. Details of the deleted book shown in the status message. Timestamp in the status bar is updated.
-   
+
    1. Test case: `book delete 0`<br>
       Expected: No book is deleted. Error details shown in the status message. Status bar remains the same.
-   
+
    1. Other incorrect delete commands to try: `book delete`, `book delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
