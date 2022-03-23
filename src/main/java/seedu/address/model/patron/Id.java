@@ -47,7 +47,7 @@ public class Id {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Id // instanceof handles nulls
-                && value.equals(((Id) other).value)); // state check
+                && value.toLowerCase().equals(((Id) other).value.toLowerCase())); // state check
     }
 
     @Override

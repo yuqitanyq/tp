@@ -33,7 +33,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditPatronCommand extends Command {
 
-    public static final String MESSAGE_USAGE = PATRON_COMMAND_GROUP + EDIT_COMMAND_WORD
+    public static final String MESSAGE_USAGE = PATRON_COMMAND_GROUP + " " + EDIT_COMMAND_WORD
             + ": Edits the details of the patron identified "
             + "by the index number used in the displayed patron list. "
             + "Existing values will be overwritten by the input values.\n"
@@ -43,9 +43,9 @@ public class EditPatronCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ID + "ID] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + PATRON_COMMAND_GROUP + EDIT_COMMAND_WORD + " 1 "
+            + "Example: " + PATRON_COMMAND_GROUP + " " + EDIT_COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com ";
 
     public static final String MESSAGE_EDIT_PATRON_SUCCESS = "Edited Patron: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
