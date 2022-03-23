@@ -245,6 +245,17 @@ Format: `request INDEX1 INDEX2`
 Examples:
 * `patron list` and `book list` followed by `request 1 2` keeps a record that the 1st patron would like to be notified when the 2nd book is available.
 
+### Listing all books related to a patron : `related`
+
+Display all books related to the patron at the specified index.
+
+Format: `book related INDEX`
+
+* `INDEX` **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of patrons in the displayed list.
+
+Examples:
+* `book related 1` will display all the books borrowed and requested by the 1st patron in the displayed patron list.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -295,15 +306,16 @@ _Details coming soon ..._
 
 ### Category: Book Commands
 
-| Function           | Format Of Command                                                   |
-|--------------------|---------------------------------------------------------------------|
-| **Add a book**     | `book add n/NAME i/ISBN [a/AUTHOR …] [t/CATEGORY_TAG …]`            |
-| **List all books** | `book list`                                                         |
-| **Edit a book**    | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR …] [t/CATEGORY_TAG …]` |
-| **Delete a book**  | `book delete INDEX`                                                 |
-| **Borrow a book**  | `borrow INDEX1 INDEX2`                                              |
-| **Return a book**  | `return PREFIX/INDEX`                                               |
-| **Request a book** | `request INDEX1 INDEX2`                                             |
+| Function                               | Format Of Command                                                   |
+|----------------------------------------|---------------------------------------------------------------------|
+| **Add a book**                         | `book add n/NAME i/ISBN [a/AUTHOR …] [t/CATEGORY_TAG …]`            |
+| **List all books**                     | `book list`                                                         |
+| **Edit a book**                        | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR …] [t/CATEGORY_TAG …]` |
+| **Delete a book**                      | `book delete INDEX`                                                 |
+| **Borrow a book**                      | `borrow INDEX1 INDEX2`                                              |
+| **Return a book**                      | `return PREFIX/INDEX`                                               |
+| **Request a book**                     | `request INDEX1 INDEX2`                                             |
+| **List all books related to a patron** | `book related INDEX`                                                |
 
 ### Category: General Commands
 
