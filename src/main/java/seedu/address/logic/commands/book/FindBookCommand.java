@@ -23,11 +23,8 @@ public class FindBookCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] or "
             + "[" + PREFIX_AUTHOR + "AUTHOR] or "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example " + BOOK_COMMAND_GROUP + FIND_COMMAND_WORD
+            + "Example " + BOOK_COMMAND_GROUP + " " + FIND_COMMAND_WORD + " "
             + PREFIX_NAME + "Harry Potter";
-
-    public static final String MESSAGE_FIND_BOOK_SUCCESS = "Found Books";
-    public static final String MESSAGE_NOT_FOUND = "Only one category may be found";
 
     private final Predicate<Book> predicate;
 

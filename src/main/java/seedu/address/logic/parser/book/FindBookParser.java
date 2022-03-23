@@ -30,15 +30,12 @@ public class FindBookParser implements Parser<Command> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parse(String args) throws ParseException {
-        System.out.println(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_AUTHOR, PREFIX_TAG);
-        System.out.println(argMultimap.getAllValues(PREFIX_NAME));
         if (!argMultimap.hasExactlyOneQueriedPrefix(PREFIX_NAME, PREFIX_AUTHOR, PREFIX_TAG)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindBookCommand.MESSAGE_USAGE));
         }
         List<Prefix> prefixes = argMultimap.getNonEmptyPrefixes(PREFIX_NAME, PREFIX_AUTHOR, PREFIX_TAG);
-        System.out.println(prefixes);
         assert(prefixes.size() == 1) : "Prefix size is wrong";
 
         Prefix queriedPrefix = prefixes.get(0);
