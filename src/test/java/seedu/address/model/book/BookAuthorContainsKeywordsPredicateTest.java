@@ -41,7 +41,4 @@ class BookAuthorContainsKeywordsPredicateTest {
         predicate = new BookAuthorContainsKeywordsPredicate(Arrays.asList("Kat", "Tom"));
         assertFalse(predicate.test(new BookBuilder().withAuthors("Alice Bob").build()));
     }
-
-
-
 }
