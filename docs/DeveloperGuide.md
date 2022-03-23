@@ -242,6 +242,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Easily overwhelmed request handler                        | be able to prioritize my book requests                                        | I can effectively handle requests                                                                                                     |
 | `***`    | Librarian                                                 | be able to view patron and book details through a GUI                         |                                                                                                                                       |
 | `***`    | Librarian                                                 | have visual feedback of the commands I executed                               | I will know if my commands have been successfully executed                                                                            |
+| `***`    | Librarian                                                 | find all the books related to a patron                                        | I can see all books related to a patron at one glance                                                                                 |
 
 *{More to be added}*
 
