@@ -175,6 +175,8 @@ List all books in LibTask database.
 
 Format: `book list`
 
+* If all books are already listed, the command will still show a success message as having listed all books, but the books listed will have no visual change.
+
 ### Finding books : `find`
 
 List books that satisfy the predicates given
@@ -188,7 +190,6 @@ Examples:
 * `book find n/Harry` Returns all books whose title contains the word Harry.
 * `book find t/Adventure` Returns all books which have a tag Adventure.
 
-
 ### Editing a book : `edit`
 
 Edit details of the book at the specified index.
@@ -196,15 +197,15 @@ Edit details of the book at the specified index.
 Format: `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR …] [t/CATEGORY_TAG …]`
 
 * Edits the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of books in the displayed list.
-* At least one of the optional fields must be provided.
+* At least one of the optional fields (ISBN, AUTHOR, CATEGORY_TAG) must be provided.
 * Existing values will be updated to the input values.
-* When editing tags or authors, the existing tags or authors of the book will be removed i.e. adding of tags and authors is not cumulative.
+* When editing tags or authors, the existing tags or authors of the book will be removed i.e. adding of tags and authors is not cumulative. However, if all tags are added in a single input, the multiple tags will be added.
 * You can remove all the book’s authors and tags by typing `a/` or `t/` respectively without
     specifying any tags after it.
 
 Examples:
-*  `book edit 1 n/Harry Potter: Sorcerer's Stone t/Adventure` Edits the name of the 1st book to be `Harry Potter: Sorceror's Stone` and edit its category tag to be `Adventure`.
-*  `book edit 2 i/978-79317-3-542-3 a/Another Rowling t/` Edits the ISBN of the 2nd book to be `978-79317-3-542-3`, changes the author to `Another Rowling` and clears all existing tags.
+* `book edit 1 n/Harry Potter: Sorcerer's Stone t/Adventure t/Magic` edits the name of the 1st book to be `Harry Potter: Sorceror's Stone` and edit its category tag to be `Adventure` and `Magic`.
+* `book edit 2 i/978-79317-3-542-3 a/Another Rowling t/` edits the ISBN of the 2nd book to be `978-79317-3-542-3`, changes the author to `Another Rowling` and clears all existing tags.
 
 ### Deleting a book : `delete`
 
@@ -325,9 +326,9 @@ _Details coming soon ..._
 
 | Function           | Format Of Command                                                   |
 |--------------------|---------------------------------------------------------------------|
-| **Add a book**     | `book add n/NAME i/ISBN [a/AUTHOR …] [t/CATEGORY_TAG …]`            |
+| **Add a book**     | `book add n/NAME i/ISBN [a/AUTHOR]…​ [t/CATEGORY_TAG]…​`            |
 | **List all books** | `book list`                                                         |
-| **Edit a book**    | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR …] [t/CATEGORY_TAG …]` |
+| **Edit a book**    | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR]…​ [t/CATEGORY_TAG]…​` |
 | **Delete a book**  | `book delete INDEX`                                                 |
 | **Borrow a book**  | `borrow INDEX1 INDEX2`                                              |
 | **Return a book**  | `return PREFIX/INDEX`                                               |
