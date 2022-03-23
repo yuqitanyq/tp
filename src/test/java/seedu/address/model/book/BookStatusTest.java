@@ -2,10 +2,13 @@ package seedu.address.model.book;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.book.BookStatus.createAvailableBookStatus;
 import static seedu.address.model.book.BookStatus.isValidStatus;
 import static seedu.address.model.book.BookStatusType.AVAILABLE;
 import static seedu.address.model.book.BookStatusType.BORROWED;
+import static seedu.address.model.util.SampleDataUtil.getSampleBorrowedStatus;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPatrons.ALICE;
 import static seedu.address.testutil.TypicalPatrons.getTypicalPatrons;
 
 import java.util.Optional;
@@ -37,6 +40,16 @@ public class BookStatusTest {
         // null return date
         assertThrows(NullPointerException.class, () ->
                 new BookStatus(AVAILABLE, VALID_BORROWER, VALID_BORROW_DATE, null));
+    }
+
+    @Test
+    public void editBorrower_nullEditedBorrower_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> getSampleBorrowedStatus().editBorrower(null));
+    }
+
+    @Test
+    public void editBorrower_statusNotBorrowed_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> createAvailableBookStatus().editBorrower(ALICE));
     }
 
     @Test

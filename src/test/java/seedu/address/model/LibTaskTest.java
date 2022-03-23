@@ -5,10 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AUTHOR_SUZANNE_COLLINS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOK_NAME_HUNGER_GAMES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_HUNGER_GAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIFI;
+import static seedu.address.model.util.SampleDataUtil.getSampleBorrowedStatus;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
+import static seedu.address.testutil.TypicalBooks.HUNGER_GAMES;
 import static seedu.address.testutil.TypicalPatrons.ALICE;
 
 import java.util.ArrayList;
@@ -114,6 +117,128 @@ public class LibTaskTest {
                 .withTags(VALID_TAG_SCIFI)
                 .build();
         assertTrue(libTask.hasBook(editedHarryPotter));
+    }
+
+    @Test
+    public void hasSameIsbnDiffAuthorsOrName_nullBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.hasSameIsbnDiffAuthorsOrName(null));
+    }
+
+    @Test
+    public void hasSameIsbnDiffAuthorsOrName_hasInconsistentBook_returnsTrue() {
+        libTask.addBook(HARRY_POTTER);
+        Book inconsistentBook = new BookBuilder(HARRY_POTTER).withName("diffname").build();
+        assertTrue(libTask.hasSameIsbnDiffAuthorsOrName(inconsistentBook));
+    }
+
+    @Test
+    public void hasSameIsbnDiffAuthorsOrName_consistentBook_returnsFalse() {
+        libTask.addBook(HARRY_POTTER);
+        // book with same name but different isbn is consistent
+        Book consistentBook = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
+        assertFalse(libTask.hasSameIsbnDiffAuthorsOrName(consistentBook));
+    }
+
+    @Test
+    public void setAndEditBook_nullTarget_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.setAndEditBook(null, HARRY_POTTER));
+    }
+
+    @Test
+    public void setAndEditBook_nullTEditedBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.setAndEditBook(HARRY_POTTER, null));
+    }
+
+    @Test
+    public void updateBookAfterPatronEdit_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.updateBookAfterPatronEdit(null, ALICE));
+        assertThrows(NullPointerException.class, () -> libTask.updateBookAfterPatronEdit(ALICE, null));
+    }
+
+    @Test
+    public void updateBookAfterPatronDelete_nullDeletedPatron_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.updateBookAfterPatronDelete(null));
+    }
+
+    @Test
+    public void addRequest_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.addRequest(null, ALICE));
+        assertThrows(NullPointerException.class, () -> libTask.addRequest(HARRY_POTTER, null));
+    }
+
+    @Test
+    public void addRequest_hasBookWithDesiredIsbn_requestAdded() {
+        libTask.addBook(HARRY_POTTER);
+        Book bookWithRequest = new BookBuilder(HARRY_POTTER).withRequesters(ALICE).build();
+        LibTask expectedLibTask = new LibTask();
+        expectedLibTask.addBook(bookWithRequest);
+
+        Book bookWithSameIsbnOnly = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES).withTags()
+                .withAuthors(VALID_AUTHOR_SUZANNE_COLLINS).build();
+        libTask.addRequest(bookWithSameIsbnOnly, ALICE);
+        assertEquals(expectedLibTask, libTask);
+    }
+
+    @Test
+    public void addRequest_hasNoBookWithDesiredIsbn_requestNotAdded() {
+        libTask.addBook(HARRY_POTTER);
+        LibTask expectedLibTask = new LibTask();
+        expectedLibTask.addBook(HARRY_POTTER);
+
+        Book bookWithDifferentIsbn = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
+        libTask.addRequest(bookWithDifferentIsbn, ALICE);
+        assertEquals(expectedLibTask, libTask);
+    }
+
+    @Test
+    public void hasAvailableCopy_nullBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.hasAvailableCopy(null));
+    }
+
+    @Test
+    public void hasAvailableCopy_hasAvailableSameIsbnCopy_returnsTrue() {
+        // has available copy with same isbn -> returns true
+        Book bookWithSameIsbnOnly = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES).withTags()
+                .withAuthors(VALID_AUTHOR_SUZANNE_COLLINS).build();
+        libTask.addBook(bookWithSameIsbnOnly);
+        assertTrue(libTask.hasAvailableCopy(HARRY_POTTER));
+    }
+
+    @Test
+    public void hasAvailableCopy_hasAvailableDifferentIsbnCopy_returnsFalse() {
+        // has available copy with different isbn -> returns false
+        Book bookWithDifferentIsbn = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
+        libTask.addBook(bookWithDifferentIsbn);
+        assertFalse(libTask.hasAvailableCopy(HARRY_POTTER));
+    }
+
+    @Test
+    public void hasAvailableCopy_allCopiesBorrowed_returnsFalse() {
+        // has available copy with different isbn -> returns false
+        Book borrowedBookWithSameIsbn = new BookBuilder(HARRY_POTTER).withBookStatus(getSampleBorrowedStatus()).build();
+        libTask.addBook(borrowedBookWithSameIsbn);
+        assertFalse(libTask.hasAvailableCopy(HARRY_POTTER));
+    }
+
+    @Test
+    public void isBorrowing_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.isBorrowing(null, HARRY_POTTER));
+        assertThrows(NullPointerException.class, () -> libTask.isBorrowing(ALICE, null));
+    }
+
+    @Test
+    public void hasSameIsbn_noSameIsbn_returnsFalse() {
+        libTask.addBook(HARRY_POTTER);
+        assertFalse(libTask.hasSameIsbn(HUNGER_GAMES));
+    }
+
+    @Test
+    public void hasSameIsbn_hasSameIsbn_returnsTrue() {
+        libTask.addBook(HARRY_POTTER);
+        Book allFieldsDifferentExceptIsbn = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES)
+                .withTags().withAuthors().withRequesters(ALICE).withBookStatus(getSampleBorrowedStatus())
+                .withTimeAdded(12345).build();
+        assertTrue(libTask.hasSameIsbn(allFieldsDifferentExceptIsbn));
     }
 
     @Test

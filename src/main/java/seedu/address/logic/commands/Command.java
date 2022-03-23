@@ -19,10 +19,12 @@ public abstract class Command {
     public static final String DELETE_COMMAND_WORD = "delete";
     public static final String FIND_COMMAND_WORD = "find";
     public static final String LIST_COMMAND_WORD = "list";
+    public static final String OVERDUE_COMMAND_WORD = "overdue";
     public static final String PREVIOUS_COMMAND_WORD = "u";
     public static final String RETURN_COMMAND_WORD = "return";
     public static final String BORROW_COMMAND_WORD = "borrow";
     public static final String RELATED_COMMAND_WORD = "related";
+    public static final String REQUEST_COMMAND_WORD = "request";
 
     /**
      * Executes the command and returns the result message.

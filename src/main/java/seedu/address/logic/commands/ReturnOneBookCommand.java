@@ -17,7 +17,7 @@ import seedu.address.model.book.BookStatus;
  */
 public class ReturnOneBookCommand extends ReturnCommand {
 
-    public static final String MESSAGE_SUCCESS = "Returned book: %1$s";
+    public static final String MESSAGE_SUCCESS = "Returned book: %1$s\n";
 
     private final Index bookIndex;
 
@@ -43,9 +43,9 @@ public class ReturnOneBookCommand extends ReturnCommand {
         }
         Book updatedAvailableBook = new Book(bookToReturn, BookStatus.createAvailableBookStatus());
         model.setBook(bookToReturn, updatedAvailableBook);
-
+        String notification = model.deleteAllRequests(bookToReturn);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, bookToReturn.getBookName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, bookToReturn.getBookName()) + notification);
     }
 
     @Override

@@ -10,7 +10,8 @@
     "timeAdded" : "1646989653388",
     "bookStatus" : {
       "bookStatusType" : "Available"
-    }
+    },
+    "requesters" : []
   }, {
     "bookName" : "Lorem Ipsum comes from a latin text written in 45BC by Roman statesman Lorem Ipsum comes from a latin text written in 45BC by Roman statesman Lorem Ipsum comes from a latin text written in 45BC by Roman statesman Lorem Ipsum comes from a latin text written in 45BC by Roman statesman Lorem Ipsum comes from a latin text written in 45BC by Roman statesman Lorem Ipsum comes from a latin text written in 45BC by Roman statesman",
     "isbn" : "0-545-01022-5",
@@ -22,7 +23,8 @@
     "timeAdded" : "1646989653388",
     "bookStatus" : {
       "bookStatusType" : "Available"
-    }
+    },
+    "requesters" : []
   }
   ]
 }

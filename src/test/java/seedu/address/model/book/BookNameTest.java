@@ -1,8 +1,13 @@
 package seedu.address.model.book;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,6 +48,43 @@ public class BookNameTest {
         assertTrue(BookName.isValidBookName("Harry Potter 2")); // alphanumeric characters
         assertTrue(BookName.isValidBookName("Harry Potter 1 The Philosopher's Stone")); // with ' character
         assertTrue(BookName.isValidBookName("Algorithms: 1st Edition")); // with : character
+    }
+
+    @Test
+    public void equals() {
+        // Differ by spaces -> returns true
+        assertEquals(new BookName("harrypotter"), new BookName("harry potter"));
+        // Differ by case -> returns true
+        assertEquals(new BookName("harry potter"), new BookName("Harry Potter"));
+        // Differ by punctuation -> returns false
+        assertNotEquals(new BookName("harry:potter"), new BookName("harry potter"));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        // Differ by spaces -> returns true
+        assertEquals(new BookName("harrypotter").hashCode(), new BookName("harry potter").hashCode());
+        // Differ by case -> returns true
+        assertEquals(new BookName("harry potter").hashCode(), new BookName("Harry Potter").hashCode());
+        // Differ by punctuation -> returns false
+        assertNotEquals(new BookName("harry:potter").hashCode(), new BookName("harry potter").hashCode());
+
+        // Testing equality on HashSet
+        HashSet<BookName> set1 = new HashSet<>();
+        set1.add(new BookName("harrypotter"));
+        HashSet<BookName> set2 = new HashSet<>();
+        set2.add(new BookName("Harry Potter"));
+        assertEquals(set1, set2);
+
+        // Testing equality on lists
+        ArrayList<BookName> list1 = new ArrayList<>();
+        list1.add(new BookName("harrypotter"));
+        list1.add(new BookName("hunger games"));
+        ArrayList<BookName> list2 = new ArrayList<>();
+        list2.add(new BookName("harry potter"));
+        list2.add(new BookName("Hunger Games"));
+        assertEquals(list1, list2);
+        assertEquals(list1.hashCode(), list2.hashCode());
     }
 }
 

@@ -17,7 +17,7 @@ public class BookRelatedToPatronPredicate implements Predicate<Book> {
 
     @Override
     public boolean test(Book book) {
-        return book.isBorrowedBy(patronToRelate); //  || book.isRequestedBy(patronToRelate)
+        return book.isBorrowedBy(patronToRelate) || book.isRequestedBy(patronToRelate);
     }
 
     @Override

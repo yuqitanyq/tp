@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -103,6 +104,23 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck) {
+        requireNonNull(bookToCheck);
+        return libTask.hasSameIsbnDiffAuthorsOrName(bookToCheck);
+    }
+
+    @Override
+    public boolean hasSameIsbn(Book bookToCheck) {
+        requireNonNull(bookToCheck);
+        return libTask.hasSameIsbn(bookToCheck);
+    }
+
+    @Override
+    public String deleteAllRequests(Book ... books) {
+        return libTask.deleteAllRequests(books);
+    }
+
+    @Override
     public void deletePatron(Patron target) {
         libTask.removePatron(target);
     }
@@ -139,15 +157,57 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void returnAllBorrowedBooks(Patron borrower) {
+    public boolean setAndEditBook(Book target, Book editedBook) {
+        requireAllNonNull(target, editedBook);
+        return libTask.setAndEditBook(target, editedBook);
+    }
+
+    @Override
+    public String updateBookAfterPatronEdit(Patron target, Patron editedPatron) {
+        requireAllNonNull(target, editedPatron);
+        return libTask.updateBookAfterPatronEdit(target, editedPatron);
+    }
+
+    @Override
+    public String updateBookAfterPatronDelete(Patron deletedPatron) {
+        requireNonNull(deletedPatron);
+        return libTask.updateBookAfterPatronDelete(deletedPatron);
+    }
+
+    @Override
+    public void addRequest(Book bookToRequest, Patron requester) {
+        requireAllNonNull(bookToRequest, requester);
+        libTask.addRequest(bookToRequest, requester);
+    }
+
+    @Override
+    public boolean hasAvailableCopy(Book book) {
+        requireNonNull(book);
+        return libTask.hasAvailableCopy(book);
+    }
+
+    @Override
+    public boolean isBorrowing(Patron patron, Book book) {
+        requireAllNonNull(patron, book);
+        return libTask.isBorrowing(patron, book);
+    }
+
+    @Override
+    public List<Book> returnAllBorrowedBooks(Patron borrower) {
         requireNonNull(borrower);
-        libTask.returnAllBorrowedBooks(borrower);
+        return libTask.returnAllBorrowedBooks(borrower);
     }
 
     @Override
     public boolean isBorrowingSomeBook(Patron borrower) {
         requireNonNull(borrower);
         return libTask.isBorrowingSomeBook(borrower);
+    }
+
+    @Override
+    public boolean hasOverdueBooks(Patron patron) {
+        requireNonNull(patron);
+        return libTask.hasOverdueBooks(patron);
     }
 
     @Override

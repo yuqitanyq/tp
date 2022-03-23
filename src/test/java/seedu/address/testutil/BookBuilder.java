@@ -13,6 +13,7 @@ import seedu.address.model.book.Book;
 import seedu.address.model.book.BookName;
 import seedu.address.model.book.BookStatus;
 import seedu.address.model.book.Isbn;
+import seedu.address.model.patron.Patron;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -26,12 +27,15 @@ public class BookBuilder {
     public static final long DEFAULT_TIME_ADDED = SAMPLE_BOOK_CREATED_TIME;
     public static final BookStatus DEFAULT_BOOK_STATUS = SAMPLE_AVAILABLE_STATUS;
 
+    public static final BookStatus BORROWED_BOOK_STATUS = SampleDataUtil.getSampleBorrowedStatus();
+
     private BookName bookName;
     private Isbn isbn;
     private List<Author> authors;
     private Set<Tag> tags;
     private long timeAdded;
     private BookStatus bookStatus;
+    private Set<Patron> requesters;
 
     /**
      * Creates a {@code BookBuilder} with the default details.
@@ -43,6 +47,7 @@ public class BookBuilder {
         tags = new HashSet<Tag>();
         timeAdded = DEFAULT_TIME_ADDED;
         bookStatus = DEFAULT_BOOK_STATUS;
+        requesters = new HashSet<Patron>();
     }
 
     /**
@@ -55,6 +60,15 @@ public class BookBuilder {
         tags = new HashSet<Tag>(bookToCopy.getTags());
         timeAdded = bookToCopy.getTimeAdded();
         bookStatus = bookToCopy.getBookStatus();
+        requesters = bookToCopy.getRequesters();
+    }
+
+    /**
+     * Creates a {@code BookBuilder} with borrowed status and default details.
+     */
+    public static BookBuilder bookBuilderWithBorrowedStatus() {
+        BookBuilder bookBuilder = new BookBuilder();
+        return bookBuilder.withBookStatus(BORROWED_BOOK_STATUS);
     }
 
     /**
@@ -105,7 +119,15 @@ public class BookBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code requesters} into a {@code Set<Patron>} and set it to the {@code Book} that we are building.
+     */
+    public BookBuilder withRequesters(Patron ... requesters) {
+        this.requesters = SampleDataUtil.getRequesterSet(requesters);
+        return this;
+    }
+
     public Book build() {
-        return new Book(bookName, isbn, authors, tags, timeAdded, bookStatus);
+        return new Book(bookName, isbn, authors, tags, timeAdded, bookStatus, requesters);
     }
 }

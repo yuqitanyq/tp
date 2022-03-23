@@ -8,7 +8,8 @@
     "timeAdded" : "1646989653388",
     "bookStatus" : {
       "bookStatusType" : "Available"
-    }
+    },
+    "requesters" : []
   }, {
     "bookName" : "The Hunger Games: MockingJay",
     "isbn" : "9786029293883",
@@ -17,6 +18,7 @@
     "timeAdded" : "1646989653388",
     "bookStatus" : {
       "bookStatusType" : "Available"
-    }
+    },
+    "requesters" : []
   }]
 }

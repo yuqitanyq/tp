@@ -4,23 +4,33 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_SAME_ISBN_INCONSISTENT;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPatrons.ALICE;
+import static seedu.address.testutil.TypicalPatrons.BOB;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LibTask;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyLibTask;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.book.Book;
+import seedu.address.model.book.Isbn;
+import seedu.address.model.book.exceptions.BookNotFoundException;
 import seedu.address.model.patron.Patron;
 import seedu.address.testutil.BookBuilder;
 
@@ -40,6 +50,64 @@ public class AddBookCommandTest {
 
         assertEquals(String.format(AddBookCommand.MESSAGE_SUCCESS, validBook), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validBook), modelStub.booksAdded);
+    }
+
+    @Test
+    public void execute_bookWithSameIsbnExistButDifferentAuthor_throwsCommandException() throws CommandException {
+        ModelStubAcceptingBookAdded modelStub = new ModelStubAcceptingBookAdded();
+        Book validBook = new BookBuilder().build();
+        new AddBookCommand(validBook).execute(modelStub);
+
+        // Fails to add a book which isbn was already added, but has different author
+        Book validBookDiffAuthor = new BookBuilder(validBook).withAuthors("diff author").build();
+        AddBookCommand errorCommand = new AddBookCommand(validBookDiffAuthor);
+        String expectedMessage = String.format(MESSAGE_SAME_ISBN_INCONSISTENT, validBookDiffAuthor.getIsbn());
+        assertThrows(CommandException.class, expectedMessage, () -> errorCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_bookWithSameIsbnExistButDifferentName_throwsCommandException() throws CommandException {
+        ModelStubAcceptingBookAdded modelStub = new ModelStubAcceptingBookAdded();
+        Book validBook = new BookBuilder().build();
+        new AddBookCommand(validBook).execute(modelStub);
+
+        // Fails to add a book which isbn was already added, but has different name
+        Book validBookDiffName = new BookBuilder(validBook).withName("diff author").build();
+        AddBookCommand errorCommand = new AddBookCommand(validBookDiffName);
+        String expectedMessage = String.format(MESSAGE_SAME_ISBN_INCONSISTENT, validBookDiffName.getIsbn());
+        assertThrows(CommandException.class, expectedMessage, () -> errorCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_bookWithSameIsbnExistButDifferentTags_addSuccessful() throws CommandException {
+        ModelStubAcceptingBookAdded modelStub = new ModelStubAcceptingBookAdded();
+        Book validBook = new BookBuilder().build();
+        new AddBookCommand(validBook).execute(modelStub);
+
+        // Able to add book that has same isbn as existing books, but different tags
+        Book validBookDiffTags = new BookBuilder(validBook).withTags("difftag1", "difftag2").build();
+        CommandResult commandResult = new AddBookCommand(validBookDiffTags).execute(modelStub);
+        assertEquals(String.format(AddBookCommand.MESSAGE_SUCCESS, validBookDiffTags),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validBook, validBookDiffTags), modelStub.booksAdded);
+    }
+
+    @Test
+    public void execute_successfulDeleteRequest() throws CommandException {
+        ModelStubAcceptingBookAdded modelStub = new ModelStubAcceptingBookAdded();
+        Book validBook = new BookBuilder().withRequesters(ALICE, BOB).build();
+        new AddBookCommand(validBook).execute(modelStub);
+
+        // After a book that has same isbn as existing books is added, all requests for that isbn is removed
+        Book validBookCopy = new BookBuilder(validBook).withRequesters().build();
+        String expectedMessage = String.format(AddBookCommand.MESSAGE_SUCCESS, validBookCopy)
+                + String.format("You should notify %s about availability of %s\n",
+                BOB.getName(), validBook.getBookName())
+                + String.format("You should notify %s about availability of %s\n",
+                ALICE.getName(), validBook.getBookName());
+        CommandResult commandResult = new AddBookCommand(validBookCopy).execute(modelStub);
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validBookCopy, validBookCopy), modelStub.booksAdded);
     }
 
     @Test
@@ -136,6 +204,21 @@ public class AddBookCommandTest {
         }
 
         @Override
+        public boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSameIsbn(Book bookToCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String deleteAllRequests(Book ... books) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePatron(Patron target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -156,12 +239,47 @@ public class AddBookCommandTest {
         }
 
         @Override
-        public void returnAllBorrowedBooks(Patron borrower) {
+        public boolean setAndEditBook(Book target, Book editedBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String updateBookAfterPatronEdit(Patron target, Patron editedPatron) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String updateBookAfterPatronDelete(Patron deletedPatron) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addRequest(Book bookToRequest, Patron requester) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAvailableCopy(Book book) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isBorrowing(Patron patron, Book book) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Book> returnAllBorrowedBooks(Patron borrower) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean isBorrowingSomeBook(Patron borrower) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasOverdueBooks(Patron patron) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -228,8 +346,60 @@ public class AddBookCommandTest {
         }
 
         @Override
+        public boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck) {
+            requireNonNull(bookToCheck);
+            return booksAdded.stream().anyMatch(book -> book.hasSameIsbn(bookToCheck)
+                    && (!book.hasSameAuthors(bookToCheck) || !book.hasSameName(bookToCheck)));
+        }
+
+        @Override
+        public String deleteAllRequests(Book ... books) {
+            HashSet<Isbn> notifiedBooks = new HashSet<>(); // To prevent adding the same notification multiple times
+            StringBuilder builder = new StringBuilder();
+            List<Book> booksToProcess = Arrays.stream(books).collect(Collectors.toList());
+            for (Book book : booksToProcess) {
+                if (notifiedBooks.contains(book.getIsbn())) {
+                    continue;
+                }
+                notifiedBooks.add(book.getIsbn());
+                builder.append(deleteRequestSingleBook(book));
+            }
+            return builder.toString();
+        }
+
+        @Override
+        public void setBook(Book target, Book editedBook) {
+            requireAllNonNull(target, editedBook);
+
+            int index = booksAdded.indexOf(target);
+            if (index == -1) {
+                throw new BookNotFoundException();
+            }
+            booksAdded.set(index, editedBook);
+        }
+
+        @Override
         public ReadOnlyLibTask getLibTask() {
             return new LibTask();
+        }
+
+        private String deleteRequestSingleBook(Book bookToDelete) {
+            StringBuilder builder = new StringBuilder();
+            boolean hasNotified = false; // flag to prevent appending the same notification many times
+            for (Book book : booksAdded) {
+                if (!book.hasSameIsbn(bookToDelete) || book.getRequesters().isEmpty()) {
+                    continue;
+                }
+                if (!hasNotified) {
+                    book.getRequesters().stream().forEach(requester ->
+                        builder.append(String.format("You should notify %s about availability of %s\n",
+                                requester.getName(), book.getBookName())));
+                    hasNotified = true;
+                }
+                Book updatedBookEmptyRequest = book.getBookWithEmptyRequest();
+                setBook(book, updatedBookEmptyRequest);
+            }
+            return builder.toString();
         }
     }
 }
