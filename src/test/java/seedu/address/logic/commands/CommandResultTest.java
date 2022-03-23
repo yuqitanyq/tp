@@ -14,7 +14,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,10 +29,48 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false)));
+    }
+
+    @Test
+    public void test_isShowHelp_returnsTrue() {
+        CommandResult commandResult = new CommandResult("Opened help window.", true, false, false);
+        assertTrue(commandResult.isShowHelp());
+    }
+
+    @Test
+    public void test_isShowHelp_returnFalse() {
+        CommandResult commandResult = new CommandResult("feedback", false, false, false);
+        assertFalse(commandResult.isShowHelp());
+    }
+
+    @Test
+    public void test_isExit_returnsTrue() {
+        CommandResult commandResult = new CommandResult("Exiting LibTask as requested ...", false,
+                true, false);
+        assertTrue(commandResult.isExit());
+    }
+
+    @Test
+    public void test_isExit_returnFalse() {
+        CommandResult commandResult = new CommandResult("feedback", false, false, false);
+        assertFalse(commandResult.isExit());
+    }
+
+    @Test
+    public void test_isPrevious_returnsTrue() {
+        CommandResult commandResult = new CommandResult("Here is your previous command.", false,
+                false, true);
+        assertTrue(commandResult.isPrevious());
+    }
+
+    @Test
+    public void test_isPrevious_returnFalse() {
+        CommandResult commandResult = new CommandResult("feedback", false, false, false);
+        assertFalse(commandResult.isPrevious());
     }
 
     @Test
@@ -46,9 +84,9 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false).hashCode());
     }
 }

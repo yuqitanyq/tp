@@ -10,13 +10,13 @@ LibTask is a **desktop application for librarians to manage book loans and reque
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 1. Introduction
+## Introduction
 
 As a school librarian of a large library, you may already have your own desktop library software. However, existing library softwares are GUI-based and slow to work with. If you prefer to work with CLI commands efficiently while still having the benefits of aesthetic displays, then LibTask is designed just for you! LibTask provides you with a well packaged system of commands for managing book loans and book requests by your patrons. Using LibTask, you can quickly process borrowing and returning books, and view different groups of patrons and books to perform tasks such as notifying patrons with overdue books. The system also maintains two independent lists of books and patrons, allowing you to perform queries more efficiently.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 2. Quick start
+## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -284,27 +284,32 @@ _Details coming soon ..._
 
 ## Command summary
 ### Category: Patron Commands
-Function | Format Of Command
-|--------|-------
-**Add a new patron** | `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
-**List all patrons** | `patron list`
-**Edit a patron** | `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
-**Find a patron** | `patron find n/KEYWORD [n/KEYWORD]…​`
-**Delete a patron** | `patron delete INDEX`
+
+| Function             | Format Of Command                                                 |
+|----------------------|-------------------------------------------------------------------|
+| **Add a new patron** | `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`                |
+| **List all patrons** | `patron list`                                                     |
+| **Edit a patron**    | `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​` |
+| **Find a patron**    | `patron find n/KEYWORD [n/KEYWORD]…​`                             |
+| **Delete a patron**  | `patron delete INDEX`                                             |
+
 ### Category: Book Commands
-Function | Format Of Command
-|--------|-------
-**Add a book** | `book add n/NAME i/ISBN [a/AUTHOR …] [t/CATEGORY_TAG …]`
-**List all books** | `book list`
-**Edit a book** | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR …] [t/CATEGORY_TAG …]`
-**Delete a book** | `book delete INDEX`
-**Borrow a book** | `borrow INDEX1 INDEX2`
-**Return a book** | `return PREFIX/INDEX`
-**Request a book** | `request INDEX1 INDEX2`
+
+| Function           | Format Of Command                                                   |
+|--------------------|---------------------------------------------------------------------|
+| **Add a book**     | `book add n/NAME i/ISBN [a/AUTHOR …] [t/CATEGORY_TAG …]`            |
+| **List all books** | `book list`                                                         |
+| **Edit a book**    | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR …] [t/CATEGORY_TAG …]` |
+| **Delete a book**  | `book delete INDEX`                                                 |
+| **Borrow a book**  | `borrow INDEX1 INDEX2`                                              |
+| **Return a book**  | `return PREFIX/INDEX`                                               |
+| **Request a book** | `request INDEX1 INDEX2`                                             |
+
 ### Category: General Commands
-Function | Format Of Command
-|--------|-------
-**Clear all entries** | `clear`
-**Exit the program** | `exit`
-**Show message to help page** | `help`
-**Navigating the different patrons/books** | **Clicking the :arrow_up and :arrow_down arrows on :keyboard**
+
+| Function                                   | Format Of Command                                                          |
+|--------------------------------------------|----------------------------------------------------------------------------|
+| **Clear all entries**                      | `clear`                                                                    |
+| **Exit the program**                       | `exit`                                                                     |
+| **Show message to help page**              | `help`                                                                     |
+| **Navigating the different patrons/books** | **Pressing the :arrow_up: and :arrow_down: arrows on keyboard :keyboard:** |
