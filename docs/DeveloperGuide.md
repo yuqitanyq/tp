@@ -242,6 +242,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Easily overwhelmed request handler                        | be able to prioritize my book requests                                        | I can effectively handle requests                                                                                                     |
 | `***`    | Librarian                                                 | be able to view patron and book details through a GUI                         |                                                                                                                                       |
 | `***`    | Librarian                                                 | have visual feedback of the commands I executed                               | I will know if my commands have been successfully executed                                                                            |
+| `***`    | Librarian                                                 | find all the books related to a patron                                        | I can see all books related to a patron at one glance                                                                                 |
 
 *{More to be added}*
 
@@ -557,7 +558,24 @@ Extension
 
       Use case ends.
 
+### UC16: List books related to a patron
 
+**MSS**
+1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
+
+2. User requests to view all books related to a patron and provides the index of the patron in the list.
+
+3. LibTask shows the list of all the books related to the patron.
+
+   Use case ends.
+
+Extension
+
+* 2a. The given index of patron is invalid.
+
+    * 2a1. LibTask shows an error message.
+
+      Use case resumes from step 2.
 
 ### Non-Functional Requirements
 

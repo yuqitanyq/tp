@@ -99,7 +99,7 @@ public class Isbn {
 
     @Override
     public String toString() {
-        return isbn;
+        return removeHyphen(isbn);
     }
 
     @Override
@@ -109,5 +109,8 @@ public class Isbn {
                 && removeHyphen(isbn).equals(removeHyphen(((Isbn) other).isbn))); // state check
     }
 
-
+    @Override
+    public int hashCode() {
+        return removeHyphen(isbn).hashCode();
+    }
 }

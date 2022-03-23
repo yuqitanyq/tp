@@ -3,6 +3,8 @@ package seedu.address.model.book;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+
 /**
  * Represents a Book's name in LibTask.
  * Guarantees: immutable; is valid as declared in {@link #isValidBookName(String)}
@@ -49,11 +51,21 @@ public class BookName {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof BookName) //instanceof handle nulls
-                && fullBookName.equals(((BookName) other).fullBookName);
+                && getBookNameForComparison().equals(((BookName) other).getBookNameForComparison());
     }
 
     @Override
     public int hashCode() {
-        return fullBookName.hashCode();
+        return getBookNameForComparison().hashCode();
+    }
+
+    /**
+     * Returns the book name, converted to lowercase and without whitespaces.
+     */
+    private String getBookNameForComparison() {
+        StringBuilder builder = new StringBuilder();
+        String[] splittedName = fullBookName.trim().toLowerCase().split("\\s+");
+        Arrays.stream(splittedName).forEachOrdered(s -> builder.append(s));
+        return builder.toString();
     }
 }

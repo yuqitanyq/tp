@@ -3,6 +3,8 @@ package seedu.address.model.book;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+
 /**
  * Represents a Author in LibTask.
  * Guarantees: immutable; is valid as declared in {@link #isValidAuthor(String)}
@@ -50,6 +52,21 @@ public class Author {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof Author // instanceof handles nulls
-            && fullAuthorName.equals(((Author) other).fullAuthorName)); // state check
+            && getAuthorNameForComparison().equals(((Author) other).getAuthorNameForComparison())); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return getAuthorNameForComparison().hashCode();
+    }
+
+    /**
+     * Returns the full name of the author, converted to lowercase and without whitespaces.
+     */
+    private String getAuthorNameForComparison() {
+        StringBuilder builder = new StringBuilder();
+        String[] splittedName = fullAuthorName.trim().toLowerCase().split("\\s+");
+        Arrays.stream(splittedName).forEachOrdered(s -> builder.append(s));
+        return builder.toString();
     }
 }

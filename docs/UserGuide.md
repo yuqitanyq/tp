@@ -87,7 +87,9 @@ Adds a patron to the library database.
 
 Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: 
+
+**Tip:**
 A patron can have any number of tags (including 0)
 </div>
 
@@ -157,7 +159,9 @@ Adds a book to LibTask database.
 
 Format: `book add n/NAME i/ISBN [a/AUTHOR …] [t/CATEGORY_TAG …] `
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+
+**Tip:**
 * ISBN must be 10 or 13 digits in length
 </div>
 
@@ -171,6 +175,21 @@ List all books in LibTask database.
 
 Format: `book list`
 
+* If all books are already listed, the command will still show a success message as having listed all books, but the books listed will have no visual change.
+
+### Finding books : `find`
+
+List books that satisfy the predicates given
+
+Format: `book find [n/Name] [t/Tag] [a/Author]`
+
+* Finds the books that match the predicate supplied.
+* Only one of the optional fields can be provided.
+
+Examples:
+* `book find n/Harry` Returns all books whose title contains the word Harry.
+* `book find t/Adventure` Returns all books which have a tag Adventure.
+
 ### Editing a book : `edit`
 
 Edit details of the book at the specified index.
@@ -178,15 +197,15 @@ Edit details of the book at the specified index.
 Format: `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR …] [t/CATEGORY_TAG …]`
 
 * Edits the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of books in the displayed list.
-* At least one of the optional fields must be provided.
+* At least one of the optional fields (ISBN, AUTHOR, CATEGORY_TAG) must be provided.
 * Existing values will be updated to the input values.
-* When editing tags or authors, the existing tags or authors of the book will be removed i.e. adding of tags and authors is not cumulative.
+* When editing tags or authors, the existing tags or authors of the book will be removed i.e. adding of tags and authors is not cumulative. However, if all tags are added in a single input, the multiple tags will be added.
 * You can remove all the book’s authors and tags by typing `a/` or `t/` respectively without
     specifying any tags after it.
 
 Examples:
-*  `book edit 1 n/Harry Potter: Sorcerer's Stone t/Adventure` Edits the name of the 1st book to be `Harry Potter: Sorceror's Stone` and edit its category tag to be `Adventure`.
-*  `book edit 2 i/978-79317-3-542-3 a/Another Rowling t/` Edits the ISBN of the 2nd book to be `978-79317-3-542-3`, changes the author to `Another Rowling` and clears all existing tags.
+* `book edit 1 n/Harry Potter: Sorcerer's Stone t/Adventure t/Magic` edits the name of the 1st book to be `Harry Potter: Sorceror's Stone` and edit its category tag to be `Adventure` and `Magic`.
+* `book edit 2 i/978-79317-3-542-3 a/Another Rowling t/` edits the ISBN of the 2nd book to be `978-79317-3-542-3`, changes the author to `Another Rowling` and clears all existing tags.
 
 ### Deleting a book : `delete`
 
@@ -245,6 +264,17 @@ Format: `request INDEX1 INDEX2`
 Examples:
 * `patron list` and `book list` followed by `request 1 2` keeps a record that the 1st patron would like to be notified when the 2nd book is available.
 
+### Listing all books related to a patron : `related`
+
+Display all books related to the patron at the specified index.
+
+Format: `book related INDEX`
+
+* `INDEX` **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of patrons in the displayed list.
+
+Examples:
+* `book related 1` will display all the books borrowed and requested by the 1st patron in the displayed patron list.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -257,6 +287,15 @@ Exits the program.
 
 Format: `exit`
 
+### Retrieving previous command: `u`
+
+Retrieves the previous command back to the command box
+
+Format: `u`
+
+* Lets you look back at the previous commands successfully entered.
+* Only allows each command to be viewed once.
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -265,7 +304,8 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: 
+**Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
@@ -295,15 +335,18 @@ _Details coming soon ..._
 
 ### Category: Book Commands
 
-| Function           | Format Of Command                                                   |
-|--------------------|---------------------------------------------------------------------|
-| **Add a book**     | `book add n/NAME i/ISBN [a/AUTHOR …] [t/CATEGORY_TAG …]`            |
-| **List all books** | `book list`                                                         |
-| **Edit a book**    | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR …] [t/CATEGORY_TAG …]` |
-| **Delete a book**  | `book delete INDEX`                                                 |
-| **Borrow a book**  | `borrow INDEX1 INDEX2`                                              |
-| **Return a book**  | `return PREFIX/INDEX`                                               |
-| **Request a book** | `request INDEX1 INDEX2`                                             |
+| Function                               | Format Of Command                                                   |
+|----------------------------------------|---------------------------------------------------------------------|
+| **Add a book**                         | `book add n/NAME i/ISBN [a/AUTHOR]…​ [t/CATEGORY_TAG]…​`            |
+| **List all books**                     | `book list`                                                         |
+| **Edit a book**                        | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR]…​ [t/CATEGORY_TAG]…​` |
+| **Delete a book**                      | `book delete INDEX`                                                 |
+| **Borrow a book**                      | `borrow INDEX1 INDEX2`                                              |
+| **Return a book**                      | `return PREFIX/INDEX`                                               |
+| **Request a book**                     | `request INDEX1 INDEX2`                                             |
+| **Find a book**                        | `book find [n/Name] [t/Tag] [a/Author]`                             |
+| **List all books related to a patron** | `book related INDEX`                                                 |
+
 
 ### Category: General Commands
 
@@ -312,4 +355,5 @@ _Details coming soon ..._
 | **Clear all entries**                      | `clear`                                                                    |
 | **Exit the program**                       | `exit`                                                                     |
 | **Show message to help page**              | `help`                                                                     |
+| **Show previous commands**                 | `u`                                                                        |
 | **Navigating the different patrons/books** | **Pressing the :arrow_up: and :arrow_down: arrows on keyboard :keyboard:** |
