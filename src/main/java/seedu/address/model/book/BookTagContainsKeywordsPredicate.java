@@ -3,8 +3,6 @@ package seedu.address.model.book;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.model.patron.NameContainsKeywordsPredicate;
 
 /**
  * Test that a {@code Book}'s {@code BookTag} matches any of the keywords given
@@ -20,7 +18,8 @@ public class BookTagContainsKeywordsPredicate implements Predicate<Book> {
     @Override
     public boolean test(Book book) {
         return keywords.stream()
-                .anyMatch(keywords -> StringUtil.containsWordIgnoreCase(book.getTags().toString(), keywords));
+                .anyMatch(keywords -> book.getTags().stream().anyMatch(x ->
+                        x.toString().toUpperCase().contains(keywords.toUpperCase())));
     }
 
     @Override

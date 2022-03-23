@@ -16,7 +16,8 @@ public class BookAuthorContainsKeywordsPredicate implements Predicate<Book> {
     @Override
     public boolean test(Book book) {
         return keywords.stream()
-                .anyMatch(keyword -> (book.getAuthors().toString().contains(keyword.toUpperCase())));
+                .anyMatch(keywords -> book.getAuthors().stream().anyMatch(x ->
+                        x.toString().toUpperCase().contains(keywords.toUpperCase())));
     }
 
     @Override
