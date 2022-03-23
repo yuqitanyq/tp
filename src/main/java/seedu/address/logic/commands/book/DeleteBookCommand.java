@@ -23,6 +23,7 @@ public class DeleteBookCommand extends Command {
             + "Example: " + BOOK_COMMAND_GROUP + " " + DELETE_COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_BOOK_SUCCESS = "Deleted Book: %1$s";
+    public static final String MESSAGE_DELETE_BORROWED_BOOK = "You cannot delete a book that is borrowed!";
 
     private final Index targetIndex;
 
@@ -43,8 +44,11 @@ public class DeleteBookCommand extends Command {
         }
 
         Book bookToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteBook(bookToDelete);
+        if (bookToDelete.isBorrowed()) {
+            throw new CommandException(MESSAGE_DELETE_BORROWED_BOOK);
+        }
 
+        model.deleteBook(bookToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_BOOK_SUCCESS, bookToDelete));
     }
 

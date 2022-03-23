@@ -5,8 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AUTHOR_SUZANNE_COLLINS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOK_NAME_HUNGER_GAMES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_HUNGER_GAMES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RETURN_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIFI;
+import static seedu.address.model.util.SampleDataUtil.getSampleBorrowedStatus;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBooks.AI;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
@@ -23,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.book.exceptions.BookNotFoundException;
 import seedu.address.model.patron.Patron;
 import seedu.address.testutil.BookBuilder;
+import seedu.address.testutil.PatronBuilder;
 
 public class BookListTest {
 
@@ -105,6 +109,154 @@ public class BookListTest {
     }
 
     @Test
+    public void updateBookAfterPatronEdit_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> bookList.updateBookAfterPatronEdit(null, ALICE));
+        assertThrows(NullPointerException.class, () -> bookList.updateBookAfterPatronEdit(ALICE, null));
+    }
+
+    @Test
+    public void updateBookAfterPatronEdit_editedPersonHasBorrowedBooks_booksUpdated() {
+        Patron patronToEdit = ALICE;
+        BookStatus dummyStatus = new BookStatus(BookStatusType.BORROWED, Optional.of(patronToEdit),
+                Optional.of("22-May-2022"), Optional.of("31-Dec-2022"));
+        Book borrowedBook = new BookBuilder(HARRY_POTTER).withBookStatus(dummyStatus).build();
+        bookList.add(borrowedBook);
+
+        Patron editedPatron = new PatronBuilder(patronToEdit).withName(VALID_NAME_BOB).build();
+        BookStatus updatedStatus = dummyStatus.editBorrower(editedPatron);
+        Book editedBorrowedBook = new BookBuilder(borrowedBook).withBookStatus(updatedStatus).build();
+
+        String expectedMessage = String.format("Borrower information of %s is also edited in some books\n",
+                editedPatron.getName());
+        BookList expectedBookList = new BookList();
+        expectedBookList.add(editedBorrowedBook);
+
+        assertEquals(bookList.updateBookAfterPatronEdit(patronToEdit, editedPatron), expectedMessage);
+        assertEquals(bookList, expectedBookList);
+    }
+
+    @Test
+    public void updateBookAfterPatronEdit_editedPersonHasRequestedBooks_booksUpdated() {
+        Patron patronToEdit = ALICE;
+        Book requestedBook = new BookBuilder(HARRY_POTTER).withRequesters(patronToEdit).build();
+        bookList.add(requestedBook);
+
+        Patron editedPatron = new PatronBuilder(patronToEdit).withName(VALID_NAME_BOB).build();
+        Book editedRequestedBook = new BookBuilder(requestedBook).withRequesters(editedPatron).build();
+
+        String expectedMessage = String.format("Requester information of %s is also edited in some books\n",
+                editedPatron.getName());
+        BookList expectedBookList = new BookList();
+        expectedBookList.add(editedRequestedBook);
+
+        assertEquals(bookList.updateBookAfterPatronEdit(patronToEdit, editedPatron), expectedMessage);
+        assertEquals(bookList, expectedBookList);
+    }
+
+    @Test
+    public void updateBookAfterPatronDelete_nullDeletedPatron_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> bookList.updateBookAfterPatronDelete(null));
+    }
+
+    @Test
+    public void updateBookAfterPatronDelete_deletedPatronHasRequestedBooks_booksUpdated() {
+        Patron patronToDelete = ALICE;
+        Book requestedBook = new BookBuilder(HARRY_POTTER).withRequesters(patronToDelete).build();
+        bookList.add(requestedBook);
+
+        Book editedRequestedBook = new BookBuilder(requestedBook).withRequesters().build();
+
+        String expectedMessage = String.format("%s is also deleted from the requesters list of some books\n",
+                patronToDelete.getName());
+        BookList expectedBookList = new BookList();
+        expectedBookList.add(editedRequestedBook);
+
+        assertEquals(bookList.updateBookAfterPatronDelete(patronToDelete), expectedMessage);
+        assertEquals(bookList, expectedBookList);
+    }
+
+    @Test
+    public void addRequest_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> bookList.addRequest(null, ALICE));
+        assertThrows(NullPointerException.class, () -> bookList.addRequest(HARRY_POTTER, null));
+    }
+
+    @Test
+    public void addRequest_hasBookWithDesiredIsbn_requestAdded() {
+        bookList.add(HARRY_POTTER);
+        Book bookWithRequest = new BookBuilder(HARRY_POTTER).withRequesters(ALICE).build();
+        BookList expectedBookList = new BookList();
+        expectedBookList.add(bookWithRequest);
+
+        Book bookWithSameIsbnOnly = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES).withTags()
+                .withAuthors(VALID_AUTHOR_SUZANNE_COLLINS).build();
+        bookList.addRequest(bookWithSameIsbnOnly, ALICE);
+        assertEquals(expectedBookList, bookList);
+    }
+
+    @Test
+    public void addRequest_hasNoBookWithDesiredIsbn_requestNotAdded() {
+        bookList.add(HARRY_POTTER);
+        BookList expectedBookList = new BookList();
+        expectedBookList.add(HARRY_POTTER);
+
+        Book bookWithDifferentIsbn = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
+        bookList.addRequest(bookWithDifferentIsbn, ALICE);
+        assertEquals(expectedBookList, bookList);
+    }
+
+    @Test
+    public void hasAvailableCopy_nullBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> bookList.hasAvailableCopy(null));
+    }
+
+    @Test
+    public void hasAvailableCopy_hasAvailableSameIsbnCopy_returnsTrue() {
+        // has available copy with same isbn -> returns true
+        Book bookWithSameIsbnOnly = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES).withTags()
+                .withAuthors(VALID_AUTHOR_SUZANNE_COLLINS).build();
+        bookList.add(bookWithSameIsbnOnly);
+        assertTrue(bookList.hasAvailableCopy(HARRY_POTTER));
+    }
+
+    @Test
+    public void hasAvailableCopy_hasAvailableDifferentIsbnCopy_returnsFalse() {
+        // has available copy with different isbn -> returns false
+        Book bookWithDifferentIsbn = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
+        bookList.add(bookWithDifferentIsbn);
+        assertFalse(bookList.hasAvailableCopy(HARRY_POTTER));
+    }
+
+    @Test
+    public void hasAvailableCopy_allCopiesBorrowed_returnsFalse() {
+        // has available copy with different isbn -> returns false
+        Book borrowedBookWithSameIsbn = new BookBuilder(HARRY_POTTER).withBookStatus(getSampleBorrowedStatus()).build();
+        bookList.add(borrowedBookWithSameIsbn);
+        assertFalse(bookList.hasAvailableCopy(HARRY_POTTER));
+    }
+
+    @Test
+    public void isBorrowing_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> bookList.isBorrowing(null, HARRY_POTTER));
+        assertThrows(NullPointerException.class, () -> bookList.isBorrowing(ALICE, null));
+    }
+
+    @Test
+    public void hasSameIsbn_noSameIsbn_returnsFalse() {
+        bookList.add(HARRY_POTTER);
+        assertFalse(bookList.hasSameIsbn(HUNGER_GAMES));
+    }
+
+    @Test
+    public void hasSameIsbn_hasSameIsbn_returnsTrue() {
+        bookList.add(HARRY_POTTER);
+        Book allFieldsDifferentExceptIsbn = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES)
+                .withTags().withAuthors().withRequesters(ALICE).withBookStatus(getSampleBorrowedStatus())
+                .withTimeAdded(12345).build();
+        assertTrue(bookList.hasSameIsbn(allFieldsDifferentExceptIsbn));
+    }
+
+    @Test
     public void returnAllBorrowedBooks() {
         bookList.add(HARRY_POTTER);
         bookList.add(AI);
@@ -113,6 +265,23 @@ public class BookListTest {
         expectedBookList.add(new Book(AI, BookStatus.createAvailableBookStatus()));
         bookList.returnAllBorrowedBooks(getTypicalPatrons().get(0));
         assertEquals(expectedBookList, bookList);
+    }
+
+    @Test
+    public void hasSameIsbnDiffAuthorsOrName() {
+        bookList.add(HARRY_POTTER);
+
+        // same isbn but different name -> returns true
+        Book book2 = new BookBuilder(HARRY_POTTER).withName("diff name").build();
+        assertTrue(bookList.hasSameIsbnDiffAuthorsOrName(book2));
+
+        // same isbn but different authors -> returns true
+        book2 = new BookBuilder(HARRY_POTTER).withAuthors("some author").build();
+        assertTrue(bookList.hasSameIsbnDiffAuthorsOrName(book2));
+
+        // different isbn, but same authors and book name is allowed -> returns false
+        book2 = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
+        assertFalse(bookList.hasSameIsbnDiffAuthorsOrName(book2));
     }
 
     @Test

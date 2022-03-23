@@ -167,38 +167,6 @@ public class EditBookCommandTest {
     }
 
     @Test
-    public void execute_duplicateBookUnfilteredList_success() {
-        Book firstBook = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
-        Book editedBook = new BookBuilder(firstBook).build();
-        EditBookDescriptor bookDescriptor = new EditBookDescriptorBuilder(firstBook).build();
-        EditBookCommand editBookCommand = new EditBookCommand(INDEX_SECOND_BOOK, bookDescriptor);
-
-        String expectedMessage = String.format(EditBookCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
-
-        Model expectedModel = new ModelManager(new LibTask(model.getLibTask()), new UserPrefs());
-        expectedModel.setBook(model.getFilteredBookList().get(1), editedBook);
-
-        assertCommandSuccess(editBookCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_duplicateBookFilteredList_success() {
-        showBookAtIndex(model, INDEX_FIRST_BOOK);
-
-        Book bookInList = model.getLibTask().getBookList().get(INDEX_SECOND_BOOK.getZeroBased());
-        EditBookCommand editBookCommand = new EditBookCommand(INDEX_FIRST_BOOK,
-                new EditBookDescriptorBuilder(bookInList).build());
-        Book editedBook = new BookBuilder(bookInList).build();
-
-        String expectedMessage = String.format(EditBookCommand.MESSAGE_EDIT_BOOK_SUCCESS, editedBook);
-
-        Model expectedModel = new ModelManager(new LibTask(model.getLibTask()), new UserPrefs());
-        expectedModel.setBook(model.getFilteredBookList().get(0), editedBook);
-
-        assertCommandSuccess(editBookCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_invalidBookIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredBookList().size() + 1);
         EditBookDescriptor bookDescriptor = new EditBookDescriptorBuilder()
@@ -206,6 +174,19 @@ public class EditBookCommandTest {
         EditBookCommand editBookCommand = new EditBookCommand(outOfBoundIndex, bookDescriptor);
 
         assertCommandFailure(editBookCommand, model, Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_hasExistingIsbn_throwsCommandException() {
+        Index indexLastBook = Index.fromOneBased(model.getFilteredBookList().size());
+        Book lastBook = model.getFilteredBookList().get(indexLastBook.getZeroBased());
+
+        Book firstBook = model.getFilteredBookList().get(0);
+        String existingIsbn = firstBook.getIsbn().toString();
+        EditBookDescriptor bookDescriptor = new EditBookDescriptorBuilder().withIsbn(existingIsbn).build();
+        EditBookCommand editBookCommand = new EditBookCommand(indexLastBook, bookDescriptor);
+
+        assertCommandFailure(editBookCommand, model, EditBookCommand.MESSAGE_SAME_ISBN);
     }
 
     @Test
