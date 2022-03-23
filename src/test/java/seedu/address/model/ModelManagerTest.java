@@ -3,6 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_HUNGER_GAMES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATRONS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -17,8 +18,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.book.Book;
 import seedu.address.model.book.BookNameContainsKeywordsPredicate;
 import seedu.address.model.patron.NameContainsKeywordsPredicate;
+import seedu.address.testutil.BookBuilder;
 import seedu.address.testutil.LibTaskBuilder;
 
 public class ModelManagerTest {
@@ -105,6 +108,54 @@ public class ModelManagerTest {
     public void hasBook_bookInLibTask_returnsTrue() {
         modelManager.addBook(HARRY_POTTER);
         assertTrue(modelManager.hasBook(HARRY_POTTER));
+    }
+
+    @Test
+    public void hasSameIsbnDiffAuthorsOrName_nullBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasSameIsbnDiffAuthorsOrName(null));
+    }
+
+    @Test
+    public void hasSameIsbnDiffAuthorsOrName_hasInconsistentBook_returnsTrue() {
+        modelManager.addBook(HARRY_POTTER);
+        Book inconsistentBook = new BookBuilder(HARRY_POTTER).withName("diffname").build();
+        assertTrue(modelManager.hasSameIsbnDiffAuthorsOrName(inconsistentBook));
+    }
+
+    @Test
+    public void hasSameIsbnDiffAuthorsOrName_consistentBook_returnsFalse() {
+        modelManager.addBook(HARRY_POTTER);
+        // book with same name but different isbn is consistent
+        Book consistentBook = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
+        assertFalse(modelManager.hasSameIsbnDiffAuthorsOrName(consistentBook));
+    }
+
+    @Test
+    public void updateBookAfterPatronEdit_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateBookAfterPatronEdit(null, ALICE));
+        assertThrows(NullPointerException.class, () -> modelManager.updateBookAfterPatronEdit(ALICE, null));
+    }
+
+    @Test
+    public void updateBookAfterPatronDelete_nullDeletedPatron_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateBookAfterPatronDelete(null));
+    }
+
+    @Test
+    public void addRequest_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addRequest(null, ALICE));
+        assertThrows(NullPointerException.class, () -> modelManager.addRequest(HARRY_POTTER, null));
+    }
+
+    @Test
+    public void hasAvailableCopy_nullBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasAvailableCopy(null));
+    }
+
+    @Test
+    public void isBorrowing_someFieldsNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.isBorrowing(null, HARRY_POTTER));
+        assertThrows(NullPointerException.class, () -> modelManager.isBorrowing(ALICE, null));
     }
 
     @Test
