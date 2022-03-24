@@ -40,16 +40,13 @@ Given below are my contributions to the project.
     * Highlights:
       * A parser is used to parse the command before the logic of the command is executed.
 
-
 * **Code contributed**:
   * The code contributed by me can be found in this [link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=yuqitanyq&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18).
-
 
 * **Project management**:
   * Frequently reviewed pull requests of other team members and wrote commits in a clear and orderly manner.
   * Resolved merge conflicts when it arises before merging.
   * Communicated with team members and ensured deliverables are delivered for each iteration.
-
 
 * **Enhancements to existing features**:
 
