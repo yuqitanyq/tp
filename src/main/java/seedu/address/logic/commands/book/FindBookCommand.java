@@ -22,8 +22,9 @@ public class FindBookCommand extends Command {
             + "Parameters:"
             + "[" + PREFIX_NAME + "NAME] or "
             + "[" + PREFIX_AUTHOR + "AUTHOR] or "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example " + BOOK_COMMAND_GROUP + " " + FIND_COMMAND_WORD + " "
+            + "[" + PREFIX_TAG + "TAG]\n"
+            + "A prefix can only be used once"
+            + "Example: " + BOOK_COMMAND_GROUP + " " + FIND_COMMAND_WORD + " "
             + PREFIX_NAME + "Harry Potter";
 
     private final Predicate<Book> predicate;

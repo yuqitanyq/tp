@@ -35,10 +35,13 @@ public class FindBookParser implements Parser<Command> {
         if (!argMultimap.hasExactlyOneQueriedPrefix(PREFIX_NAME, PREFIX_AUTHOR, PREFIX_TAG)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindBookCommand.MESSAGE_USAGE));
         }
+
         List<Prefix> prefixes = argMultimap.getNonEmptyPrefixes(PREFIX_NAME, PREFIX_AUTHOR, PREFIX_TAG);
-        assert(prefixes.size() == 1) : "Prefix size is wrong";
 
         Prefix queriedPrefix = prefixes.get(0);
+        if (!argMultimap.hasExactlyOneValue(queriedPrefix)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindBookCommand.MESSAGE_USAGE));
+        }
         String argument = (argMultimap.getValue(queriedPrefix)).get();
         return new FindBookCommand(parsePredicate(queriedPrefix, List.of(argument)));
     }
