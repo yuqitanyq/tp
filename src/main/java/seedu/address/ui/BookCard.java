@@ -146,7 +146,7 @@ public class BookCard extends UiPart<Region> {
                     .map(requester -> requester.getName().fullName)
                     .collect(Collectors.joining(", "));
 
-            requestedBy.setText("Requesters: " + requestersString);
+            requestedBy.setText(requestersString);
             return;
         }
         requestedBy.setVisible(false);
