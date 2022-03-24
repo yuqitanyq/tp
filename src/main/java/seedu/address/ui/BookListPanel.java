@@ -25,6 +25,7 @@ public class BookListPanel extends UiPart<Region> {
      */
     public BookListPanel(ObservableList<Book> bookList) {
         super(FXML);
+        logger.info("Creating Book List Panel");
         bookListView.setItems(bookList);
         bookListView.setCellFactory(listView -> new BookListViewCell());
     }
