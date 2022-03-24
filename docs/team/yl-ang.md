@@ -32,6 +32,5 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PR reviewed (with non-trivial review comments): [\#101](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/101), [\#100](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/100), [\#96](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/96), [\#95](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/95), [\#83](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/83), [\#79](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/79), [\#78](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/78), [\#73](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/73), [\#69](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/69), [\#66](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/65), [\#62](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/65), [\#60](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/60)
-  *
 
 * **Tools**:
