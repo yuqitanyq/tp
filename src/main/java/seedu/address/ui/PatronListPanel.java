@@ -25,6 +25,7 @@ public class PatronListPanel extends UiPart<Region> {
      */
     public PatronListPanel(ObservableList<Patron> patronList) {
         super(FXML);
+        logger.info("Creating Patron List Panel");
         patronListView.setItems(patronList);
         patronListView.setCellFactory(listView -> new PatronListViewCell());
     }

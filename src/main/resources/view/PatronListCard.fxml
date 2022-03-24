@@ -25,9 +25,9 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true" />
+        <Label fx:id="name" text="\$first" styleClass="cell_big_label" textOverrun="ELLIPSIS"/>
       </HBox>
-      <FlowPane fx:id="patronRoleTags" />
+      <FlowPane fx:id="patronRoleTags"/>
       <Label fx:id="patronId" styleClass="cell_small_label" text="\$patronId" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true" />
