@@ -9,7 +9,7 @@ LibTask is a desktop application used by librarians to keep track of books, over
 
 Given below are my contributions to the project.
 
-###Summary of Contributions
+### Summary of Contributions
 
 * **New Feature**:
   * Added the ability to edit the different fields of a book
@@ -32,13 +32,15 @@ Given below are my contributions to the project.
     * Highlights:
       * This enhancement is implemented rather similarly as to how the list command is implemented in AB3 originally, but with minor tweaks to accommodate to the book object and book list.
 
-  * Worked with Yong Liang to add the ability to find all books related to a particular patron
+  * Added the ability to find all books related to a particular patron
     * What it does:
       * Allows users to get a list of books related to a particular patron.
     * Justification:
       * The feature will improve the product significantly as it will help users to filter the books that are related to a particular patron of concern.
     * Highlights:
       * A parser is used to parse the command before the logic of the command is executed.
+    * Credits:
+      * Worked with [Yong Liang](http://github.com/yl-ang) to implement this enhancement.
 
 * **Code contributed**:
   * The code contributed by me can be found in this [link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=yuqitanyq&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18).
@@ -49,6 +51,8 @@ Given below are my contributions to the project.
   * Communicated with team members and ensured deliverables are delivered for each iteration.
 
 * **Enhancements to existing features**:
+  * Added Tests cases for EditBookCommand
+  * Added Tests cases for ListBookCommand
 
 * **Documentation**:
   * User Guide:

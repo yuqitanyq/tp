@@ -224,7 +224,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Librarian                                                 | update return and order status of books                                       | I can keep track of a book’s availability                                                                                             |
 | `*`      | Request handler                                           | take note of requests from students to be notified when a book is returned    | I can easily notify the student when the book under request is returned                                                               |
 | `*`      | Request handler                                           | take note of book order requests from professors                              | I can easily inform the professor when the book has arrived                                                                           |
-| `*`      | Librarian                                                 | view all books in my database                                                 | I can make use of the list to perform other tasks                                                                                     |
+| `*`      | Librarian                                                 | list all books in the database                                                | I can see all the books with one click and in one sitting                                                                             |
 | `*`      | Librarian overwhelmed with lots of book requests          | delete book requests I have                                                   | records of book requests are minimized by not keeping track of cancelled and fulfilled requests                                       |
 | `*`      | New user                                                  | be able to access help                                                        | I can learn how to use the application                                                                                                |
 | `*`      | User who has done learning how to use the application     | remove all the current entries and sample data                                | I can start a fresh and input my own data                                                                                             |
@@ -403,6 +403,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Extensions**
+
+* 2a. LibTask has no stored books.
+    * 2a1. LibTask shows an empty list.
+
+      Use case ends.
+    
 ### UC08: Find books on LibTask
 
 **MSS**
@@ -439,6 +446,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. The new details are invalid.
 
     * 1b1. LibTask shows an error message.
+
+      Use case resumes from step 1.
+  
+* 1c. The index is valid but no new details are entered
+    
+    * 1c1. LibTask shows an error message saying that at least ISBN, author or category must be provided.
 
       Use case resumes from step 1.
 
