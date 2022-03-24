@@ -577,6 +577,70 @@ Extension
 
       Use case resumes from step 2.
 
+### UC17: List patrons with overdue books
+
+**MSS**
+1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
+
+2. User requests to view all patrons with overdue books.
+
+3. LibTask shows the list of all patrons with overdue books.
+
+   Use case ends.
+
+Extension
+
+* 2a. LibTask has no users with overdue books.
+
+    * 2a1. LibTask shows an empty patron list.
+
+      Use case ends.
+
+### UC18: Request Book
+
+**MSS**
+1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
+
+2. User lists all books [UC07](#uc07-list-books-on-libtask)
+
+3. User requests to establish a request relationship and provides index of the patron and index of the book in lists.
+
+4. LibTask establishes a request relationship between the patron and the book.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The given index of patron or book is invalid.
+
+    * 3a1. LibTask shows an error message.
+
+      Use case resumes from step 3.
+
+* 3b. Patron has already requested for the book.
+
+    * 3a1. LibTask shows an error message.
+
+      Use case resumes from step 3.
+
+* 3b. The book is already borrowed by the same user.
+
+    * 3a1. LibTask shows an error message.
+
+      Use case resumes from step 3.
+
+* 3b. The book is available for borrowing.
+
+    * 3a1. LibTask shows an error message.
+
+      Use case resumes from step 3.
+
+* 3b. The book already has 3 requesters.
+
+    * 3a1. LibTask shows an error message.
+
+      Use case resumes from step 3.
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -645,10 +709,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `book delete 1`<br>
       Expected: First book is deleted from the list. Details of the deleted book shown in the status message. Timestamp in the status bar is updated.
-   
+
    1. Test case: `book delete 0`<br>
       Expected: No book is deleted. Error details shown in the status message. Status bar remains the same.
-   
+
    1. Other incorrect delete commands to try: `book delete`, `book delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 

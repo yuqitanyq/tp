@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-LibTask is a **desktop application for librarians to manage book loans and requests by patrons, optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your book tracking tasks done faster than traditional GUI apps. 
+LibTask is a **desktop application for librarians to manage book loans and requests by patrons, optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, LibTask can get your book tracking tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -27,41 +27,41 @@ As a school librarian of a large library, you may already have your own desktop 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+1. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open a help window.<br>
+   Here are some sample commands you can try:
 
-   * **`patron list`** : Lists all the patrons in libTask.
+   * **`patron list`** : Lists all patrons in LibTask's patron list.
 
-   * **`patron add`**`n/Alice s/S01823283S p/90123212 e/profA@u.nus.edu ` : Adds a patron named `Alice` into LibTask.
+   * **`patron add n/Alice s/S01823283S p/90123212 e/profA@u.nus.edu `** : Adds a patron named `Alice` into LibTask's patron list.
 
-   * **`patron delete`**`3` : Deletes the 3rd patron shown in the current patron list.
+   * **`patron delete 3`** : Deletes the 3rd patron shown in the displayed patron list.
 
-   * **`book add`**` n/Harry Potter i/12398-12398-239 a/J.K.Rowling t/Thriller t/Magic`: Adds a book titled `Harry Potter`.
+   * **`book add n/Harry Potter i/12398-12398-239 a/J.K.Rowling t/Thriller t/Magic`**: Adds a book titled `Harry Potter`into LibTask's book list.
 
-   * **`book list`** : Lists all the books in libTask.
+   * **`book list`** : Lists all books in LibTask's book list.
 
-   * **`book delete`**`1` : Deletes the 1st book shown in the current book list.
+   * **`book delete 1`** : Deletes the 1st book shown in the displayed book list.
 
-   * **`exit`** : Exits libTask.
+   * **`exit`** : Exits LibTask.
 
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Important Notes
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `patron delete INDEX`, `INDEX` is a parameter which the user can enter and can be used as `patron delete 1`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​ ` can be used as `patron add n/John s/A0123456A p/93231222 e/e03482@u.nus.edu t/student` or as `patron add n/John s/A0123456A p/93231222 e/e03482@u.nus.edu`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend` or `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -69,43 +69,75 @@ As a school librarian of a large library, you may already have your own desktop 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `patron list`, `book list`, `exit` and `clear`) will be ignored.<br>
+  e.g. `help 123` will be interpreted as `help`.
 
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Features
+
+### A. General Features
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Opens a help window explaining how to access LibTask's user guide.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
-### Adding a patron: `add`
-Adds a patron to the library database.
+### Clearing all entries : `clear`
+
+Clears all patrons and books from LibTask's patron and book lists.
+
+Format: `clear`
+
+### Exiting LibTask : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Retrieving previous command: `u`
+
+Retrieves the previous command entered by the user back to the command box.
+
+Format: `u`
+
+* Loads your previous successfully entered commands back to the command box so you can view and rerun it.
+* Only allows each command to be viewed once.
+
+### Saving LibTask's data
+
+LibTask's data is saved in the hard disk automatically after any command that changes it. There is no need to save manually.
+
+### B. Patron Features
+
+--------------------------------------------------------------------------------------------------------------------
+### Adding a patron: `patron add`
+Adds a patron to LibTask's patron list.
 
 Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: 
-
-**Tip:**
-A patron can have any number of tags (including 0)
-</div>
 
 Examples:
 * `patron add n/John s/A02128282A p/93231222 e/e03482@u.nus.edu t/student`
 * `patron add n/Alice s/S01823283S p/90123212 e/profA@u.nus.edu`
 
-### Listing all patrons : `list`
+### Listing all patrons : `patron list`
 
-Shows a list of all patrons in the database.
+Shows a list of all patrons in LibTask's patron list.
 
 Format: `patron list`
 
-### Editing a patron : `edit`
+* If all patrons are already listed, the command will still show a success message as having listed all patrons, but the patrons listed will have no visual change.
 
-Edits a patron at a specified index of the displayed patron list.
+### Editing a patron : `patron edit`
+
+Edits the details of a patron at a specified index of the displayed patron list.
 
 Format: `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
@@ -117,21 +149,21 @@ Format: `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-* `patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu` Edits the name, phone number and email address of the 1st patron to be `John Cena`, `91959491` and `johncena@u.nus.edu` respectively.
-* `patron edit 2 n/Alice t/Professor t/Horror ` Edits the name of the 2nd patron to be `Alice` and changes tags to `Professor` and `Horror`.
+* `patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu` Edits the name, phone number and email address of the 1st patron in the displayed patron list to be `John Cena`, `91959491` and `johncena@u.nus.edu` respectively.
+* `patron edit 2 n/Alice t/Professor t/Horror ` Edits the name of the 2nd patron in the displayed patron list to be `Alice` and changes tags to `Professor` and `Horror`.
 
-### Finding a patron by name: `find`
+### Finding a patron by name: `patron find`
 
-Finds all patrons with names matching the given keywords in the database.
+Finds all patrons with names matching the given keywords in LibTask's patron list.
 
 Format: `patron find n/KEYWORD [n/KEYWORD]…​`
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The order of the keywords does not matter. e.g. results from the keyword `Hans Bo` will match results of the keyword `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Patrons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only full words will be matched e.g. results from the keyword `Han` will not match results from the keyword `Hans`
+* Patrons matching at least one part of the keyword will be returned (i.e. `OR` search).
+  e.g. keyword `Hans Bo` will return patrons with names `Hans Gruber`, `Bo Yang`
 
 Example:
 
@@ -139,9 +171,9 @@ Example:
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a patron : `delete`
+### Deleting a patron : `patron delete`
 
-Delete a patron from the system at a specified index of the displayed patron list.
+Deletes the patron at a specified index in the displayed patron list.
 
 Format: `patron delete INDEX`
 
@@ -150,12 +182,21 @@ Format: `patron delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `patron list` followed by `patron delete 2` deletes the 2nd patron in the patron list.
+* `patron list` followed by `patron delete 2` deletes the 2nd patron shown in the displayed patron list.
 * `patron find n/Betsy` followed by `patron delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding a book: `add`
+### Listing all patrons with overdue books : `patron overdue`
 
-Adds a book to LibTask database.
+Lists all patrons in LibTask's patron list with overdue books.
+
+Format: `patron overdue`
+
+### C. Book Features
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Adding a book: `book add`
+Adds a book to LibTask's book list.
 
 Format: `book add n/NAME i/ISBN [a/AUTHOR …] [t/CATEGORY_TAG …] `
 
@@ -169,17 +210,17 @@ Examples:
 * `book add n/Harry Potter i/978-7-783828-15-1 a/J.K.Rowling t/Thriller t/Magic`
 * `book add n/Heads You Lose i/979-381-26-8943-3 a/Lisa Lutz a/David Hayward`
 
-### Listing all books : `list`
+### Listing all books : `book list`
 
-List all books in LibTask database.
+Shows a list of all books in LibTask's book list.
 
 Format: `book list`
 
 * If all books are already listed, the command will still show a success message as having listed all books, but the books listed will have no visual change.
 
-### Finding books : `find`
+### Finding books : `book find`
 
-List books that satisfy the predicates given
+Lists all books in LibTask's book list that satisfy the predicates given.
 
 Format: `book find [n/Name] [t/Tag] [a/Author]`
 
@@ -187,12 +228,12 @@ Format: `book find [n/Name] [t/Tag] [a/Author]`
 * Only one of the optional fields can be provided.
 
 Examples:
-* `book find n/Harry` Returns all books whose title contains the word Harry.
-* `book find t/Adventure` Returns all books which have a tag Adventure.
+* `book find n/Harry` Returns all books in LibTask's book list whose titles contain the word `Harry`.
+* `book find t/Adventure` Returns all books in LibTask's book list which have a tag `Adventure`.
 
-### Editing a book : `edit`
+### Editing a book : `book edit`
 
-Edit details of the book at the specified index.
+Edits the details of a book at a specified index of the displayed book list.
 
 Format: `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR …] [t/CATEGORY_TAG …]`
 
@@ -207,9 +248,9 @@ Examples:
 * `book edit 1 n/Harry Potter: Sorcerer's Stone t/Adventure t/Magic` edits the name of the 1st book to be `Harry Potter: Sorceror's Stone` and edit its category tag to be `Adventure` and `Magic`.
 * `book edit 2 i/978-79317-3-542-3 a/Another Rowling t/` edits the ISBN of the 2nd book to be `978-79317-3-542-3`, changes the author to `Another Rowling` and clears all existing tags.
 
-### Deleting a book : `delete`
+### Deleting a book : `book delete`
 
-Deletes the book at the specified index.
+Deletes the book at the specified index in the displayed book list.
 
 Format: `book delete INDEX`
 
@@ -218,16 +259,16 @@ Format: `book delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of books in the displayed list.
 
 Examples:
-* `book list` followed by `book delete 2` deletes the 2nd book from LibTask's database.
+* `book list` followed by `book delete 2` deletes the 2nd book from LibTask's book list.
 
 ### Borrowing a book : `borrow`
 
-Establishes a relationship that patron at index INDEX1 borrows a book at index INDEX2.
+Allows the patron at `INDEX1` of the displayed patron list to borrow a book at `INDEX2` of the displayed book list.
 
 Format: `borrow INDEX1 INDEX2`
 
-* `INDEX1` refers to the index number shown in the displayed patron list.
-* `INDEX2` refers to the index number shown in the displayed book list.
+* `INDEX1` refers to the index number of a patron shown in the displayed patron list.
+* `INDEX2` refers to the index number of a book shown in the displayed book list.
 * `INDEX1` **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of patrons in the displayed list.
 * `INDEX2` **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of books in the displayed list.
 * The book at `INDEX2` must not be already borrowed.
@@ -237,7 +278,7 @@ Examples:
 
 ### Returning a book : `return`
 
-Depending on the exact command, return all books borrowed by a patron at the specified index, or return a book at the specified index.
+Depending on the exact command, returns all books borrowed by a patron at a specified index of the displayed patron list, or returns a book at a specified index in the displayed book list.
 
 Format: `return PREFIX/INDEX`
 
@@ -253,7 +294,7 @@ Examples:
 
 ### Requesting a book : `request`
 
-Establishes a relationship that patron at index INDEX1 is requesting to be notified when the book at index INDEX2 is available.
+Establishes a relationship that patron at index `INDEX1` of the displayed patron list is requesting to be notified when the book at index `INDEX2` of the displayed book list is available.
 
 Format: `request INDEX1 INDEX2`
 
@@ -262,11 +303,11 @@ Format: `request INDEX1 INDEX2`
 * If the book at index `INDEX2` is currently available, a message will be displayed.
 
 Examples:
-* `patron list` and `book list` followed by `request 1 2` keeps a record that the 1st patron would like to be notified when the 2nd book is available.
+* `patron list` and `book list` followed by `request 1 2` keeps a record that the 1st patron in the displayed patron list would like to be notified when the 2nd book in the displayed book list is available.
 
-### Listing all books related to a patron : `related`
+### Listing all books related to a patron : `book related`
 
-Display all books related to the patron at the specified index.
+Display all books related to the patron at the specified index of the displayed patron list.
 
 Format: `book related INDEX`
 
@@ -275,38 +316,14 @@ Format: `book related INDEX`
 Examples:
 * `book related 1` will display all the books borrowed and requested by the 1st patron in the displayed patron list.
 
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Retrieving previous command: `u`
-
-Retrieves the previous command back to the command box
-
-Format: `u`
-
-* Lets you look back at the previous commands successfully entered.
-* Only allows each command to be viewed once.
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+LibTask's data is saved as a JSON file `[JAR file location]/data/libtask.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: 
+<div markdown="span" class="alert alert-warning">:exclamation:
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, LibTask will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -318,20 +335,32 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How does this app help current librarians?<br>
-**A**: The app helps librarians manage the statuses of books borrowed and borrowers.
+**A**: The app helps librarians manage the statuses of books borrowed along with their borrowers.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+
+### Category: General Commands
+
+| Function                                   | Format Of Command                                                          |
+|--------------------------------------------|----------------------------------------------------------------------------|
+| **Show message to help page**              | `help`                                                                     |
+| **Clear all entries**                      | `clear`                                                                    |
+| **Exit the program**                       | `exit`                                                                     |
+| **Show previous commands**                 | `u`                                                                        |
+| **Navigating the different patrons/books** | **Pressing the :arrow_up: and :arrow_down: arrows on keyboard :keyboard:** |
+
 ### Category: Patron Commands
 
-| Function             | Format Of Command                                                 |
-|----------------------|-------------------------------------------------------------------|
-| **Add a new patron** | `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`                |
-| **List all patrons** | `patron list`                                                     |
-| **Edit a patron**    | `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​` |
-| **Find a patron**    | `patron find n/KEYWORD [n/KEYWORD]…​`                             |
-| **Delete a patron**  | `patron delete INDEX`                                             |
+| Function                            | Format Of Command                                                 |
+|-------------------------------------|-------------------------------------------------------------------|
+| **Add a new patron**                | `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`                |
+| **List all patrons**                | `patron list`                                                     |
+| **Edit a patron**                   | `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​` |
+| **Find a patron**                   | `patron find n/KEYWORD [n/KEYWORD]…​`                             |
+| **Delete a patron**                 | `patron delete INDEX`                                             |
+| **List patrons with overdue books** | `patron overdue`                                                  |
 
 ### Category: Book Commands
 
@@ -339,21 +368,10 @@ _Details coming soon ..._
 |----------------------------------------|---------------------------------------------------------------------|
 | **Add a book**                         | `book add n/NAME i/ISBN [a/AUTHOR]…​ [t/CATEGORY_TAG]…​`            |
 | **List all books**                     | `book list`                                                         |
+| **Find a book**                        | `book find [n/Name] [t/Tag] [a/Author]`                             |
 | **Edit a book**                        | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR]…​ [t/CATEGORY_TAG]…​` |
 | **Delete a book**                      | `book delete INDEX`                                                 |
 | **Borrow a book**                      | `borrow INDEX1 INDEX2`                                              |
 | **Return a book**                      | `return PREFIX/INDEX`                                               |
 | **Request a book**                     | `request INDEX1 INDEX2`                                             |
-| **Find a book**                        | `book find [n/Name] [t/Tag] [a/Author]`                             |
-| **List all books related to a patron** | `book related INDEX`                                                 |
-
-
-### Category: General Commands
-
-| Function                                   | Format Of Command                                                          |
-|--------------------------------------------|----------------------------------------------------------------------------|
-| **Clear all entries**                      | `clear`                                                                    |
-| **Exit the program**                       | `exit`                                                                     |
-| **Show message to help page**              | `help`                                                                     |
-| **Show previous commands**                 | `u`                                                                        |
-| **Navigating the different patrons/books** | **Pressing the :arrow_up: and :arrow_down: arrows on keyboard :keyboard:** |
+| **List all books related to a patron** | `book related INDEX`                                                |
