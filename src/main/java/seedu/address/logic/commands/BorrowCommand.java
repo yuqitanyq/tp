@@ -16,7 +16,7 @@ import seedu.address.model.book.Book;
 import seedu.address.model.patron.Patron;
 
 /**
- * Parses input arguments and creates a new BorrowCommand object
+ * Borrows a book by a patron, both identified using their displayed index from LibTask.
  */
 public class BorrowCommand extends Command {
 
@@ -28,6 +28,7 @@ public class BorrowCommand extends Command {
             + "Example: " + BORROW_COMMAND_WORD + " 1 1 28-Feb-2023";
 
     public static final String MESSAGE_BORROW_BOOK_SUCCESS = "Patron %1$s borrowed book %2$s until %3$s";
+    public static final String MESSAGE_IS_BORROWING = "Patron %1$s already borrowing a copy of the same book!\n";
 
     private final Index patronIndex;
     private final Index bookIndex;
@@ -62,6 +63,9 @@ public class BorrowCommand extends Command {
 
         Patron borrower = lastShownPatronList.get(patronIndex.getZeroBased());
         Book bookToBorrow = lastShownBookList.get(bookIndex.getZeroBased());
+        if (model.isBorrowing(borrower, bookToBorrow)) {
+            throw new CommandException(String.format(MESSAGE_IS_BORROWING, borrower.getName()));
+        }
         if (!isAfterCurrentDate(returnDate)) {
             throw new CommandException(Messages.MESSAGE_RETURN_DATE_TOO_EARLY);
         }

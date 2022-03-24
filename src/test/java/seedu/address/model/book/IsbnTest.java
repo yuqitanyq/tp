@@ -1,8 +1,12 @@
 package seedu.address.model.book;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -44,5 +48,31 @@ public class IsbnTest {
         assertTrue(Isbn.isValidIsbn("17-18-13730-3")); // ISBN10 with hyphen
         assertTrue(Isbn.isValidIsbn("1718137303")); // ISBN10 without hyphen
         assertTrue(Isbn.isValidIsbn("97-971617-018-8-4")); // ISBN13 starting with 979
+    }
+
+    @Test
+    public void equals() {
+        // Differ hyphen arrangements -> returns true
+        assertEquals(new Isbn("978-71617-018-8-5"), new Isbn("9-7-8-71617-018-8-5"));
+        // Differ strings after hyphen removal -> returns false
+        assertNotEquals(new Isbn("978-71617-018-8-5"), new Isbn("17-18-13730-3"));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        // Differ hyphen arrangements -> returns true
+        assertEquals(new Isbn("978-71617-018-8-5").hashCode(), new Isbn("9-7-8-71617-018-8-5").hashCode());
+        // Differ strings after hyphen removal -> returns false
+        assertNotEquals(new Isbn("978-71617-018-8-5").hashCode(), new Isbn("17-18-13730-3").hashCode());
+
+        // Testing equality on HashSet
+        HashSet<Isbn> set1 = new HashSet<>();
+        set1.add(new Isbn("978-71617-018-8-5"));
+        HashSet<Isbn> set2 = new HashSet<>();
+        set2.add(new Isbn("9-7-8-71617-018-8-5"));
+        assertEquals(set1, set2);
+        HashSet<Isbn> set3 = new HashSet<>();
+        set1.add(new Isbn("17-18-13730-3"));
+        assertNotEquals(set1, set3);
     }
 }

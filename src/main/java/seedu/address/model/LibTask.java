@@ -89,6 +89,33 @@ public class LibTask implements ReadOnlyLibTask {
     }
 
     /**
+     * Returns true if there is some book in this LibTask's book list with the same isbn, but different book name or
+     * different set of authors as {@code bookToCheck}.
+     */
+    public boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck) {
+        requireNonNull(bookToCheck);
+        return books.hasSameIsbnDiffAuthorsOrName(bookToCheck);
+    }
+
+    /**
+     * Returns true if there is some book in this LibTask's book list with the same isbn as {@code bookToCheck}.
+     */
+    public boolean hasSameIsbn(Book bookToCheck) {
+        requireNonNull(bookToCheck);
+        return books.hasSameIsbn(bookToCheck);
+    }
+
+    /**
+     * Removes all book requests from all books in this LibTask's book list that has the same isbn as any book in
+     * {@param booksToDelete}.
+     *
+     * @return A message string representing the notifications for distinct book request that were deleted.
+     */
+    public String deleteAllRequests(Book ... booksToDelete) {
+        return books.deleteAllRequests(booksToDelete);
+    }
+
+    /**
      * Adds a patron to LibTask.
      * The patron must not already exist in LibTask.
      */
@@ -125,12 +152,74 @@ public class LibTask implements ReadOnlyLibTask {
     }
 
     /**
-     * Replaces all books borrowed by {@code borrower} with the same book, but with available status in LibTask.
+     * Replaces the given book {@code target} with {@code editedBook}. If there are any other books with the same isbn
+     * as {@code target}, update the authors and names of all those books to ensure consistency about books.
+     * {@code target} must exist in LibTask.
+     *
+     * @return True if some other book other than target is modified for the sake of consistency.
      */
-    public void returnAllBorrowedBooks(Patron borrower) {
+    public boolean setAndEditBook(Book target, Book editedBook) {
+        requireAllNonNull(target, editedBook);
+        return books.setAndEditBook(target, editedBook);
+    }
+
+    /**
+     * Replaces all books that are borrowed or requested by {@code target} with new book objects such that
+     * {@code target} is replaced by {@code editedPatron} in the new book's requesters list and borrower.
+     *
+     * @return A message string representing the notifications for the book updates.
+     */
+    public String updateBookAfterPatronEdit(Patron target, Patron editedPatron) {
+        requireAllNonNull(target, editedPatron);
+        return books.updateBookAfterPatronEdit(target, editedPatron);
+    }
+
+    /**
+     * Replaces all books that are borrowed or requested by {@code deletedPatron} with new book objects such that
+     * {@code deletedPatron} is removed from the new book's requesters list.
+     *
+     * @return A message string representing the notifications for the book updates.
+     */
+    public String updateBookAfterPatronDelete(Patron deletedPatron) {
+        requireNonNull(deletedPatron);
+        return books.updateBookAfterPatronDelete(deletedPatron);
+    }
+
+    /**
+     * Replaces all books that have the same isbn as {@code bookToRequest} with new book objects such that
+     * {@code requester} is added to the new book's requesters list.
+     */
+    public void addRequest(Book bookToRequest, Patron requester) {
+        requireAllNonNull(bookToRequest, requester);
+        books.addRequest(bookToRequest, requester);
+    }
+
+    /**
+     * Returns true if there is at least one available copy of book with the same isbn as {@code book}
+     */
+    public boolean hasAvailableCopy(Book book) {
+        requireNonNull(book);
+        return books.hasAvailableCopy(book);
+    }
+
+    /**
+     * Returns true if the specified {@code patron} is currently borrowing a copy book with the same isbn as
+     * the specified {@code book}.
+     */
+    public boolean isBorrowing(Patron patron, Book book) {
+        requireAllNonNull(patron, book);
+        return books.isBorrowing(patron, book);
+    }
+
+    /**
+     * Replaces all books borrowed by {@code borrower} with the same book, but with available status in LibTask.
+     *
+     * @return The list of available books that were returned by {@code borrower}
+     */
+    public List<Book> returnAllBorrowedBooks(Patron borrower) {
         requireNonNull(borrower);
 
-        books.returnAllBorrowedBooks(borrower);
+        return books.returnAllBorrowedBooks(borrower);
     }
 
     /**

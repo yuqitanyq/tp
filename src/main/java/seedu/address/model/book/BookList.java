@@ -3,9 +3,13 @@ package seedu.address.model.book;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,6 +61,95 @@ public class BookList implements Iterable<Book> {
     }
 
     /**
+     * Replaces the given book {@code target} with {@code editedBook}. If there are any other books with the same isbn
+     * as {@code target}, update the authors and names of all those books to ensure consistency about books.
+     * {@code target} must exist in LibTask.
+     *
+     * @return True if some other book other than target is modified for the sake of consistency.
+     */
+    public boolean setAndEditBook(Book target, Book editedBook) {
+        // setBook must be done first, otherwise tags will not be updated
+        setBook(target, editedBook);
+        boolean hasModifiedOtherBooks = false;
+        for (Book book : internalList) {
+            if (!book.hasSameIsbn(target) || book.equals(editedBook)) {
+                continue;
+            }
+            if (!book.hasSameIsbn(editedBook) || !book.hasSameName(editedBook) || !book.hasSameAuthors(editedBook)) {
+                Book updatedConsistentBook = book.getConsistentReplacement(editedBook);
+                setBook(book, updatedConsistentBook);
+                hasModifiedOtherBooks = true;
+            }
+        }
+        return hasModifiedOtherBooks;
+    }
+
+    /**
+     * Replaces all books that are borrowed or requested by {@code target} with new book objects such that
+     * {@code target} is replaced by {@code editedPatron} in the new book's requesters list and borrower.
+     *
+     * @return A message string representing the notifications for the book updates.
+     */
+    public String updateBookAfterPatronEdit(Patron target, Patron editedPatron) {
+        requireAllNonNull(target, editedPatron);
+        return updatePatronBorrowedBooks(target, editedPatron) + updatePatronRequestedBooks(target, editedPatron);
+    }
+
+    /**
+     * Replaces all books that are borrowed or requested by {@code deletedPatron} with new book objects such that
+     * {@code deletedPatron} is removed from the new book's requesters list.
+     *
+     * @return A message string representing the notifications for the book updates.
+     */
+    public String updateBookAfterPatronDelete(Patron deletedPatron) {
+        requireNonNull(deletedPatron);
+        boolean hasModifiedSomeBooks = false;
+        for (Book book : internalList) {
+            if (!book.isRequestedBy(deletedPatron)) {
+                continue;
+            }
+            Book updatedBook = book.deleteRequester(deletedPatron);
+            setBook(book, updatedBook);
+            hasModifiedSomeBooks = true;
+        }
+        return hasModifiedSomeBooks
+                ? String.format("%s is also deleted from the requesters list of some books\n", deletedPatron.getName())
+                : "";
+    }
+
+    /**
+     * Replaces all books that have the same isbn as {@code bookToRequest} with new book objects such that
+     * {@code requester} is added to the new book's requesters list.
+     */
+    public void addRequest(Book bookToRequest, Patron requester) {
+        requireAllNonNull(bookToRequest, requester);
+        for (Book book : internalList) {
+            if (!book.hasSameIsbn(bookToRequest)) {
+                continue;
+            }
+            Book updatedBook = book.addRequester(requester);
+            setBook(book, updatedBook);
+        }
+    }
+
+    /**
+     * Returns true if there is at least one available copy of book with the same isbn as {@code book}
+     */
+    public boolean hasAvailableCopy(Book book) {
+        requireNonNull(book);
+        return internalList.stream().anyMatch(b -> b.hasSameIsbn(book) && b.isAvailable());
+    }
+
+    /**
+     * Returns true if the specified {@code patron} is currently borrowing a copy book with the same isbn as
+     * the specified {@code book}.
+     */
+    public boolean isBorrowing(Patron patron, Book book) {
+        requireAllNonNull(patron, book);
+        return internalList.stream().anyMatch(b -> b.hasSameIsbn(book) && b.isBorrowedBy(patron));
+    }
+
+    /**
      * Removes the equivalent book from the list.
      * The book must exist in the list.
      */
@@ -83,15 +176,55 @@ public class BookList implements Iterable<Book> {
 
     /**
      * Replaces all books borrowed by {@code borrower} with the same book, but with available status in this book list.
+     *
+     * @return The list of available books that were returned by {@code borrower}
      */
-    public void returnAllBorrowedBooks(Patron borrower) {
+    public List<Book> returnAllBorrowedBooks(Patron borrower) {
+        ArrayList<Book> returnedBooks = new ArrayList<>();
         for (Book book : internalList) {
             if (!book.isBorrowedBy(borrower)) {
                 continue;
             }
             Book updatedAvailableBook = new Book(book, BookStatus.createAvailableBookStatus());
             setBook(book, updatedAvailableBook);
+            returnedBooks.add(updatedAvailableBook);
         }
+        return returnedBooks;
+    }
+
+    /**
+     * Returns true if there is some other book in this book list with the same isbn, but different book name or
+     * different set of authors as {@code bookToCheck}.
+     */
+    public boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck) {
+        return internalList.stream().anyMatch(book -> book.hasSameIsbn(bookToCheck)
+                && (!book.hasSameAuthors(bookToCheck) || !book.hasSameName(bookToCheck)));
+    }
+
+    /**
+     * Returns true if there is some book in this book list with the same isbn as {@code bookToCheck}.
+     */
+    public boolean hasSameIsbn(Book bookToCheck) {
+        return internalList.stream().anyMatch(book -> book.hasSameIsbn(bookToCheck));
+    }
+
+    /**
+     * Removes all book requests from all books in this book list that has the same isbn as any book in {@param books}
+     *
+     * @return A message string representing the notifications for distinct book request that were deleted.
+     */
+    public String deleteAllRequests(Book ... books) {
+        HashSet<Isbn> notifiedBooks = new HashSet<>(); // To prevent adding the same notification multiple times
+        StringBuilder builder = new StringBuilder();
+        List<Book> booksToProcess = Arrays.stream(books).collect(Collectors.toList());
+        for (Book book : booksToProcess) {
+            if (notifiedBooks.contains(book.getIsbn())) {
+                continue;
+            }
+            notifiedBooks.add(book.getIsbn());
+            builder.append(deleteRequestSingleBook(book));
+        }
+        return builder.toString();
     }
 
     /**
@@ -150,4 +283,54 @@ public class BookList implements Iterable<Book> {
         return internalList.hashCode();
     }
 
+    private String deleteRequestSingleBook(Book bookToDelete) {
+        StringBuilder builder = new StringBuilder();
+        boolean hasNotified = false; // flag to prevent appending the same notification many times
+        for (Book book : internalList) {
+            if (!book.hasSameIsbn(bookToDelete) || book.getRequesters().isEmpty()) {
+                continue;
+            }
+            if (!hasNotified) {
+                book.getRequesters().stream().forEach(requester ->
+                        builder.append(String.format("You should notify %s about availability of %s\n",
+                                requester.getName(), book.getBookName())));
+                hasNotified = true;
+            }
+            Book updatedBookEmptyRequest = book.getBookWithEmptyRequest();
+            setBook(book, updatedBookEmptyRequest);
+        }
+        return builder.toString();
+    }
+
+    private String updatePatronBorrowedBooks(Patron target, Patron editedPatron) {
+        requireAllNonNull(target, editedPatron);
+        boolean hasModifiedSomeBooks = false;
+        for (Book book : internalList) {
+            if (!book.isBorrowedBy(target)) {
+                continue;
+            }
+            Book updatedBook = book.editBorrower(editedPatron);
+            setBook(book, updatedBook);
+            hasModifiedSomeBooks = true;
+        }
+        return hasModifiedSomeBooks
+                ? String.format("Borrower information of %s is also edited in some books\n", editedPatron.getName())
+                : "";
+    }
+
+    private String updatePatronRequestedBooks(Patron target, Patron editedPatron) {
+        requireAllNonNull(target, editedPatron);
+        boolean hasModifiedSomeBooks = false;
+        for (Book book : internalList) {
+            if (!book.isRequestedBy(target)) {
+                continue;
+            }
+            Book updatedBook = book.editRequester(target, editedPatron);
+            setBook(book, updatedBook);
+            hasModifiedSomeBooks = true;
+        }
+        return hasModifiedSomeBooks
+                ? String.format("Requester information of %s is also edited in some books\n", editedPatron.getName())
+                : "";
+    }
 }

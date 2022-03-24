@@ -20,7 +20,7 @@ import seedu.address.model.patron.Phone;
 public class JsonAdaptedPatronTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_ID = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
@@ -86,7 +86,7 @@ public class JsonAdaptedPatronTest {
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedPatron patron =
-                new JsonAdaptedPatron(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_TAGS);
+                new JsonAdaptedPatron(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ID, VALID_TAGS);
         String expectedMessage = Id.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, patron::toModelType);
     }

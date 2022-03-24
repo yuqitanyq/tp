@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -65,6 +66,25 @@ public interface Model {
     boolean hasBook(Book book);
 
     /**
+     * Returns true if there is some book in this model's book list with the same isbn, but different book name or
+     * different set of authors as {@code bookToCheck}.
+     */
+    boolean hasSameIsbnDiffAuthorsOrName(Book bookToCheck);
+
+    /**
+     * Returns true if there is some book in this model's book list with the same isbn as {@code bookToCheck}.
+     */
+    boolean hasSameIsbn(Book bookToCheck);
+
+    /**
+     * Removes all book requests from all books in this model's book list that has the same isbn as any book in
+     * {@param books}.
+     *
+     * @return A message string representing the notifications for distinct book request that were deleted.
+     */
+    String deleteAllRequests(Book ... books);
+
+    /**
      * Deletes the given patron.
      * The patron must exist in LibTask.
      */
@@ -102,15 +122,62 @@ public interface Model {
     void setBook(Book target, Book editedBook);
 
     /**
-     * Replaces all books borrowed by {@code borrower} with the same book, but with available status in LibTask.
+     * Replaces the given book {@code target} with {@code editedBook}. If there are any other books with the same isbn
+     * as {@code target}, update the authors and names of all those books to ensure consistency about books.
+     * {@code target} must exist in LibTask.
+     *
+     * @return True if some other book other than target is modified for the sake of consistency.
      */
-    void returnAllBorrowedBooks(Patron borrower);
+    boolean setAndEditBook(Book target, Book editedBook);
+
+    /**
+     * Replaces all books that are borrowed or requested by {@code target} with new book objects such that
+     * {@code target} is replaced by {@code editedPatron} in the new book's requesters list and borrower.
+     *
+     * @return A message string representing the notifications for the book updates.
+     */
+    String updateBookAfterPatronEdit(Patron target, Patron editedPatron);
+
+    /**
+     * Replaces all books that are borrowed or requested by {@code deletedPatron} with new book objects such that
+     * {@code deletedPatron} is removed from the new book's requesters list.
+     *
+     * @return A message string representing the notifications for the book updates.
+     */
+    String updateBookAfterPatronDelete(Patron deletedPatron);
+
+    /**
+     * Replaces all books that have the same isbn as {@code bookToRequest} with new book objects such that
+     * {@code requester} is added to the new book's requesters list.
+     */
+    void addRequest(Book bookToRequest, Patron requester);
+
+    /**
+     * Returns true if there is at least one available copy of book with the same isbn as {@code book}.
+     */
+    boolean hasAvailableCopy(Book book);
+
+    /**
+     * Returns true if the specified {@code patron} is currently borrowing a copy book with the same isbn as
+     * the specified {@code book}.
+     */
+    boolean isBorrowing(Patron patron, Book book);
+
+    /**
+     * Replaces all books borrowed by {@code borrower} with the same book, but with available status in LibTask.
+     *
+     * @return The list of available books that were returned by {@code borrower}
+     */
+    List<Book> returnAllBorrowedBooks(Patron borrower);
 
     /**
      * Returns true if the specified patron is currently borrowing at least one book.
      */
     boolean isBorrowingSomeBook(Patron borrower);
 
+    /**
+     * Returns true if a specified patron has overdue books.
+     */
     boolean hasOverdueBooks(Patron patron);
 
     /**
