@@ -61,6 +61,9 @@ public class BookCommandParser implements Parser<Command> {
         case Command.REQUEST_COMMAND_WORD:
             return new RequestBookCommandParser().parse(arguments);
 
+        case Command.FIND_COMMAND_WORD:
+            return new FindBookParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
