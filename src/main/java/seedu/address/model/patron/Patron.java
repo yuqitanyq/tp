@@ -70,9 +70,9 @@ public class Patron {
         }
 
         return otherPatron != null
-                && (otherPatron.getName().equals(getName()) ||
-                    otherPatron.getId().equals(getId()) ||
-                    otherPatron.getEmail().equals(getEmail()));
+                && (otherPatron.getName().equals(getName())
+                || otherPatron.getId().equals(getId())
+                || otherPatron.getEmail().equals(getEmail()));
     }
 
     /**
