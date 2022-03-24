@@ -21,7 +21,7 @@ Given below are my contributions to the project.
       * In addition, it requires some measurements to ensure that the patron and book cards are rendered in-place.
     * Credits:
       * Using Scene builder to modify FXML files.
-      * Understanding how GridPane to evenly divide the GUI space for the respective patron and book lists via the [doc oracle guide](https://docs.oracle.com/javafx/2/get_started/fxml_example.fxml.html).
+      * Understanding GridPane to evenly divide the GUI space for the respective patron and book lists via the [doc oracle guide](https://docs.oracle.com/javafx/2/get_started/fxml_example.fxml.html).
   * Added the ability to find all books related to a particular patron [\#97](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/97), [\#101](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/101)
     * What it does:
       * Allows users to get a list of books related to a particular patron.
