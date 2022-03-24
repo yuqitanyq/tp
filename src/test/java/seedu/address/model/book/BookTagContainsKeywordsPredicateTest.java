@@ -1,12 +1,16 @@
 package seedu.address.model.book;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.BookBuilder;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.BookBuilder;
+
+
 
 class BookTagContainsKeywordsPredicateTest {
 

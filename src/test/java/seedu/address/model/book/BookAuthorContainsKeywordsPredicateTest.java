@@ -1,12 +1,14 @@
 package seedu.address.model.book;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.BookBuilder;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.BookBuilder;
 
 class BookAuthorContainsKeywordsPredicateTest {
 
@@ -21,7 +23,7 @@ class BookAuthorContainsKeywordsPredicateTest {
         predicate = new BookAuthorContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
         assertTrue(predicate.test(new BookBuilder().withAuthors("Alice Carol").build()));
 
-         //Multiple keywords
+        //Multiple keywords
         predicate = new BookAuthorContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new BookBuilder().withAuthors("Alice Bob").build()));
 
