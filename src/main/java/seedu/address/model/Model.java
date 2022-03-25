@@ -114,6 +114,12 @@ public interface Model {
     boolean hasOverdueBooks(Patron patron);
 
     /**
+     * Returns true if this model containt a model that is not the same as {@code oldPatron} based on
+     * {@link Patron#equals(Object), but same as {@code editedPatron} based on {@link Patron#isSamePatron(Patron)}.
+     */
+    boolean hasEditedPatron(Patron oldPatron, Patron editedPatron);
+
+    /**
      * Replaces the given book {@code bookToBorrow} with a new book with all same fields except status.
      * The new status will be {@link seedu.address.model.book.BookStatusType#BORROWED} status
      * with {@code borrower} as the borrower and {@returnDate} as the returnDate.

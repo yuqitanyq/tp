@@ -78,7 +78,7 @@ public class EditPatronCommand extends Command {
         Patron patronToEdit = lastShownList.get(index.getZeroBased());
         Patron editedPatron = createEditedPatron(patronToEdit, editPatronDescriptor);
 
-        if (!patronToEdit.isSamePatron(editedPatron) && model.hasPatron(editedPatron)) {
+        if (model.hasEditedPatron(patronToEdit, editedPatron)) {
             throw new CommandException(MESSAGE_DUPLICATE_PATRON);
         }
 
