@@ -292,18 +292,18 @@ Examples:
 * `patron list` followed by `return p/3` will return all books borrowed by the 3rd patron, if any.
 * `book list` followed by `return b/2` will return the 2nd book, if it is borrowed.
 
-### Requesting a book : `request`
+### Requesting a book : `book request`
 
 Establishes a relationship that patron at index `INDEX1` of the displayed patron list is requesting to be notified when the book at index `INDEX2` of the displayed book list is available.
 
-Format: `request INDEX1 INDEX2`
+Format: `book request INDEX1 INDEX2`
 
 * `INDEX1` **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of patrons in the displayed list.
 * `INDEX2` **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of books in the displayed list.
 * If the book at index `INDEX2` is currently available, a message will be displayed.
 
 Examples:
-* `patron list` and `book list` followed by `request 1 2` keeps a record that the 1st patron in the displayed patron list would like to be notified when the 2nd book in the displayed book list is available.
+* `patron list` and `book list` followed by `book request 1 2` keeps a record that the 1st patron in the displayed patron list would like to be notified when the 2nd book in the displayed book list is available.
 
 ### Listing all books related to a patron : `book related`
 
