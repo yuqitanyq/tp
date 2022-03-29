@@ -1,5 +1,8 @@
 package seedu.address.model.patron;
 
+import java.util.Arrays;
+import java.util.Locale;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -47,12 +50,19 @@ public class Id {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Id // instanceof handles nulls
-                && value.toLowerCase().equals(((Id) other).value.toLowerCase())); // state check
+                && getIdForComparison().equals(((Id) other).getIdForComparison())); // state check
+    }
+
+    /**
+     * Returns the id of the patron, converted to lowercase.
+     */
+    private  String getIdForComparison() {
+        return value.toLowerCase();
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return getIdForComparison().hashCode();
     }
 
 }

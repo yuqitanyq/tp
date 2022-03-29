@@ -1,5 +1,7 @@
 package seedu.address.model.patron;
 
+import java.util.Arrays;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -62,12 +64,19 @@ public class Email {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Email // instanceof handles nulls
-                && value.toLowerCase().equals(((Email) other).value.toLowerCase())); // state check
+                && getEmailForComparison().equals(((Email) other).getEmailForComparison())); // state check
+    }
+
+    /**
+     * Returns the email of the patron, converted to lowercase.
+     */
+    private  String getEmailForComparison() {
+        return value.toLowerCase();
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return getEmailForComparison().hashCode();
     }
 
 }

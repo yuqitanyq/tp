@@ -40,18 +40,18 @@ public class PatronTest {
         editedAlice = new PatronBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertTrue(ALICE.isSamePatron(editedAlice));
 
-        // different id, all other attributes same -> returns false
+        // different id, all other attributes same -> returns true
         editedAlice = new PatronBuilder(ALICE).withId(VALID_ID_BOB).build();
-        assertFalse(ALICE.isSamePatron(editedAlice));
+        assertTrue(ALICE.isSamePatron(editedAlice));
 
         // name differs in case, all other attributes same -> returns true
         Patron editedBob = new PatronBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertTrue(BOB.isSamePatron(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> returns true
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PatronBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePatron(editedBob));
+        assertTrue(BOB.isSamePatron(editedBob));
     }
 
     @Test

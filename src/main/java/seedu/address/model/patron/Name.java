@@ -1,5 +1,7 @@
 package seedu.address.model.patron;
 
+import java.util.Arrays;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -49,12 +51,22 @@ public class Name {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Name // instanceof handles nulls
-                && fullName.toLowerCase().equals(((Name) other).fullName.toLowerCase())); // state check
+                && getPatronNameForComparison().equals(((Name) other).getPatronNameForComparison())); // state check
+    }
+
+    /**
+     * Returns the full name of the patron, converted to lowercase and without whitespaces.
+     */
+    private String getPatronNameForComparison() {
+        StringBuilder builder = new StringBuilder();
+        String[] splittedName = fullName.trim().toLowerCase().split("\\s+");
+        Arrays.stream(splittedName).forEachOrdered(s -> builder.append(s));
+        return builder.toString();
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return getPatronNameForComparison().hashCode();
     }
 
 }
