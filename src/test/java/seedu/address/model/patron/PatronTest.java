@@ -36,9 +36,9 @@ public class PatronTest {
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePatron(editedAlice));
 
-        // different name, all other attributes same -> returns false
+        // different name, all other attributes same -> returns true
         editedAlice = new PatronBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePatron(editedAlice));
+        assertTrue(ALICE.isSamePatron(editedAlice));
 
         // different id, all other attributes same -> returns false
         editedAlice = new PatronBuilder(ALICE).withId(VALID_ID_BOB).build();
