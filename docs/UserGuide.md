@@ -222,7 +222,7 @@ Format: `book list`
 
 Lists all books in LibTask's book list that satisfy the predicates given.
 
-Format: `book find [n/Name] [t/Tag] [a/Author]`
+Format: `book find [n/NAME] [t/CATEGORY_TAG] [a/AUTHOR]`
 
 * Finds the books that match the predicate supplied.
 * Only one of the optional fields can be provided.
