@@ -1,9 +1,9 @@
 package seedu.address.model.patron;
 
-import java.util.Arrays;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Arrays;
 
 /**
  * Represents a Patron's name in the address book.

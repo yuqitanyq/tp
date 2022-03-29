@@ -1,8 +1,5 @@
 package seedu.address.model.patron;
 
-import java.util.Arrays;
-import java.util.Locale;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -56,7 +53,7 @@ public class Id {
     /**
      * Returns the id of the patron, converted to lowercase.
      */
-    private  String getIdForComparison() {
+    private String getIdForComparison() {
         return value.toLowerCase();
     }
 
