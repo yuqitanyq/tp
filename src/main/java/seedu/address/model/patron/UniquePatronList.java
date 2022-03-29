@@ -99,7 +99,7 @@ public class UniquePatronList implements Iterable<Patron> {
 
     /**
      * Returns true if this patron list contains a patron that is not the same as {@code oldPatron} based on
-     * {@link Patron#equals(Object), but same as {@code editedPatron} based on {@link Patron#isSamePatron(Patron)}.
+     * {@link Patron#equals(Object)}, but same as {@code editedPatron} based on {@link Patron#isSamePatron(Patron)}.
      */
     public boolean hasEditedPatron(Patron oldPatron, Patron editedPatron) {
         requireAllNonNull(oldPatron, editedPatron);

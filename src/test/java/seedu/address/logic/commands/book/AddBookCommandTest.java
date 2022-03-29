@@ -171,6 +171,11 @@ public class AddBookCommandTest {
         }
 
         @Override
+        public boolean hasEditedPatron(Patron oldPatron, Patron editedPatron) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void borrowBook(Patron borrower, Book bookToBorrow, String returnDate) {
             throw new AssertionError("This method should not be called.");
         }

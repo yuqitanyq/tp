@@ -157,8 +157,8 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns true if this model containt a model that is not the same as {@code oldPatron} based on
-     * {@link Patron#equals(Object), but same as {@code editedPatron} based on {@link Patron#isSamePatron(Patron)}.
+     * Returns true if this model contains a model that is not the same as {@code oldPatron} based on
+     * {@link Patron#equals(Object)}, but same as {@code editedPatron} based on {@link Patron#isSamePatron(Patron)}.
      */
     public boolean hasEditedPatron(Patron oldPatron, Patron editedPatron) {
         requireAllNonNull(oldPatron, editedPatron);
