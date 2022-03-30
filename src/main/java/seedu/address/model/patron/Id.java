@@ -47,12 +47,19 @@ public class Id {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Id // instanceof handles nulls
-                && value.equals(((Id) other).value)); // state check
+                && getIdForComparison().equals(((Id) other).getIdForComparison())); // state check
+    }
+
+    /**
+     * Returns the id of the patron, converted to lowercase.
+     */
+    private String getIdForComparison() {
+        return value.toLowerCase();
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return getIdForComparison().hashCode();
     }
 
 }
