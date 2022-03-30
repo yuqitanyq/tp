@@ -14,11 +14,11 @@ import seedu.address.model.patron.NameContainsKeywordsPredicate;
  */
 public class FindPatronCommand extends Command {
 
-    public static final String MESSAGE_USAGE = PATRON_COMMAND_GROUP + FIND_COMMAND_WORD
+    public static final String MESSAGE_USAGE = PATRON_COMMAND_GROUP + " " + FIND_COMMAND_WORD
             + ": Finds all patrons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + PATRON_COMMAND_GROUP + FIND_COMMAND_WORD + " alice bob charlie";
+            + "Example: " + PATRON_COMMAND_GROUP + " " + FIND_COMMAND_WORD + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
 

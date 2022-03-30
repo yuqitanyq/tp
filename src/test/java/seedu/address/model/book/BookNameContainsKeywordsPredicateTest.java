@@ -1,6 +1,8 @@
 package seedu.address.model.book;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -24,21 +26,21 @@ public class BookNameContainsKeywordsPredicateTest {
                 new BookNameContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
-        assertTrue(firstPredicate.equals(firstPredicate));
+        assertEquals(firstPredicate, firstPredicate);
 
         // same values -> returns true
         BookNameContainsKeywordsPredicate firstPredicateCopy =
                 new BookNameContainsKeywordsPredicate(firstPredicateKeywordList);
-        assertTrue(firstPredicate.equals(firstPredicateCopy));
+        assertEquals(firstPredicate, firstPredicateCopy);
 
         // different types -> returns false
-        assertFalse(firstPredicate.equals(1));
+        assertNotEquals(1, firstPredicate);
 
         // null -> returns false
-        assertFalse(firstPredicate.equals(null));
+        assertNotEquals(null, firstPredicate);
 
         // different patron -> returns false
-        assertFalse(firstPredicate.equals(secondPredicate));
+        assertNotEquals(firstPredicate, secondPredicate);
     }
 
     @Test
@@ -72,8 +74,9 @@ public class BookNameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new BookBuilder().withName("Hunger Games").build()));
 
         // Keywords match isbn, but does not match name
-        predicate = new BookNameContainsKeywordsPredicate(Arrays.asList("978-71617-018-8-5"));
+        predicate = new BookNameContainsKeywordsPredicate(List.of("978-71617-018-8-5"));
         assertFalse(predicate.test(new BookBuilder().withName("Harry Potter")
             .withIsbn("978-71617-018-8-5").build()));
     }
+
 }

@@ -154,6 +154,23 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Model
+
+The class diagram for the `Model` can be seen above (needs link later) in the Design section. Model contains two main object components, `Book` and `Patron`, with `Book` having a dependency on `Patron`. Such a design was chosen after a few iterations on other designs. The final design in v1.3 is documented here:
+
+**v1.3**
+
+(Needs to insert a small image here)
+
+In v1.3, `Book` has a set of `Patron`s as `requesters`. It also has a `Status` containing an optional `Patron` representing the borrower of the book. Initially, `Patron` and `Book` were designed in a way such that both classes contain references to each other. This design allows fast and direct access of certain information, such as all books borrowed and requested by a patron. However, the initial design results in cyclic reference among classes, which makes it impossible to store patron and book information in json format. For example, the patron json object needs to store a list of books it is referencing, which in turns store a list of patrons it is referencing, which in turn stores more patrons.
+
+Furthermore, the initial design results in the problem of cyclic update whenever data is modified. For example, when a patron's name is changed, the corresponding borrower's name of all books borrowed by that patron needs to be changed as well. Since `Book` is immutable, new `Book` objects are created to update the information, and as a result, all `Patron` objects referencing those old `Book` objects needs to be updated as well. Since `Patron` is also immutable, the chain of never ending cyclic updates continues on.
+
+Due to the downsides of the initial design, a decision was made to have only one of `Book` or `Patron` depending on the other. `Book` was chosen to depend on `Patron` because the UI needs to display information of borrower and requesters together with the book. This design does not require the transversal of the whole `Patron` list to identify the borrower and requesters of the book, since such information is stored in `Book` itself. However, transversal of the whole `Book` list is required to find all books related to a patron, or when updating a patron's information. Nevertheless, the amortized cost is much lower as such commands are performed less frequently than the amount of UI updates.
+
+#### Implementation
+(Todo)
+
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
@@ -224,7 +241,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Librarian                                                 | update return and order status of books                                       | I can keep track of a book’s availability                                                                                             |
 | `*`      | Request handler                                           | take note of requests from students to be notified when a book is returned    | I can easily notify the student when the book under request is returned                                                               |
 | `*`      | Request handler                                           | take note of book order requests from professors                              | I can easily inform the professor when the book has arrived                                                                           |
-| `*`      | Librarian                                                 | view all books in my database                                                 | I can make use of the list to perform other tasks                                                                                     |
+| `*`      | Librarian                                                 | list all books in the database                                                | I can see all the books with one click and in one sitting                                                                             |
 | `*`      | Librarian overwhelmed with lots of book requests          | delete book requests I have                                                   | records of book requests are minimized by not keeping track of cancelled and fulfilled requests                                       |
 | `*`      | New user                                                  | be able to access help                                                        | I can learn how to use the application                                                                                                |
 | `*`      | User who has done learning how to use the application     | remove all the current entries and sample data                                | I can start a fresh and input my own data                                                                                             |
@@ -242,6 +259,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Easily overwhelmed request handler                        | be able to prioritize my book requests                                        | I can effectively handle requests                                                                                                     |
 | `***`    | Librarian                                                 | be able to view patron and book details through a GUI                         |                                                                                                                                       |
 | `***`    | Librarian                                                 | have visual feedback of the commands I executed                               | I will know if my commands have been successfully executed                                                                            |
+| `***`    | Librarian                                                 | find all the books related to a patron                                        | I can see all books related to a patron at one glance                                                                                 |
 
 *{More to be added}*
 
@@ -402,7 +420,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-### UC08: Edit a book on LibTask
+**Extensions**
+
+* 2a. LibTask has no stored books.
+    * 2a1. LibTask shows an empty list.
+
+      Use case ends.
+    
+### UC08: Find books on LibTask
+
+**MSS**
+1. User requests to find books which matches a query. 
+
+2. LibTask shows the books that match the query
+
+    Use case ends
+
+**Extension**
+
+* 1a The given query is invalid
+  * 1a1 LibTask shows an error message
+    Use case resumes from step 1
+
+### UC09: Edit a book on LibTask
 
 **MSS**
 
@@ -425,8 +465,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. LibTask shows an error message.
 
       Use case resumes from step 1.
+  
+* 1c. The index is valid but no new details are entered
+    
+    * 1c1. LibTask shows an error message saying that at least ISBN, author or category must be provided.
 
-### UC09: Delete Book from LibTask
+      Use case resumes from step 1.
+
+### UC10: Delete Book from LibTask
 
 **MSS**
 
@@ -444,7 +490,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 1.
 
-### UC10: Borrow Book
+### UC11: Borrow Book
 
 **MSS**
 
@@ -478,7 +524,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 3.
 
-### UC11: Return Book on LibTask
+### UC12: Return Book on LibTask
 
 **MSS**
 
@@ -504,7 +550,7 @@ Use case ends.
 
       Use case resumes from step 2.
 
-### UC12: Asking for Help on LibTask
+### UC13: Asking for Help on LibTask
 
 **MSS**
 1. User requests to list all commands
@@ -513,7 +559,7 @@ Use case ends.
 
    Use case ends.
 
-### UC13: Exiting LibTask
+### UC14: Exiting LibTask
 
 **MSS**
 1. User requests to exit LibTask
@@ -522,7 +568,7 @@ Use case ends.
 
    Use case ends.
 
-### UC14: Clear database of all Patron's and Book's
+### UC15: Clear database of all Patron's and Book's
 
 **MSS**
 
@@ -540,7 +586,7 @@ Extension
 
       Use case ends
 
-### UC15: Show previously run commands
+### UC16: Show previously run commands
 
 **MSS**
 1. User requests to see previous command
@@ -557,7 +603,88 @@ Extension
 
       Use case ends.
 
+### UC17: List books related to a patron
 
+**MSS**
+1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
+
+2. User requests to view all books related to a patron and provides the index of the patron in the list.
+
+3. LibTask shows the list of all the books related to the patron.
+
+   Use case ends.
+
+Extension
+
+* 2a. The given index of patron is invalid.
+
+    * 2a1. LibTask shows an error message.
+
+      Use case resumes from step 2.
+
+### UC18: List patrons with overdue books
+
+**MSS**
+1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
+
+2. User requests to view all patrons with overdue books.
+
+3. LibTask shows the list of all patrons with overdue books.
+
+   Use case ends.
+
+Extension
+
+* 2a. LibTask has no users with overdue books.
+
+    * 2a1. LibTask shows an empty patron list.
+
+      Use case ends.
+
+### UC19: Request Book
+
+**MSS**
+1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
+
+2. User lists all books [UC07](#uc07-list-books-on-libtask)
+
+3. User requests to establish a request relationship and provides index of the patron and index of the book in lists.
+
+4. LibTask establishes a request relationship between the patron and the book.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The given index of patron or book is invalid.
+
+    * 3a1. LibTask shows an error message.
+
+      Use case resumes from step 3.
+
+* 3b. Patron has already requested for the book.
+
+    * 3a1. LibTask shows an error message.
+
+      Use case resumes from step 3.
+
+* 3b. The book is already borrowed by the same user.
+
+    * 3a1. LibTask shows an error message.
+
+      Use case resumes from step 3.
+
+* 3b. The book is available for borrowing.
+
+    * 3a1. LibTask shows an error message.
+
+      Use case resumes from step 3.
+
+* 3b. The book already has 3 requesters.
+
+    * 3a1. LibTask shows an error message.
+
+      Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
@@ -627,10 +754,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `book delete 1`<br>
       Expected: First book is deleted from the list. Details of the deleted book shown in the status message. Timestamp in the status bar is updated.
-   
+
    1. Test case: `book delete 0`<br>
       Expected: No book is deleted. Error details shown in the status message. Status bar remains the same.
-   
+
    1. Other incorrect delete commands to try: `book delete`, `book delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 

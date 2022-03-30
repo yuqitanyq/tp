@@ -210,6 +210,15 @@ public class ModelManager implements Model {
         return libTask.hasOverdueBooks(patron);
     }
 
+    /**
+     * Returns true if this model contains a model that is not the same as {@code oldPatron} based on
+     * {@link Patron#equals(Object)}, but same as {@code editedPatron} based on {@link Patron#isSamePatron(Patron)}.
+     */
+    public boolean hasEditedPatron(Patron oldPatron, Patron editedPatron) {
+        requireAllNonNull(oldPatron, editedPatron);
+        return libTask.hasEditedPatron(oldPatron, editedPatron);
+    }
+
     @Override
     public void borrowBook(Patron borrower, Book bookToBorrow, String returnDate) {
         requireAllNonNull(borrower, bookToBorrow, returnDate);

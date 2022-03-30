@@ -25,7 +25,7 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true" />
+        <Label fx:id="name" text="\$first" styleClass="cell_big_label" textOverrun="ELLIPSIS"/>
       </HBox>
       <FlowPane fx:id="bookCategoryTags" />
       <!-- Ensures that the author line will not be rendered if the book doesn't have an author-->
@@ -36,6 +36,9 @@
       <!-- Ensures that the borrower and book return date line will not be rendered if the book is not borrowed-->
       <Label fx:id="borrower" styleClass="cell_small_label" visible="false" managed="false" wrapText="true" />
       <Label fx:id="bookReturnDate" styleClass="cell_small_label" visible="false" managed="false" wrapText="true" />
+      <!-- Ensures that the requesters label will not be rendered if the book is not requested by anyone-->
+      <FlowPane fx:id="bookRequestTag" />
+      <Label fx:id="requestedBy" styleClass="cell_small_label" visible="false" managed="false" wrapText="true" />
     </VBox>
   </GridPane>
 </HBox>
