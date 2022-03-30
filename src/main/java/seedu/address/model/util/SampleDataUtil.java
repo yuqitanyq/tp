@@ -2,7 +2,6 @@ package seedu.address.model.util;
 
 import static seedu.address.model.book.BookStatusType.BORROWED;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -143,18 +142,18 @@ public class SampleDataUtil {
 
     private static ArrayList<HashSet<Patron>> getRequesters() {
         ArrayList<HashSet<Patron>> listOfRequesters = new ArrayList<>();
-        HashSet<Patron> ALGORITHMS_REQUESTERS = new HashSet<>();
-        ALGORITHMS_REQUESTERS.add(getSamplePatrons()[1]);
-        ALGORITHMS_REQUESTERS.add(getSamplePatrons()[2]);
-        listOfRequesters.add(ALGORITHMS_REQUESTERS);
+        HashSet<Patron> algorithmsRequesters = new HashSet<>();
+        algorithmsRequesters.add(getSamplePatrons()[1]);
+        algorithmsRequesters.add(getSamplePatrons()[2]);
+        listOfRequesters.add(algorithmsRequesters);
 
         listOfRequesters.add(new HashSet<>()); // for "The Little Book of Semaphores"
         listOfRequesters.add(new HashSet<>()); // for "Maze Runner"
 
-        HashSet<Patron> AI_REQUESTERS = new HashSet<>();
-        AI_REQUESTERS.add(getSamplePatrons()[2]);
-        AI_REQUESTERS.add(getSamplePatrons()[3]);
-        listOfRequesters.add(AI_REQUESTERS);
+        HashSet<Patron> aiRequesters = new HashSet<>();
+        aiRequesters.add(getSamplePatrons()[2]);
+        aiRequesters.add(getSamplePatrons()[3]);
+        listOfRequesters.add(aiRequesters);
 
         listOfRequesters.add(new HashSet<>()); // for "Cinderella"
         return listOfRequesters;
