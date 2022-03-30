@@ -23,29 +23,29 @@ import seedu.address.model.patron.Patron;
 public class TypicalPatrons {
 
     public static final Patron ALICE = new PatronBuilder().withName("Alice Pauline")
-            .withId("A0123456H").withEmail("alice@example.com")
+            .withId("A0123451H").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends").build();
     public static final Patron BENSON = new PatronBuilder().withName("Benson Meier")
-            .withId("A0123456H")
+            .withId("A0123452H")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
     public static final Patron CARL = new PatronBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withId("A0123456H").build();
+            .withEmail("heinz@example.com").withId("A0123453H").build();
     public static final Patron DANIEL = new PatronBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withId("A0123456H").withTags("friends").build();
+            .withEmail("cornelia@example.com").withId("A0123454H").withTags("friends").build();
     public static final Patron ELLE = new PatronBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withId("A0123456H").build();
+            .withEmail("werner@example.com").withId("A0123455H").build();
     public static final Patron FIONA = new PatronBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withId("A0123456H").build();
     public static final Patron GEORGE = new PatronBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withId("A0123456H").build();
+            .withEmail("anna@example.com").withId("A0123457H").build();
 
     // Manually added
     public static final Patron HOON = new PatronBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withId("A0123456H").build();
+            .withEmail("stefan@example.com").withId("A0123458H").build();
     public static final Patron IDA = new PatronBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withId("A0123456H").build();
+            .withEmail("hans@example.com").withId("A0123459H").build();
 
     // Manually added - Patron's details found in {@code CommandTestUtil}
     public static final Patron AMY = new PatronBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

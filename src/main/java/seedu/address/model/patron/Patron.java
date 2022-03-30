@@ -61,7 +61,7 @@ public class Patron {
     }
 
     /**
-     * Returns true if both patrons have the same name.
+     * Returns true if both patrons have the same name, id or emails.
      * This defines a weaker notion of equality between two patrons.
      */
     public boolean isSamePatron(Patron otherPatron) {
@@ -70,8 +70,9 @@ public class Patron {
         }
 
         return otherPatron != null
-                && otherPatron.getName().equals(getName())
-                && otherPatron.getId().equals(getId());
+                && (otherPatron.getName().equals(getName())
+                || otherPatron.getId().equals(getId())
+                || otherPatron.getEmail().equals(getEmail()));
     }
 
     public Patron copy() {
