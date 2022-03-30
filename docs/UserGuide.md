@@ -334,9 +334,29 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How does this app help current librarians?<br>
-**A**: The app helps librarians manage the statuses of books borrowed along with their borrowers.
+**Q1**: What happens if there is no response after attempting to enter a command?<br>
+**A**: Please double-check if the format of the command is written correctly. If the issue persists, please close the application and restart it again.
 
+**Q2**: I tried to edit a book's details, but there seems to be an error message being shown. Why is that so?<br>
+**A**: Please do ensure that if the book name is not provided, at least one of the optional fields Isbn, Author and Category tag is provided.
+
+**Q3**: Is there any other way to exit the application without typing?<br>
+**A**: Yes, there is another way to exit the program, and that is by clicking the File button on the top left-hand corner of the app. There is an exit button in the dropdown list which appear after clicking the File button.
+
+**Q4**: Will the data of the books be saved if the program was not closed via the `exit` command or via the method shown in Q3?<br>
+**A**: Yes the data will still be saved. However, to ensure a better user experience, we recommend using the exit command as described in the user guide.
+
+**Q5**: Is there a shortcut on using the various commands?<br>
+**A**: Unfortunately, no there is no shortcut. In order to execute the various commands, please enter the commands in the correct format and with valid inputs.
+
+**Q6**: I entered the `book list` command but nothing has changed. Is this expected?<br>
+**A**: Yes, it is expected, as all the books have probably been already listed.
+
+**Q7**: Is there a summary of the commands?<br>
+**A**: Yes, there is a summary of commands available, and they can be found in the section below.
+
+**Q8**: Why are there two separate lists for books and patrons instead of one combined list?<br>
+**A**: This is done so that the user can see the two lists side by side and have a clearer picture of the various patrons and books in the database.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
