@@ -1,8 +1,13 @@
 package seedu.address.logic.commands.book;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -10,15 +15,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.book.BookAuthorContainsKeywordsPredicate;
 import seedu.address.model.book.BookNameContainsKeywordsPredicate;
 import seedu.address.model.book.BookTagContainsKeywordsPredicate;
-import seedu.address.model.patron.NameContainsKeywordsPredicate;
 import seedu.address.testutil.TypicalLibTask;
-
-import java.util.Arrays;
-import java.util.Collections;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.ISBN_DESC_HARRY_POTTER;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 class FindBookCommandTest {
 
