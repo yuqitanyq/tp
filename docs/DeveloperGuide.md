@@ -154,6 +154,23 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Model
+
+The class diagram for the `Model` can be seen above (needs link later) in the Design section. Model contains two main object components, `Book` and `Patron`, with `Book` having a dependency on `Patron`. Such a design was chosen after a few iterations on other designs. The final design in v1.3 is documented here:
+
+**v1.3**
+
+(Needs to insert a small image here)
+
+In v1.3, `Book` has a set of `Patron`s as `requesters`. It also has a `Status` containing an optional `Patron` representing the borrower of the book. Initially, `Patron` and `Book` were designed in a way such that both classes contain references to each other. This design allows fast and direct access of certain information, such as all books borrowed and requested by a patron. However, the initial design results in cyclic reference among classes, which makes it impossible to store patron and book information in json format. For example, the patron json object needs to store a list of books it is referencing, which in turns store a list of patrons it is referencing, which in turn stores more patrons.
+
+Furthermore, the initial design results in the problem of cyclic update whenever data is modified. For example, when a patron's name is changed, the corresponding borrower's name of all books borrowed by that patron needs to be changed as well. Since `Book` is immutable, new `Book` objects are created to update the information, and as a result, all `Patron` objects referencing those old `Book` objects needs to be updated as well. Since `Patron` is also immutable, the chain of never ending cyclic updates continues on.
+
+Due to the downsides of the initial design, a decision was made to have only one of `Book` or `Patron` depending on the other. `Book` was chosen to depend on `Patron` because the UI needs to display information of borrower and requesters together with the book. This design does not require the transversal of the whole `Patron` list to identify the borrower and requesters of the book, since such information is stored in `Book` itself. However, transversal of the whole `Book` list is required to find all books related to a patron, or when updating a patron's information. Nevertheless, the amortized cost is much lower as such commands are performed less frequently than the amount of UI updates.
+
+#### Implementation
+(Todo)
+
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
@@ -224,7 +241,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Librarian                                                 | update return and order status of books                                       | I can keep track of a book’s availability                                                                                             |
 | `*`      | Request handler                                           | take note of requests from students to be notified when a book is returned    | I can easily notify the student when the book under request is returned                                                               |
 | `*`      | Request handler                                           | take note of book order requests from professors                              | I can easily inform the professor when the book has arrived                                                                           |
-| `*`      | Librarian                                                 | view all books in my database                                                 | I can make use of the list to perform other tasks                                                                                     |
+| `*`      | Librarian                                                 | list all books in the database                                                | I can see all the books with one click and in one sitting                                                                             |
 | `*`      | Librarian overwhelmed with lots of book requests          | delete book requests I have                                                   | records of book requests are minimized by not keeping track of cancelled and fulfilled requests                                       |
 | `*`      | New user                                                  | be able to access help                                                        | I can learn how to use the application                                                                                                |
 | `*`      | User who has done learning how to use the application     | remove all the current entries and sample data                                | I can start a fresh and input my own data                                                                                             |
@@ -403,6 +420,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Extensions**
+
+* 2a. LibTask has no stored books.
+    * 2a1. LibTask shows an empty list.
+
+      Use case ends.
+    
 ### UC08: Find books on LibTask
 
 **MSS**
@@ -439,6 +463,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. The new details are invalid.
 
     * 1b1. LibTask shows an error message.
+
+      Use case resumes from step 1.
+  
+* 1c. The index is valid but no new details are entered
+    
+    * 1c1. LibTask shows an error message saying that at least ISBN, author or category must be provided.
 
       Use case resumes from step 1.
 

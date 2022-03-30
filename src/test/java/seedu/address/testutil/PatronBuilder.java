@@ -19,7 +19,7 @@ public class PatronBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ID = "A0123456H";
+    public static final String DEFAULT_ID = "A6666666H";
 
     private Name name;
     private Phone phone;

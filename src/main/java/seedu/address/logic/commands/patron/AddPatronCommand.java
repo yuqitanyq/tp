@@ -18,7 +18,7 @@ import seedu.address.model.patron.Patron;
  */
 public class AddPatronCommand extends Command {
 
-    public static final String MESSAGE_USAGE = PATRON_COMMAND_GROUP + ADD_COMMAND_WORD
+    public static final String MESSAGE_USAGE = PATRON_COMMAND_GROUP + " " + ADD_COMMAND_WORD
             + ": Adds a patron to LibTask. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -26,13 +26,13 @@ public class AddPatronCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ID + "ID "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + PATRON_COMMAND_GROUP + ADD_COMMAND_WORD + " "
+            + "Example: " + PATRON_COMMAND_GROUP + " " + ADD_COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ID + "A1234567X"
+            + PREFIX_ID + "A1234567X "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "owesMoney ";
 
     public static final String MESSAGE_SUCCESS = "New patron added: %1$s";
     public static final String MESSAGE_DUPLICATE_PATRON = "This patron already exists in LibTask";
