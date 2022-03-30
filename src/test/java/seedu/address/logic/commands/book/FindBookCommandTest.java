@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -22,6 +23,12 @@ class FindBookCommandTest {
     private Model model = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
     private Model expectedModel = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
 
+    @BeforeEach
+    void setUp() {
+        model = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
+        expectedModel = new ModelManager(TypicalLibTask.getTypicalLibTask(), new UserPrefs());
+    }
+
 
 
     @Test
@@ -32,7 +39,7 @@ class FindBookCommandTest {
         FindBookCommand findBookCommand = new FindBookCommand(predicate);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(findBookCommand, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPatronList());
+        assertEquals(Collections.emptyList(), model.getFilteredBookList());
     }
 
     @Test
@@ -43,18 +50,18 @@ class FindBookCommandTest {
         FindBookCommand findBookCommand = new FindBookCommand(predicate);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(findBookCommand, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPatronList());
+        assertEquals(Collections.emptyList(), model.getFilteredBookList());
     }
 
     @Test
     void execute_authorPredicate_noBooksFound() {
         String expectedMessage = String.format(Messages.MESSAGE_BOOKS_LISTED_OVERVIEW, 0);
         //user input author
-        BookAuthorContainsKeywordsPredicate predicate = preparePredicateAuthor("");
+        BookAuthorContainsKeywordsPredicate predicate = preparePredicateAuthor("a/OOP");
         FindBookCommand findBookCommand = new FindBookCommand(predicate);
         expectedModel.updateFilteredBookList(predicate);
         assertCommandSuccess(findBookCommand, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPatronList());
+        assertEquals(Collections.emptyList(), model.getFilteredBookList());
     }
 
     /**
