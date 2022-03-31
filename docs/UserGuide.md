@@ -226,6 +226,7 @@ Format: `book find [n/NAME] [t/CATEGORY_TAG] [a/AUTHOR]`
 
 * Finds the books that match the predicate supplied.
 * Only one of the optional fields can be provided.
+* The tag, name and author must be provided will also return partial results. 
 
 Examples:
 * `book find n/Harry` Returns all books in LibTask's book list whose titles contain the word `Harry`.
@@ -368,7 +369,7 @@ _Details coming soon ..._
 |----------------------------------------|---------------------------------------------------------------------|
 | **Add a book**                         | `book add n/NAME i/ISBN [a/AUTHOR]…​ [t/CATEGORY_TAG]…​`            |
 | **List all books**                     | `book list`                                                         |
-| **Find a book**                        | `book find [n/Name] [t/Tag] [a/Author]`                             |
+| **Find a book**                        | `book find [n/NAME] [t/TAG] [a/AUTHOR]`                             |
 | **Edit a book**                        | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR]…​ [t/CATEGORY_TAG]…​` |
 | **Delete a book**                      | `book delete INDEX`                                                 |
 | **Borrow a book**                      | `borrow INDEX1 INDEX2`                                              |
