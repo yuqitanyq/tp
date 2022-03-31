@@ -285,7 +285,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list all patrons
+1. User requests to list all patrons.
 
 2. LibTask shows the list of all the patrons.
 
@@ -324,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resume from step 1.
 
-* 1c. The index is valid but no details are provided
+* 1c. The index is valid but no details are provided.
 
   * 1c1. LibTask shows an error message.
        
@@ -380,7 +380,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2b1. LibTask shows an error message.
 
-  Use case resumes from step 1
+  Use case resumes from step 1. 
 
 * 2c. The patron has a book requested.
 
@@ -434,9 +434,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. User requests to find books and provides either a tag, author or title.  
 
-2. LibTask shows the books that match the search
+2. LibTask shows the books that match the search. 
 
-    Use case ends
+    Use case ends. 
 
 **Extension**
 
@@ -444,13 +444,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   * 1a1. LibTask shows an error message.
 
-  Use case resumes from step 1
+  Use case resumes from step 1. 
 
 * 1b. No books match the given query.
 
-  * 1b1. LibTask shows an empty list.</br>
+  * 1b1. LibTask shows an empty list.
 
-  Use case ends
+  Use case ends. 
 
 * 1c. More than search parameter was provided. 
 
@@ -516,9 +516,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
+1. User lists all patrons. [UC02](#uc02-list-patrons-on-libtask)
 
-2. User lists all books [UC07](#uc07-list-books-on-libtask)
+2. User lists all books. [UC07](#uc07-list-books-on-libtask)
 
 3. User requests to establish a borrow relationship and provides index of the patron and index of the book in lists, as well as return date of the book.
 
@@ -550,7 +550,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User finds a patron [UC04](#uc04-find-a-patron-on-libtask)
+1. User finds a patron. [UC04](#uc04-find-a-patron-on-libtask)
 
 2. User requests to end a borrow relationship and provides index of the patron or index of the book in lists.
 
@@ -581,16 +581,16 @@ Use case ends.
 ### UC13: Asking for Help on LibTask
 
 **MSS**
-1. User requests to list all commands
+1. User requests to list all commands.
 
-2. LibTask shows the list of all the commands
+2. LibTask shows the list of all the commands.
 
   Use case ends.
 
 ### UC14: Exiting LibTask
 
 **MSS**
-1. User requests to exit LibTask
+1. User requests to exit LibTask.
 
 2. LibTask closes.
 
@@ -609,9 +609,9 @@ Use case ends.
 ### UC16: Show previously run commands
 
 **MSS**
-1. User requests to see previous command
+1. User requests to see previous command.
 
-2. LibTask shows the last command used
+2. LibTask shows the last command used.
 
   Use case ends.
 
@@ -619,7 +619,7 @@ Extension
 
 * 1a. No previous command
 
-    * 1a1. LibTask shows an empty Commandbox. 
+    * 1a1. LibTask shows an empty CommandBox. 
 
   Use case ends.
 
@@ -644,7 +644,7 @@ Extension
 
 * 3a. There are no books related to the patron
 
-  * 3a1. LibTask returns an empty book list. </br>
+  * 3a1. LibTask returns an empty book list.
 
   Use case ends
 
@@ -670,9 +670,9 @@ Extension
 ### UC19: Request Book
 
 **MSS**
-1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
+1. User lists all patrons. [UC02](#uc02-list-patrons-on-libtask)
 
-2. User lists all books [UC07](#uc07-list-books-on-libtask)
+2. User lists all books. [UC07](#uc07-list-books-on-libtask)
 
 3. User requests to establish a request relationship and provides index of the patron and index of the book in lists.
 
