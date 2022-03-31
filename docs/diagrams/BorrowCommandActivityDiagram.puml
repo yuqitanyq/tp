@@ -1,0 +1,20 @@
+@startuml
+start
+:User enters borrow command;
+if () then ([return date is valid format])
+    :Parser parses book index, borrower index and return date;
+        :Logic executes command;
+        if () then ([valid indexes and return date])
+            if () then ([book not yet borrowed])
+                :Model executes borrowBook();
+            else ([else])
+                :Ui shows error message;
+            endif
+        else ([else])
+            :Ui shows error message;
+        endif
+else([else])
+    :Ui shows error message;
+endif
+stop
+@enduml
