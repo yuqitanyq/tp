@@ -155,7 +155,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Model
-    
 
 The class diagram for the `Model` can be seen above (needs link later) in the Design section. Model contains two main object components, `Book` and `Patron`, with `Book` having a dependency on `Patron`. Such a design was chosen after a few iterations on other designs. The final design in v1.3 is documented here:
 
