@@ -21,7 +21,7 @@ public class AddBookCommand extends Command {
     public static final String MESSAGE_USAGE = BOOK_COMMAND_GROUP + " " + ADD_COMMAND_WORD
             + ": Adds a book to LibTask. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_NAME + "BOOK_NAME "
             + PREFIX_ISBN + "ISBN "
             + "[" + PREFIX_TAG + "TAG]..."
             + "[" + PREFIX_AUTHOR + "AUTHOR]...\n"
