@@ -156,6 +156,8 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Model
 
+<img src="images/ModelClassDiagram.png" width="450" />
+
 The class diagram for the `Model` can be seen above (needs link later) in the Design section. Model contains two main object components, `Book` and `Patron`, with `Book` having a dependency on `Patron`. Such a design was chosen after a few iterations on other designs. The final design in v1.3 is documented here:
 
 **v1.3**
@@ -235,7 +237,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `**`     | Efficient librarian          | find patrons based on their names                     | I do not get overwhelmed by long lists of patrons in uncategorized search results      |
 | `**`     | Efficient librarian          | view patrons with overdue books                       | I can contact them to return the overdue books                                         |
 | `**`     | Careless librarian           | edit information about a book                         | I can correct typos in the details of the books when I first added them                |
-| `**`     | Request handler              | filter books based on authors and keywords            | I can quickly navigate the book when a patron is requesting it                         |
+| `**`     | Request handler              | filter books based on authors, titles and tags        | I can quickly navigate the book when a patron is requesting it                         |
 | `**`     | Librarian                    | classify books into categories                        | I can more easily provide book recommendations                                         |
 | `**`     | Librarian                    | store details about a book loan by a patron           | I can perform tasks such as sorting, searching or categorizing books and patrons later |
 | `**`     | Request handler              | take note of book requests from students              | I can easily notify the student when the book under request is returned                |
@@ -364,9 +366,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The index is not provided or is invalid.
+* 2a. The index is not provided or is invalid.
 
-    * 1a1. LibTask shows an error message.
+    * 2a1. LibTask shows an error message.
 
       Use case resumes from step 1.
 
@@ -376,7 +378,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to add a book and provides the name and details of the book
 
-2. LibTask adds the module.
+2. LibTask adds the book.
 
    Use case ends.
 
@@ -413,9 +415,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### UC08: Find books on LibTask
 
 **MSS**
-1. User requests to find books which matches a query. 
+1. User requests to find books and provides either a tag, author or title.  
 
-2. LibTask shows the books that match the query
+2. LibTask shows the books that match the search
 
     Use case ends
 
@@ -424,6 +426,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a The given query is invalid
   * 1a1 LibTask shows an error message
     Use case resumes from step 1
+
+* 1b No books match the given query
+  * 1b1 LibTask shows an empty list.</br>
+  Use case ends
 
 ### UC09: Edit a book on LibTask
 
@@ -582,7 +588,7 @@ Extension
 
 * 1a. No previous command
 
-    * 1a1. LibTask shows an empty field
+    * 1a1. LibTask shows an empty Commandbox. 
 
       Use case ends.
 
@@ -601,9 +607,12 @@ Extension
 
 * 2a. The given index of patron is invalid.
 
-    * 2a1. LibTask shows an error message.
+  * 2a1. LibTask shows an error message.
 
-      Use case resumes from step 2.
+    Use case resumes from step 2.
+* 3a. There are no books related to the patron
+  * 3a1. LibTask returns an empty book list </br>
+    Use case ends
 
 ### UC18: List patrons with overdue books
 
@@ -647,25 +656,25 @@ Extension
 
 * 3b. Patron has already requested for the book.
 
-    * 3a1. LibTask shows an error message.
+    * 3b1. LibTask shows an error message.
 
       Use case resumes from step 3.
 
-* 3b. The book is already borrowed by the same user.
+* 3c. The book is already borrowed by the same user.
 
-    * 3a1. LibTask shows an error message.
-
-      Use case resumes from step 3.
-
-* 3b. The book is available for borrowing.
-
-    * 3a1. LibTask shows an error message.
+    * 3c1. LibTask shows an error message.
 
       Use case resumes from step 3.
 
-* 3b. The book already has 3 requesters.
+* 3d. The book is available for borrowing.
 
-    * 3a1. LibTask shows an error message.
+    * 3d1. LibTask shows an error message.
+
+      Use case resumes from step 3.
+
+* 3e. The book already has 3 requesters.
+
+    * 3e1. LibTask shows an error message.
 
       Use case resumes from step 3.
 
@@ -680,10 +689,10 @@ Extension
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Patron**: A user of the library
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Patron**: A user of the library.
 * **ISBN**: An International Standard Book Number 13 digits in length.
-
+* **MSS**: Main Success Scenario.
 
 --------------------------------------------------------------------------------------------------------------------
 
