@@ -396,7 +396,7 @@ _Details coming soon ..._
 | **Request a book**                     | `request INDEX1 INDEX2`                                             |
 | **List all books related to a patron** | `book related INDEX`                                                |
 
-# 6. Glossary
+# **6. Glossary**
 
 | Term                   | Explanation                                                         |
 |------------------------|---------------------------------------------------------------------|
