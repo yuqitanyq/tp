@@ -7,7 +7,8 @@ public class Isbn {
 
     public static final String SPECIAL_CHARACTERS = "-";
     public static final String MESSAGE_CONSTRAINTS = "Isbn should adhere to the following constraints:\n"
-            + "1. Contain only digits and at most one \"" + SPECIAL_CHARACTERS + "\" character between consecutive digits,"
+            + "1. Contain only digits and at most one \"" + SPECIAL_CHARACTERS
+            + "\" character between consecutive digits,"
             + " and must start and end with digit characters.\n"
             + "2. Contain exactly 10 digits or 13 digits\n"
             + "3. For 10-digit Isbn, the sum of [position]x[digit at position] must be divisible by 11\n"
