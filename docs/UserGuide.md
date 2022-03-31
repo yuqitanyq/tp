@@ -26,20 +26,21 @@ Take note of following symbols that are used in this document:
 
 ## 1.3. Navigating the User Guide
 
-For help with the setup of LibTask, you can refer to head to our [Quick start](#2-quick-start) section.
+For help with installing LibTask and understanding our interface, you can refer to head to our [Quick start](#2-quick-start) section.
 
 For the full documentation of each feature, you can refer to our [Features](#3-features) section.
 
-For frequently asked questions about LibTask, you can refer to our [FAQ](#4-faq) section.
+For a list of frequently asked questions about LibTask, you can refer to our [FAQ](#4-faq) section.
 
-For a quick overview of all the commands in LibTask, you can refer to our [Command summary](#5-command-summary) section.
+If you are an advanced user, you can refer to our [Command summary](#5-command-summary) section.
 
-For the list of definitions of vocabulary words used in this document can be found in our [Glossary](#6-glossary) section.
+For the list of definition of the vocabulary words used in this document can be found in our [Glossary](#6-glossary) section.
 
 --------------------------------------------------------------------------------------------------------------------
 
 # **2. Quick start**
 
+## 2.1. Installation
 1. Ensure you have Java `11` or above installed in your Computer. You can follow this [guide](https://docs.oracle.com/en/java/javase/11/install) to download and install java.
 
 1. Download the latest `libtask.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases).
@@ -68,6 +69,16 @@ For the list of definitions of vocabulary words used in this document can be fou
 
 1. Refer to the [Features](#features) below for details of each command.
 
+## 2.2. LibTask GUI Overview
+The various GUI components of LibTask are described in the picture below:
+
+![LabelledUi](images/LabelledGUI.png)
+
+* `Menu bar`: Menu buttons that you can click to exit LibTask or to open up the help window that contains a link to this user guide.
+* `Command box`: You can type and enter commands to run them in this box.
+* `Result box`: You can view the results from running your commands in this box.
+* `patron list`: You can view the list of patrons with their details in this list.
+* `Book list`: You can view the list of books with their details in this list.
 --------------------------------------------------------------------------------------------------------------------
 
 # **3. Features**
@@ -419,6 +430,7 @@ _Details coming soon ..._
 
 # **6. Glossary**
 
-| Term                   | Explanation                                                         |
-|------------------------|---------------------------------------------------------------------|
-| Command-line interface | a console which users can type text as commands into it to execute. |
+| Term                           | Explanation                                                                                     |
+|--------------------------------|-------------------------------------------------------------------------------------------------|
+| Command-line Interface (CLI)   | An interface which involves the users typing text and executing it as commands.                 |
+| Graphical User Interface (GUI) | An interface which involves the users clicking buttons and selecting options from the menu bar. |
