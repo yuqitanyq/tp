@@ -155,8 +155,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Model
-
-<img src="images/ModelClassDiagram.png" width="450" />
+    
 
 The class diagram for the `Model` can be seen above (needs link later) in the Design section. Model contains two main object components, `Book` and `Patron`, with `Book` having a dependency on `Patron`. Such a design was chosen after a few iterations on other designs. The final design in v1.3 is documented here:
 
@@ -268,19 +267,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. LibTask shows an error message.
 
-      Use case resumes from step 1.
+  Use case resumes from step 1.
 
 * 1b. The patron details are invalid.
 
     * 1b1. LibTask shows an error message.
 
-      Use case resumes from step 1.
+  Use case resumes from step 1.
 
-* 1c. The given name and details are duplicated.
+* 1c. The given name and details except phone number are duplicated.
 
     * 1c1. LibTask shows an error message.
 
-      Use case resume from step 1.
+  Use case resume from step 1.
 
 
 ### UC02: List patron's on LibTask
@@ -297,9 +296,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. LibTask has no stored patrons.
 
-    * 2a1. LibTask shows an empty list.
+    * 2a1. LibTask shows an empty patron list.
 
-      Use case ends.
+  Use case ends.
 
 ### UC03: Editing a patron on LibTask
 
@@ -318,13 +317,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. LibTask shows an error message.
 
-      Use case resumes from step 1.
+  Use case resumes from step 1.
 
 * 1b. The details are not provided or are invalid.
 
     * 1b1.  LibTask shows an error message.
 
-      Use case resume from step 1.
+  Use case resume from step 1.
+
+* 1c. The index is valid but no details are provided
+
+  * 1c1. LibTask shows an error message.
+       
+  Use case resumes from step 1.
 
 
 ### UC04: Find a patron on LibTask
@@ -343,13 +348,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. LibTask shows an error message.
 
-      Use case resumes from step 1.
+  Use case resumes from step 1.
 
 * 2a.  No patrons fulfil the search criteria.
 
     * 2a1. LibTask shows an empty list.
 
-      Use case ends.
+  Use case ends.
 
 
 ### UC05: Delete a patron from LibTask
@@ -370,7 +375,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. LibTask shows an error message.
 
-      Use case resumes from step 1.
+  Use case resumes from step 1.
+
+* 2b. The patron has a book borrowed.
+
+    * 2b1. LibTask shows an error message.
+
+  Use case resumes from step 1
+
+* 2c. The patron has a book requested.
+
+    * 2c1. LibTask deletes the patron from the list of requesters
+    
+  Use case resumes from step 3. 
 
 ### UC06: Add book to LibTask
 
@@ -388,13 +405,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. LibTask shows an error message.
 
-      Use case resumes from step 1.
+  Use case resumes from step 1.
 
 * 1b. The book details are invalid.
 
     * 1b1. LibTask shows an error message.
 
-      Use case resumes from step 1.
+  Use case resumes from step 1.
 
 ### UC07: List Books on LibTask
 
@@ -408,9 +425,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. LibTask has no stored books.
-    * 2a1. LibTask shows an empty list.
 
-      Use case ends.
+    * 2a1. LibTask shows an empty book list.
+
+  Use case ends.
     
 ### UC08: Find books on LibTask
 
@@ -423,19 +441,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extension**
 
-* 1a The given query is invalid
-  * 1a1 LibTask shows an error message
-    Use case resumes from step 1
+* 1a. The given search is invalid.
 
-* 1b No books match the given query
-  * 1b1 LibTask shows an empty list.</br>
+  * 1a1. LibTask shows an error message.
+
+  Use case resumes from step 1
+
+* 1b. No books match the given query.
+
+  * 1b1. LibTask shows an empty list.</br>
+
   Use case ends
+
+* 1c. More than search parameter was provided. 
+
+  * 1c1. Lib Task shows an error message.
+
+  Use case ends.
 
 ### UC09: Edit a book on LibTask
 
 **MSS**
 
-1. User requests to edit a book and provides the index of the book and the new details.
+1. User requests to edit a book and provides the index of the book and the details.
 
 2. LibTask edits the book.
 
@@ -447,19 +475,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. LibTask shows an error message.
 
-      Use case resumes from step 1.
+   Use case resumes from step 1.
 
 * 1b. The new details are invalid.
 
     * 1b1. LibTask shows an error message.
 
-      Use case resumes from step 1.
+   Use case resumes from step 1.
   
-* 1c. The index is valid but no new details are entered
+* 1c. The index is valid but no new details are entered.
     
     * 1c1. LibTask shows an error message saying that at least ISBN, author or category must be provided.
 
-      Use case resumes from step 1.
+  Use case resumes from step 1.
 
 ### UC10: Delete Book from LibTask
 
@@ -477,7 +505,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. LibTask shows an error message.
 
-      Use case resumes from step 1.
+   Use case resumes from step 1.
+
+* 1b. The book is being borrowed.
+
+  * 1b1. LibTask shows an error message.
+   
+   Use case resumes from step 1. 
 
 ### UC11: Borrow Book
 
@@ -499,19 +533,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. LibTask shows an error message.
 
-      Use case resumes from step 3.
+  Use case resumes from step 3.
 
 * 3b. The return date of the book is invalid.
 
     * 3a1. LibTask shows an error message.
 
-      Use case resumes from step 3.
+  Use case resumes from step 3.
 
-* 3b. The book is already borrowed.
+* 3c. The book is already borrowed.
 
-    * 3a1. LibTask shows an error message.
+    * 3c1. LibTask shows an error message.
 
-      Use case resumes from step 3.
+  Use case resumes from step 3.
 
 ### UC12: Return Book on LibTask
 
@@ -519,7 +553,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User finds a patron [UC04](#uc04-find-a-patron-on-libtask)
 
-2. User requests to end a borrow relationship and provides index of the patron and index of the book in lists.
+2. User requests to end a borrow relationship and provides index of the patron or index of the book in lists.
 
 3. LibTask removes the borrow relationship between the patron and the book.
 
@@ -531,13 +565,19 @@ Use case ends.
 
     * 2a1. LibTask shows an error message.
 
-      Use case resumes from step 2.
+  Use case resumes from step 2.
 
 * 2b. The book is not borrowed by the patron.
 
     * 2a1. LibTask shows an error message.
 
-      Use case resumes from step 2.
+  Use case resumes from step 2.
+
+* 2c. The patron has not borrowed any books.
+
+  * 2c1. LibTask shows an error message.
+
+  Use case resumes from step 2
 
 ### UC13: Asking for Help on LibTask
 
@@ -546,7 +586,7 @@ Use case ends.
 
 2. LibTask shows the list of all the commands
 
-   Use case ends.
+  Use case ends.
 
 ### UC14: Exiting LibTask
 
@@ -555,25 +595,17 @@ Use case ends.
 
 2. LibTask closes.
 
-   Use case ends.
+  Use case ends.
 
 ### UC15: Clear database of all Patron's and Book's
 
 **MSS**
 
-1. User requests to clear database
+1. User requests to clear all patrons and books. 
 
-2. LibTask clears the database.
+2. LibTask clears the all patrons and books.
 
-   Use case ends.
-
-Extension
-
-* 1a. The database is already empty
-
-    * 1a1. LibTask shows an error message
-
-      Use case ends
+  Use case ends.
 
 ### UC16: Show previously run commands
 
@@ -582,7 +614,7 @@ Extension
 
 2. LibTask shows the last command used
 
-   Use case ends.
+  Use case ends.
 
 Extension
 
@@ -590,7 +622,7 @@ Extension
 
     * 1a1. LibTask shows an empty Commandbox. 
 
-      Use case ends.
+  Use case ends.
 
 ### UC17: List books related to a patron
 
@@ -609,10 +641,13 @@ Extension
 
   * 2a1. LibTask shows an error message.
 
-    Use case resumes from step 2.
+  Use case resumes from step 2.
+
 * 3a. There are no books related to the patron
-  * 3a1. LibTask returns an empty book list </br>
-    Use case ends
+
+  * 3a1. LibTask returns an empty book list. </br>
+
+  Use case ends
 
 ### UC18: List patrons with overdue books
 
@@ -623,7 +658,7 @@ Extension
 
 3. LibTask shows the list of all patrons with overdue books.
 
-   Use case ends.
+  Use case ends.
 
 Extension
 
@@ -631,7 +666,7 @@ Extension
 
     * 2a1. LibTask shows an empty patron list.
 
-      Use case ends.
+  Use case ends.
 
 ### UC19: Request Book
 
@@ -652,31 +687,31 @@ Extension
 
     * 3a1. LibTask shows an error message.
 
-      Use case resumes from step 3.
+  Use case resumes from step 3.
 
 * 3b. Patron has already requested for the book.
 
     * 3b1. LibTask shows an error message.
 
-      Use case resumes from step 3.
+  Use case resumes from step 3.
 
 * 3c. The book is already borrowed by the same user.
 
     * 3c1. LibTask shows an error message.
 
-      Use case resumes from step 3.
+  Use case resumes from step 3.
 
 * 3d. The book is available for borrowing.
 
     * 3d1. LibTask shows an error message.
 
-      Use case resumes from step 3.
+  Use case resumes from step 3.
 
 * 3e. The book already has 3 requesters.
 
     * 3e1. LibTask shows an error message.
 
-      Use case resumes from step 3.
+  Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
@@ -688,12 +723,13 @@ Extension
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, macOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others.
-* **Patron**: A user of the library.
-* **ISBN**: An International Standard Book Number 13 digits in length.
-* **MSS**: Main Success Scenario.
-
+| Term                   | Explanation                                                      |
+|------------------------|------------------------------------------------------------------|
+| Mainstream OS          | Windows, Linux, macOS                                            |
+| Private contact detail | A contact detail that is not meant to be shared with others.     |
+| Patron                 | A user of the library.                                           |
+| ISBN                   | An International Standard Book Number 10 or 13 digits in length. |
+| MSS                    | Main Success Scenario.                                           |
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
