@@ -3,20 +3,20 @@ layout: page
 title: User Guide
 ---
 
-LibTask is a **desktop application for librarians to manage book loans and requests by patrons, optimized for use via a [Command Line Interface (CLI)](#6-glossary)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, LibTask can get your book tracking tasks done faster than traditional GUI apps.
+LibTask is a **desktop application for librarians to manage book loans and requests by patrons. It is specially made to improve the overall efficiency of librarians when processing book loans and requests, helping them to complete their daily tasks quickly. LibTask is optimized for use via a [Command Line Interface (CLI)](#6-glossary)** while still having the benefits of a [Graphical User Interface (GUI)](#6-glossary) so that librarians who prefer typing can get their tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-# **1. Introduction**
+## **1. Introduction**
 
-## 1.1. Welcome to LibTask
-As a school librarian of a large library, you may already have your own desktop library software. However, existing library software are GUI-based and slow to work with. If you prefer to work with CLI commands efficiently while still having the benefits of aesthetic displays, then LibTask is designed just for you! LibTask provides you with a well packaged system of commands for managing book loans and book requests by your patrons. With LibTask, you can quickly process borrowing and returning of books by typing a few commands. The system also maintains two independent lists of books and patrons, allowing you to perform queries more efficiently.
+### 1.1. Welcome to LibTask
+As a school librarian of a large library, you may already have your own desktop library software. However, existing library software are GUI-based and slow to work with. If you prefer to work with CLI commands efficiently while still having the benefits of aesthetic displays, then LibTask is designed just for you! LibTask provides you with a well packaged system of commands for managing book loans and book requests by your patrons. With LibTask, you can quickly process borrowing and returning of books by simply typing a few commands. The system also maintains two independent lists of books and patrons, allowing you to perform queries more efficiently.
 
-## 1.2. About the User Guide
-The purpose of this guide is to explain to you how to use **LibTask** and to allow you to have an enjoyable experience. It explains the features and commands compatible with LibTask.  It is also structured in a way that lets you easily navigate to relevant sections.
+### 1.2. About the User Guide
+The purpose of this guide is to explain to you how to use **LibTask** and to allow you to have an enjoyable experience. It explains the features and commands compatible with LibTask.  It is also structured in a way that lets you easily navigate to relevant sections based on your level of experience with LibTask.
 
 Take note of following symbols that are used in this document:
 
@@ -24,7 +24,7 @@ Take note of following symbols that are used in this document:
 
 * :exclamation:: This symbol is used to warn users of potential actions that might corrupt the LibTask's data file.
 
-## 1.3. Navigating the User Guide
+### 1.3. Navigating the User Guide
 
 For help with installing LibTask and understanding our interface, you can refer to head to our [Quick start](#2-quick-start) section.
 
@@ -38,9 +38,9 @@ For the list of definition of the vocabulary words used in this document can be 
 
 --------------------------------------------------------------------------------------------------------------------
 
-# **2. Quick start**
+## **2. Quick start**
 
-## 2.1. Installation
+### 2.1. Installation
 1. Ensure you have Java `11` or above installed in your Computer. You can follow this [guide](https://docs.oracle.com/en/java/javase/11/install) to download and install java.
 
 1. Download the latest `libtask.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases).
@@ -69,19 +69,19 @@ For the list of definition of the vocabulary words used in this document can be 
 
 1. Refer to the [Features](#features) below for details of each command.
 
-## 2.2. LibTask GUI Overview
+### 2.2. LibTask GUI Overview
 The various GUI components of LibTask are described in the picture below:
 
 ![LabelledUi](images/LabelledGUI.png)
 
 * `Menu bar`: Menu buttons that you can click to exit LibTask or to open up the help window that contains a link to this user guide.
-* `Command box`: You can type and enter commands to run them in this box.
+* `Command box`: You can type and enter commands to run in this box.
 * `Result box`: You can view the results from running your commands in this box.
 * `patron list`: You can view the list of patrons with their details in this list.
 * `Book list`: You can view the list of books with their details in this list.
 --------------------------------------------------------------------------------------------------------------------
 
-# **3. Features**
+## **3. Features**
 
 This section describes the features supported by LibTask and how to use them.
 
@@ -109,11 +109,11 @@ This section describes the features supported by LibTask and how to use them.
 
 </div>
 
-## 3.1. General Features
+### 3.1. General Features
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.1.1. Viewing help : `help`
+#### 3.1.1. Viewing help : `help`
 
 Opens a help window explaining how to access LibTask's user guide.
 
@@ -121,19 +121,19 @@ Opens a help window explaining how to access LibTask's user guide.
 
 Format: `help`
 
-### 3.1.2. Clearing all entries : `clear`
+#### 3.1.2. Clearing all entries : `clear`
 
 Clears all patrons and books from LibTask's patron and book lists.
 
 Format: `clear`
 
-### 3.1.3. Exiting LibTask : `exit`
+#### 3.1.3. Exiting LibTask : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### 3.1.4. Retrieving previous command: `u`
+#### 3.1.4. Retrieving previous command: `u`
 
 Retrieves the previous command entered by the user back to the command box.
 
@@ -142,14 +142,14 @@ Format: `u`
 * Loads your previous successfully entered commands back to the command box so you can view and rerun it.
 * Only allows each command to be viewed once.
 
-### Saving LibTask's data
+#### Saving LibTask's data
 
 LibTask's data is saved in the hard disk automatically after any command that changes it. There is no need to save manually.
 
-## 3.2. Patron Features
+### 3.2. Patron Features
 
 --------------------------------------------------------------------------------------------------------------------
-### 3.2.1. Adding a patron: `patron add`
+#### 3.2.1. Adding a patron: `patron add`
 Adds a patron to LibTask's patron list.
 
 Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
@@ -158,7 +158,7 @@ Examples:
 * `patron add n/John s/A02128282A p/93231222 e/e03482@u.nus.edu t/student`
 * `patron add n/Alice s/S01823283S p/90123212 e/profA@u.nus.edu`
 
-### 3.2.2. Listing all patrons : `patron list`
+#### 3.2.2. Listing all patrons : `patron list`
 
 Shows a list of all patrons in LibTask's patron list.
 
@@ -166,7 +166,7 @@ Format: `patron list`
 
 * If all patrons are already listed, the command will still show a success message as having listed all patrons, but the patrons listed will have no visual change.
 
-### 3.2.3. Editing a patron : `patron edit`
+#### 3.2.3. Editing a patron : `patron edit`
 
 Edits the details of a patron at a specified index of the displayed patron list.
 
@@ -183,7 +183,7 @@ Examples:
 * `patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu` Edits the name, phone number and email address of the 1st patron in the displayed patron list to be `John Cena`, `91959491` and `johncena@u.nus.edu` respectively.
 * `patron edit 2 n/Alice t/Professor t/Horror ` Edits the name of the 2nd patron in the displayed patron list to be `Alice` and changes tags to `Professor` and `Horror`.
 
-### 3.2.4. Finding a patron by name: `patron find`
+#### 3.2.4. Finding a patron by name: `patron find`
 
 Finds all patrons with names matching the given keywords in LibTask's patron list.
 
@@ -202,7 +202,7 @@ Example:
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### 3.2.5. Deleting a patron : `patron delete`
+#### 3.2.5. Deleting a patron : `patron delete`
 
 Deletes the patron at a specified index in the displayed patron list.
 
@@ -216,17 +216,17 @@ Examples:
 * `patron list` followed by `patron delete 2` deletes the 2nd patron shown in the displayed patron list.
 * `patron find n/Betsy` followed by `patron delete 1` deletes the 1st person in the results of the `find` command.
 
-### 3.2.6. Listing all patrons with overdue books : `patron overdue`
+#### 3.2.6. Listing all patrons with overdue books : `patron overdue`
 
 Lists all patrons in LibTask's patron list with overdue books.
 
 Format: `patron overdue`
 
-## 3.3. Book Features
+### 3.3. Book Features
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.3.1. Adding a book: `book add`
+#### 3.3.1. Adding a book: `book add`
 Adds a book to LibTask's book list.
 
 Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
@@ -254,7 +254,7 @@ Before entering the command. A book with the same name already exists in LibTask
 After entering the command, a new available copy of the book is added. You will also be reminded to notify Bernice and Charlotte about the availability of this book.
 ![book-add-2.png](images/book-add-2.PNG)
 
-### 3.3.2. Listing all books : `book list`
+#### 3.3.2. Listing all books : `book list`
 
 To show a list of all books in LibTask, you can enter the `list` command with the format shown below.
 
@@ -274,7 +274,7 @@ Before entering the command, only two books are listed.
 After entering the command, all books will be listed.
 ![book-list-1.png](images/book-list-2.PNG)
 
-### 3.3.3. Finding books : `book find`
+#### 3.3.3. Finding books : `book find`
 
 To find books in LibTask based on book name, author or tags, you can enter the `find` command with the format shown below.
 
@@ -310,7 +310,7 @@ Before entering the command, all books are displayed.
 After entering the command, only one book which name contains `Harry` is displayed.
 ![book-find-4.png](images/book-find-4.PNG)
 
-### 3.3.4. Editing a book : `book edit`
+#### 3.3.4. Editing a book : `book edit`
 
 To edit the details of a specific book, you can enter the `edit` command with the format shown below.
 
@@ -351,7 +351,7 @@ Before entering the command, there are two copies of `Harry Potter and The Philo
 After entering the command, both copies will have their author removed. However, only the copy at the first index will have its tag removed, because different book copies can have different tags.
 ![book-edit-4.png](images/book-edit-4.PNG)
 
-### 3.3.5. Deleting a book : `book delete`
+#### 3.3.5. Deleting a book : `book delete`
 
 To delete a specific book, you can enter the `delete` command with the format shown below.
 
@@ -376,7 +376,7 @@ Before entering the command, there is a copy of `Harry Potter and The Philosophe
 After entering the command, that copy of `Harry Potter and The Philospher's Stone` is deleted.
 ![book-delete-2.png](images/book-delete-2.PNG)
 
-### 3.3.6. Borrowing a book : `borrow`
+#### 3.3.6. Borrowing a book : `borrow`
 
 To keep track that a specific patron is borrowing a specific book, you can enter the `borrow` command with the format shown below.
 
@@ -405,7 +405,7 @@ Before entering the command, the first book is available.
 After entering the command, that first book is labelled as borrowed, and is borrowed by the first patron Alex Yeoh, until a return data of 05-May-2022.
 ![book-borrow-2.png](images/book-borrow-2.PNG)
 
-### 3.3.7. Returning a book : `return`
+#### 3.3.7. Returning a book : `return`
 
 To return a specific book, or to return all books by a specific patron, you can enter the `return` command with the format shown below.
 
@@ -446,7 +446,7 @@ Before entering the command, the third book is labelled as borrowed, and has two
 After entering the command, the third book becomes available. The two requesters are also removed as you are reminded to notify both of them about the availability of the returned book.
 ![book-return-4.png](images/book-return-4.PNG)
 
-### 3.3.8. Requesting a book : `book request`
+#### 3.3.8. Requesting a book : `book request`
 
 To keep track that a specific patron is requesting for a specific book, you can enter the `request` command with the format shown below.
 
@@ -479,7 +479,7 @@ After entering the command, both books are labelled as requested by Bernice Yu (
 
 When a copy of this book becomes available later, you will be reminded to notify Bernice Yu automatically.
 
-### 3.3.9. Listing all books related to a patron : `book related`
+#### 3.3.9. Listing all books related to a patron : `book related`
 
 To list all books borrowed by or requested by a specific patron, you can enter the `related` command with the format shown below.
 
@@ -506,7 +506,7 @@ After entering the command, the book list displays only books that are borrowed 
 
 This command is typically used after `patron overdue` command. After listing all patrons with overdue books, you can use this command to check which books are overdue by each patron.
 
-### Editing the data file
+#### Editing the data file
 
 LibTask's data is saved as a JSON file `[JAR file location]/data/libtask.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -515,7 +515,7 @@ LibTask's data is saved as a JSON file `[JAR file location]/data/libtask.json`. 
 If your changes to the data file makes its format invalid, LibTask will discard all data and start with an empty data file at the next run.
 </div>
 
-# **4. FAQ**
+## **4. FAQ**
 
 **Q1**: What happens if there is no response after attempting to enter a command?<br>
 **A**: Please double-check if the format of the command is written correctly. If the issue persists, please close the application and restart it again.
@@ -542,9 +542,9 @@ If your changes to the data file makes its format invalid, LibTask will discard 
 **A**: This is done so that the user can see the two lists side by side and have a clearer picture of the various patrons and books in the database.
 --------------------------------------------------------------------------------------------------------------------
 
-# **5. Command summary**
+## **5. Command summary**
 
-## 5.1. General Commands
+### 5.1. General Commands
 
 | Function                                   | Format Of Command                                                          |
 |--------------------------------------------|----------------------------------------------------------------------------|
@@ -554,7 +554,7 @@ If your changes to the data file makes its format invalid, LibTask will discard 
 | **Show previous commands**                 | `u`                                                                        |
 | **Navigating the different patrons/books** | **Pressing the :arrow_up: and :arrow_down: arrows on keyboard :keyboard:** |
 
-## 5.2. Patron Commands
+### 5.2. Patron Commands
 
 | Function                            | Format Of Command                                                 |
 |-------------------------------------|-------------------------------------------------------------------|
@@ -565,7 +565,7 @@ If your changes to the data file makes its format invalid, LibTask will discard 
 | **Delete a patron**                 | `patron delete INDEX`                                             |
 | **List patrons with overdue books** | `patron overdue`                                                  |
 
-## 5.3. Book Commands
+### 5.3. Book Commands
 
 | Function                               | Format Of Command                                                   |
 |----------------------------------------|---------------------------------------------------------------------|
@@ -579,7 +579,7 @@ If your changes to the data file makes its format invalid, LibTask will discard 
 | **Request a book**                     | `book request INDEX1 INDEX2`                                        |
 | **List all books related to a patron** | `book related INDEX`                                                |
 
-# **6. Glossary**
+## **6. Glossary**
 
 | Term                           | Explanation                                                                                     |
 |--------------------------------|-------------------------------------------------------------------------------------------------|
