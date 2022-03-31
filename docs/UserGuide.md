@@ -74,7 +74,7 @@ For the list of definition of the vocabulary words used in this document can be 
 ### 2.2. LibTask GUI Overview
 The various GUI components of LibTask are described in the picture below:
 
-![LabelledUi](images/LabelledGUI.png)
+![LabeledUi](images/LabeledGUI.png)
 
 * `Menu bar`: Menu buttons that you can click to exit LibTask or to open up the help window that contains a link to this user guide.
 * `Command box`: You can type and enter commands to run in this box.
