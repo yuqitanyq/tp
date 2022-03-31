@@ -50,6 +50,8 @@ For the list of definition of the vocabulary words used in this document can be 
 1. Double-click the file to start the app. The GUI is similar to the one shown below and should appear in a few seconds.<br>
    ![Ui](images/Ui.png)
 
+1. You can refer to [LibTask GUI Overview](#22-libtask-gui-overview) to understand what each component in the GUI does.
+
 1. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open a help window.<br>
    Here are some sample commands you can try:
 
@@ -67,7 +69,7 @@ For the list of definition of the vocabulary words used in this document can be 
 
    * **`exit`** : Exits LibTask.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#3-features) below for details of each command.
 
 ### 2.2. LibTask GUI Overview
 The various GUI components of LibTask are described in the picture below:
@@ -79,6 +81,7 @@ The various GUI components of LibTask are described in the picture below:
 * `Result box`: You can view the results from running your commands in this box.
 * `patron list`: You can view the list of patrons with their details in this list.
 * `Book list`: You can view the list of books with their details in this list.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **3. Features**
