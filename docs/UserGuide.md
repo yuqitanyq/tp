@@ -3,20 +3,20 @@ layout: page
 title: User Guide
 ---
 
-LibTask is a **desktop application for librarians to manage book loans and requests by patrons, optimized for use via a [Command Line Interface (CLI)](#6-glossary)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, LibTask can get your book tracking tasks done faster than traditional GUI apps.
+LibTask is a **desktop application for librarians to manage book loans and requests by patrons. It is specially made to improve the overall efficiency of librarians when processing book loans and requests, helping them to complete their daily tasks quickly. LibTask is optimized for use via a [Command Line Interface (CLI)](#6-glossary)** while still having the benefits of a [Graphical User Interface (GUI)](#6-glossary) so that librarians who prefer typing can get their tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-# **1. Introduction**
+## **1. Introduction**
 
-## 1.1. Welcome to LibTask
-As a school librarian of a large library, you may already have your own desktop library software. However, existing library software are GUI-based and slow to work with. If you prefer to work with CLI commands efficiently while still having the benefits of aesthetic displays, then LibTask is designed just for you! LibTask provides you with a well packaged system of commands for managing book loans and book requests by your patrons. With LibTask, you can quickly process borrowing and returning of books by typing a few commands. The system also maintains two independent lists of books and patrons, allowing you to perform queries more efficiently.
+### 1.1. Welcome to LibTask
+As a school librarian of a large library, you may already have your own desktop library software. However, existing library software are GUI-based and slow to work with. If you prefer to work with CLI commands efficiently while still having the benefits of aesthetic displays, then LibTask is designed just for you! LibTask provides you with a well packaged system of commands for managing book loans and book requests by your patrons. With LibTask, you can quickly process borrowing and returning of books by simply typing a few commands. The system also maintains two independent lists of books and patrons, allowing you to perform queries more efficiently.
 
-## 1.2. About the User Guide
-The purpose of this guide is to explain to you how to use **LibTask** and to allow you to have an enjoyable experience. It explains the features and commands compatible with LibTask.  It is also structured in a way that lets you easily navigate to relevant sections.
+### 1.2. About the User Guide
+The purpose of this guide is to explain to you how to use **LibTask** and to allow you to have an enjoyable experience. It explains the features and commands compatible with LibTask.  It is also structured in a way that lets you easily navigate to relevant sections based on your level of experience with LibTask.
 
 Take note of following symbols that are used in this document:
 
@@ -24,22 +24,23 @@ Take note of following symbols that are used in this document:
 
 * :exclamation:: This symbol is used to warn users of potential actions that might corrupt the LibTask's data file.
 
-## 1.3. Navigating the User Guide
+### 1.3. Navigating the User Guide
 
-For help with the setup of LibTask, you can refer to head to our [Quick start](#2-quick-start) section.
+For help with installing LibTask and understanding our interface, you can refer to head to our [Quick start](#2-quick-start) section.
 
 For the full documentation of each feature, you can refer to our [Features](#3-features) section.
 
-For frequently asked questions about LibTask, you can refer to our [FAQ](#4-faq) section.
+For a list of frequently asked questions about LibTask, you can refer to our [FAQ](#4-faq) section.
 
-For a quick overview of all the commands in LibTask, you can refer to our [Command summary](#5-command-summary) section.
+If you are an advanced user, you can refer to our [Command summary](#5-command-summary) section.
 
-For the list of definitions of vocabulary words used in this document can be found in our [Glossary](#6-glossary) section.
+For the list of definition of the vocabulary words used in this document can be found in our [Glossary](#6-glossary) section.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# **2. Quick start**
+## **2. Quick start**
 
+### 2.1. Installation
 1. Ensure you have Java `11` or above installed in your Computer. You can follow this [guide](https://docs.oracle.com/en/java/javase/11/install) to download and install java.
 
 1. Download the latest `libtask.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases).
@@ -48,6 +49,8 @@ For the list of definitions of vocabulary words used in this document can be fou
 
 1. Double-click the file to start the app. The GUI is similar to the one shown below and should appear in a few seconds.<br>
    ![Ui](images/Ui.png)
+
+1. You can refer to [LibTask GUI Overview](#22-libtask-gui-overview) to understand what each component in the GUI does.
 
 1. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open a help window.<br>
    Here are some sample commands you can try:
@@ -66,11 +69,22 @@ For the list of definitions of vocabulary words used in this document can be fou
 
    * **`exit`** : Exits LibTask.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#3-features) below for details of each command.
+
+### 2.2. LibTask GUI Overview
+The various GUI components of LibTask are described in the picture below:
+
+![LabeledUi](images/LabeledGUI.png)
+
+* `Menu bar`: Menu buttons that you can click to exit LibTask or to open up the help window that contains a link to this user guide.
+* `Command box`: You can type and enter commands to run in this box.
+* `Result box`: You can view the results from running your commands in this box.
+* `patron list`: You can view the list of patrons with their details in this list.
+* `Book list`: You can view the list of books with their details in this list.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# **3. Features**
+## **3. Features**
 
 This section describes the features supported by LibTask and how to use them.
 
@@ -98,11 +112,11 @@ This section describes the features supported by LibTask and how to use them.
 
 </div>
 
-## 3.1. General Features
+### 3.1. General Features
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.1.1. Viewing help : `help`
+#### 3.1.1. Viewing help : `help`
 
 Opens a help window explaining how to access LibTask's user guide.
 
@@ -110,19 +124,19 @@ Opens a help window explaining how to access LibTask's user guide.
 
 Format: `help`
 
-### 3.1.2. Clearing all entries : `clear`
+#### 3.1.2. Clearing all entries : `clear`
 
 Clears all patrons and books from LibTask's patron and book lists.
 
 Format: `clear`
 
-### 3.1.3. Exiting LibTask : `exit`
+#### 3.1.3. Exiting LibTask : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### 3.1.4. Retrieving previous command: `u`
+#### 3.1.4. Retrieving previous command: `u`
 
 Retrieves the previous command entered by the user back to the command box.
 
@@ -131,14 +145,14 @@ Format: `u`
 * Loads your previous successfully entered commands back to the command box so you can view and rerun it.
 * Only allows each command to be viewed once.
 
-### Saving LibTask's data
+#### Saving LibTask's data
 
 LibTask's data is saved in the hard disk automatically after any command that changes it. There is no need to save manually.
 
-## 3.2. Patron Features
+### 3.2. Patron Features
 
 --------------------------------------------------------------------------------------------------------------------
-### 3.2.1. Adding a patron: `patron add`
+#### 3.2.1. Adding a patron: `patron add`
 Adds a patron to LibTask's patron list.
 
 Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
@@ -147,7 +161,7 @@ Examples:
 * `patron add n/John s/A02128282A p/93231222 e/e03482@u.nus.edu t/student`
 * `patron add n/Alice s/S01823283S p/90123212 e/profA@u.nus.edu`
 
-### 3.2.2. Listing all patrons : `patron list`
+#### 3.2.2. Listing all patrons : `patron list`
 
 Shows a list of all patrons in LibTask's patron list.
 
@@ -155,7 +169,7 @@ Format: `patron list`
 
 * If all patrons are already listed, the command will still show a success message as having listed all patrons, but the patrons listed will have no visual change.
 
-### 3.2.3. Editing a patron : `patron edit`
+#### 3.2.3. Editing a patron : `patron edit`
 
 Edits the details of a patron at a specified index of the displayed patron list.
 
@@ -172,7 +186,7 @@ Examples:
 * `patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu` Edits the name, phone number and email address of the 1st patron in the displayed patron list to be `John Cena`, `91959491` and `johncena@u.nus.edu` respectively.
 * `patron edit 2 n/Alice t/Professor t/Horror ` Edits the name of the 2nd patron in the displayed patron list to be `Alice` and changes tags to `Professor` and `Horror`.
 
-### 3.2.4. Finding a patron by name: `patron find`
+#### 3.2.4. Finding a patron by name: `patron find`
 
 Finds all patrons with names matching the given keywords in LibTask's patron list.
 
@@ -191,7 +205,7 @@ Example:
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### 3.2.5. Deleting a patron : `patron delete`
+#### 3.2.5. Deleting a patron : `patron delete`
 
 Deletes the patron at a specified index in the displayed patron list.
 
@@ -205,140 +219,297 @@ Examples:
 * `patron list` followed by `patron delete 2` deletes the 2nd patron shown in the displayed patron list.
 * `patron find n/Betsy` followed by `patron delete 1` deletes the 1st person in the results of the `find` command.
 
-### 3.2.6. Listing all patrons with overdue books : `patron overdue`
+#### 3.2.6. Listing all patrons with overdue books : `patron overdue`
 
 Lists all patrons in LibTask's patron list with overdue books.
 
 Format: `patron overdue`
 
-## 3.3. Book Features
+### 3.3. Book Features
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.3.1. Adding a book: `book add`
+#### 3.3.1. Adding a book: `book add`
 Adds a book to LibTask's book list.
 
-Format: `book add n/NAME i/ISBN [a/AUTHOR …] [t/CATEGORY_TAG …] `
+Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 
 <div markdown="span" class="alert alert-primary">
 
-**Tip:**
-* ISBN must be 10 or 13 digits in length
+**Notes about the add command:**
+* BOOK_NAME must start and end with alphanumeric characters, and can only contain `'` character, `:` character and alphanumeric characters.
+* ISBN must be 10 or 13 digits in length, and contain only numbers with at most one `-` character between consecutive numbers. If it is 13 digits long, it must start with 978 or 979. 
+* ISBN digits must have valid checksum. Details on calculating checksum can be found here.
+* AUTHOR must start with an alphanumeric character, and can only contain alphanumeric characters and `.` character.
+* You can add multiple copies the same book with the same isbn. However, all books with the same isbn must also have the same name and written by the same authors.
+* If books with the same isbn already exists, and is requested by some patrons, adding this book will also remove all requests for those books, and you will be reminded to notify patrons who are interested in this available book.
 </div>
 
-Examples:
-* `book add n/Harry Potter i/978-7-783828-15-1 a/J.K.Rowling t/Thriller t/Magic`
-* `book add n/Heads You Lose i/979-381-26-8943-3 a/Lisa Lutz a/David Hayward`
+**Example**
 
-### 3.3.2. Listing all books : `book list`
+To add a book with the name `Introduction to Algorithms`, isbn `9780371888506`, authors `Cormen`, `Leiserson`, `Rivest` and `Stein`, with a tag of `ComputerScience`, you can enter the following command:
 
-Shows a list of all books in LibTask's book list.
+`book add book add n/Introduction to Algorithms a/Cormen a/Leiserson a/Rivest a/Stein i/9780371888506 t/ComputerScience`
 
-Format: `book list`
+Before entering the command. A book with the same name already exists in LibTask. However, that copy is currently borrowed by Alex and requested by Bernice and Charlotte.
+![book-add-1.png](images/book-add-1.PNG)
 
+After entering the command, a new available copy of the book is added. You will also be reminded to notify Bernice and Charlotte about the availability of this book.
+![book-add-2.png](images/book-add-2.PNG)
+
+#### 3.3.2. Listing all books : `book list`
+
+To show a list of all books in LibTask, you can enter the `list` command with the format shown below.
+
+**Format**: `book list`
+
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the list command:**
 * If all books are already listed, the command will still show a success message as having listed all books, but the books listed will have no visual change.
+</div>
 
-### 3.3.3. Finding books : `book find`
+**Example**: `book list`
 
-Lists all books in LibTask's book list that satisfy the predicates given.
+Before entering the command, only two books are listed.
+![book-list-1.png](images/book-list-1.PNG)
 
-Format: `book find [n/NAME] [t/CATEGORY_TAG] [a/AUTHOR]`
+After entering the command, all books will be listed.
+![book-list-1.png](images/book-list-2.PNG)
 
-* Finds the books that match the predicate supplied.
-* Only one of the optional fields can be provided.
-* The tag, name and author must be provided will also return partial results. 
+#### 3.3.3. Finding books : `book find`
 
-Examples:
-* `book find n/Harry` Returns all books in LibTask's book list whose titles contain the word `Harry`.
-* `book find t/Adventure` Returns all books in LibTask's book list which have a tag `Adventure`.
+To find books in LibTask based on book name, author or tags, you can enter the `find` command with the format shown below.
 
-### 3.3.4. Editing a book : `book edit`
+**Format**: `book find PREFIX/KEYWORD`
 
-Edits the details of a book at a specified index of the displayed book list.
+<div markdown="span" class="alert alert-primary">
 
-Format: `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR …] [t/CATEGORY_TAG …]`
+**Notes about the list command:**
 
-* Edits the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of books in the displayed list.
+* `PREFIX` must be either `t` (for find based on tag), `a` (for finding based on author), or `n` (for finding based on book name).
+* All books with a tag, or author, or book name that contains the substring `KEYWORD` will be displayed in the book list. 
+</div>
+
+**Example**:
+
+To find all books for computer science students, you can enter the following command:
+
+`book find t/computer`
+
+Before entering the command, all books are displayed.
+![book-find-1.png](images/book-find-1.PNG)
+
+After entering the command, only books that have a tag containing the keyword "computer" are displayed.
+![book-find-2.png](images/book-find-2.PNG)
+
+To find all books for with a book name containing the keyword `Harry`, you can enter the following command:
+
+`book find n/Harry`
+
+Before entering the command, all books are displayed.
+![book-find-3.png](images/book-find-3.PNG)
+
+After entering the command, only one book which name contains `Harry` is displayed.
+![book-find-4.png](images/book-find-4.PNG)
+
+#### 3.3.4. Editing a book : `book edit`
+
+To edit the details of a specific book, you can enter the `edit` command with the format shown below.
+
+**Format**: `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR] … [t/CATEGORY_TAG] …`
+
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the edit command:**
+
+* Edits the book at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, … 
 * At least one of the optional fields (ISBN, AUTHOR, CATEGORY_TAG) must be provided.
 * Existing values will be updated to the input values.
+* When a book's name, authors or isbn is changed, all copies of books with the same isbn will have their respective fields edited as well. This is because all books with the same isbn should have the same name and authors.
 * When editing tags or authors, the existing tags or authors of the book will be removed i.e. adding of tags and authors is not cumulative. However, if all tags are added in a single input, the multiple tags will be added.
-* You can remove all the book’s authors and tags by typing `a/` or `t/` respectively without
-    specifying any tags after it.
+* You can remove all the book’s authors and tags by typing `a/` or `t/` respectively without specifying any tags after it.
+* You cannot edit a book's isbn into a new isbn if the new isbn already belongs to another book in LibTask.
+</div>
 
-Examples:
-* `book edit 1 n/Harry Potter: Sorcerer's Stone t/Adventure t/Magic` edits the name of the 1st book to be `Harry Potter: Sorceror's Stone` and edit its category tag to be `Adventure` and `Magic`.
-* `book edit 2 i/978-79317-3-542-3 a/Another Rowling t/` edits the ISBN of the 2nd book to be `978-79317-3-542-3`, changes the author to `Another Rowling` and clears all existing tags.
+**Examples**:
 
-### 3.3.5. Deleting a book : `book delete`
+To edit the first book's name from `Harry Potter: Sorcerer's Stone` to `Harry Potter 1`, and its tag to `Thriller` and `Magic`, you can enter the following command:
 
-Deletes the book at the specified index in the displayed book list.
+`book edit 1 n/Harry Potter 1 t/Thriller t/Magic`
 
-Format: `book delete INDEX`
+Before entering the command, the first book still has its original name and tags.
+![book-edit-1.png](images/book-edit-1.PNG)
 
-* Deletes the book at the specified `INDEX`.
-* The index refers to the index number shown in the displayed book list.
-* The index **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of books in the displayed list.
+After entering the command, the first book has its name edited to `Harry Potter 1` and has tags `Thriller` and `Magic`
+![book-edit-2.png](images/book-edit-2.PNG)
 
-Examples:
-* `book list` followed by `book delete 2` deletes the 2nd book from LibTask's book list.
+To remove all authors from and tags from the first book, you can enter the following command:
 
-### 3.3.6. Borrowing a book : `borrow`
+`book edit 1 a/ t/`
 
-Allows the patron at `INDEX1` of the displayed patron list to borrow a book at `INDEX2` of the displayed book list.
+Before entering the command, there are two copies of `Harry Potter and The Philosopher's Stone`, both have different tags but has the same author `J. K. Rowling`.
+![book-edit-3.png](images/book-edit-3.PNG)
 
-Format: `borrow INDEX1 INDEX2`
+After entering the command, both copies will have their author removed. However, only the copy at the first index will have its tag removed, because different book copies can have different tags.
+![book-edit-4.png](images/book-edit-4.PNG)
+
+#### 3.3.5. Deleting a book : `book delete`
+
+To delete a specific book, you can enter the `delete` command with the format shown below.
+
+**Format**: `book delete INDEX`
+
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the delete command:**
+
+* Deletes the book at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, …
+* You cannot delete a book that is borrowed. If you insist on deleting the book, you can first return the book.
+</div>
+
+**Example**:
+* To delete the first book, you can enter the following command:
+
+`book delete 1`
+
+Before entering the command, there is a copy of `Harry Potter and The Philosopher's Stone` as the first book.
+![book-delete-1.png](images/book-delete-1.PNG)
+
+After entering the command, that copy of `Harry Potter and The Philospher's Stone` is deleted.
+![book-delete-2.png](images/book-delete-2.PNG)
+
+#### 3.3.6. Borrowing a book : `borrow`
+
+To keep track that a specific patron is borrowing a specific book, you can enter the `borrow` command with the format shown below.
+
+**Format**: `borrow INDEX1 INDEX2 RETURN_DATE`
+
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the borrow command:**
 
 * `INDEX1` refers to the index number of a patron shown in the displayed patron list.
 * `INDEX2` refers to the index number of a book shown in the displayed book list.
-* `INDEX1` **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of patrons in the displayed list.
-* `INDEX2` **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of books in the displayed list.
-* The book at `INDEX2` must not be already borrowed.
+* Both `INDEX1` and `INDEX2` **must be a positive integer** 1, 2, 3, …
+* `RETURN_DATE` must be in dd-MMM-yyyy format (e.g. 20-May-2022) and must be later than the current date.
+* A patron cannot borrow multiple copies of the same book with the same isbn.
+* A patron cannot borrow a book that is already borrowed by someone else.
+</div>
 
-Examples:
-* `patron list` and `book list` followed by `borrow 2 3` establishes a relationship that the 2nd patron borrows the 3rd book.
+**Example**:
+* To keep track that the first patron is borrowing the first book until a return date of 5th May 2022, you can enter the following command:
 
-### 3.3.7. Returning a book : `return`
+`borrow 1 1 05-May-2022`
 
-Depending on the exact command, returns all books borrowed by a patron at a specified index of the displayed patron list, or returns a book at a specified index in the displayed book list.
+Before entering the command, the first book is available.
+![book-borrow-1.png](images/book-borrow-1.PNG)
 
-Format: `return PREFIX/INDEX`
+After entering the command, that first book is labelled as borrowed, and is borrowed by the first patron Alex Yeoh, until a return data of 05-May-2022.
+![book-borrow-2.png](images/book-borrow-2.PNG)
+
+#### 3.3.7. Returning a book : `return`
+
+To return a specific book, or to return all books by a specific patron, you can enter the `return` command with the format shown below.
+
+**Format**: `return PREFIX/INDEX`
+
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the return command:**
 
 * `PREFIX` must be either `p` for patrons or `b` for books.
-* If `PREFIX` is `p`, `INDEX` refers to the index number shown in the displayed patron list.
-* If `PREFIX` is `b`, `INDEX` refers to the index number shown in the displayed book list.
-* `INDEX` **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of patrons or books in the displayed list.
+* If `PREFIX` is `p`, `INDEX` refers to the index number of the patron who is returning books, as shown in the displayed patron list.
+* If `PREFIX` is `b`, `INDEX` refers to the index number of the book to be returned, as shown in the displayed book list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …
 * If the book at index `INDEX` is not borrowed, or if the patron at index `INDEX` does not borrow any books, nothing happens.
+* If there are patrons who requested to be notified about the availability of the returned books, you will be reminded to notify them. Subsequently, all requests for those books will be deleted automatically.
+* You cannot return a specific book if it is not borrowed
+* You cananot return all books by a patron if the patron did not borrow any books.
+</div>
 
-Examples:
-* `patron list` followed by `return p/3` will return all books borrowed by the 3rd patron, if any.
-* `book list` followed by `return b/2` will return the 2nd book, if it is borrowed.
+**Examples**:
+* To return all books borrowed by the first patron, you can enter the following command:
 
-### 3.3.8. Requesting a book : `book request`
+`return p/1`
 
-Establishes a relationship that patron at index `INDEX1` of the displayed patron list is requesting to be notified when the book at index `INDEX2` of the displayed book list is available.
+Before entering the command, there are three books borrowed by the first patron. There are also two patrons requesting to be notified when the third book becomes available.
+![book-return-1.png](images/book-return-1.PNG)
 
-Format: `book request INDEX1 INDEX2`
+After entering the command, all three books borrowed by the first patron is returned. Furthermore, you are reminded to notify the two patrons who requested for the third book.
+![book-return-2.png](images/book-return-2.PNG)
 
-* `INDEX1` **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of patrons in the displayed list.
-* `INDEX2` **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of books in the displayed list.
-* If the book at index `INDEX2` is currently available, a message will be displayed.
+* To return only the third book, you can enter the following command:
 
-Examples:
-* `patron list` and `book list` followed by `book request 1 2` keeps a record that the 1st patron in the displayed patron list would like to be notified when the 2nd book in the displayed book list is available.
+`return b/3`
 
-### 3.3.9. Listing all books related to a patron : `book related`
+Before entering the command, the third book is labelled as borrowed, and has two requesters requesting to be notified when it becomes available.
+![book-return-3.png](images/book-return-3.PNG)
 
-Displays all books related to the patron at the specified index of the displayed patron list.
+After entering the command, the third book becomes available. The two requesters are also removed as you are reminded to notify both of them about the availability of the returned book.
+![book-return-4.png](images/book-return-4.PNG)
 
-Format: `book related INDEX`
+#### 3.3.8. Requesting a book : `book request`
 
-* `INDEX` **must be a positive integer** 1, 2, 3, … and smaller than or equal to the number of patrons in the displayed list.
+To keep track that a specific patron is requesting for a specific book, you can enter the `request` command with the format shown below.
 
-Examples:
-* `book related 1` will display all the books borrowed and requested by the 1st patron in the displayed patron list.
+**Format**: `book request INDEX1 INDEX2`
 
+<div markdown="span" class="alert alert-primary">
 
-### Editing the data file
+**Notes about the request command:**
+
+* `INDEX1` refers to the index number of the patron who is requesting for the book, as shown in the displayed patron list.
+* `INDEX2` refers to the index number of the book to be requested, as shown in the displayed book list.
+* Both `INDEX1` and `INDEX2` **must be a positive integer** 1, 2, 3, …
+* Book requests are associated with books with the same isbn, not a book copy. For example, when patron Alex requests for the first book, LibTask recognizes that Alex is requesting for books with the same isbn as the first book.
+* A patron can only request for a book if all copies of the book is borrowed. This is because if there is an available copy of the book, you can let the patron borrow that copy without requesting for it.
+* A patron cannot request for the same book again if LibTask is still keeping track of his previous request.
+* A patron cannot request for a book if he/she is currently borrowing a copy of that book.
+* A book can have a maximum of three book requests. There is no need in having too many book requests because ultimately only one patron can borrow that book.
+</div>
+
+**Example**:
+* To keep track that the second patron is requesting for first book, you can enter the following command:
+
+`book request 1 1`
+
+Before entering the command, there are two books with the same isbn as the first book. Both copies of the book are already borrowed.
+![book-request-1.png](images/book-request-1.PNG)
+
+After entering the command, both books are labelled as requested by Bernice Yu (the name of the second patron).
+![book-request-2.png](images/book-request-2.PNG)
+
+When a copy of this book becomes available later, you will be reminded to notify Bernice Yu automatically.
+
+#### 3.3.9. Listing all books related to a patron : `book related`
+
+To list all books borrowed by or requested by a specific patron, you can enter the `related` command with the format shown below.
+
+**Format**: `book related INDEX`
+
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the related command:**
+
+* Lists all books borrowed by or requested by a patron at `INDEX`. `INDEX` refers to the index number of the patron of interest, as shown in the displayed patron list.
+* If the patron of interest did not borrow any book or request for any book, an empty book list will be shown.
+</div>
+
+**Example**:
+* To list all books borrowed by or requested by the second patron, you can enter the following command:
+
+`book related 2`
+
+Before entering the command, the book list displays all books in LibTask.
+![book-related-1.png](images/book-related-1.PNG)
+
+After entering the command, the book list displays only books that are borrowed by or requested by Bernice Yu (the second patron). In this case, only one book is shown because Bernice Yu did not borrow any book, and requested for one book.
+![book-related-2.png](images/book-related-2.PNG)
+
+This command is typically used after `patron overdue` command. After listing all patrons with overdue books, you can use this command to check which books are overdue by each patron.
+
+#### Editing the data file
 
 LibTask's data is saved as a JSON file `[JAR file location]/data/libtask.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -347,13 +518,7 @@ LibTask's data is saved as a JSON file `[JAR file location]/data/libtask.json`. 
 If your changes to the data file makes its format invalid, LibTask will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
---------------------------------------------------------------------------------------------------------------------
-
-# **4. FAQ**
+## **4. FAQ**
 
 **Q1**: What happens if there is no response after attempting to enter a command?<br>
 **A**: Please double-check if the format of the command is written correctly. If the issue persists, please close the application and restart it again.
@@ -380,9 +545,9 @@ _Details coming soon ..._
 **A**: This is done so that the user can see the two lists side by side and have a clearer picture of the various patrons and books in the database.
 --------------------------------------------------------------------------------------------------------------------
 
-# **5. Command summary**
+## **5. Command summary**
 
-## 5.1. General Commands
+### 5.1. General Commands
 
 | Function                                   | Format Of Command                                                          |
 |--------------------------------------------|----------------------------------------------------------------------------|
@@ -392,7 +557,7 @@ _Details coming soon ..._
 | **Show previous commands**                 | `u`                                                                        |
 | **Navigating the different patrons/books** | **Pressing the :arrow_up: and :arrow_down: arrows on keyboard :keyboard:** |
 
-## 5.2. Patron Commands
+### 5.2. Patron Commands
 
 | Function                            | Format Of Command                                                 |
 |-------------------------------------|-------------------------------------------------------------------|
@@ -403,7 +568,7 @@ _Details coming soon ..._
 | **Delete a patron**                 | `patron delete INDEX`                                             |
 | **List patrons with overdue books** | `patron overdue`                                                  |
 
-## 5.3. Book Commands
+### 5.3. Book Commands
 
 | Function                               | Format Of Command                                                   |
 |----------------------------------------|---------------------------------------------------------------------|
@@ -412,13 +577,14 @@ _Details coming soon ..._
 | **Find a book**                        | `book find [n/NAME] [t/TAG] [a/AUTHOR]`                             |
 | **Edit a book**                        | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR]…​ [t/CATEGORY_TAG]…​` |
 | **Delete a book**                      | `book delete INDEX`                                                 |
-| **Borrow a book**                      | `borrow INDEX1 INDEX2`                                              |
+| **Borrow a book**                      | `borrow INDEX1 INDEX2 RETURN_DATE`                                  |
 | **Return a book**                      | `return PREFIX/INDEX`                                               |
-| **Request a book**                     | `request INDEX1 INDEX2`                                             |
+| **Request a book**                     | `book request INDEX1 INDEX2`                                        |
 | **List all books related to a patron** | `book related INDEX`                                                |
 
-# **6. Glossary**
+## **6. Glossary**
 
-| Term                   | Explanation                                                         |
-|------------------------|---------------------------------------------------------------------|
-| Command-line interface | a console which users can type text as commands into it to execute. |
+| Term                           | Explanation                                                                                     |
+|--------------------------------|-------------------------------------------------------------------------------------------------|
+| Command-line Interface (CLI)   | An interface which involves the users typing text and executing it as commands.                 |
+| Graphical User Interface (GUI) | An interface which involves the users clicking buttons and selecting options from the menu bar. |
