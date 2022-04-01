@@ -11,7 +11,6 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.patron.ListPatronCommand;
 import seedu.address.logic.commands.patron.OverduePatronCommand;
 import seedu.address.logic.parser.LibTaskParser;
-import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -19,7 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  *
  * @see LibTaskParser
  */
-public class PatronCommandParser implements Parser<Command> {
+public class PatronCommandParser {
 
     /**
      * Used for initial separation of command word and args.

@@ -3,9 +3,10 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":LibTaskParser" as LibTaskParser LOGIC_COLOR
+participant ":PatronCommandParser" as PatronCommandParser LOGIC_COLOR
+participant ":DeletePatronCommandParser" as DeletePatronCommandParser LOGIC_COLOR
+participant "d:DeletePatronCommand" as DeletePatronCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,56 +14,72 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("patron delete 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> LibTaskParser : parseCommand("patron delete 1")
+activate LibTaskParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create PatronCommandParser
+LibTaskParser -> PatronCommandParser
+activate PatronCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+PatronCommandParser --> LibTaskParser
+deactivate PatronCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+LibTaskParser -> PatronCommandParser : parse("delete 1")
+activate PatronCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeletePatronCommandParser
+PatronCommandParser -> DeletePatronCommandParser
+activate DeletePatronCommandParser
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+DeletePatronCommandParser --> PatronCommandParser
+deactivate DeletePatronCommandParser
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+PatronCommandParser -> DeletePatronCommandParser : parse("1")
+activate DeletePatronCommandParser
+
+create DeletePatronCommand
+DeletePatronCommandParser -> DeletePatronCommand
+activate DeletePatronCommand
+
+DeletePatronCommand --> DeletePatronCommandParser : d
+deactivate DeletePatronCommand
+
+DeletePatronCommandParser --> PatronCommandParser : d
+deactivate DeletePatronCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+DeletePatronCommandParser -[hidden]-> LibTaskParser
+destroy DeletePatronCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+PatronCommandParser --> LibTaskParser : d
+deactivate PatronCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PatronCommandParser -[hidden]-> LibTaskParser
+destroy PatronCommandParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LibTaskParser --> LogicManager : d
+deactivate LibTaskParser
 
-DeleteCommand -> Model : deletePerson(1)
+LogicManager -> DeletePatronCommand : execute()
+activate DeletePatronCommand
+
+DeletePatronCommand -> Model : deletePatron(1)
 activate Model
 
-Model --> DeleteCommand
+Model --> DeletePatronCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeletePatronCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeletePatronCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DeletePatronCommand --> LogicManager : result
+deactivate DeletePatronCommand
 
 [<--LogicManager
 deactivate LogicManager

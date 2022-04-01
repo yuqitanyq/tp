@@ -1,0 +1,16 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package {
+Class Book
+Class Patron
+Class BookStatus
+}
+
+Book "*" -up-> "0..3" Patron : requested by >
+Book -up-> "1" BookStatus
+BookStatus -up-> "0..1" Patron : borrowed by >
+@enduml

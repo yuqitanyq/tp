@@ -114,6 +114,8 @@ This section describes the features supported by LibTask and how to use them.
 
 ### 3.1. General Features
 
+This section describes features users can use to navigate through LibTask.
+
 --------------------------------------------------------------------------------------------------------------------
 
 #### 3.1.1. Viewing help : `help`
@@ -151,46 +153,71 @@ LibTask's data is saved in the hard disk automatically after any command that ch
 
 ### 3.2. Patron Features
 
+This section describes features users can use to interact with LibTask's patron list.
+
 --------------------------------------------------------------------------------------------------------------------
 #### 3.2.1. Adding a patron: `patron add`
 Adds a patron to LibTask's patron list.
 
 Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
 
-Examples:
-* `patron add n/John s/A02128282A p/93231222 e/e03482@u.nus.edu t/student`
-* `patron add n/Alice s/S01823283S p/90123212 e/profA@u.nus.edu`
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the add command:**
+
+* ID must be 9 characters in length. First character of ID should be 'A' and last character of ID should be an alphabet.
+* NAME can be a maximum of 40 characters.
+* EMAIL can be a maximum of 50 characters.
+* You cannot add a patron with the same NAME, EMAIL or ID as another existing patron in the patron list.
+</div>
+
+**Example**
+
+To add a patron with the name `John`, id `A0212828X`, phone number `93231222`, email `e03482@u.nus.edu` and tag `student`, 
+you can enter the following command:
+
+`patron add n/John s/A0212828X p/93231222 e/e03482@u.nus.edu t/student`
+
+Before entering the command, there is no existing patron with the same name, id or email in LibTask.
+
+![patron-add-1](images/patron-add-1.png)
+
+After entering the command, the new patron is added. 
+
+![patron-add-2](images/patron-add-2.png)
 
 #### 3.2.2. Listing all patrons : `patron list`
 
-Shows a list of all patrons in LibTask's patron list.
+To show a list of all patrons in LibTask, you can enter the `list` command with the format shown below.
 
 Format: `patron list`
 
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the list command:**
+
 * If all patrons are already listed, the command will still show a success message as having listed all patrons, but the patrons listed will have no visual change.
+</div>
 
-#### 3.2.3. Editing a patron : `patron edit`
+**Example:** `patron list`
 
-Edits the details of a patron at a specified index of the displayed patron list.
+Before entering the command only two patrons are listed.
 
-Format: `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+![patron-list-1](images/patron-list-1.png)
 
-* Edits the patron at the specified `INDEX`. The index refers to the index number shown in the displayed patron list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the patron will be removed i.e. adding of tags is not cumulative.
-* You can remove all the patron’s tags by typing `t/` without
-    specifying any tags after it.
+After entering the command, all patrons will be listed.
 
-Examples:
-* `patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu` Edits the name, phone number and email address of the 1st patron in the displayed patron list to be `John Cena`, `91959491` and `johncena@u.nus.edu` respectively.
-* `patron edit 2 n/Alice t/Professor t/Horror ` Edits the name of the 2nd patron in the displayed patron list to be `Alice` and changes tags to `Professor` and `Horror`.
+![patron-list-2](images/patron-list-2.png)
 
-#### 3.2.4. Finding a patron by name: `patron find`
+#### 3.2.4. Finding patrons: `patron find`
 
-Finds all patrons with names matching the given keywords in LibTask's patron list.
+To find patrons in LibTask based on patron name, you can enter the `find` command with the format shown below.
 
-Format: `patron find n/KEYWORD [n/KEYWORD]…​`
+Format: `patron find KEYWORD [KEYWORD]…​`
+
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the find command:**
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. results from the keyword `Hans Bo` will match results of the keyword `Bo Hans`
@@ -198,34 +225,114 @@ Format: `patron find n/KEYWORD [n/KEYWORD]…​`
 * Only full words will be matched e.g. results from the keyword `Han` will not match results from the keyword `Hans`
 * Patrons matching at least one part of the keyword will be returned (i.e. `OR` search).
   e.g. keyword `Hans Bo` will return patrons with names `Hans Gruber`, `Bo Yang`
+</div>
 
-Example:
+**Example:**
 
-`patron find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
+To find all patrons with names containing the keywords "alex" or "david", you can enter the following command:
 
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+`patron find alex david`
+
+Before entering the command, all patrons are displayed.
+
+![patron-find-1](images/patron-find-1.png)
+
+After entering the command, only patrons with names containing "alex" or "david" are displayed.
+
+![patron-find-2](images/patron-find-2.png)
+
+#### 3.2.3. Editing a patron : `patron edit`
+
+To edit the details of a specific patron, you can enter the `edit` command with the format shown below.
+
+Format: `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the edit command:**
+
+* Edits the patron at the specified `INDEX`. The index refers to the index number shown in the displayed patron list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the patron will be removed i.e. adding of tags is not cumulative.
+* You can remove all the patron’s tags by typing `t/` without
+    specifying any tags after it.
+* You cannot edit a patron's name, email or id to that of some other patron in LibTask.
+</div>
+
+**Examples:**
+
+To edit the first patron's name from `Alex Yeoh` to `John Cena`, its phone number from `87438807` to `91959491` and email from `alexyeoh@example.com` to `johncena@u.nus.edu`, you can enter the following command:
+
+`patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu`
+
+Before entering the command, the first patron still has its original name, phone number and email.
+
+![patron-edit-1](images/patron-edit-1.png)
+
+After entering the command, the first patron has its name edited to `John Cena`, phone number edited to `91959491` and email edited to `johncena@u.nus.edu`
+
+![patron-edit-2](images/patron-edit-2.png)
+
+To remove all tags and edit the first patron's name from `Alex Yeoh` to `John Cena`, its phone number from `87438807` to `91959491` and email from `alexyeoh@example.com` to `johncena@u.nus.edu`you can enter the following command:
+
+`patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu t/`
+
+Before entering the command, the first patron has different tags.
+
+![patron-edit-3](images/patron-edit-3.png)
+
+After entering the command, the first patron will have their tags removed.
+
+![patron-edit-4](images/patron-edit-4.png)
 
 #### 3.2.5. Deleting a patron : `patron delete`
 
-Deletes the patron at a specified index in the displayed patron list.
+To delete a specific patron, you can enter the `delete` command with the format shown below.
 
 Format: `patron delete INDEX`
 
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the delete command:**
 * Deletes the patron at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patron list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</div>
 
-Examples:
-* `patron list` followed by `patron delete 2` deletes the 2nd patron shown in the displayed patron list.
-* `patron find n/Betsy` followed by `patron delete 1` deletes the 1st person in the results of the `find` command.
+**Example:**
+
+To delete the second patron, you can enter the following command:
+
+`patron delete 2`
+
+Before entering the command, the second patron in LibTask is `Bernice Yu`.
+
+![patron-delete-1](images/patron-delete-1.png)
+
+After entering the command, patron `Bernice Yu` is deleted.
+
+![patron-delete-2](images/patron-delete-2.png)
 
 #### 3.2.6. Listing all patrons with overdue books : `patron overdue`
 
-Lists all patrons in LibTask's patron list with overdue books.
+To list all patrons with overdue books, you can enter the `overdue` command with the format shown below.
 
 Format: `patron overdue`
 
+**Example:**
+
+Before entering the command, all patrons are displayed.
+
+![patron-list-1](images/patron-list-1.png)
+
+After entering the command, only patrons with overdue books are displayed.
+
+![patron-list-2](images/patron-list-2.png)
+
 ### 3.3. Book Features
+
+This section describes features users can use to interact with LibTask's book list.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -234,15 +341,22 @@ Adds a book to LibTask's book list.
 
 Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-**Notes about the add command:**
+**Notes about the add command:**<br>
+
 * BOOK_NAME must start and end with alphanumeric characters, and can only contain `'` character, `:` character and alphanumeric characters.
+
 * ISBN must be 10 or 13 digits in length, and contain only numbers with at most one `-` character between consecutive numbers. If it is 13 digits long, it must start with 978 or 979. 
+
 * ISBN digits must have valid checksum. Details on calculating checksum can be found here.
+
 * AUTHOR must start with an alphanumeric character, and can only contain alphanumeric characters and `.` character.
+
 * You can add multiple copies the same book with the same isbn. However, all books with the same isbn must also have the same name and written by the same authors.
+
 * If books with the same isbn already exists, and is requested by some patrons, adding this book will also remove all requests for those books, and you will be reminded to notify patrons who are interested in this available book.
+
 </div>
 
 **Example**
@@ -251,7 +365,7 @@ To add a book with the name `Introduction to Algorithms`, isbn `9780371888506`, 
 
 `book add book add n/Introduction to Algorithms a/Cormen a/Leiserson a/Rivest a/Stein i/9780371888506 t/ComputerScience`
 
-Before entering the command. A book with the same name already exists in LibTask. However, that copy is currently borrowed by Alex and requested by Bernice and Charlotte.
+Before entering the command, a book with the same name already exists in LibTask. However, that copy is currently borrowed by Alex and requested by Bernice and Charlotte.
 ![book-add-1.png](images/book-add-1.PNG)
 
 After entering the command, a new available copy of the book is added. You will also be reminded to notify Bernice and Charlotte about the availability of this book.
@@ -263,10 +377,12 @@ To show a list of all books in LibTask, you can enter the `list` command with th
 
 **Format**: `book list`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-**Notes about the list command:**
+**Notes about the list command:**<br>
+
 * If all books are already listed, the command will still show a success message as having listed all books, but the books listed will have no visual change.
+
 </div>
 
 **Example**: `book list`
@@ -283,12 +399,14 @@ To find books in LibTask based on book name, author or tags, you can enter the `
 
 **Format**: `book find PREFIX/KEYWORD`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-**Notes about the list command:**
+**Notes about the find command:**<br>
 
 * `PREFIX` must be either `t` (for find based on tag), `a` (for finding based on author), or `n` (for finding based on book name).
+
 * All books with a tag, or author, or book name that contains the substring `KEYWORD` will be displayed in the book list. 
+
 </div>
 
 **Example**:
@@ -319,17 +437,24 @@ To edit the details of a specific book, you can enter the `edit` command with th
 
 **Format**: `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR] … [t/CATEGORY_TAG] …`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-**Notes about the edit command:**
+**Notes about the edit command:**<br>
 
 * Edits the book at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, … 
+
 * At least one of the optional fields (ISBN, AUTHOR, CATEGORY_TAG) must be provided.
+
 * Existing values will be updated to the input values.
+
 * When a book's name, authors or isbn is changed, all copies of books with the same isbn will have their respective fields edited as well. This is because all books with the same isbn should have the same name and authors.
+
 * When editing tags or authors, the existing tags or authors of the book will be removed i.e. adding of tags and authors is not cumulative. However, if all tags are added in a single input, the multiple tags will be added.
+
 * You can remove all the book’s authors and tags by typing `a/` or `t/` respectively without specifying any tags after it.
+
 * You cannot edit a book's isbn into a new isbn if the new isbn already belongs to another book in LibTask.
+
 </div>
 
 **Examples**:
@@ -360,12 +485,14 @@ To delete a specific book, you can enter the `delete` command with the format sh
 
 **Format**: `book delete INDEX`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-**Notes about the delete command:**
+**Notes about the delete command:**<br>
 
 * Deletes the book at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, …
+
 * You cannot delete a book that is borrowed. If you insist on deleting the book, you can first return the book.
+
 </div>
 
 **Example**:
@@ -385,16 +512,22 @@ To keep track that a specific patron is borrowing a specific book, you can enter
 
 **Format**: `borrow INDEX1 INDEX2 RETURN_DATE`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-**Notes about the borrow command:**
+**Notes about the borrow command:**<br>
 
 * `INDEX1` refers to the index number of a patron shown in the displayed patron list.
+
 * `INDEX2` refers to the index number of a book shown in the displayed book list.
+
 * Both `INDEX1` and `INDEX2` **must be a positive integer** 1, 2, 3, …
+
 * `RETURN_DATE` must be in dd-MMM-yyyy format (e.g. 20-May-2022) and must be later than the current date.
+
 * A patron cannot borrow multiple copies of the same book with the same isbn.
+
 * A patron cannot borrow a book that is already borrowed by someone else.
+
 </div>
 
 **Example**:
@@ -414,18 +547,26 @@ To return a specific book, or to return all books by a specific patron, you can 
 
 **Format**: `return PREFIX/INDEX`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-**Notes about the return command:**
+**Notes about the return command:**<br>
 
 * `PREFIX` must be either `p` for patrons or `b` for books.
+
 * If `PREFIX` is `p`, `INDEX` refers to the index number of the patron who is returning books, as shown in the displayed patron list.
+
 * If `PREFIX` is `b`, `INDEX` refers to the index number of the book to be returned, as shown in the displayed book list.
+
 * `INDEX` **must be a positive integer** 1, 2, 3, …
+
 * If the book at index `INDEX` is not borrowed, or if the patron at index `INDEX` does not borrow any books, nothing happens.
+
 * If there are patrons who requested to be notified about the availability of the returned books, you will be reminded to notify them. Subsequently, all requests for those books will be deleted automatically.
+
 * You cannot return a specific book if it is not borrowed
+
 * You cananot return all books by a patron if the patron did not borrow any books.
+
 </div>
 
 **Examples**:
@@ -455,18 +596,26 @@ To keep track that a specific patron is requesting for a specific book, you can 
 
 **Format**: `book request INDEX1 INDEX2`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-**Notes about the request command:**
+**Notes about the request command:**<br>
 
 * `INDEX1` refers to the index number of the patron who is requesting for the book, as shown in the displayed patron list.
+
 * `INDEX2` refers to the index number of the book to be requested, as shown in the displayed book list.
+
 * Both `INDEX1` and `INDEX2` **must be a positive integer** 1, 2, 3, …
+
 * Book requests are associated with books with the same isbn, not a book copy. For example, when patron Alex requests for the first book, LibTask recognizes that Alex is requesting for books with the same isbn as the first book.
+
 * A patron can only request for a book if all copies of the book is borrowed. This is because if there is an available copy of the book, you can let the patron borrow that copy without requesting for it.
+
 * A patron cannot request for the same book again if LibTask is still keeping track of his previous request.
+
 * A patron cannot request for a book if he/she is currently borrowing a copy of that book.
+
 * A book can have a maximum of three book requests. There is no need in having too many book requests because ultimately only one patron can borrow that book.
+
 </div>
 
 **Example**:
@@ -488,12 +637,14 @@ To list all books borrowed by or requested by a specific patron, you can enter t
 
 **Format**: `book related INDEX`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-**Notes about the related command:**
+**Notes about the related command:**<br>
 
 * Lists all books borrowed by or requested by a patron at `INDEX`. `INDEX` refers to the index number of the patron of interest, as shown in the displayed patron list.
+
 * If the patron of interest did not borrow any book or request for any book, an empty book list will be shown.
+
 </div>
 
 **Example**:
@@ -564,7 +715,7 @@ If your changes to the data file makes its format invalid, LibTask will discard 
 | **Add a new patron**                | `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`                |
 | **List all patrons**                | `patron list`                                                     |
 | **Edit a patron**                   | `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​` |
-| **Find a patron**                   | `patron find n/KEYWORD [n/KEYWORD]…​`                             |
+| **Find a patron**                   | `patron find KEYWORD [KEYWORD]…​`                                 |
 | **Delete a patron**                 | `patron delete INDEX`                                             |
 | **List patrons with overdue books** | `patron overdue`                                                  |
 
