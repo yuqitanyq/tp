@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-LibTask is a **desktop application for librarians to manage book loans and requests by patrons. It is specially made to improve the overall efficiency of librarians when processing book loans and requests, helping them to complete their daily tasks quickly. LibTask is optimized for use via a [Command Line Interface (CLI)](#6-glossary)** while still having the benefits of a [Graphical User Interface (GUI)](#6-glossary) so that librarians who prefer typing can get their tasks done faster than traditional GUI apps.
+LibTask is a **desktop application for librarians to manage book loans and requests by patrons. It is specially made to improve the overall efficiency of librarians when processing book loans and requests, helping them to complete their daily tasks quickly. LibTask is optimized for use via a [Command Line Interface (CLI)](#7-glossary)** while still having the benefits of a [Graphical User Interface (GUI)](#7-glossary) so that librarians who prefer typing can get their tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -34,7 +34,7 @@ For a list of frequently asked questions about LibTask, you can refer to our [FA
 
 If you are an advanced user, you can refer to our [Command summary](#5-command-summary) section.
 
-For the list of definition of the vocabulary words used in this document can be found in our [Glossary](#6-glossary) section.
+For the list of definition of the vocabulary words used in this document can be found in our [Glossary](#7-glossary) section.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -349,7 +349,7 @@ Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 
 * ISBN must be 10 or 13 digits in length, and contain only numbers with at most one `-` character between consecutive numbers. If it is 13 digits long, it must start with 978 or 979. 
 
-* ISBN digits must have valid checksum. Details on calculating checksum can be found at [this section](#6-appendix).
+* ISBN digits must have valid checksum. Details on calculating checksum can be found in [this section](#6-appendix).
 
 * AUTHOR must start with an alphanumeric character, and can only contain alphanumeric characters and `.` character.
 
