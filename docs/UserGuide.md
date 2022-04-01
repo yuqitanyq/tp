@@ -161,10 +161,13 @@ Adds a patron to LibTask's patron list.
 
 Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
 
+<div markdown="span" class="alert alert-primary">
+
 **Notes about the add command:**
 
 * ID must be 9 characters in length. First character of ID should be 'A' and last character of ID should be an alphabet.
 * You cannot add a patron with the same NAME, EMAIL or ID as another existing patron in the patron list.
+</div>
 
 **Example**
 
@@ -187,9 +190,12 @@ To show a list of all patrons in LibTask, you can enter the `list` command with 
 
 Format: `patron list`
 
+<div markdown="span" class="alert alert-primary">
+
 **Notes about the list command:**
 
 * If all patrons are already listed, the command will still show a success message as having listed all patrons, but the patrons listed will have no visual change.
+</div>
 
 **Example:** `patron list`
 
@@ -207,7 +213,9 @@ To find patrons in LibTask based on patron name, you can enter the `find` comman
 
 Format: `patron find KEYWORD [KEYWORD]…​`
 
-**Noted about the find command:**
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the find command:**
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. results from the keyword `Hans Bo` will match results of the keyword `Bo Hans`
@@ -215,6 +223,7 @@ Format: `patron find KEYWORD [KEYWORD]…​`
 * Only full words will be matched e.g. results from the keyword `Han` will not match results from the keyword `Hans`
 * Patrons matching at least one part of the keyword will be returned (i.e. `OR` search).
   e.g. keyword `Hans Bo` will return patrons with names `Hans Gruber`, `Bo Yang`
+</div>
 
 **Example:**
 
@@ -236,6 +245,8 @@ To edit the details of a specific patron, you can enter the `edit` command with 
 
 Format: `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
+<div markdown="span" class="alert alert-primary">
+
 **Notes about the edit command:**
 
 * Edits the patron at the specified `INDEX`. The index refers to the index number shown in the displayed patron list. The index **must be a positive integer** 1, 2, 3, …​
@@ -245,6 +256,7 @@ Format: `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 * You can remove all the patron’s tags by typing `t/` without
     specifying any tags after it.
 * You cannot edit a patron's name, email or id to that of some other patron in LibTask.
+</div>
 
 **Examples:**
 
@@ -278,10 +290,13 @@ To delete a specific patron, you can enter the `delete` command with the format 
 
 Format: `patron delete INDEX`
 
+<div markdown="span" class="alert alert-primary">
+
 **Notes about the delete command:**
 * Deletes the patron at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patron list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</div>
 
 **Example:**
 
