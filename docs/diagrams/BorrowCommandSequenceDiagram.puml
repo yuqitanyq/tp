@@ -1,0 +1,81 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":LibTaskParser" as LibTaskParser LOGIC_COLOR
+participant ":BorrowCommandParser" as BorrowCommandParser LOGIC_COLOR
+participant "b:BorrowCommand" as BorrowCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("borrow 1 1 \n22-May-2023")
+activate LogicManager
+
+LogicManager -> LibTaskParser : parseCommand("borrow \n1 1 22-May-2023")
+activate LibTaskParser
+
+create BorrowCommandParser
+LibTaskParser -> BorrowCommandParser
+activate BorrowCommandParser
+
+BorrowCommandParser --> LibTaskParser
+deactivate BorrowCommandParser
+
+LibTaskParser -> BorrowCommandParser : parse("1 1 22-May-2023")
+activate BorrowCommandParser
+
+create BorrowCommand
+BorrowCommandParser -> BorrowCommand
+activate BorrowCommand
+
+BorrowCommand --> BorrowCommandParser : b
+deactivate BorrowCommand
+
+BorrowCommandParser --> LibTaskParser : b
+deactivate BorrowCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+BorrowCommandParser -[hidden]-> LibTaskParser
+destroy BorrowCommandParser
+
+LibTaskParser --> LogicManager : b
+deactivate LibTaskParser
+
+LogicManager -> BorrowCommand : execute()
+activate BorrowCommand
+
+BorrowCommand -> Model : getFilteredPatronList()\n.getIndex(borrowerIndex)
+activate Model
+
+Model --> BorrowCommand : borrower
+deactivate Model
+
+BorrowCommand -> Model : getFilteredBookList()\n.getIndex(bookIndex)
+activate Model
+
+Model --> BorrowCommand : bookToBorrow
+deactivate Model
+
+BorrowCommand -> Model : borrowBook(borrower, \nbookToBorrow,"22-May-2023")
+activate Model
+
+Model --> BorrowCommand
+deactivate Model
+
+create CommandResult
+BorrowCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> BorrowCommand
+deactivate CommandResult
+
+BorrowCommand --> LogicManager : result
+deactivate BorrowCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

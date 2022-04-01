@@ -5,46 +5,88 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyLibTask" as ReadOnlyLibTask
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
+Class LibTask
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
+Package Book <<Rectangle>> {
+Class BookList
+Class Book
+Class Author
+Class BookName
+Class BookStatus
+Class Isbn
+Class "<<enum>>\nBookStatusType"
+}
+
+Package Patron <<Rectangle>> {
+Class UniquePatronList
+Class Patron
 Class Address
 Class Email
 Class Name
+Class Id
 Class Phone
+}
+
+
+Package Tag <<Rectangle>> {
 Class Tag
+}
 
 }
+
+
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+LibTask .up.|> ReadOnlyLibTask
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyLibTask
+ModelManager -left-> "1" LibTask
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+LibTask *--> "1" UniquePatronList
+UniquePatronList --> "~* " Patron
+Patron *--> "1" Name
+Patron *--> "1" Id
+Patron *--> "1" Phone
+Patron *--> "1" Email
+Patron *--> "1" Address
+Patron *--> "*" Tag
 
-Name -[hidden]right-> Phone
+Name -[hidden]right-> Id
+Id -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager -->"~* filtered" Person
+LibTask *--> "1" BookList
+BookList --> "~* " Book
+Book *--> "0..3" Patron : requested by >
+Book *--> "*" Author
+Book *--> "1" BookName
+Book *--> "1" Isbn
+Book *--> "1" BookStatus
+Book *--> "*" Tag
+BookStatus --> "0..1" Patron
+BookStatus --> "1" "<<enum>>\nBookStatusType"
+
+Name -[hidden]right-> Id
+Id -[hidden]right-> Address
+Address -[hidden]right-> Email
+BookStatus -[hidden]right-> Isbn
+Isbn -[hidden]right-> Author
+Author -[hidden]right-> BookName
+BookStatus -[hidden]up->Patron
+BookStatus -[hidden]right->"<<enum>>\nBookStatusType"
+
+ModelManager -->"~* " Patron : contains filtered >
+ModelManager -->"~* " Book : contains filtered >
 @enduml
