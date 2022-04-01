@@ -21,11 +21,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W14-1/tp/blob/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
@@ -49,13 +44,6 @@ The rest of the App consists of four components.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-
-**How the architecture components interact with each other**
-
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `patron delete 1`.
-
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
-
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
@@ -64,6 +52,13 @@ Each of the four main components (also shown in the diagram above),
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
+
+**How the architecture components interact with each other**
+
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `patron delete 1`.
+
+<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+
 
 The sections below give more details of each component.
 
@@ -94,15 +89,15 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `LibTaskParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddPatronCommand` or `AddBookCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a Patron or a Book).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddPatronCommand` or `AddBookCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to add a Patron or a Book).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`, which is then used by the `Ui` to perform certain actions, such as displaying the results to the user.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("patron delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `patron delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `DeleteBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -110,25 +105,26 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `LibTaskParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPatronCommandParser` or `AddBookCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPatronCommand` or `AddBookCommand`) which the `LibTaskParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddPatronCommandParser`, `AddBookCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `LibTaskParser` class creates a `PatronCommandParser` if the command starts with `patron`, a `BookCommandParser` if the command starts with `book`, and a `XYZCommandParser` otherwise.
+* If `PatronCommandParser` or `BookCommandParser` is created, it will further create a `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPatronCommandParser` or `AddBookCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPatronCommand` or `AddBookCommand`) which the `LibTaskParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddPatronCommandParser`, `AddBookCommandParser`, ...) implement the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W14-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="650" />
 
 
 The `Model` component,
 
-* stores the libtask data i.e., all `Patron` objects (which are contained in a `UniquePatronList` object) and `Book` objects (which are contained in a `UniqueBookList` object).
+* stores the libtask data i.e., all `Patron` objects (which are contained in a `UniquePatronList` object) and `Book` objects (which are contained in a `BookList` object).
 * stores the currently 'selected' `Patron` and `Book` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patron>` abd `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `LibTask`, which `Patron` references. This allows `LibTask` to only require one `Tag` object per unique tag, instead of each `Patron` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="600" />
 
 </div>
 
@@ -137,11 +133,11 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-W14-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="650" />
 
 The `Storage` component,
 * can save both libTask data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `LibTaskStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* implements both `LibTaskStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -156,40 +152,231 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Model
 
-The class diagram for the `Model` can be seen above (needs link later) in the Design section. Model contains two main object components, `Book` and `Patron`, with `Book` having a dependency on `Patron`. Such a design was chosen after a few iterations on other designs. The final design in v1.3 is documented here:
+The class diagram for the `Model` can be seen above in the [Design section](#model-component). Model contains two main object components, `Book` and `Patron`, with `Book` having a dependency on `Patron`. Such a design was chosen after a few iterations on other designs. The final design is documented here:
 
-**v1.3**
+#### Implementation details
 
-(Needs to insert a small image here)
+![ModelImplementation.png](images/ModelImplementation.png)
 
-In v1.3, `Book` has a set of `Patron`s as `requesters`. It also has a `Status` containing an optional `Patron` representing the borrower of the book. Initially, `Patron` and `Book` were designed in a way such that both classes contain references to each other. This design allows fast and direct access of certain information, such as all books borrowed and requested by a patron. However, the initial design results in cyclic reference among classes, which makes it impossible to store patron and book information in json format. For example, the patron json object needs to store a list of books it is referencing, which in turns store a list of patrons it is referencing, which in turn stores more patrons.
+`Book` has a set of `Patron`s both have their own set of attributes, but only the most important ones are shown here. `Book` has a set of `Patron`s as `requesters`. It also has a `BookStatus` containing an optional `Patron` representing the borrower of the book.
+
+#### Design considerations
+
+Initially, `Patron` and `Book` were designed in a way such that both classes contain references to each other. This design allows fast and direct access of certain information, such as all books borrowed and requested by a patron. However, the initial design results in cyclic reference among classes, which makes it impossible to store patron and book information in json format. For example, the patron json object needs to store a list of books it is referencing, which in turns store a list of patrons it is referencing, which in turn stores more patrons.
 
 Furthermore, the initial design results in the problem of cyclic update whenever data is modified. For example, when a patron's name is changed, the corresponding borrower's name of all books borrowed by that patron needs to be changed as well. Since `Book` is immutable, new `Book` objects are created to update the information, and as a result, all `Patron` objects referencing those old `Book` objects needs to be updated as well. Since `Patron` is also immutable, the chain of never ending cyclic updates continues on.
 
-Due to the downsides of the initial design, a decision was made to have only one of `Book` or `Patron` depending on the other. `Book` was chosen to depend on `Patron` because the UI needs to display information of borrower and requesters together with the book. This design does not require the transversal of the whole `Patron` list to identify the borrower and requesters of the book, since such information is stored in `Book` itself. However, transversal of the whole `Book` list is required to find all books related to a patron, or when updating a patron's information. Nevertheless, the amortized cost is much lower as such commands are performed less frequently than the amount of UI updates.
+Due to the downsides of the initial design, a decision was made to have only one of `Book` or `Patron` depending on the other. `Book` was chosen to depend on `Patron` because the UI needs to display information of borrower and requesters together with the book. This design does not require the transversal of the whole `UniquePatronList` to identify the borrower and requesters of the book, since such information is stored in `Book` itself. However, transversal of the whole `BookList` is required to find all books related to a patron, or when updating a patron's information. Nevertheless, the amortized cost is much lower as such commands are performed less frequently than the amount of UI updates.
 
-#### Implementation
-(Todo)
+### Saving books and patrons to Json format
+
+The saving of books and patrons to json format is performed by the `Storage` component, which class diagram can be seen [above](#storage-component).The `JsonSerializableLibTask` stores both `JsonAdaptedPatron` and `JsonAdaptedBook`, which implementations will be discussed below.
+
+#### Implementation details
+`JsonAdaptedBook` is an object that represents a `Book` object in its json format. It is responsible for converting attributes in `Book` to json compatible formats. `JsonApdatedBook` contains a `JsonAdaptedBookStatus` , and may contain multiple instances of `JsonAdaptedPatron`, `JsonAdaptedAuthor`, and `JsonAdaptedTag` as requesters, authors, and tags respectively
+
+`JsonAdaptedPatron` is an object that represents a `Patron` object in its json format. It is responsible for converting attributes in `Patron` to its json compatible formats. It may contain multiple instances of `JsonAdaptedTag`
+
+Attributes of `Book` and `Patron` not mentioned above are stored directly as a String in `JsonAdaptedBook` and `JsonAdaptedPatron` respectively. For example, the isbn of a book is stored as a String and not converted to a class named `JsonAdaptedIsbn` before saving.
+
+#### Design considerations
+
+Aspect: How to store a list of patrons requesting for a book.
+
+* Alternative 1 (current choice): `JsonAdaptedBook` stores a list of `JsonAdaptedPatron`
+  * Pros: Fast program loading time as requester `Patron` objects can be created directly with all the provided information, without the need to search through `UniquePatronList` for a `Patron` with matching name.
+  * Cons: Overhead in converting `Patron` object to `JsonAdaptedPatron` and more storage space used.
+* Alternative 2: `JsonAdaptedBook` stores a list of String representing the name of the patrons. This is possible since patrons can be identified by their unique names.
+  * Pros: Less overhead in converting `Patron` object to `JsonAdaptedPatron` and less storage space used.
+  * Cons: Slow program loading time. When the program loads up, for every name we need to search through the whole `UniquePatronList` for the specified `Patron` object before we can initialize a `Book` object that refers to the `Patron` as requester. Furthermore, this design is not flexible to changes if we need to patron names are no longer unique.
+
+### Borrow Feature
+
+This feature allows users to keep track of books that are borrowed and the patrons who borrowed them, as well as its return date.
+
+#### Implementation details
+
+The borrow feature is facilitated by `BorrowCommandParser` and `BorrowCommand`. The operation is exposed in the Model interface as `Model#borrowBook()`.
+
+Given below is an example usage scenario and how the borrow mechanism behaves at each step:
+
+1. The user enters the borrow command and provides the index of book to be borrowed, index of borrower patron, and the return date.
+2. `LibTaskParser` creates a new `BorrowCommandParser` after preliminary processing of user input.
+3. `BorrowCommandParser` creates a new `BorrowCommand` based on the processed input.
+4. `LogicManager` executes the `BorrowCommand`.
+5. `BorrowCommand` calls `Model#getFilteredPatronList()` to get the list of displayed patrons, and then gets the borrower at the specified index.
+6. `BorrowCommand` calls `Model#getFilteredBookList()` to get the list of displayed books, and then get the book to be borrowed at the specified index.
+7. `BorrowCommand` calls `Model#borrowBook()` and passes the borrower, book to be borrowed and return date as parameters.
+8. Finally, `BorrowCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command.
+
+The following sequence diagram shows how the borrow command works:
+
+<img src="images/BorrowCommandSequenceDiagram.png" width="800" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BorrowCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The following activity diagram summarizes what happens when a user executes a borrow command:
+
+<img src="images/BorrowCommandActivityDiagram.png" width="650" />
+
+#### Design considerations
+
+The borrow command is designed to be used in conjunction with the `book find` and `patron find` command. For instance, the user would first use `patron find n/Alex Yeoh` and `book find n/Harry Potter` to find the borrower and book to be borrowed, before entering `borrow 1 1 23-May-2022` to keep track of Alex Yeoh borrowing Harry Potter until 23-May-2022.
+
+This integration of borrow command with the find commands is important because LibTask can store large amounts of books and patrons, making it infeasible for the user to scroll through both patron list and book list to identify the target patron and book. By designing borrow command to work based on indexes, we do not restrict users to borrow books based on a fixed attribute, for example, book isbn and patron id. This allows users to search for books and patrons in any way they deem convenient (e.g. using tags, names etc.), thus enhancing the usability of borrow feature.
+
+### Return Feature
+
+This feature allows users to return a borrowed book, or all books that were borrowed by a patron.
+
+#### Implementation details
+
+The borrow feature is facilitated by `ReturnCommandParser`, `ReturnOneBookCommand`, and `ReturnAllBooksCommand`. `ReturnOneBookCommand` is the concrete `Command` class responsible for returning a single book, while `ReturnAllBooksCommand` is the concrete `Command` class responsible fo returning all books borrowed by a patron. The functionality of returning all books by a patron is exposed in Model interface as `Model#returnAllBorrowedBooks()`, while the functionality to return a single book is facilitated by `Model#setBook()`.
+
+Due to the high similarities in both return commands, only the implementation of `ReturnAllBooksCommand` will be discussed below.
+
+Given below is an example usage scenario and how the return mechanism behaves at each step:
+
+1. The user enters the return command and provides the index of patron whose books should be returned.
+2. `LibTaskParser` creates a new `ReturnCommandParser` after preliminary processing of user input.
+3. `ReturnCommandParser` creates a new `ReturnAllBooksCommand` based on the processed input.
+4. `LogicManager` executes the `ReturnAllBooksCommand`.
+5. `ReturnAllBooksCommand` calls `Model#getFilteredPatronList()` to get the list of displayed patrons, and then gets the borrower at the specified index.
+6. `ReturnAllBooksCommand` calls `Model#returnAllBorrowedBooks()` and passes the borrower as parameter.
+7. `ReturnAllBooksCommand` calls `Model#deleteAllRequests()` to delete all book requests for the returned books, and gets a message that reminds the user to notify patrons who requested for those books.
+8. Finally, `ReturnAllBooksCommand` creates a `CommandResult` with the message and returns it to `LogicManager` to complete the command.
+
+The following sequence diagram shows how the return command works:
+
+<img src="images/ReturnAllBooksCommandSequenceDiagram.png" width="800" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ReturnCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The following activity diagram summarizes what happens when a user executes a return command:
+
+<img src="images/ReturnAllBooksCommandActivityDiagram.png" width="650" />
+
+#### Design considerations
+
+The return command is designed to be to return multiple books in one command, while providing the user with the option of returning a single book. This enhances the usability of the feature, as the librarian can experience more efficient processing of books, while retaining fine-grain control of the process if needed (e.g. in situations when a patron only intends to return some of his/her borrowed books).
+
+Despite having similar functionalities, the return commands are split into `ReturnOneBookCommand` and `ReturnAllBooksCommand` because they depend on different methods in `Model`, and have structurally similar but logically different execution. As per the _Single Responsibility Principle_, the return commands are separated into different classes so that each class is responsible for the logical implementation of only one subcommand.
+
+### Request Feature
+
+This feature allows users to keep track of books that are requested by patrons, and allow users to be automatically reminded to notify requesters when the books of interest become available.
+
+#### Implementation details
+
+The request feature is facilitated by `BookCommandParser`, `RequestBookCommandParser`, and `RequestBookCommand`. The operation is exposed in the Model interface as `Model#addRequest()`.
+
+Given below is an example usage scenario and how the request mechanism behaves at each step:
+
+1. The user enters the borrow command and provides the index of the requester patron, and the index of book to be requested.
+2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turns creates a new `RequestBookCommandParser`.
+3. `RequestBookCommandParser` creates a new `RequestBookCommand` based on the processed input.
+4. `LogicManager` executes the `RequestBookCommand`.
+5. `RequestBookCommand` calls `Model#getFilteredPatronList()`` to get the list of displayed patrons, and then gets the requester at the specified index. It then calls `Model#getFilteredBookList()` to get the list of displayed books, and then get the book to be requested at the specified index.
+6. `RequestBookCommand` calls `Model#isBorrowing()` to check that the requester is not currently borrowing a copy of the requested book, to prevent a patron from requesting a book he/she is already borrowing.
+7. `RequestBookCommand` calls `Model#hasAvailableCopy()` to confirm that there are no available copies of the requested book. This is because there is no need for a book request if there is an available copy of the book.
+8. `RequestBookCommand` calls `Model#addRequest()` to add the book request to all book copies with the same isbn as the requested book.
+9. Finally, `RequestBookCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command.
+
+The following sequence diagram shows how the request command works:
+
+<img src="images/RequestBookCommandSequenceDiagram.png" width="850" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RequestCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The following activity diagram summarizes what happens when a user executes a request command:
+
+<img src="images/RequestBookCommandActivityDiagram.png" width="650" />
+
+#### Design considerations
+
+Each book request is designed to bind to an isbn instead of a book copy. For example, when a patron requests to be notified when the first book becomes available, LibTask attaches the book request to all books with the same isbn as the first book. This is in-line with our use case, as it is rational to assume that patrons are not particular about which book copy they are requesting for.
+
+Associating a book request with multiple book copies introduces some problems. Initially, when a book becomes available, the same reminder message to the user will be printed multiple times, once per book request per book copy. Nevertheless, this is solved by using a `Set` to store reminder messages so that identical reminder messages will not be added multiple times.
+
+### \[Proposed\] Undo/redo feature
+
+#### Proposed Implementation
+
+The proposed undo/redo mechanism is facilitated by `VersionedLibTask`. It extends `LibTask` with an undo/redo history, stored internally as an `libTaskStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedLibTask#commit()` —  Saves the current LibTask state in its history.
+* `VersionedLibTask#undo()` —  Restores the previous LibTask state from its history.
+* `VersionedLibTask#redo()` —  Restores a previously undone LibTask state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitLibTask()`, `Model#undoLibTask()` and `Model#redoLibTask()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedLibTask` will be initialized with the initial LibTask state, and the `currentStatePointer` pointing to that single LibTask state.
+
+![UndoRedoState0](images/UndoRedoState0.png)
+
+Step 2. The user executes `patron delete 5` command to delete the 5th patron in the LibTask. The `patron delete` command calls `Model#commitLibTask()`, causing the modified state of the LibTask after the `patron delete 5` command executes to be saved in the `libTaskStateList`, and the `currentStatePointer` is shifted to the newly inserted LibTask state.
+
+![UndoRedoState1](images/UndoRedoState1.png)
+
+Step 3. The user executes `patron add n/David …​` to add a new patron. The `patron add` command also calls `Model#commitLibTask()`, causing another modified LibTask state to be saved into the `libTaskStateList`.
+
+![UndoRedoState2](images/UndoRedoState2.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitLibTask()`, so the LibTask state will not be saved into the `libTaskStateList`.
+
+</div>
+
+Step 4. The user now decides that adding the patron was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoLibTask()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous LibTask state, and restores the LibTask to that state.
+
+![UndoRedoState3](images/UndoRedoState3.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial LibTask state, then there are no previous LibTask states to restore. The `undo` command uses `Model#canUndoLibTask()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+
+</div>
+
+The following sequence diagram shows how the undo operation works:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The `redo` command does the opposite — it calls `Model#redoLibTask()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the LibTask to that state.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `libTaskStateList.size() - 1`, pointing to the latest LibTask state, then there are no undone LibTask states to restore. The `redo` command uses `Model#canRedoLibTask()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</div>
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the LibTask, such as `list`, will usually not call `Model#commitLibTask()`, `Model#undoLibTask()` or `Model#redoLibTask()`. Thus, the `libTaskStateList` remains unchanged.
+
+![UndoRedoState4](images/UndoRedoState4.png)
+
+Step 6. The user executes `clear`, which calls `Model#commitLibTask()`. Since the `currentStatePointer` is not pointing at the end of the `libTaskStateList`, all LibTask states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+
+![UndoRedoState5](images/UndoRedoState5.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<img src="images/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire libTask.
+* **Alternative 1 (current choice):** Saves the entire LibTask.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `patron delete`, just save the patron being deleted).
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -330,7 +517,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
        
   Use case resumes from step 1.
 
-
 ### UC04: Find a patron on LibTask
 
 **MSS**
@@ -354,7 +540,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. LibTask shows an empty list.
 
   Use case ends.
-
 
 ### UC05: Delete a patron from LibTask
 
