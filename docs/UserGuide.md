@@ -349,7 +349,7 @@ Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 
 * ISBN must be 10 or 13 digits in length, and contain only numbers with at most one `-` character between consecutive numbers. If it is 13 digits long, it must start with 978 or 979. 
 
-* ISBN digits must have valid checksum. Details on calculating checksum can be found here.
+* ISBN digits must have valid checksum. Details on calculating checksum can be found at [this section](#6-appendix).
 
 * AUTHOR must start with an alphanumeric character, and can only contain alphanumeric characters and `.` character.
 
@@ -590,7 +590,7 @@ Before entering the command, the third book is labelled as borrowed, and has two
 After entering the command, the third book becomes available. The two requesters are also removed as you are reminded to notify both of them about the availability of the returned book.
 ![book-return-4.png](images/book-return-4.PNG)
 
-#### 3.3.8. Requesting a book : `book request`
+#### 3.3.`8`. Requesting a book : `book request`
 
 To keep track that a specific patron is requesting for a specific book, you can enter the `request` command with the format shown below.
 
@@ -733,7 +733,45 @@ If your changes to the data file makes its format invalid, LibTask will discard 
 | **Request a book**                     | `book request INDEX1 INDEX2`                                        |
 | **List all books related to a patron** | `book related INDEX`                                                |
 
-## **6. Glossary**
+## **6. Appendix**
+
+### 6.1. Calculating ISBN checksum
+
+There are two types of ISBN, 10-digit ISBNs and 13-digit ISBNs. Both types of ISBN have different ways of caculating checksums, as illustrated below. For easy testing and exploration, you can generate valid ISBNs from [this website](http://sqa.fyicenter.com/1000332_Test_ISBN_Number_Generator.html) without having to perform the tedious calculations yourself to ensure its validity.
+
+#### 10-digit ISBN checksum
+
+* Step 1. For each of the 10 digits, from left to right, multiply the digit by an integer weight. The weights are descending from 10 to 1 from left to right.
+
+* Step 2. After obtaining the product of digit and weight for each digit, sum all the products.
+
+* Step 3. The 10-digit ISBN checksum is valid if the sum of products is a multiple of 11.
+
+**Example:**
+
+The checksum for an 10-digit ISBN of 0-306-40615-2 is calculated as follows:
+
+`checksum = (0 × 10) + (3 × 9) + (0 × 8) + (6 × 7) + (4 × 6) + (0 × 5) + (6 × 4) + (1 × 3) + (5 × 2) + (2 × 1) = 132 `
+
+Since 132 is a multiple of 11, the above 10-digit ISBN has a valid checksum.
+
+#### 13-digit ISBN checksum
+
+* Step 1. For each of the 13 digits, from left to right, multiply the digit by an integer weight. The weight is a number alternating between 1 and 3, from left to right.
+
+* Step 2. After obtaining the product of digit and weight for each digit, sum all the products.
+
+* Step 3. The 13-digit ISBN checksum is valid if the sum of products is a multiple of 10.
+
+**Example:**
+
+The checksum for an 13-digit ISBN of 978-0-306-40615-7 is calculated as follows:
+
+`checksum = (9 × 1) + (7 × 3) + (8 × 1) + (0 × 3) + (3 × 1) + (0 × 3) + (6 × 1) + (4 × 3) + (0 × 1) + (6 × 3) + (1 × 1) + (5 × 3) + (7 × 1) = 100`
+
+Since 100 is a multiple of 10, the above 13-digit ISBN has a valid checksum.
+
+## **7. Glossary**
 
 | Term                           | Explanation                                                                                     |
 |--------------------------------|-------------------------------------------------------------------------------------------------|
