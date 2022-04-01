@@ -166,6 +166,8 @@ Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
 **Notes about the add command:**
 
 * ID must be 9 characters in length. First character of ID should be 'A' and last character of ID should be an alphabet.
+* NAME can be a maximum of 40 characters.
+* EMAIL can be a maximum of 50 characters.
 * You cannot add a patron with the same NAME, EMAIL or ID as another existing patron in the patron list.
 </div>
 
