@@ -4,18 +4,34 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+LibTask *-right-> "1" BookList
+LibTask *-right-> "1" UniquePatronList
+LibTask *-right-> "1" UniqueTagList
+BookList -[hidden]down- UniqueTagList
+UniqueTagList -[hidden]down- UniquePatronList
 
 UniqueTagList *-right-> "*" Tag
-UniquePersonList -right-> Person
+UniquePatronList o-right-> Patron
+BookList o-right-> Book
 
-Person -up-> "*" Tag
+Patron -up-> "*" Tag
+Book -down-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Book *-right-> "1" BookName
+Book *-down-> "1" Author
+Book *-down-> "1" Isbn
+Book *-down-> "1" BookStatus
+BookStatus -right-> "1" "<<enum>>\nBookStatusType"
+
+Tag -[hidden]right- Author
+Author -[hidden]right- BookStatus
+"<<enum>>\nBookStatusType" -[hidden]right- Isbn
+BookStatus --> "0..1" Patron
+Book --> "0..3" Patron
+
+Patron *--> "1" Name
+Patron *--> "1" Phone
+Patron *--> "1" Email
+Patron *--> "1" Address
+Patron *--> "1" Id
 @enduml

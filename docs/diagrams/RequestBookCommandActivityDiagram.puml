@@ -1,0 +1,20 @@
+@startuml
+start
+:User enters request command;
+if () then ([return date is valid format])
+    :Parser parses book index, and requester index;
+        :Logic executes command;
+        if () then ([valid indexes])
+            if () then ([book can be requested])
+                :Model executes addRequest();
+            else ([else])
+                :Ui shows error message;
+            endif
+        else ([else])
+            :Ui shows error message;
+        endif
+else([else])
+    :Ui shows error message;
+endif
+stop
+@enduml
