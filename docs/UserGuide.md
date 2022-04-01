@@ -114,6 +114,8 @@ This section describes the features supported by LibTask and how to use them.
 
 ### 3.1. General Features
 
+This section describes features users can use to navigate through LibTask.
+
 --------------------------------------------------------------------------------------------------------------------
 
 #### 3.1.1. Viewing help : `help`
@@ -151,46 +153,71 @@ LibTask's data is saved in the hard disk automatically after any command that ch
 
 ### 3.2. Patron Features
 
+This section describes features users can use to interact with LibTask's patron list.
+
 --------------------------------------------------------------------------------------------------------------------
 #### 3.2.1. Adding a patron: `patron add`
 Adds a patron to LibTask's patron list.
 
 Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
 
-Examples:
-* `patron add n/John s/A02128282A p/93231222 e/e03482@u.nus.edu t/student`
-* `patron add n/Alice s/S01823283S p/90123212 e/profA@u.nus.edu`
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the add command:**
+
+* ID must be 9 characters in length. First character of ID should be 'A' and last character of ID should be an alphabet.
+* NAME can be a maximum of 40 characters.
+* EMAIL can be a maximum of 50 characters.
+* You cannot add a patron with the same NAME, EMAIL or ID as another existing patron in the patron list.
+</div>
+
+**Example**
+
+To add a patron with the name `John`, id `A0212828X`, phone number `93231222`, email `e03482@u.nus.edu` and tag `student`, 
+you can enter the following command:
+
+`patron add n/John s/A0212828X p/93231222 e/e03482@u.nus.edu t/student`
+
+Before entering the command, there is no existing patron with the same name, id or email in LibTask.
+
+![patron-add-1](images/patron-add-1.png)
+
+After entering the command, the new patron is added. 
+
+![patron-add-2](images/patron-add-2.png)
 
 #### 3.2.2. Listing all patrons : `patron list`
 
-Shows a list of all patrons in LibTask's patron list.
+To show a list of all patrons in LibTask, you can enter the `list` command with the format shown below.
 
 Format: `patron list`
 
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the list command:**
+
 * If all patrons are already listed, the command will still show a success message as having listed all patrons, but the patrons listed will have no visual change.
+</div>
 
-#### 3.2.3. Editing a patron : `patron edit`
+**Example:** `patron list`
 
-Edits the details of a patron at a specified index of the displayed patron list.
+Before entering the command only two patrons are listed.
 
-Format: `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+![patron-list-1](images/patron-list-1.png)
 
-* Edits the patron at the specified `INDEX`. The index refers to the index number shown in the displayed patron list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the patron will be removed i.e. adding of tags is not cumulative.
-* You can remove all the patron’s tags by typing `t/` without
-    specifying any tags after it.
+After entering the command, all patrons will be listed.
 
-Examples:
-* `patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu` Edits the name, phone number and email address of the 1st patron in the displayed patron list to be `John Cena`, `91959491` and `johncena@u.nus.edu` respectively.
-* `patron edit 2 n/Alice t/Professor t/Horror ` Edits the name of the 2nd patron in the displayed patron list to be `Alice` and changes tags to `Professor` and `Horror`.
+![patron-list-2](images/patron-list-2.png)
 
-#### 3.2.4. Finding a patron by name: `patron find`
+#### 3.2.4. Finding patrons: `patron find`
 
-Finds all patrons with names matching the given keywords in LibTask's patron list.
+To find patrons in LibTask based on patron name, you can enter the `find` command with the format shown below.
 
-Format: `patron find n/KEYWORD [n/KEYWORD]…​`
+Format: `patron find KEYWORD [KEYWORD]…​`
+
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the find command:**
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. results from the keyword `Hans Bo` will match results of the keyword `Bo Hans`
@@ -198,34 +225,114 @@ Format: `patron find n/KEYWORD [n/KEYWORD]…​`
 * Only full words will be matched e.g. results from the keyword `Han` will not match results from the keyword `Hans`
 * Patrons matching at least one part of the keyword will be returned (i.e. `OR` search).
   e.g. keyword `Hans Bo` will return patrons with names `Hans Gruber`, `Bo Yang`
+</div>
 
-Example:
+**Example:**
 
-`patron find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
+To find all patrons with names containing the keywords "alex" or "david", you can enter the following command:
 
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+`patron find alex david`
+
+Before entering the command, all patrons are displayed.
+
+![patron-find-1](images/patron-find-1.png)
+
+After entering the command, only patrons with names containing "alex" or "david" are displayed.
+
+![patron-find-2](images/patron-find-2.png)
+
+#### 3.2.3. Editing a patron : `patron edit`
+
+To edit the details of a specific patron, you can enter the `edit` command with the format shown below.
+
+Format: `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the edit command:**
+
+* Edits the patron at the specified `INDEX`. The index refers to the index number shown in the displayed patron list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the patron will be removed i.e. adding of tags is not cumulative.
+* You can remove all the patron’s tags by typing `t/` without
+    specifying any tags after it.
+* You cannot edit a patron's name, email or id to that of some other patron in LibTask.
+</div>
+
+**Examples:**
+
+To edit the first patron's name from `Alex Yeoh` to `John Cena`, its phone number from `87438807` to `91959491` and email from `alexyeoh@example.com` to `johncena@u.nus.edu`, you can enter the following command:
+
+`patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu`
+
+Before entering the command, the first patron still has its original name, phone number and email.
+
+![patron-edit-1](images/patron-edit-1.png)
+
+After entering the command, the first patron has its name edited to `John Cena`, phone number edited to `91959491` and email edited to `johncena@u.nus.edu`
+
+![patron-edit-2](images/patron-edit-2.png)
+
+To remove all tags and edit the first patron's name from `Alex Yeoh` to `John Cena`, its phone number from `87438807` to `91959491` and email from `alexyeoh@example.com` to `johncena@u.nus.edu`you can enter the following command:
+
+`patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu t/`
+
+Before entering the command, the first patron has different tags.
+
+![patron-edit-3](images/patron-edit-3.png)
+
+After entering the command, the first patron will have their tags removed.
+
+![patron-edit-4](images/patron-edit-4.png)
 
 #### 3.2.5. Deleting a patron : `patron delete`
 
-Deletes the patron at a specified index in the displayed patron list.
+To delete a specific patron, you can enter the `delete` command with the format shown below.
 
 Format: `patron delete INDEX`
 
+<div markdown="span" class="alert alert-primary">
+
+**Notes about the delete command:**
 * Deletes the patron at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patron list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</div>
 
-Examples:
-* `patron list` followed by `patron delete 2` deletes the 2nd patron shown in the displayed patron list.
-* `patron find n/Betsy` followed by `patron delete 1` deletes the 1st person in the results of the `find` command.
+**Example:**
+
+To delete the second patron, you can enter the following command:
+
+`patron delete 2`
+
+Before entering the command, the second patron in LibTask is `Bernice Yu`.
+
+![patron-delete-1](images/patron-delete-1.png)
+
+After entering the command, patron `Bernice Yu` is deleted.
+
+![patron-delete-2](images/patron-delete-2.png)
 
 #### 3.2.6. Listing all patrons with overdue books : `patron overdue`
 
-Lists all patrons in LibTask's patron list with overdue books.
+To list all patrons with overdue books, you can enter the `overdue` command with the format shown below.
 
 Format: `patron overdue`
 
+**Example:**
+
+Before entering the command, all patrons are displayed.
+
+![patron-list-1](images/patron-list-1.png)
+
+After entering the command, only patrons with overdue books are displayed.
+
+![patron-list-2](images/patron-list-2.png)
+
 ### 3.3. Book Features
+
+This section describes features users can use to interact with LibTask's book list.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -258,7 +365,7 @@ To add a book with the name `Introduction to Algorithms`, isbn `9780371888506`, 
 
 `book add book add n/Introduction to Algorithms a/Cormen a/Leiserson a/Rivest a/Stein i/9780371888506 t/ComputerScience`
 
-Before entering the command. A book with the same name already exists in LibTask. However, that copy is currently borrowed by Alex and requested by Bernice and Charlotte.
+Before entering the command, a book with the same name already exists in LibTask. However, that copy is currently borrowed by Alex and requested by Bernice and Charlotte.
 ![book-add-1.png](images/book-add-1.PNG)
 
 After entering the command, a new available copy of the book is added. You will also be reminded to notify Bernice and Charlotte about the availability of this book.
@@ -608,7 +715,7 @@ If your changes to the data file makes its format invalid, LibTask will discard 
 | **Add a new patron**                | `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`                |
 | **List all patrons**                | `patron list`                                                     |
 | **Edit a patron**                   | `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​` |
-| **Find a patron**                   | `patron find n/KEYWORD [n/KEYWORD]…​`                             |
+| **Find a patron**                   | `patron find KEYWORD [KEYWORD]…​`                                 |
 | **Delete a patron**                 | `patron delete INDEX`                                             |
 | **List patrons with overdue books** | `patron overdue`                                                  |
 
