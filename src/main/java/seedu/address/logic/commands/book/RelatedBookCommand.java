@@ -19,9 +19,11 @@ import seedu.address.model.patron.Patron;
 public class RelatedBookCommand extends Command {
 
     public static final String MESSAGE_USAGE = BOOK_COMMAND_GROUP + " " + RELATED_COMMAND_WORD
-            + ": Lists all the books related to the patron at a specified index "
+            + ": Lists all the books borrowed or requested by the patron at a specified index "
             + "by the index number used in the displayed patron list. \n"
             + "Parameters: INDEX (must be a positive integer)\n"
+            + "PATRON_INDEX must be a positive integer and "
+            + "does not exceed the largest index number in the displayed patron list\n"
             + "Example: " + BOOK_COMMAND_GROUP + " " + RELATED_COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_RELATED_BOOK_SUCCESS = "Listed all books related to patron %1$s";
