@@ -17,7 +17,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_BOOK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PATRON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PATRON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PATRON;
 
 import org.junit.jupiter.api.Test;
 
@@ -99,12 +98,10 @@ public class RequestBookCommandTest {
         // The fourth book must be used because it is borrowed. Otherwise, a different error message is thrown.
         Book bookToRequest = model.getFilteredBookList().get(INDEX_FOURTH_BOOK.getZeroBased());
         Patron requester1 = model.getFilteredPatronList().get(INDEX_FIRST_PATRON.getZeroBased());
-        Patron requester2 = model.getFilteredPatronList().get(INDEX_SECOND_PATRON.getZeroBased());
-        Patron requester3 = model.getFilteredPatronList().get(INDEX_THIRD_PATRON.getZeroBased());
-        Book alreadyRequestedBook = new BookBuilder(bookToRequest).withRequesters(requester1, requester2, requester3)
+        Book alreadyRequestedBook = new BookBuilder(bookToRequest).withRequesters(requester1)
                 .build();
 
-        // Modify the model so that the first book is already requested by 3 patrons
+        // Modify the model so that the first book is already requested by 1 patron, and there is only 1 copy of book
         model.setBook(bookToRequest, alreadyRequestedBook);
         RequestBookCommand requestCommand = new RequestBookCommand(INDEX_FOURTH_PATRON, INDEX_FOURTH_BOOK);
 

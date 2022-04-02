@@ -31,13 +31,11 @@ public class RequestBookCommand extends Command {
 
     public static final String MESSAGE_REQUEST_BOOK_SUCCESS = "Patron %1$s requested for all books with isbn %2$s";
     public static final String MESSAGE_ALREADY_REQUESTED = "Patron %1$s already requested for %2$s";
-    public static final String MESSAGE_MAX_REQUEST = "%1$s already has a maximum of 3 requesters!";
+    public static final String MESSAGE_MAX_REQUEST = "%1$s already has maximum number of requesters!";
     public static final String MESSAGE_HAS_AVAILABLE = "There is at least one copy of %1$s that is available.\n"
             + "There is no need to request to be notified about this book's availability.";
     public static final String MESSAGE_IS_BORROWING = "Patron %1$s already borrowing a copy of the same book!\n"
             + "There is no need to for the patron to request for a book he/she has already borrowed.";
-
-    private static final int MAX_REQUESTS_PER_BOOK = 3;
 
     private final Index patronIndex;
     private final Index bookIndex;
@@ -78,7 +76,7 @@ public class RequestBookCommand extends Command {
             // Not sure if it will result in better UX if book list is reset to show all books
             throw new CommandException(String.format(MESSAGE_HAS_AVAILABLE, bookToRequest.getBookName()));
         }
-        if (bookToRequest.getRequesters().size() >= MAX_REQUESTS_PER_BOOK) {
+        if (bookToRequest.getRequesters().size() >= model.getMaxRequests(bookToRequest)) {
             throw new CommandException(String.format(MESSAGE_MAX_REQUEST, bookToRequest.getBookName()));
         }
         model.addRequest(bookToRequest, requester);

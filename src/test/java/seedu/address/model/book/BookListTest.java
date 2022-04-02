@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalBooks.AI;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.address.testutil.TypicalBooks.HUNGER_GAMES;
 import static seedu.address.testutil.TypicalPatrons.ALICE;
+import static seedu.address.testutil.TypicalPatrons.BOB;
 import static seedu.address.testutil.TypicalPatrons.getTypicalPatrons;
 
 import java.util.Collections;
@@ -282,6 +283,30 @@ public class BookListTest {
         // different isbn, but same authors and book name is allowed -> returns false
         book2 = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
         assertFalse(bookList.hasSameIsbnDiffAuthorsOrName(book2));
+    }
+
+    @Test
+    public void getMaxRequests_nullBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> bookList.getMaxRequests(null));
+    }
+
+    @Test
+    public void getMaxRequests_oneIdenticalBookCopy_returnsOne() {
+        bookList.add(HARRY_POTTER);
+        // There is only one copy of Harry Potter, therefore maximum of one requests allowed
+        assertEquals(1, bookList.getMaxRequests(HARRY_POTTER));
+    }
+
+    @Test
+    public void getMaxRequests_twoNonIdenticalBooksButSameIsbn_returnsTwo() {
+        Book bookWithSameIsbn1 = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES)
+                .withTags().withAuthors().withRequesters(BOB).withTimeAdded(1).build();
+        Book bookWithSameIsbn2 = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES)
+                .withTags(VALID_TAG_SCIFI).withAuthors().withRequesters(BOB).withTimeAdded(3).build();
+        bookList.add(bookWithSameIsbn1);
+        bookList.add(bookWithSameIsbn2);
+        // There are two copies of Harry Potter, therefore maximum of two requests allowed
+        assertEquals(2, bookList.getMaxRequests(HARRY_POTTER));
     }
 
     @Test
