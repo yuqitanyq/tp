@@ -565,7 +565,7 @@ To return a specific book, or to return all books by a specific patron, you can 
 
 * You cannot return a specific book if it is not borrowed
 
-* You cananot return all books by a patron if the patron did not borrow any books.
+* You cannot return all books by a patron if the patron did not borrow any books.
 
 </div>
 
@@ -614,7 +614,7 @@ To keep track that a specific patron is requesting for a specific book, you can 
 
 * A patron cannot request for a book if he/she is currently borrowing a copy of that book.
 
-* A book can have a maximum of three book requests. There is no need in having too many book requests because ultimately only one patron can borrow that book.
+* A book can have a maximum number of book requests equal to the number of books with the same isbn in LibTask. There is no need to have too many book requests because ultimately each copy of the book can only be borrowed by one patron.
 
 </div>
 

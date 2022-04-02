@@ -131,6 +131,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getMaxRequests_nullBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.getMaxRequests(null));
+    }
+
+    @Test
     public void updateBookAfterPatronEdit_someFieldsNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.updateBookAfterPatronEdit(null, ALICE));
         assertThrows(NullPointerException.class, () -> modelManager.updateBookAfterPatronEdit(ALICE, null));
