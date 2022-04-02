@@ -23,6 +23,10 @@ public class RequestBookCommand extends Command {
             + ": Establishes a request relationship between the patron identified by the index number "
             + " in the displayed patron list and the book identified the index number in the displayed book list.\n"
             + "Parameters: PATRON_INDEX BOOK_INDEX (both must be positive integers)\n"
+            + "PATRON_INDEX must be a positive integer and "
+            + "does not exceed the largest index number in the displayed patron list\n"
+            + "BOOK_INDEX must be a positive integer and "
+            + "does not exceed the largest index number in the displayed book list\n"
             + "Example: " + BOOK_COMMAND_GROUP + " " + REQUEST_COMMAND_WORD + " 1 1";
 
     public static final String MESSAGE_REQUEST_BOOK_SUCCESS = "Patron %1$s requested for all books with isbn %2$s";
