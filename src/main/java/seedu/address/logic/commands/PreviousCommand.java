@@ -17,21 +17,17 @@ public class PreviousCommand extends Command {
     }
 
     public String getMessageForUi() {
-        return String.format("%s|%s", previousCommand, MESSAGE_SUCCESS);
-    }
-
-    public String getMessageForUiNoPreviousCommand() {
-        return String.format("%s", NO_PREVIOUS_COMMAND);
+        if (this.previousCommand.equals("")) {
+            return String.format("%s|%s", previousCommand, NO_PREVIOUS_COMMAND);
+        } else {
+            return String.format("%s|%s", previousCommand, MESSAGE_SUCCESS);
+        }
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (this.previousCommand.equals("")) {
-            return new CommandResult(getMessageForUiNoPreviousCommand(), false, false, true);
-        } else {
-            return new CommandResult(getMessageForUi(), false, false, true);
-        }
+        return new CommandResult(getMessageForUi(), false, false, true);
     }
 }
 
