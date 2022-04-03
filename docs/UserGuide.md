@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-LibTask is a **desktop application for librarians to manage book loans and requests by patrons. It is specially made to improve the overall efficiency of librarians when processing book loans and requests, helping them to complete their daily tasks quickly. LibTask is optimized for use via a [Command Line Interface (CLI)](#7-glossary)** while still having the benefits of a [Graphical User Interface (GUI)](#7-glossary) so that librarians who prefer typing can get their tasks done faster than traditional GUI apps.
+LibTask is a desktop application for librarians to manage book loans and requests by patrons. It is specially made to improve the overall efficiency of librarians when processing book loans and requests, helping them to complete their daily tasks quickly. LibTask is optimized for use via a [Command Line Interface (CLI)](#7-glossary) while still having the benefits of a [Graphical User Interface (GUI)](#7-glossary) so that librarians who prefer typing can get their tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -20,13 +20,14 @@ The purpose of this guide is to explain to you how to use **LibTask** and to all
 
 Take note of following symbols that are used in this document:
 
-* :information_source:: This symbol is used to highlight extra knowledge.
-
-* :exclamation:: This symbol is used to warn users of potential actions that might corrupt the LibTask's data file.
+| Icon                 | Explanation                                                                                    |
+|----------------------|------------------------------------------------------------------------------------------------|
+| :information_source: | This symbol is used to highlight extra knowledge.                                              |
+| :exclamation:        | This symbol is used to warn users of potential actions that might corrupt LibTask's data file. |
 
 ### 1.3. Navigating the User Guide
 
-For help with installing LibTask and understanding our interface, you can refer to head to our [Quick start](#2-quick-start) section.
+For help with installing LibTask and understanding our interface, you can head over to our [Quick start](#2-quick-start) section.
 
 For the full documentation of each feature, you can refer to our [Features](#3-features) section.
 
@@ -34,7 +35,7 @@ For a list of frequently asked questions about LibTask, you can refer to our [FA
 
 If you are an advanced user, you can refer to our [Command summary](#5-command-summary) section.
 
-For the list of definition of the vocabulary words used in this document can be found in our [Glossary](#7-glossary) section.
+For the glossary of content, you can refer to our [Glossary](#7-glossary) section.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -79,7 +80,7 @@ The various GUI components of LibTask are described in the picture below:
 * `Menu bar`: Menu buttons that you can click to exit LibTask or to open up the help window that contains a link to this user guide.
 * `Command box`: You can type and enter commands to run in this box.
 * `Result box`: You can view the results from running your commands in this box.
-* `patron list`: You can view the list of patrons with their details in this list.
+* `Patron list`: You can view the list of patrons with their details in this list.
 * `Book list`: You can view the list of books with their details in this list.
 
 --------------------------------------------------------------------------------------------------------------------
