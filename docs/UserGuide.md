@@ -730,7 +730,6 @@ If your changes to the data file makes its format invalid, LibTask will discard 
 | **Clear all entries**                      | `clear`                                                                    |
 | **Exit the program**                       | `exit`                                                                     |
 | **Show previous commands**                 | `u`                                                                        |
-| **Navigating the different patrons/books** | **Pressing the :arrow_up: and :arrow_down: arrows on keyboard :keyboard:** |
 
 ### 5.2. Patron Commands
 
