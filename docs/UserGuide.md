@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-LibTask is a **desktop application for librarians to manage book loans and requests by patrons. It is specially made to improve the overall efficiency of librarians when processing book loans and requests, helping them to complete their daily tasks quickly. LibTask is optimized for use via a [Command Line Interface (CLI)](#6-glossary)** while still having the benefits of a [Graphical User Interface (GUI)](#6-glossary) so that librarians who prefer typing can get their tasks done faster than traditional GUI apps.
+LibTask is a **desktop application for librarians to manage book loans and requests by patrons. It is specially made to improve the overall efficiency of librarians when processing book loans and requests, helping them to complete their daily tasks quickly. LibTask is optimized for use via a [Command Line Interface (CLI)](#7-glossary)** while still having the benefits of a [Graphical User Interface (GUI)](#7-glossary) so that librarians who prefer typing can get their tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -34,7 +34,7 @@ For a list of frequently asked questions about LibTask, you can refer to our [FA
 
 If you are an advanced user, you can refer to our [Command summary](#5-command-summary) section.
 
-For the list of definition of the vocabulary words used in this document can be found in our [Glossary](#6-glossary) section.
+For the list of definition of the vocabulary words used in this document can be found in our [Glossary](#7-glossary) section.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -114,6 +114,8 @@ This section describes the features supported by LibTask and how to use them.
 
 ### 3.1. General Features
 
+This section describes features users can use to navigate through LibTask.
+
 --------------------------------------------------------------------------------------------------------------------
 
 #### 3.1.1. Viewing help : `help`
@@ -151,81 +153,205 @@ LibTask's data is saved in the hard disk automatically after any command that ch
 
 ### 3.2. Patron Features
 
+This section describes features users can use to interact with LibTask's patron list.
+
 --------------------------------------------------------------------------------------------------------------------
 #### 3.2.1. Adding a patron: `patron add`
 Adds a patron to LibTask's patron list.
 
 Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
 
-Examples:
-* `patron add n/John s/A02128282A p/93231222 e/e03482@u.nus.edu t/student`
-* `patron add n/Alice s/S01823283S p/90123212 e/profA@u.nus.edu`
+<div markdown="block" class="alert alert-info">
+
+**Notes about the add command:**<br>
+
+* ID must be 9 characters in length. First character of ID should be 'A' and last character of ID should be an alphabet.
+
+* NAME can be a maximum of 40 characters.
+
+* EMAIL can be a maximum of 50 characters.
+
+* You cannot add a patron with the same NAME, EMAIL or ID as another existing patron in the patron list.
+
+</div>
+
+**Example**
+
+To add a patron with the name `John`, id `A0212828X`, phone number `93231222`, email `e03482@u.nus.edu` and tag `student`, 
+you can enter the following command:
+
+`patron add n/John s/A0212828X p/93231222 e/e03482@u.nus.edu t/student`
+
+Before entering the command, there is no existing patron with the same name, id or email in LibTask.
+
+![patron-add-1](images/patron-add-1.png)
+
+After entering the command, the new patron is added. 
+
+![patron-add-2](images/patron-add-2.png)
 
 #### 3.2.2. Listing all patrons : `patron list`
 
-Shows a list of all patrons in LibTask's patron list.
+To show a list of all patrons in LibTask, you can enter the `list` command with the format shown below.
 
 Format: `patron list`
 
+<div markdown="block" class="alert alert-info">
+
+**Notes about the list command:**<br>
+
 * If all patrons are already listed, the command will still show a success message as having listed all patrons, but the patrons listed will have no visual change.
 
-#### 3.2.3. Editing a patron : `patron edit`
+</div>
 
-Edits the details of a patron at a specified index of the displayed patron list.
+**Example:** `patron list`
 
-Format: `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Before entering the command only two patrons are listed.
 
-* Edits the patron at the specified `INDEX`. The index refers to the index number shown in the displayed patron list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the patron will be removed i.e. adding of tags is not cumulative.
-* You can remove all the patron’s tags by typing `t/` without
-    specifying any tags after it.
+![patron-list-1](images/patron-list-1.png)
 
-Examples:
-* `patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu` Edits the name, phone number and email address of the 1st patron in the displayed patron list to be `John Cena`, `91959491` and `johncena@u.nus.edu` respectively.
-* `patron edit 2 n/Alice t/Professor t/Horror ` Edits the name of the 2nd patron in the displayed patron list to be `Alice` and changes tags to `Professor` and `Horror`.
+After entering the command, all patrons will be listed.
 
-#### 3.2.4. Finding a patron by name: `patron find`
+![patron-list-2](images/patron-list-2.png)
 
-Finds all patrons with names matching the given keywords in LibTask's patron list.
+#### 3.2.4. Finding patrons: `patron find`
 
-Format: `patron find n/KEYWORD [n/KEYWORD]…​`
+To find patrons in LibTask based on patron name, you can enter the `find` command with the format shown below.
+
+Format: `patron find KEYWORD [KEYWORD]…​`
+
+<div markdown="block" class="alert alert-info">
+
+**Notes about the find command:**<br>
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
+
 * The order of the keywords does not matter. e.g. results from the keyword `Hans Bo` will match results of the keyword `Bo Hans`
+
 * Only the name is searched.
+
 * Only full words will be matched e.g. results from the keyword `Han` will not match results from the keyword `Hans`
+
 * Patrons matching at least one part of the keyword will be returned (i.e. `OR` search).
   e.g. keyword `Hans Bo` will return patrons with names `Hans Gruber`, `Bo Yang`
 
-Example:
+</div>
 
-`patron find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
+**Example:**
 
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+To find all patrons with names containing the keywords "alex" or "david", you can enter the following command:
+
+`patron find alex david`
+
+Before entering the command, all patrons are displayed.
+
+![patron-find-1](images/patron-find-1.png)
+
+After entering the command, only patrons with names containing "alex" or "david" are displayed.
+
+![patron-find-2](images/patron-find-2.png)
+
+#### 3.2.3. Editing a patron : `patron edit`
+
+To edit the details of a specific patron, you can enter the `edit` command with the format shown below.
+
+Format: `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+
+<div markdown="block" class="alert alert-info">
+
+**Notes about the edit command:**<br>
+
+* Edits the patron at the specified `INDEX`. The index refers to the index number shown in the displayed patron list. The index **must be a positive integer** 1, 2, 3, … and cannot exceed the largest index number in the displayed patron list.​
+
+* At least one of the optional fields must be provided.
+
+* Existing values will be updated to the input values.
+
+* When editing tags, the existing tags of the patron will be removed i.e. adding of tags is not cumulative.
+
+* You can remove all the patron’s tags by typing `t/` without specifying any tags after it.
+
+* You cannot edit a patron's name, email or id to that of some other patron in LibTask.
+
+</div>
+
+**Examples:**
+
+To edit the first patron's name from `Alex Yeoh` to `John Cena`, its phone number from `87438807` to `91959491` and email from `alexyeoh@example.com` to `johncena@u.nus.edu`, you can enter the following command:
+
+`patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu`
+
+Before entering the command, the first patron still has its original name, phone number and email.
+
+![patron-edit-1](images/patron-edit-1.png)
+
+After entering the command, the first patron has its name edited to `John Cena`, phone number edited to `91959491` and email edited to `johncena@u.nus.edu`
+
+![patron-edit-2](images/patron-edit-2.png)
+
+To remove all tags and edit the first patron's name from `Alex Yeoh` to `John Cena`, its phone number from `87438807` to `91959491` and email from `alexyeoh@example.com` to `johncena@u.nus.edu`you can enter the following command:
+
+`patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu t/`
+
+Before entering the command, the first patron has different tags.
+
+![patron-edit-3](images/patron-edit-3.png)
+
+After entering the command, the first patron will have their tags removed.
+
+![patron-edit-4](images/patron-edit-4.png)
 
 #### 3.2.5. Deleting a patron : `patron delete`
 
-Deletes the patron at a specified index in the displayed patron list.
+To delete a specific patron, you can enter the `delete` command with the format shown below.
 
 Format: `patron delete INDEX`
 
-* Deletes the patron at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patron list.
-* The index **must be a positive integer** 1, 2, 3, …​
+<div markdown="block" class="alert alert-info">
 
-Examples:
-* `patron list` followed by `patron delete 2` deletes the 2nd patron shown in the displayed patron list.
-* `patron find n/Betsy` followed by `patron delete 1` deletes the 1st person in the results of the `find` command.
+**Notes about the delete command:**<br>
+
+* Deletes the patron at the specified `INDEX`.
+
+* The index refers to the index number shown in the displayed patron list.
+
+* The index **must be a positive integer** 1, 2, 3, … and cannot exceed the largest index number in the displayed patron list.​
+
+</div>
+
+**Example:**
+
+To delete the second patron, you can enter the following command:
+
+`patron delete 2`
+
+Before entering the command, the second patron in LibTask is `Bernice Yu`.
+
+![patron-delete-1](images/patron-delete-1.png)
+
+After entering the command, patron `Bernice Yu` is deleted.
+
+![patron-delete-2](images/patron-delete-2.png)
 
 #### 3.2.6. Listing all patrons with overdue books : `patron overdue`
 
-Lists all patrons in LibTask's patron list with overdue books.
+To list all patrons with overdue books, you can enter the `overdue` command with the format shown below.
 
 Format: `patron overdue`
 
+**Example:**
+
+Before entering the command, all patrons are displayed.
+
+![patron-list-1](images/patron-list-1.png)
+
+After entering the command, only patrons with overdue books are displayed.
+
+![patron-list-2](images/patron-list-2.png)
+
 ### 3.3. Book Features
+
+This section describes features users can use to interact with LibTask's book list.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -242,7 +368,7 @@ Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 
 * ISBN must be 10 or 13 digits in length, and contain only numbers with at most one `-` character between consecutive numbers. If it is 13 digits long, it must start with 978 or 979. 
 
-* ISBN digits must have valid checksum. Details on calculating checksum can be found here.
+* ISBN digits must have valid checksum. Details on calculating checksum can be found in [this section](#6-appendix).
 
 * AUTHOR must start with an alphanumeric character, and can only contain alphanumeric characters and `.` character.
 
@@ -256,9 +382,9 @@ Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 
 To add a book with the name `Introduction to Algorithms`, isbn `9780371888506`, authors `Cormen`, `Leiserson`, `Rivest` and `Stein`, with a tag of `ComputerScience`, you can enter the following command:
 
-`book add book add n/Introduction to Algorithms a/Cormen a/Leiserson a/Rivest a/Stein i/9780371888506 t/ComputerScience`
+`book add n/Introduction to Algorithms a/Cormen a/Leiserson a/Rivest a/Stein i/9780371888506 t/ComputerScience`
 
-Before entering the command. A book with the same name already exists in LibTask. However, that copy is currently borrowed by Alex and requested by Bernice and Charlotte.
+Before entering the command, a book with the same name already exists in LibTask. However, that copy is currently borrowed by Alex and requested by Bernice and Charlotte.
 ![book-add-1.png](images/book-add-1.PNG)
 
 After entering the command, a new available copy of the book is added. You will also be reminded to notify Bernice and Charlotte about the availability of this book.
@@ -334,7 +460,7 @@ To edit the details of a specific book, you can enter the `edit` command with th
 
 **Notes about the edit command:**<br>
 
-* Edits the book at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, … 
+* Edits the book at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, … and cannot exceed the largest index number in the displayed book list.
 
 * At least one of the optional fields (ISBN, AUTHOR, CATEGORY_TAG) must be provided.
 
@@ -382,7 +508,7 @@ To delete a specific book, you can enter the `delete` command with the format sh
 
 **Notes about the delete command:**<br>
 
-* Deletes the book at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, …
+* Deletes the book at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, … and cannot exceed the largest index number in the displayed book list.
 
 * You cannot delete a book that is borrowed. If you insist on deleting the book, you can first return the book.
 
@@ -403,17 +529,19 @@ After entering the command, that copy of `Harry Potter and The Philospher's Ston
 
 To keep track that a specific patron is borrowing a specific book, you can enter the `borrow` command with the format shown below.
 
-**Format**: `borrow INDEX1 INDEX2 RETURN_DATE`
+**Format**: `borrow PATRON_INDEX BOOK_INDEX RETURN_DATE`
 
 <div markdown="block" class="alert alert-info">
 
 **Notes about the borrow command:**<br>
 
-* `INDEX1` refers to the index number of a patron shown in the displayed patron list.
+* `PATRON_INDEX` refers to the index number of a patron shown in the displayed patron list.
 
-* `INDEX2` refers to the index number of a book shown in the displayed book list.
+* `BOOK_INDEX` refers to the index number of a book shown in the displayed book list.
 
-* Both `INDEX1` and `INDEX2` **must be a positive integer** 1, 2, 3, …
+* Both `PATRON_INDEX` and `BOOK_INDEX` **must be a positive integer** 1, 2, 3, …
+
+* Both `PATRON_INDEX` and `BOOK_INDEX` cannot exceed the largest index number in the displayed patron list or book list, respectively.
 
 * `RETURN_DATE` must be in dd-MMM-yyyy format (e.g. 20-May-2022) and must be later than the current date.
 
@@ -450,15 +578,15 @@ To return a specific book, or to return all books by a specific patron, you can 
 
 * If `PREFIX` is `b`, `INDEX` refers to the index number of the book to be returned, as shown in the displayed book list.
 
-* `INDEX` **must be a positive integer** 1, 2, 3, …
+* `INDEX` **must be a positive integer** 1, 2, 3, … and cannot exceed the largest index number in the displayed book list (if prefix is `b`) or patron list (if prefix is `p`).
 
-* If the book at index `INDEX` is not borrowed, or if the patron at index `INDEX` does not borrow any books, nothing happens.
+* If the book at index `INDEX` is not borrowed, or if the patron at index `INDEX` does not borrow any books, a message is shown.
 
 * If there are patrons who requested to be notified about the availability of the returned books, you will be reminded to notify them. Subsequently, all requests for those books will be deleted automatically.
 
 * You cannot return a specific book if it is not borrowed
 
-* You cananot return all books by a patron if the patron did not borrow any books.
+* You cannot return all books by a patron if the patron did not borrow any books.
 
 </div>
 
@@ -487,17 +615,19 @@ After entering the command, the third book becomes available. The two requesters
 
 To keep track that a specific patron is requesting for a specific book, you can enter the `request` command with the format shown below.
 
-**Format**: `book request INDEX1 INDEX2`
+**Format**: `book request PATRON_INDEX BOOK_INDEX`
 
 <div markdown="block" class="alert alert-info">
 
 **Notes about the request command:**<br>
 
-* `INDEX1` refers to the index number of the patron who is requesting for the book, as shown in the displayed patron list.
+* `PATRON_INDEX` refers to the index number of the patron who is requesting for the book, as shown in the displayed patron list.
 
-* `INDEX2` refers to the index number of the book to be requested, as shown in the displayed book list.
+* `BOOK_INDEX` refers to the index number of the book to be requested, as shown in the displayed book list.
 
-* Both `INDEX1` and `INDEX2` **must be a positive integer** 1, 2, 3, …
+* Both `PATRON_INDEX` and `BOOK_INDEX` **must be a positive integer** 1, 2, 3, …
+
+* Both `PATRON_INDEX` and `BOOK_INDEX` cannot exceed the largest index number in the displayed patron list or book list, respectively.
 
 * Book requests are associated with books with the same isbn, not a book copy. For example, when patron Alex requests for the first book, LibTask recognizes that Alex is requesting for books with the same isbn as the first book.
 
@@ -507,14 +637,14 @@ To keep track that a specific patron is requesting for a specific book, you can 
 
 * A patron cannot request for a book if he/she is currently borrowing a copy of that book.
 
-* A book can have a maximum of three book requests. There is no need in having too many book requests because ultimately only one patron can borrow that book.
+* A book can have a maximum number of book requests equal to the number of books with the same isbn in LibTask. There is no need to have too many book requests because ultimately each copy of the book can only be borrowed by one patron.
 
 </div>
 
 **Example**:
 * To keep track that the second patron is requesting for first book, you can enter the following command:
 
-`book request 1 1`
+`book request 2 1`
 
 Before entering the command, there are two books with the same isbn as the first book. Both copies of the book are already borrowed.
 ![book-request-1.png](images/book-request-1.PNG)
@@ -608,7 +738,7 @@ If your changes to the data file makes its format invalid, LibTask will discard 
 | **Add a new patron**                | `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`                |
 | **List all patrons**                | `patron list`                                                     |
 | **Edit a patron**                   | `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​` |
-| **Find a patron**                   | `patron find n/KEYWORD [n/KEYWORD]…​`                             |
+| **Find a patron**                   | `patron find KEYWORD [KEYWORD]…​`                                 |
 | **Delete a patron**                 | `patron delete INDEX`                                             |
 | **List patrons with overdue books** | `patron overdue`                                                  |
 
@@ -621,12 +751,50 @@ If your changes to the data file makes its format invalid, LibTask will discard 
 | **Find a book**                        | `book find [n/NAME] [t/TAG] [a/AUTHOR]`                             |
 | **Edit a book**                        | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR]…​ [t/CATEGORY_TAG]…​` |
 | **Delete a book**                      | `book delete INDEX`                                                 |
-| **Borrow a book**                      | `borrow INDEX1 INDEX2 RETURN_DATE`                                  |
+| **Borrow a book**                      | `borrow PATRON_INDEX BOOK_INDEX RETURN_DATE`                        |
 | **Return a book**                      | `return PREFIX/INDEX`                                               |
-| **Request a book**                     | `book request INDEX1 INDEX2`                                        |
+| **Request a book**                     | `book request PATRON_INDEX BOOK_INDEX`                              |
 | **List all books related to a patron** | `book related INDEX`                                                |
 
-## **6. Glossary**
+## **6. Appendix**
+
+### 6.1. Calculating ISBN checksum
+
+There are two types of ISBN, 10-digit ISBNs and 13-digit ISBNs. Both types of ISBN have different ways of calculating checksums, as illustrated below. For easy testing and exploration, you can generate valid ISBNs from [this website](http://sqa.fyicenter.com/1000332_Test_ISBN_Number_Generator.html) without having to perform the tedious calculations yourself to ensure its validity.
+
+#### 10-digit ISBN checksum
+
+* Step 1. For each of the 10 digits, from left to right, multiply the digit by an integer weight. The weights are descending from 10 to 1 from left to right.
+
+* Step 2. After obtaining the product of digit and weight for each digit, sum all the products.
+
+* Step 3. The 10-digit ISBN checksum is valid if the sum of products is a multiple of 11.
+
+**Example:**
+
+The checksum for an 10-digit ISBN of 0-306-40615-2 is calculated as follows:
+
+`checksum = (0 × 10) + (3 × 9) + (0 × 8) + (6 × 7) + (4 × 6) + (0 × 5) + (6 × 4) + (1 × 3) + (5 × 2) + (2 × 1) = 132 `
+
+Since 132 is a multiple of 11, the above 10-digit ISBN has a valid checksum.
+
+#### 13-digit ISBN checksum
+
+* Step 1. For each of the 13 digits, from left to right, multiply the digit by an integer weight. The weight is a number alternating between 1 and 3, from left to right.
+
+* Step 2. After obtaining the product of digit and weight for each digit, sum all the products.
+
+* Step 3. The 13-digit ISBN checksum is valid if the sum of products is a multiple of 10.
+
+**Example:**
+
+The checksum for an 13-digit ISBN of 978-0-306-40615-7 is calculated as follows:
+
+`checksum = (9 × 1) + (7 × 3) + (8 × 1) + (0 × 3) + (3 × 1) + (0 × 3) + (6 × 1) + (4 × 3) + (0 × 1) + (6 × 3) + (1 × 1) + (5 × 3) + (7 × 1) = 100`
+
+Since 100 is a multiple of 10, the above 13-digit ISBN has a valid checksum.
+
+## **7. Glossary**
 
 | Term                           | Explanation                                                                                     |
 |--------------------------------|-------------------------------------------------------------------------------------------------|

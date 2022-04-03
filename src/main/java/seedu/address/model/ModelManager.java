@@ -116,6 +116,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int getMaxRequests(Book book) {
+        requireNonNull(book);
+        return libTask.getMaxRequests(book);
+    }
+
+    @Override
     public String deleteAllRequests(Book ... books) {
         return libTask.deleteAllRequests(books);
     }

@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.model.book.BookStatus.STATUS_DATE_FORMAT;
+import static seedu.address.model.book.BookStatus.isValidDateString;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.BorrowCommand;
@@ -30,11 +30,8 @@ public class BorrowCommandParser implements Parser<BorrowCommand> {
         // Ensures date can be parsed because regex does not check for all invalid cases.
         // Check is done here instead of BookStatus class so that invalid date error is not
         // thrown from BookStatus, therefore hiding BookStatus from end user.
-        try {
-            STATUS_DATE_FORMAT.parse(returnDate);
-        } catch (java.text.ParseException e) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, BorrowCommand.MESSAGE_USAGE));
+        if (!isValidDateString(returnDate)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BorrowCommand.MESSAGE_USAGE));
         }
 
         try {

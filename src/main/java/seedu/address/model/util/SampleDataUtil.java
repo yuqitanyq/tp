@@ -144,7 +144,6 @@ public class SampleDataUtil {
         ArrayList<HashSet<Patron>> listOfRequesters = new ArrayList<>();
         HashSet<Patron> algorithmsRequesters = new HashSet<>();
         algorithmsRequesters.add(getSamplePatrons()[1]);
-        algorithmsRequesters.add(getSamplePatrons()[2]);
         listOfRequesters.add(algorithmsRequesters);
 
         listOfRequesters.add(new HashSet<>()); // for "The Little Book of Semaphores"
@@ -152,7 +151,6 @@ public class SampleDataUtil {
 
         HashSet<Patron> aiRequesters = new HashSet<>();
         aiRequesters.add(getSamplePatrons()[2]);
-        aiRequesters.add(getSamplePatrons()[3]);
         listOfRequesters.add(aiRequesters);
 
         listOfRequesters.add(new HashSet<>()); // for "Cinderella"
