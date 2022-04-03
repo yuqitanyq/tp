@@ -30,8 +30,7 @@ public class Id {
      * Returns true if a given string is a valid id.
      */
     public static boolean isValidId(String test) {
-        String[] idArray = test.split("");
-        return ((idArray.length == 9) && test.matches(VALIDATION_REGEX));
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
