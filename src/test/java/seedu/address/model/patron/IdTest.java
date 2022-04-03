@@ -36,8 +36,8 @@ public class IdTest {
         assertTrue(Id.isValidId("A0123457K"));
         assertTrue(Id.isValidId("A0123458L"));
 
-        // valid id but will need to check again in the future
-        assertTrue(Id.isValidId("ABCDEFGHI")); // starts with A and only contains letters
-        assertTrue(Id.isValidId("A00000000")); // starts with A followed by 8 digits
+        // invalid id
+        assertFalse(Id.isValidId("ABCDEFGHI")); // starts with A and only contains letters
+        assertFalse(Id.isValidId("A00000000")); // starts with A followed by 8 digits
     }
 }

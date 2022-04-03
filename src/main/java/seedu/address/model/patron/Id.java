@@ -11,11 +11,7 @@ public class Id {
 
     public static final String MESSAGE_CONSTRAINTS = "Ids must be of format AXXXXXXXX, and should not be blank";
 
-    /*
-     * The first character of the id must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "A[0-9]{7}[A-Z]{1}";
 
     public final String value;
 
@@ -35,7 +31,7 @@ public class Id {
      */
     public static boolean isValidId(String test) {
         String[] idArray = test.split("");
-        return ((idArray.length == 9) && idArray[0].equals("A") && test.matches(VALIDATION_REGEX));
+        return ((idArray.length == 9) && test.matches(VALIDATION_REGEX));
     }
 
     @Override
