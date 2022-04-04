@@ -975,6 +975,57 @@ testers are expected to do more *exploratory* testing.
 
 2. _{ more test cases …​ }_
 
+### Listing all books related to a patron
+1. Listing all books related to a patron while all books are being shown and a book has been borrowed by a patron
+
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list. Ensure that the first book
+   is borrowed by the first person.
+
+   2. Test case: `book related 1`<br>
+      Expected: Only first book is shown in the book list. 
+
+   3. Test case: `book related 0`<br>
+      Expected: Book list remains unchanged. Error details shown in the status message. 
+
+   4. Other incorrect book related commands to try: `book related`, `book related x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
+
+2. Listing all books related to a patron while all books are being shown and multiple books have been borrowed by a patron.
+
+    1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first,
+   second and third book are borrowed by the first patron.
+
+    2. Test case: `book related 1`<br>
+       Expected: The first, second and third book are shown in the book list. 
+
+3. Listing all books related to a patron while all books are being shown and a book has been requested by a patron.
+
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list. Ensure that the first
+   book is borrowed by the first patron and requested by the second patron.
+
+   2. Test case: `book related 2`<br>
+      Expected: Only first book is shown in the book list.
+
+4. Listing all books related to a patron while all books are being shown and multiple books have been requested
+by a patron.
+
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first,
+   second, and third book is borrowed by the first patron and requested by the second patron.
+
+   2. Test case: `book related 2`<br>
+      Expected: The first, second and third book are shown in the book list.
+
+5. Listing all books related to a patron while all books are being shown and multiple books have been requested 
+and borrowed by a patron.
+
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first
+   and second book are borrowed by the first patron and requested by the second patron. Ensure that the third book is 
+   borrowed by the second patron.
+
+   3. Test case: `book related 2`<br>
+      Expected: The first, second and third book are shown in the book list.
+
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
