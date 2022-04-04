@@ -19,7 +19,8 @@ public class DeleteBookCommand extends Command {
 
     public static final String MESSAGE_USAGE = BOOK_COMMAND_GROUP + " " + DELETE_COMMAND_WORD
             + ": Deletes the book identified by the index number used in the displayed book list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer "
+            + "and does not exceed the largest index number in the displayed book list)\n"
             + "Example: " + BOOK_COMMAND_GROUP + " " + DELETE_COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_BOOK_SUCCESS = "Deleted Book: %1$s";

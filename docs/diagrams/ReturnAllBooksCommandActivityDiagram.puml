@@ -1,0 +1,21 @@
+@startuml
+start
+:User enters return command;
+if () then ([command is valid format])
+    :Parser parses patron index;
+        :Logic executes command;
+        if () then ([valid indexes])
+            if () then ([patron has borrowed books])
+                :Model executes \nreturnAllBorrowedBooks();
+                :Model executes \ndeleteAllRequests();
+            else ([else])
+                :Ui shows error message;
+            endif
+        else ([else])
+            :Ui shows error message;
+        endif
+else([else])
+    :Ui shows error message;
+endif
+stop
+@enduml

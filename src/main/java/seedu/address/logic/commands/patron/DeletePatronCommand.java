@@ -19,7 +19,8 @@ public class DeletePatronCommand extends Command {
 
     public static final String MESSAGE_USAGE = PATRON_COMMAND_GROUP + " " + DELETE_COMMAND_WORD
             + ": Deletes the patron identified by the index number used in the displayed patron list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer "
+            + "and does not exceed the largest index number in the displayed patron list)\n"
             + "Example: " + PATRON_COMMAND_GROUP + " " + DELETE_COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PATRON_SUCCESS = "Deleted Patron: %1$s\n";

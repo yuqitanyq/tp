@@ -77,6 +77,11 @@ public interface Model {
     boolean hasSameIsbn(Book bookToCheck);
 
     /**
+     * Returns the number of maximum requests allowed for the given {@link Book}
+     */
+    int getMaxRequests(Book book);
+
+    /**
      * Removes all book requests from all books in this model's book list that has the same isbn as any book in
      * {@param books}.
      *

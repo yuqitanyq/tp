@@ -38,7 +38,7 @@ public class LibTaskParser {
 
 
     /**
-     * Shows the last valid comma
+     * Shows the last valid command
      *
      * @return A String of the past commands
      */

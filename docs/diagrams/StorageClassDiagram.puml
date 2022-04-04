@@ -14,12 +14,15 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
+package "LibTask Storage" #F4F6F6{
+Class "<<interface>>\nLibTaskStorage" as LibTaskStorage
+Class JsonLibTaskStorage
+Class JsonSerializableLibTask
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+Class JsonAdaptedBook
+Class JsonAdaptedBookStatus
+Class JsonAdaptedAuthor
 }
 
 }
@@ -29,15 +32,21 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" LibTaskStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> LibTaskStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+JsonLibTaskStorage .up.|> LibTaskStorage
+JsonLibTaskStorage ..> JsonSerializableLibTask
+JsonSerializableLibTask ---> "*" JsonAdaptedPerson
+JsonSerializableLibTask --> "*" JsonAdaptedBook
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonAdaptedBook --> "*" JsonAdaptedAuthor
+JsonAdaptedBook --> "1" JsonAdaptedBookStatus
+JsonAdaptedBook --> "0..3" JsonAdaptedPerson : requested by >
+JsonAdaptedBookStatus -> "0..1" JsonAdaptedPerson : borrowed by >
 
+JsonAdaptedBookStatus -[hidden]left-JsonAdaptedAuthor
 @enduml

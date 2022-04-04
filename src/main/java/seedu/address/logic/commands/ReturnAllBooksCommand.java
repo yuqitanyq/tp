@@ -41,10 +41,10 @@ public class ReturnAllBooksCommand extends ReturnCommand {
             throw new CommandException(String.format(Messages.MESSAGE_NO_BOOKS_BORROWED, borrower.getName()));
         }
         List<Book> returnedBooks = model.returnAllBorrowedBooks(borrower);
-        String notification = model.deleteAllRequests(returnedBooks.toArray(Book[]::new));
+        String reminder = model.deleteAllRequests(returnedBooks.toArray(Book[]::new));
 
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, borrower.getName()) + notification);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, borrower.getName()) + reminder);
     }
 
     @Override
