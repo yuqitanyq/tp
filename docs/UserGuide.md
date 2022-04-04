@@ -178,7 +178,7 @@ Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
 
 **Example**
 
-To add a patron with the name `John`, id `A0212828X`, phone number `93231222`, email `e03482@u.nus.edu` and tag `student`, 
+To add a patron with the name `John`, id `A0212828X`, phone number `93231222`, email `e03482@u.nus.edu` and tag `student`,
 you can enter the following command:
 
 `patron add n/John s/A0212828X p/93231222 e/e03482@u.nus.edu t/student`
@@ -187,7 +187,7 @@ Before entering the command, there is no existing patron with the same name, id 
 
 ![patron-add-1](images/patron-add-1.png)
 
-After entering the command, the new patron is added. 
+After entering the command, the new patron is added.
 
 ![patron-add-2](images/patron-add-2.png)
 
@@ -367,7 +367,7 @@ Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 
 * BOOK_NAME must start and end with alphanumeric characters, and can only contain `'` character, `:` character and alphanumeric characters.
 
-* ISBN must be 10 or 13 digits in length, and contain only numbers with at most one `-` character between consecutive numbers. If it is 13 digits long, it must start with 978 or 979. 
+* ISBN must be 10 or 13 digits in length, and contain only numbers with at most one `-` character between consecutive numbers. If it is 13 digits long, it must start with 978 or 979.
 
 * ISBN digits must have valid checksum. Details on calculating checksum can be found in [this section](#6-appendix).
 
@@ -425,7 +425,7 @@ To find books in LibTask based on book name, author or tags, you can enter the `
 
 * `PREFIX` must be either `t` (for find based on tag), `a` (for finding based on author), or `n` (for finding based on book name).
 
-* All books with a tag, or author, or book name that contains the substring `KEYWORD` will be displayed in the book list. 
+* All books with a tag, or author, or book name that contains the substring `KEYWORD` will be displayed in the book list.
 
 </div>
 

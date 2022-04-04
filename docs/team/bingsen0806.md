@@ -37,8 +37,8 @@ LibTask is a desktop application used by librarians to keep track of books, over
   * Initiated multiple zoom sessions to help teammates debug code
 
 * **Project management**:
-  * Ensure that all milestone progress are reached (which includes team-based and individual-based tasks). We managed to achieve 100% of the recommended milestone tasks, including early wrap up for both v1.2 (only achieved by 11% of the cohort) and v1.3. 
-  * Managed releases [v1.2](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases/tag/v1.2) and [v1.3.trial](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases/tag/v1.3.trial) on GitHub 
+  * Ensure that all milestone progress are reached (which includes team-based and individual-based tasks). We managed to achieve 100% of the recommended milestone tasks, including early wrap up for both v1.2 (only achieved by 11% of the cohort) and v1.3.
+  * Managed releases [v1.2](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases/tag/v1.2) and [v1.3.trial](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases/tag/v1.3.trial) on GitHub
   * Maintained the issue tracker and milestones for team repo
 
 * **Community**:
