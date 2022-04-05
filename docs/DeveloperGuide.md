@@ -274,11 +274,11 @@ The request feature is facilitated by `BookCommandParser`, `RequestBookCommandPa
 
 Given below is an example usage scenario and how the request mechanism behaves at each step:
 
-1. The user enters the borrow command and provides the index of the requester patron, and the index of book to be requested.
+1. The user enters the request command and provides the index of the requester patron, and the index of book to be requested.
 2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turns creates a new `RequestBookCommandParser`.
 3. `RequestBookCommandParser` creates a new `RequestBookCommand` based on the processed input.
 4. `LogicManager` executes the `RequestBookCommand`.
-5. `RequestBookCommand` calls `Model#getFilteredPatronList()`` to get the list of displayed patrons, and then gets the requester at the specified index. It then calls `Model#getFilteredBookList()` to get the list of displayed books, and then get the book to be requested at the specified index.
+5. `RequestBookCommand` calls `Model#getFilteredPatronList()` to get the list of displayed patrons, and then gets the requester at the specified index. It then calls `Model#getFilteredBookList()` to get the list of displayed books, and then get the book to be requested at the specified index.
 6. `RequestBookCommand` calls `Model#isBorrowing()` to check that the requester is not currently borrowing a copy of the requested book, to prevent a patron from requesting a book he/she is already borrowing.
 7. `RequestBookCommand` calls `Model#hasAvailableCopy()` to confirm that there are no available copies of the requested book. This is because there is no need for a book request if there is an available copy of the book.
 8. `RequestBookCommand` calls `Model#addRequest()` to add the book request to all book copies with the same isbn as the requested book.
@@ -288,7 +288,7 @@ The following sequence diagram shows how the request command works:
 
 <img src="images/RequestBookCommandSequenceDiagram.png" width="850" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RequestCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RequestBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 The following activity diagram summarizes what happens when a user executes a request command:
@@ -300,6 +300,41 @@ The following activity diagram summarizes what happens when a user executes a re
 Each book request is designed to bind to an isbn instead of a book copy. For example, when a patron requests to be notified when the first book becomes available, LibTask attaches the book request to all books with the same isbn as the first book. This is in-line with our use case, as it is rational to assume that patrons are not particular about which book copy they are requesting for.
 
 Associating a book request with multiple book copies introduces some problems. Initially, when a book becomes available, the same reminder message to the user will be printed multiple times, once per book request per book copy. Nevertheless, this is solved by using a `Set` to store reminder messages so that identical reminder messages will not be added multiple times.
+
+### Related Feature
+
+This feature allows users to list and view all the books borrowed or requested by a patron.
+
+#### Implementation details
+
+The related feature is facilitated by `BookCommandParser`, `RelatedBookCommandParser`, and `RelatedBookCommand`.
+
+Given below is an example usage scenario and how the related mechanism behaves at each step:
+
+1. The user enters the request command and provides the index of the patron to related to.
+2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turns creates a new `RelatedBookCommandParser`.
+3. `RelatedBookCommandParser` creates a new `RelatedBookCommand` based on the processed input.
+4. `RelatedBookCommand` object would be returned to `LogicManager`.
+5. `LogicManager` then executes the `RelatedBookCommand` object.
+6. `RelatedBookCommand` calls `Model#getFilteredPatronList()` to get the list of displayed patrons, and then gets the patron to be related at the specified index.
+7. `RelatedBookCommand` then creates a `BookRelatedToPatronPredicate` object named `predicate` with the patron.
+8. `RelatedBookCommand` calls `Model#updateFilteredBookList()` with the `predicate`, resulting in the book list to be updated to display all the books borrowed and requested by the patron.
+9. Finally, `RelatedBookCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command.
+
+The following sequence diagram shows how the related command works:
+
+<img src="images/RelatedBookCommandSequenceDiagram.png" width="1200" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RelatedBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The following activity diagram summarizes what happens when a user executes a related command:
+
+<img src="images/RelatedBookCommandActivityDiagram.png" width="650" />
+
+#### Design considerations
+
+Each book related command is designed to
 
 ### \[Proposed\] Undo/redo feature
 

@@ -48,7 +48,8 @@ public class RelatedBookCommand extends Command {
         }
 
         Patron patronToRelate = lastShownPatronList.get(patronIndex.getZeroBased());
-        model.updateFilteredBookList(new BookRelatedToPatronPredicate(patronToRelate));
+        BookRelatedToPatronPredicate predicate = new BookRelatedToPatronPredicate(patronToRelate);
+        model.updateFilteredBookList(predicate);
         return new CommandResult(String.format(MESSAGE_RELATED_BOOK_SUCCESS, patronToRelate));
     }
 
