@@ -332,10 +332,6 @@ The following activity diagram summarizes what happens when a user executes a re
 
 <img src="images/RelatedBookCommandActivityDiagram.png" width="650" />
 
-#### Design considerations
-
-Each book related command is designed to
-
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
