@@ -73,7 +73,7 @@ Model --> RelatedBookCommand : patronToRelate
 deactivate Model
 
 create BookRelatedToPatronPredicate
-RelatedBookCommand -> BookRelatedToPatronPredicate : BookRelatedToPatronPredicate(patronToRelate)
+RelatedBookCommand -> BookRelatedToPatronPredicate :
 activate BookRelatedToPatronPredicate
 
 BookRelatedToPatronPredicate --> RelatedBookCommand : predicate
