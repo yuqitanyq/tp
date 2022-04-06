@@ -83,7 +83,7 @@ to doing this tutorial.
    Below are some sample commands you can try running. You may continue adding more books while
    ensuring that the format of your command follows [book add](#331-adding-a-book-book-add).
 
-   **`book add n/Harry Potter i/12398-12398-239 a/J.K.Rowling t/Thriller t/Magic`**: Adds a book titled `Harry Potter` 
+   **`book add n/Harry Potter i/97888-69183-157 a/J.K.Rowling t/Thriller t/Magic`**: Adds a book titled `Harry Potter` 
       into LibTask's book list.
 
    **`book add n/To Kill a Mockingbird i/97804-46310-789 a/Harper Lee t/Thriller t/Suspense`**: Adds a book title 
@@ -95,7 +95,7 @@ to doing this tutorial.
    **`book add n/The Two Towers i/97800-07203-598 a/J. R. R. Tolkein t/Action t/Fantasy t/Adventure t/Drama`**: Adds a 
       book titled `The Two Towers` into LibTask's book list.
 
-   **`book add n/Death on the Nile i/97800-06168-959 a/Agatha Christie t/Mystery t/Drama t/Crime film t/Thriller`**: 
+   **`book add n/Death on the Nile i/97800-06168-959 a/Agatha Christie t/Mystery t/Drama t/Crime t/Thriller`**: 
       Adds a book titled `Death on the Nile` into LibTask's book list.
 
 
