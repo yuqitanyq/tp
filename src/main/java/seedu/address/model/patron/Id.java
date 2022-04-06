@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Id {
 
-    public static final String MESSAGE_CONSTRAINTS = "Ids must be of format AXXXXXXXX, and should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Ids must be of format AXXXXXXXX, and should not be blank. Last "
+            + "character of an ID must be a capital letter.";
 
     public static final String VALIDATION_REGEX = "A[0-9]{7}[A-Z]{1}";
 

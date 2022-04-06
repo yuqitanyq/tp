@@ -569,7 +569,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. The index is valid but no details are provided.
 
   * 1c1. LibTask shows an error message.
-       
+
   Use case resumes from step 1.
 
 ### UC04: Find a patron on LibTask
@@ -620,13 +620,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2b1. LibTask shows an error message.
 
-  Use case resumes from step 1. 
+  Use case resumes from step 1.
 
 * 2c. The patron has a book requested.
 
     * 2c1. LibTask deletes the patron from the list of requesters
-    
-  Use case resumes from step 3. 
+
+  Use case resumes from step 3.
 
 ### UC06: Add book to LibTask
 
@@ -668,15 +668,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. LibTask shows an empty book list.
 
   Use case ends.
-    
+
 ### UC08: Find books on LibTask
 
 **MSS**
-1. User requests to find books and provides either a tag, author or title.  
+1. User requests to find books and provides either a tag, author or title.
 
-2. LibTask shows the books that match the search. 
+2. LibTask shows the books that match the search.
 
-    Use case ends. 
+    Use case ends.
 
 **Extension**
 
@@ -684,15 +684,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   * 1a1. LibTask shows an error message.
 
-  Use case resumes from step 1. 
+  Use case resumes from step 1.
 
 * 1b. No books match the given query.
 
   * 1b1. LibTask shows an empty list.
 
-  Use case ends. 
+  Use case ends.
 
-* 1c. More than search parameter was provided. 
+* 1c. More than search parameter was provided.
 
   * 1c1. Lib Task shows an error message.
 
@@ -721,9 +721,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. LibTask shows an error message.
 
    Use case resumes from step 1.
-  
+
 * 1c. The index is valid but no new details are entered.
-    
+
     * 1c1. LibTask shows an error message saying that at least ISBN, author or category must be provided.
 
   Use case resumes from step 1.
@@ -749,8 +749,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. The book is being borrowed.
 
   * 1b1. LibTask shows an error message.
-   
-   Use case resumes from step 1. 
+
+   Use case resumes from step 1.
 
 ### UC11: Borrow Book
 
@@ -840,7 +840,7 @@ Use case ends.
 
 **MSS**
 
-1. User requests to clear all patrons and books. 
+1. User requests to clear all patrons and books.
 
 2. LibTask clears the all patrons and books.
 
@@ -859,7 +859,7 @@ Extension
 
 * 1a. No previous command
 
-    * 1a1. LibTask shows an empty CommandBox. 
+    * 1a1. LibTask shows an empty CommandBox.
 
   Use case ends.
 
@@ -1063,6 +1063,56 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `patron overdue`<br>
       Expected: Patron list contains borrowers of all books borrowed with return dates before the present date.
+
+### Listing all books related to a patron
+1. Listing all books related to a patron while all books are being shown and a book has been borrowed by a patron
+
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list. Ensure that the first book
+   is borrowed by the first person.
+
+   2. Test case: `book related 1`<br>
+      Expected: Only first book is shown in the book list.
+
+   3. Test case: `book related 0`<br>
+      Expected: Book list remains unchanged. Error details shown in the status message.
+
+   4. Other incorrect book related commands to try: `book related`, `book related x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
+
+2. Listing all books related to a patron while all books are being shown and multiple books have been borrowed by a patron.
+
+    1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first,
+   second and third book are borrowed by the first patron.
+
+    2. Test case: `book related 1`<br>
+       Expected: The first, second and third book are shown in the book list.
+
+3. Listing all books related to a patron while all books are being shown and a book has been requested by a patron.
+
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list. Ensure that the first
+   book is borrowed by the first patron and requested by the second patron.
+
+   2. Test case: `book related 2`<br>
+      Expected: Only first book is shown in the book list.
+
+4. Listing all books related to a patron while all books are being shown and multiple books have been requested
+by a patron.
+
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first,
+   second, and third book is borrowed by the first patron and requested by the second patron.
+
+   2. Test case: `book related 2`<br>
+      Expected: The first, second and third book are shown in the book list.
+
+5. Listing all books related to a patron while all books are being shown and multiple books have been requested
+and borrowed by a patron.
+
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first
+   and second book are borrowed by the first patron and requested by the second patron. Ensure that the third book is
+   borrowed by the second patron.
+
+   3. Test case: `book related 2`<br>
+      Expected: The first, second and third book are shown in the book list. 
 
 ### Saving data
 
