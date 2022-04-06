@@ -69,69 +69,75 @@ The various GUI components of LibTask are described in the picture below:
 
 1. Remove existing sample data from LibTask's patron and book lists by entering the `clear` command in the Command Box.
 
+<div markdown="block" class="alert alert-info">
+
+**Warning:**<br>
+
+Do not clear LibTask's pre-existing data if you wish to test its commands. You are recommended to finish testing prior 
+to doing this tutorial.
+
+</div>
 
 2. Add some books into LibTask's book list using the `book add` command.
 
-   Below are some sample commands you can try running. You may continue adding more books of your choice while
+   Below are some sample commands you can try running. You may continue adding more books while
    ensuring that the format of your command follows [book add](#331-adding-a-book-book-add).
 
-   **`book add n/Harry Potter i/12398-12398-239 a/J.K.Rowling t/Thriller t/Magic`**: Adds a book titled `Harry Potter`
+   **`book add n/Harry Potter i/12398-12398-239 a/J.K.Rowling t/Thriller t/Magic`**: Adds a book titled `Harry Potter` 
       into LibTask's book list.
 
    **`book add n/To Kill a Mockingbird i/97804-46310-789 a/Harper Lee t/Thriller t/Suspense`**: Adds a book title 
-      `To Kill a Mockingbird`into LibTask's book list.
+      `To Kill a Mockingbird` into LibTask's book list.
 
    **`book add n/The Da Vinci Code i/97803-85513-227 a/Dan Brown t/Thriller t/Mystery t/Crime`**: Adds a book titled 
-     `The Da Vinci Code`into LibTask's book list.
+     `The Da Vinci Code` into LibTask's book list.
 
    **`book add n/The Two Towers i/97800-07203-598 a/J. R. R. Tolkein t/Action t/Fantasy t/Adventure t/Drama`**: Adds a 
-      book titled `The Two Towers`into LibTask's book list.
+      book titled `The Two Towers` into LibTask's book list.
 
    **`book add n/Death on the Nile i/97800-06168-959 a/Agatha Christie t/Mystery t/Drama t/Crime film t/Thriller`**: 
-      Adds a book titled `Death on the Nile`into LibTask's book list.
-
+      Adds a book titled `Death on the Nile` into LibTask's book list.
 
 
 3. Add some patrons into LibTask's patron list using the `patron add` command.
 
-   Below are some sample commands you can try running. You may continue adding more patrons of your choice while
+   Below are some sample commands you can try running. You may continue adding more patrons while
    ensuring that the format of your command follows [patron add](#321-adding-a-patron-patron-add).
 
-   **`patron add n/Alice s/A0123456H p/90123212 e/profA@u.nus.edu t/professor`** : Adds a patron named `Alice` into 
+   **`patron add n/Alice s/A0123456H p/90123212 e/profA@u.nus.edu t/professor`**: Adds a patron named `Alice` into 
       LibTask's patron list.
 
-   **`patron add n/Bob Miller s/A4468931X p/92940284 e/bobmiller@u.nus.edu t/student`** : Adds a patron named 
+   **`patron add n/Bob Miller s/A4468931X p/92940284 e/bobmiller@u.nus.edu t/student`**: Adds a patron named 
      `Bob Miller` into LibTask's patron list.
 
-   **`patron add n/Harper Lee s/A0988773M p/91437496 e/harperlee@u.nus.edu `** : Adds a patron named `Harper Lee` into 
+   **`patron add n/Harper Lee s/A0988773M p/91437496 e/harperlee@u.nus.edu`**: Adds a patron named `Harper Lee` into 
       LibTask's patron list.
 
-   **`patron add n/Jessica s/A6666789G p/90194628 e/jessica@u.nus.edu t/student`** : Adds a patron named `Jessica` into 
+   **`patron add n/Jessica s/A6666789G p/90194628 e/jessica@u.nus.edu t/student`**: Adds a patron named `Jessica` into 
       LibTask's patron list.
 
-   **`patron add n/Christian Grey s/A0123345L p/91214567 e/christian@u.nus.edu `** : Adds a patron named `Christian Grey` 
+   **`patron add n/Christian Grey s/A0123345L p/91214567 e/christian@u.nus.edu`**: Adds a patron named `Christian Grey` 
       into LibTask's patron list.
-
 
 #### Step 2: Borrow some books
 
-Harper Lee wishes to borrow Death on the Nile. Here are two ways you can create a book loan for her:
+Harper Lee wishes to borrow Death on the Nile. You may create a book loan for her in one of the two following ways:
 
 Method A:
 1. Scroll through the patron list to find the index at which `Harper Lee` is stored in LibTask. Let's say this index 
    number is 3.
 2. Scroll through the book list to find the index at which `Death on the Nile` is stored in LibTask. Let's say this 
    index number is 5.
-3. Enter command `borrow 3 5 06-Dec-2022` in the Command Box. `Harper Lee` has now borrowed `Death on the Nile` with a 
-   return date of 6th December 2022. You can confirm this by viewing the book's status in the book list.  
+3. Enter command `borrow 3 5 25-Apr-2022` in the Command box. `Harper Lee` has now borrowed `Death on the Nile` with a 
+   return date of 25th April 2022. You can confirm this by viewing the book's status in the book list.  
 
 Method B:
-1. Enter `patron find harper lee` in the Command Box. Running this command will display `Harper Lee` first in the patron
+1. Enter `patron find harper lee` in the Command box. Running this command will display `Harper Lee` first in the patron
    list. Learn more about the format of the `patron find` command [here](#324-finding-patrons-patron-find).
-2. Enter `book find n/death on the nile` in the Command Box. Running this command will display `Death on the Nile` first
+2. Enter `book find n/death on the nile` in the Command box. Running this command will display `Death on the Nile` first
    in the book list. Learn more about the format of the `book find` command [here](#333-finding-books--book-find).
-3. Enter command `borrow 1 1 06-Dec-2022` in the Command Box. `Harper Lee` has now borrowed `Death on the Nile` with a 
-   return date of 6th December 2022. You can confirm this by viewing the book's status in the book list.
+3. Enter command `borrow 1 1 25-Apr-2022` in the Command box. `Harper Lee` has now borrowed `Death on the Nile` with a 
+   return date of 25th April 2022. You can confirm this by viewing the book's status in the book list.
 
 <div markdown="block" class="alert alert-info">
 
@@ -158,30 +164,24 @@ Method A:
    confirm this by viewing the book's status in the book list.
 
 Method B:
-1. Enter `patron find christian grey` in the Command Box. Running this command will display `Christian Grey` first in 
+1. Enter `patron find christian grey` in the Command box. Running this command will display `Christian Grey` first in 
    the patron list. Learn more about the format of the `patron find` command [here](#324-finding-patrons-patron-find).
-2. Enter `book find n/death on the nile` in the Command Box. Running this command will display `Death on the Nile` first
+2. Enter `book find n/death on the nile` in the Command box. Running this command will display `Death on the Nile` first
    in the book list. Learn more about the format of the `book find` command [here](#333-finding-books--book-find).
-3. Enter command `request 5 5` in the Command Box. `Christian Grey` has now requested for `Death on the Nile`. You can
+3. Enter command `request 1 1` in the Command box. `Christian Grey` has now requested for `Death on the Nile`. You can
    confirm this by viewing the book's status in the book list.
 
-Subsequently, when Harper Lee returns Death on the Nile, you may either:
-1. Find Harper Lee in patron list by entering `patron find harper lee` (which would result in `Harper Lee` being 
-   displayed first in patron list) followed by `return p/1` (which would result in all of Harper Lee's 
-   borrowed books being returned).
-2. Find Death on the Nile in book list by entering `book find n/death on the nile` (which would result in `Death on the
-   Nile` being displayed first in book list) followed by `return b/1` (which would result in Death on the Nile being 
-   returned).
-
-Either method would result in Death on the Nile being returned and the Result Box prompting you to notify Christian Grey
-that the book is now available. 
+Subsequently, when Harper Lee returns Death on the Nile, find the book by entering `book find n/death on the nile` 
+(which would result in it being displayed first) followed by `return b/1` (more about the `return` command 
+[here](#337-returning-a-book--return)). `Death on the Nile` is hence returned and the Result box would prompt you to 
+notify Christian Grey that the book is now available. 
 
 <div markdown="block" class="alert alert-info">
 
 **Notes:**<br>
 
-* Up to 3 patrons may request for Death on the Nile and the Result Box would prompt you to notify all of them once the 
-  book is returned.
+* Multiple patrons may request for `Death on the Nile` in which case, Result box would prompt you to notify all of them 
+  once the book is returned.
 
 * Learn more about the `request` command [here](#338-requesting-a-book--book-request).
 
