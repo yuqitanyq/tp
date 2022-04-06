@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-LibTask is a **desktop application for librarians to manage book loans and requests by patrons. It is specially made to improve the overall efficiency of librarians when processing book loans and requests, helping them to complete their daily tasks quickly. LibTask is optimized for use via a [Command Line Interface (CLI)](#7-glossary)** while still having the benefits of a [Graphical User Interface (GUI)](#7-glossary) so that librarians who prefer typing can get their tasks done faster than traditional GUI apps.
+LibTask is a desktop application for librarians to manage book loans and requests by patrons. It is specially made to improve the overall efficiency of librarians when processing book loans and requests, helping them to complete their daily tasks quickly. LibTask is optimized for use via a [Command Line Interface (CLI)](#7-glossary) while still having the benefits of a [Graphical User Interface (GUI)](#7-glossary) so that librarians who prefer typing can get their tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -20,13 +20,14 @@ The purpose of this guide is to explain to you how to use **LibTask** and to all
 
 Take note of following symbols that are used in this document:
 
-* :information_source:: This symbol is used to highlight extra knowledge.
-
-* :exclamation:: This symbol is used to warn users of potential actions that might corrupt the LibTask's data file.
+| Icon                 | Explanation                                                                                    |
+|----------------------|------------------------------------------------------------------------------------------------|
+| :information_source: | This symbol is used to highlight extra knowledge.                                              |
+| :exclamation:        | This symbol is used to warn users of potential actions that might corrupt LibTask's data file. |
 
 ### 1.3. Navigating the User Guide
 
-For help with installing LibTask and understanding our interface, you can refer to head to our [Quick start](#2-quick-start) section.
+For help with installing LibTask and understanding our interface, you can head over to our [Quick start](#2-quick-start) section.
 
 For the full documentation of each feature, you can refer to our [Features](#3-features) section.
 
@@ -34,7 +35,7 @@ For a list of frequently asked questions about LibTask, you can refer to our [FA
 
 If you are an advanced user, you can refer to our [Command summary](#5-command-summary) section.
 
-For the list of definition of the vocabulary words used in this document can be found in our [Glossary](#7-glossary) section.
+For the glossary of content, you can refer to our [Glossary](#7-glossary) section.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -282,7 +283,7 @@ Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
 
 **Example**
 
-To add a patron with the name `John`, id `A0212828X`, phone number `93231222`, email `e03482@u.nus.edu` and tag `student`, 
+To add a patron with the name `John`, id `A0212828X`, phone number `93231222`, email `e03482@u.nus.edu` and tag `student`,
 you can enter the following command:
 
 `patron add n/John s/A0212828X p/93231222 e/e03482@u.nus.edu t/student`
@@ -291,7 +292,7 @@ Before entering the command, there is no existing patron with the same name, id 
 
 ![patron-add-1](images/patron-add-1.png)
 
-After entering the command, the new patron is added. 
+After entering the command, the new patron is added.
 
 ![patron-add-2](images/patron-add-2.png)
 
@@ -471,7 +472,7 @@ Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 
 * BOOK_NAME must start and end with alphanumeric characters, and can only contain `'` character, `:` character and alphanumeric characters.
 
-* ISBN must be 10 or 13 digits in length, and contain only numbers with at most one `-` character between consecutive numbers. If it is 13 digits long, it must start with 978 or 979. 
+* ISBN must be 10 or 13 digits in length, and contain only numbers with at most one `-` character between consecutive numbers. If it is 13 digits long, it must start with 978 or 979.
 
 * ISBN digits must have valid checksum. Details on calculating checksum can be found in [this section](#6-appendix).
 
@@ -529,7 +530,7 @@ To find books in LibTask based on book name, author or tags, you can enter the `
 
 * `PREFIX` must be either `t` (for find based on tag), `a` (for finding based on author), or `n` (for finding based on book name).
 
-* All books with a tag, or author, or book name that contains the substring `KEYWORD` will be displayed in the book list. 
+* All books with a tag, or author, or book name that contains the substring `KEYWORD` will be displayed in the book list.
 
 </div>
 
@@ -800,19 +801,25 @@ If your changes to the data file makes its format invalid, LibTask will discard 
 ## **4. FAQ**
 
 **Q1**: What happens if there is no response after attempting to enter a command?<br>
-**A**: Please double-check if the format of the command is written correctly. If the issue persists, please close the application and restart it again.
+**A**: Please double-check if the format of the command is written correctly. If the issue persists, please close the
+application and restart it again.
 
 **Q2**: I tried to edit a book's details, but there seems to be an error message being shown. Why is that so?<br>
-**A**: Please do ensure that if the book name is not provided, at least one of the optional fields Isbn, Author and Category tag is provided.
+**A**: Please do ensure that if the book name is not provided, at least one of the optional fields Isbn, Author and
+Category tag is provided.
 
 **Q3**: Is there any other way to exit the application without typing?<br>
-**A**: Yes, there is another way to exit the program, and that is by clicking the File button on the top left-hand corner of the app. There is an exit button in the dropdown list which appear after clicking the File button.
+**A**: Yes, there is another way to exit the program, and that is by clicking the File button on the top left-hand
+corner of the app. There is an exit button in the dropdown list which appear after clicking the File button.
 
-**Q4**: Will the data of the books be saved if the program was not closed via the `exit` command or via the method shown in Q3?<br>
-**A**: Yes the data will still be saved. However, to ensure a better user experience, we recommend using the exit command as described in the user guide.
+**Q4**: Will the data of the books be saved if the program was not closed via the `exit` command or via the
+method shown in Q3?<br>
+**A**: Yes the data will still be saved. However, to ensure a better user experience, we recommend using the exit
+command as described in the user guide.
 
 **Q5**: Is there a shortcut on using the various commands?<br>
-**A**: Unfortunately, no there is no shortcut. In order to execute the various commands, please enter the commands in the correct format and with valid inputs.
+**A**: Unfortunately, no there is no shortcut. In order to execute the various commands, please enter the commands
+in the correct format and with valid inputs.
 
 **Q6**: I entered the `book list` command but nothing has changed. Is this expected?<br>
 **A**: Yes, it is expected, as all the books have probably been already listed.
@@ -821,7 +828,14 @@ If your changes to the data file makes its format invalid, LibTask will discard 
 **A**: Yes, there is a summary of commands available, and they can be found in the section below.
 
 **Q8**: Why are there two separate lists for books and patrons instead of one combined list?<br>
-**A**: This is done so that the user can see the two lists side by side and have a clearer picture of the various patrons and books in the database.
+**A**: This is done so that the user can see the two lists side by side and have a clearer picture of the various
+patrons and books in the database.
+
+**Q9**: Why are the "requested by" tags removed from the books after a patron has returned that particular book?<br>
+**A**: Once a book has been returned and that book has been requested, a list of alerts will be shown to the librarian
+to remind the patrons that have requested the book. The purpose of the automatic deletion of the "requested by" tag is
+a feature that is meant to provide convenience for the user and make them more productive because they would not need
+to manually input additional commands to delete the "requested by" tags.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **5. Command summary**
@@ -834,7 +848,6 @@ If your changes to the data file makes its format invalid, LibTask will discard 
 | **Clear all entries**                      | `clear`                                                                    |
 | **Exit the program**                       | `exit`                                                                     |
 | **Show previous commands**                 | `u`                                                                        |
-| **Navigating the different patrons/books** | **Pressing the :arrow_up: and :arrow_down: arrows on keyboard :keyboard:** |
 
 ### 5.2. Patron Commands
 
@@ -901,7 +914,10 @@ Since 100 is a multiple of 10, the above 13-digit ISBN has a valid checksum.
 
 ## **7. Glossary**
 
-| Term                           | Explanation                                                                                     |
-|--------------------------------|-------------------------------------------------------------------------------------------------|
-| Command-line Interface (CLI)   | An interface which involves the users typing text and executing it as commands.                 |
-| Graphical User Interface (GUI) | An interface which involves the users clicking buttons and selecting options from the menu bar. |
+| Term                                      | Explanation                                                                                     |
+|-------------------------------------------|-------------------------------------------------------------------------------------------------|
+| Command-line Interface (CLI)              | An interface which involves the users typing text and executing it as commands.                 |
+| Graphical User Interface (GUI)            | An interface which involves the users clicking buttons and selecting options from the menu bar. |
+| Java                                      | A programming language which was used to built LibTask.                                         |
+| International Standard Book Number (ISBN) | An international standard identification number for identifying books.                          |
+| Patron                                    | Visitor of the library.                                                                         |
