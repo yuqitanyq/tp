@@ -301,6 +301,22 @@ Each book request is designed to bind to an isbn instead of a book copy. For exa
 
 Associating a book request with multiple book copies introduces some problems. Initially, when a book becomes available, the same reminder message to the user will be printed multiple times, once per book request per book copy. Nevertheless, this is solved by using a `Set` to store reminder messages so that identical reminder messages will not be added multiple times.
 
+
+### Book Find feature
+
+This feature allows users to search for any books with either the isbn, title or author's name
+
+### Implementation
+The Book find feature is facilitated by the `BookCommandParser`, `FindBookParser` and `FindBookCommand`. 
+
+Given below is an example usage scenario and how the request mechanism behaves at each step:
+
+1. The user enters a book find command and provides the parameter for the search query.
+2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turns creates a new `FindBookParser`.
+3. `FindBookParser` creates a new `FindBookCommand` based on the parsed input.
+4. `FindBookCommand` calls 
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -1025,7 +1041,28 @@ and borrowed by a patron.
    3. Test case: `book related 2`<br>
       Expected: The first, second and third book are shown in the book list. 
 
+### Searching for a book based on tags, author, title
+1. Searching for a book based on title. 
 
+   1. Prerequisites: List all books using the `book list` command. Ensure that the first book is titled "Harry Potter and the Philosopher's Stone".
+
+   2. Test case: `book find n/Harry Potter and the Philospher's Stone`
+      Expected: The first book is shown in the book list
+
+2. Searching for a book based on tags.
+
+   1. Prerequisites: List all books using the `book list` command. Ensure that the first, second and fifth books have the tag "Adventure".
+   
+   2. Test case: `book find t/Adventure`
+      Expected: The first, second and fifth books are shown in the book list. 
+
+3. Searching for a book based on author.
+    
+    1. Prerequisites: List all books using the `book list` command. Ensure that the second book has an author "Suzanne Collins".
+
+    2. Test case: `book find a/Suzanne Collins`
+       Expected: The second book is shown in the book list. 
+  
 ### Saving data
 
 1. Dealing with missing/corrupted data files
