@@ -27,6 +27,30 @@ LibTask is a desktop application used by librarians to keep track of books, over
   * Return command - A feature to return borrowed books. This feature also allows the librarian to return all books by a patron in just one command.
   * Request book command - A feature for librarians to keep track of book requests by patrons. Whenever a requested book is added or returned, the librarian will receive a reminder message to notify the requesters.
 
+#### Team-based tasks contributions
+
+* Created team organization and setup team repo, CodeCov, GitHub actions and workflow.
+
+* Set target and deadlines for milestone v1.2, v1.2b, v1.3, v1.3b, v1.4 and v1.4b. Noticeably led team discussions and provided the team with a direction on features to be prioritized and features to be cut down. Also managed team milestone release.
+
+* Accepted, rejected and assigned 50 bug reports to team members during Practical Exam Dry Run and decided on bugs to be prioritized.
+
+* Contributed to more than 100 PR review comments as shown over [this dashboard](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html).
+
+* Initiated multiple zoom sessions to help teammates debug code
+
+#### Project management
+
+* Ensure that all milestone progress are reached (which includes team-based and individual-based tasks). We managed to achieve 100% of the recommended milestone tasks, including early wrap up for both v1.2 (only achieved by 11% of the cohort) and v1.3.
+
+* Managed releases [v1.2](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases/tag/v1.2), [v1.3.trial](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases/tag/v1.3.trial) and [v.1.3](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases/tag/v1.3) on GitHub.
+
+#### Community
+
+* Authored multiple helpful forum posts to help peers. For example, [this post on how to resolve GitHub action issues](https://github.com/nus-cs2103-AY2122S2/forum/issues/115)
+
+* Reported significant number of bugs (top 10% of cohort) in other team's software product, thus helping the other team to improve their product. Bugs reported can be found [here](https://github.com/bingsen0806/ped/issues)
+
 #### User Guide contribution
 
 Given below are sections I contributed to the User Guide. They showcase my ability to write technical documentation targeting end users.
@@ -78,32 +102,4 @@ Given below are sections I contributed to the Developer Guide. They showcase my 
 
 * Manual Testing Section:
   * Added manual testing instructions for delete book, borrow book, return book, and request book commands.
-
-#### Team-based tasks contributions
-
-  * Created team organization and setup CI/CD and workflow.
-
-  * Setup team repo, CodeCov, GitHub actions.
-
-  * Set target and deadlines for milestone v1.2, v1.2b, v1.3, v1.3b, v1.4 and v1.4b. Noticeably led team discussions and provided the team with a direction on features to be prioritized and features to be cut down.
-
-  * Accepted, rejected and assigned 50 bug reports to team members during Practical Exam Dry Run and decided on bugs to be prioritized.
-
-  * Contributed to more than 100 PR review comments as shown over [this dashboard](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html).
-
-  * Initiated multiple zoom sessions to help teammates debug code
-
-#### Project management
-
-  * Ensure that all milestone progress are reached (which includes team-based and individual-based tasks). We managed to achieve 100% of the recommended milestone tasks, including early wrap up for both v1.2 (only achieved by 11% of the cohort) and v1.3.
-
-  * Managed releases [v1.2](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases/tag/v1.2) and [v1.3.trial](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases/tag/v1.3.trial) on GitHub
-
-  * Maintained the issue tracker and milestones for team repo
-
-#### Community
-
-  * Authored multiple helpful forum posts to help peers. For example, [this post on how to resolve GitHub action issues](https://github.com/nus-cs2103-AY2122S2/forum/issues/115)
-
-  * Reported significant number of bugs (top 10% of cohort) in other team's software product, thus helping the other team to improve their product. Bugs reported can be found [here](https://github.com/bingsen0806/ped/issues)
 
