@@ -1,0 +1,100 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":LibTaskParser" as LibTaskParser LOGIC_COLOR
+participant ":BookCommandParser" as BookCommandParser LOGIC_COLOR
+participant ":RelatedBookCommandParser" as RelatedBookCommandParser LOGIC_COLOR
+participant "r:RelatedBookCommand" as RelatedBookCommand LOGIC_COLOR
+participant "predicate:BookRelatedToPatronPredicate" as BookRelatedToPatronPredicate LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("book \nrelated 1")
+activate LogicManager
+
+LogicManager -> LibTaskParser : parseCommand("book \nrelated 1")
+activate LibTaskParser
+
+create BookCommandParser
+LibTaskParser -> BookCommandParser
+activate BookCommandParser
+
+BookCommandParser --> LibTaskParser
+deactivate BookCommandParser
+
+LibTaskParser -> BookCommandParser : parse("related 1")
+activate BookCommandParser
+
+create RelatedBookCommandParser
+BookCommandParser -> RelatedBookCommandParser
+activate RelatedBookCommandParser
+
+RelatedBookCommandParser --> BookCommandParser
+deactivate RelatedBookCommandParser
+
+BookCommandParser -> RelatedBookCommandParser : parse("1")
+activate RelatedBookCommandParser
+
+create RelatedBookCommand
+RelatedBookCommandParser -> RelatedBookCommand
+activate RelatedBookCommand
+
+RelatedBookCommand --> RelatedBookCommandParser : r
+deactivate RelatedBookCommand
+
+RelatedBookCommandParser --> BookCommandParser : r
+deactivate RelatedBookCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+RelatedBookCommandParser -[hidden]-> LibTaskParser
+destroy RelatedBookCommandParser
+
+BookCommandParser --> LibTaskParser : r
+deactivate BookCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+BookCommandParser -[hidden]-> LibTaskParser
+destroy BookCommandParser
+
+LibTaskParser --> LogicManager : r
+deactivate LibTaskParser
+
+LogicManager -> RelatedBookCommand : execute()
+activate RelatedBookCommand
+
+RelatedBookCommand -> Model : getFilteredPatronList()\n.getIndex(patronIndex)
+activate Model
+
+Model --> RelatedBookCommand : patronToRelate
+deactivate Model
+
+create BookRelatedToPatronPredicate
+RelatedBookCommand -> BookRelatedToPatronPredicate :
+activate BookRelatedToPatronPredicate
+
+BookRelatedToPatronPredicate --> RelatedBookCommand : predicate
+deactivate BookRelatedToPatronPredicate
+
+RelatedBookCommand -> Model : updateFilteredBookList(predicate)
+activate Model
+
+Model --> RelatedBookCommand
+deactivate Model
+
+create CommandResult
+RelatedBookCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> RelatedBookCommand
+deactivate CommandResult
+
+RelatedBookCommand --> LogicManager : result
+deactivate RelatedBookCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

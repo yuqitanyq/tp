@@ -3,13 +3,14 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -77,7 +78,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Patron` and `Book` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Patron` and `Book` objects residing in the `Model`.
 
 ### Logic component
 
@@ -264,6 +265,57 @@ The return command is designed to be to return multiple books in one command, wh
 
 Despite having similar functionalities, the return commands are split into `ReturnOneBookCommand` and `ReturnAllBooksCommand` because they depend on different methods in `Model`, and have structurally similar but logically different execution. As per the _Single Responsibility Principle_, the return commands are separated into different classes so that each class is responsible for the logical implementation of only one subcommand.
 
+### Overdue Patron List Feature
+
+This feature allows users to view a list of patrons with overdue books.
+
+#### Implementation details
+
+The overdue patron feature is facilitated by `PatronCommandParser` and `OverduePatronCommand`. `OverduePatronCommand` is
+the concrete `Command` class responsible for returning a filtered list of patrons with overdue books from LibTask's main
+patron list. The class does this by checking if each patron has overdue books, a functionality exposed in the Model 
+interface as `Model#hasOverdueBooks()`.
+
+Given below is an example usage scenario and how the overdue mechanism behaves at each step:
+
+1. The user enters the overdue command.
+2. `LibTaskParser` creates a new `PatronCommandParser` after preliminary processing the first argument of user input as 
+   `patron`.
+3. `PatronCommandParser` creates a new `OverduePatronCommand` after processing the second argument of user input as 
+   `overdue`.
+4. `LogicManager` executes the `OverduePatronCommand`.
+5. `OverduePatronCommand` calls `Model#updateFilteredPatronList()` to get a filtered list of patrons with overdue books 
+   by passing in `Model#hasOverdueBooks()` as predicate argument.
+6. Finally, `OverduePatronCommand` creates a `CommandResult` with the message and returns it to `LogicManager` to 
+   complete the command.
+
+The following sequence diagram shows how the overdue command works:
+
+<img src="images/OverduePatronCommandSequenceDiagram.png" width="800" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PatronCommandParser` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The following activity diagram summarizes what happens when a user executes an overdue command:
+
+<img src="images/OverduePatronCommandActivityDiagram.png" width="300" />
+
+#### Design considerations
+
+Unlike some other patron and book features, `patron overdue` designed to be a stand-alone command (i.e. does not need to
+be used in conjunction with any other command) and requires no parameters. This is because iterating through LibTask
+patrons and filtering them based on their borrowed book statuses does not require pre-processing by any
+other command or additional information.
+
+LibTask can store a large number of books and patrons, making it infeasible for the user to scroll through the book list
+to identify patrons with books borrowed beyond their return dates. The design of the overdue command hence enhances 
+LibTask's usability, as librarians can experience more efficient processing of overdue books.
+
+`patron overdue` is designed to not affect the displayed book list while interacting with LibTask's patron list (for 
+example by displaying all overdue books in the displayed book list). However, executing the `book related` command in 
+succession to the overdue command gives users a more detailed view the patron's overdue books.
+
 ### Request Feature
 
 This feature allows users to keep track of books that are requested by patrons, and allow users to be automatically reminded to notify requesters when the books of interest become available.
@@ -274,11 +326,11 @@ The request feature is facilitated by `BookCommandParser`, `RequestBookCommandPa
 
 Given below is an example usage scenario and how the request mechanism behaves at each step:
 
-1. The user enters the borrow command and provides the index of the requester patron, and the index of book to be requested.
+1. The user enters the request command and provides the index of the requester patron, and the index of book to be requested.
 2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turns creates a new `RequestBookCommandParser`.
 3. `RequestBookCommandParser` creates a new `RequestBookCommand` based on the processed input.
 4. `LogicManager` executes the `RequestBookCommand`.
-5. `RequestBookCommand` calls `Model#getFilteredPatronList()`` to get the list of displayed patrons, and then gets the requester at the specified index. It then calls `Model#getFilteredBookList()` to get the list of displayed books, and then get the book to be requested at the specified index.
+5. `RequestBookCommand` calls `Model#getFilteredPatronList()` to get the list of displayed patrons, and then gets the requester at the specified index. It then calls `Model#getFilteredBookList()` to get the list of displayed books, and then get the book to be requested at the specified index.
 6. `RequestBookCommand` calls `Model#isBorrowing()` to check that the requester is not currently borrowing a copy of the requested book, to prevent a patron from requesting a book he/she is already borrowing.
 7. `RequestBookCommand` calls `Model#hasAvailableCopy()` to confirm that there are no available copies of the requested book. This is because there is no need for a book request if there is an available copy of the book.
 8. `RequestBookCommand` calls `Model#addRequest()` to add the book request to all book copies with the same isbn as the requested book.
@@ -288,7 +340,7 @@ The following sequence diagram shows how the request command works:
 
 <img src="images/RequestBookCommandSequenceDiagram.png" width="850" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RequestCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RequestBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 The following activity diagram summarizes what happens when a user executes a request command:
@@ -300,6 +352,76 @@ The following activity diagram summarizes what happens when a user executes a re
 Each book request is designed to bind to an isbn instead of a book copy. For example, when a patron requests to be notified when the first book becomes available, LibTask attaches the book request to all books with the same isbn as the first book. This is in-line with our use case, as it is rational to assume that patrons are not particular about which book copy they are requesting for.
 
 Associating a book request with multiple book copies introduces some problems. Initially, when a book becomes available, the same reminder message to the user will be printed multiple times, once per book request per book copy. Nevertheless, this is solved by using a `Set` to store reminder messages so that identical reminder messages will not be added multiple times.
+
+### Book Related Feature
+
+This feature allows users to list and view all the books borrowed or requested by a patron.
+
+#### Implementation details
+
+The related feature is facilitated by `BookCommandParser`, `RelatedBookCommandParser`, and `RelatedBookCommand`.
+
+Given below is an example usage scenario and how the related mechanism behaves at each step:
+
+1. The user enters the related command and provides the index of the patron to relate to.
+2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turn creates a new `RelatedBookCommandParser`.
+3. `RelatedBookCommandParser` creates a new `RelatedBookCommand` based on the processed input.
+4. `RelatedBookCommand` object would be returned to `LogicManager`.
+5. `LogicManager` then executes the `RelatedBookCommand` object.
+6. `RelatedBookCommand` calls `Model#getFilteredPatronList()` to get the list of displayed patrons, and then gets the patron at that specified index.
+7. `RelatedBookCommand` then creates a `BookRelatedToPatronPredicate` object named `predicate` with the patron.
+8. `RelatedBookCommand` calls `Model#updateFilteredBookList()` with the `predicate`, resulting in the book list to be updated to display all the books borrowed and requested by the patron.
+9. Finally, `RelatedBookCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command.
+
+The following sequence diagram shows how the related command works:
+
+<img src="images/RelatedBookCommandSequenceDiagram.png" width="1200" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RelatedBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The following activity diagram summarizes what happens when a user executes a related command:
+
+<img src="images/RelatedBookCommandActivityDiagram.png" width="650" />
+
+#### Design considerations
+
+LibTask can store a large number of books and patrons, making it infeasible for the user to scroll through the book list to identify the books borrowed or requested by a patron. The design of the related command hence enhances LibTask's usability, as librarians can be more efficient in identifying the books related to the patron.
+
+### Book Find feature
+
+This feature allows users to search for any books with either the tag, title or author's name. 
+
+#### Implementation
+The Book find feature is facilitated by the `BookCommandParser`, `FindBookParser` and `FindBookCommand`. 
+
+Given below is an example usage scenario and how the request mechanism behaves at each step:
+
+1. The user enters a book find command and provides the parameter for the search query.
+2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turns creates a new `FindBookParser`.
+3. `FindBookParser` creates either a `BookAuthorContainsKeywordsPredicate` or `BookNameContainsKeywordsPredicate` or `BookTagContainsKeywordsPredicate` object `predicate` with the search query.
+4. `FindBookParser` creates a new `FindBookCommand` based on the processed input and passes the `predicate` on.
+5. `LogicManager` then executes the `FindBookCommand`. 
+6. `FindBookCommand` calls `Model#updateFilteredBookList()` with the `predicate`, resulting in the book list to be updated to display all the books that match the given search query.
+7. Finally, the `FindBookCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command. 
+
+The following sequence diagram shows how the request command works:
+
+<img src="images/FindBookCommandSequenceDiagram.png" width="850" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `FindBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The following activity diagram summarizes what happens when a user executes a request command:
+
+<img src="images/FindBookCommandActivityDiagram.png" width="650" />
+
+
+#### Design considerations
+
+Each find query can only be one of either the tag, author or title. The feature is designed to display all books that match the predicate created and display them. We chose not to include the isbn as a user searchable query as it is likely that most users would remember the title of the book or the author's name rather than the isbn.
+To account for cases where there might be multiple editions of the same book, the book find will return partial matches. This increases usability as the librarian can find all books that match the title even if it is the first edition or the fifth.
+The feature is also designed to make other features like `borrow` and `request` easier. LibTask can store a large amount of books and users cannot be expected to scroll through them just to find the index of the book they are looking for. `book find` aims to reduce the time spent searching by providing a simple way to search for your book in multiple ways.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -394,15 +516,19 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Product scope
 
+LibTask aids librarians in managing statuses of books borrowed and along with their borrowers. Keeping track of book 
+requests by patrons who are interested in the books when they become available. Organizing books and patrons into 
+categories for effective querying and extraction of insightful data.
+
 **Target user profile**:
 
 * a librarian who wants to manage book loans and requests by patrons
-* prefer desktop apps over other types
+* prefer desktop apps over other types of applications
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* is reasonably comfortable using CLI applications
 
-**Value proposition**: simplifying how librarians manage the status of library book loans and requests by patrons
+**Value proposition**: simplifying how librarians manage library book loans and requests by patrons.
 
 
 ### User stories
@@ -437,7 +563,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `LibTask` and the **Actor** is the `user`, unless specified otherwise)
 
-### UC01: Adding a patron to LibTask
+#### UC01: Adding a patron to LibTask
 
 **MSS**
 
@@ -468,7 +594,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case resume from step 1.
 
 
-### UC02: List patron's on LibTask
+#### UC02: List patron's on LibTask
 
 **MSS**
 
@@ -486,7 +612,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### UC03: Editing a patron on LibTask
+#### UC03: Editing a patron on LibTask
 
 **MSS**
 1. User list all patrons [UC02](#uc02-list-patrons-on-libtask)
@@ -514,10 +640,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. The index is valid but no details are provided.
 
   * 1c1. LibTask shows an error message.
-       
+
   Use case resumes from step 1.
 
-### UC04: Find a patron on LibTask
+#### UC04: Find a patron on LibTask
 
 **MSS**
 
@@ -541,7 +667,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### UC05: Delete a patron from LibTask
+#### UC05: Delete a patron from LibTask
 
 **MSS**
 
@@ -565,15 +691,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2b1. LibTask shows an error message.
 
-  Use case resumes from step 1. 
+  Use case resumes from step 1.
 
 * 2c. The patron has a book requested.
 
     * 2c1. LibTask deletes the patron from the list of requesters
-    
-  Use case resumes from step 3. 
 
-### UC06: Add book to LibTask
+  Use case resumes from step 3.
+
+#### UC06: Add book to LibTask
 
 **MSS**
 
@@ -597,7 +723,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 1.
 
-### UC07: List Books on LibTask
+#### UC07: List Books on LibTask
 
 **MSS**
 1. User requests to list all books.
@@ -613,37 +739,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. LibTask shows an empty book list.
 
   Use case ends.
-    
-### UC08: Find books on LibTask
 
-**MSS**
-1. User requests to find books and provides either a tag, author or title.  
-
-2. LibTask shows the books that match the search. 
-
-    Use case ends. 
-
-**Extension**
-
-* 1a. The given search is invalid.
-
-  * 1a1. LibTask shows an error message.
-
-  Use case resumes from step 1. 
-
-* 1b. No books match the given query.
-
-  * 1b1. LibTask shows an empty list.
-
-  Use case ends. 
-
-* 1c. More than search parameter was provided. 
-
-  * 1c1. Lib Task shows an error message.
-
-  Use case ends.
-
-### UC09: Edit a book on LibTask
+#### UC08: Edit a book on LibTask
 
 **MSS**
 
@@ -666,14 +763,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. LibTask shows an error message.
 
    Use case resumes from step 1.
-  
+
 * 1c. The index is valid but no new details are entered.
-    
+
     * 1c1. LibTask shows an error message saying that at least ISBN, author or category must be provided.
 
   Use case resumes from step 1.
 
-### UC10: Delete Book from LibTask
+#### UC09: Find books on LibTask
+
+**MSS**
+1. User requests to find books and provides either a tag, author or title.
+
+2. LibTask shows the books that match the search.
+
+   Use case ends.
+
+**Extension**
+
+* 1a. The given search is invalid.
+
+  * 1a1. LibTask shows an error message.
+
+  Use case resumes from step 1.
+
+* 1b. No books match the given query.
+
+  * 1b1. LibTask shows an empty list.
+
+  Use case ends.
+
+* 1c. More than search parameter was provided.
+
+  * 1c1. Lib Task shows an error message.
+
+  Use case ends.
+
+#### UC10: Delete Book from LibTask
 
 **MSS**
 
@@ -694,10 +820,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. The book is being borrowed.
 
   * 1b1. LibTask shows an error message.
-   
-   Use case resumes from step 1. 
 
-### UC11: Borrow Book
+   Use case resumes from step 1.
+
+#### UC11: Borrow Book
 
 **MSS**
 
@@ -731,7 +857,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 3.
 
-### UC12: Return Book on LibTask
+#### UC12: Return Book on LibTask
 
 **MSS**
 
@@ -763,35 +889,7 @@ Use case ends.
 
   Use case resumes from step 2
 
-### UC13: Asking for Help on LibTask
-
-**MSS**
-1. User requests to list all commands.
-
-2. LibTask shows the list of all the commands.
-
-  Use case ends.
-
-### UC14: Exiting LibTask
-
-**MSS**
-1. User requests to exit LibTask.
-
-2. LibTask closes.
-
-  Use case ends.
-
-### UC15: Clear database of all Patron's and Book's
-
-**MSS**
-
-1. User requests to clear all patrons and books. 
-
-2. LibTask clears the all patrons and books.
-
-  Use case ends.
-
-### UC16: Show previously run commands
+#### UC13: Show previously run commands
 
 **MSS**
 1. User requests to see previous command.
@@ -804,11 +902,11 @@ Extension
 
 * 1a. No previous command
 
-    * 1a1. LibTask shows an empty CommandBox. 
+    * 1a1. LibTask shows an empty CommandBox.
 
   Use case ends.
 
-### UC17: List books related to a patron
+#### UC14: List books related to a patron
 
 **MSS**
 1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
@@ -833,7 +931,7 @@ Extension
 
   Use case ends
 
-### UC18: List patrons with overdue books
+#### UC15: List patrons with overdue books
 
 **MSS**
 1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
@@ -852,7 +950,7 @@ Extension
 
   Use case ends.
 
-### UC19: Request Book
+#### UC16: Request Book
 
 **MSS**
 1. User lists all patrons. [UC02](#uc02-list-patrons-on-libtask)
@@ -897,11 +995,40 @@ Extension
 
   Use case resumes from step 3.
 
+#### UC17: Asking for Help on LibTask
+
+**MSS**
+1. User requests to list all commands.
+
+2. LibTask shows the list of all the commands.
+
+Use case ends.
+
+#### UC18: Exiting LibTask
+
+**MSS**
+1. User requests to exit LibTask.
+
+2. LibTask closes.
+
+Use case ends.
+
+#### UC19: Clear database of all Patron's and Book's
+
+**MSS**
+
+1. User requests to clear all patrons and books.
+
+2. LibTask clears the all patrons and books.
+
+Use case ends.
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 patrons and books without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. A user with average regular English text typing speed (i.e. not code, not system admin commands) should be able to 
+   accomplish most of their tasks faster using commands than using a mouse.
 4. A novice with no coding background should be able to use the Lib Task.
 5. The system should respond in 1 second.
 
@@ -948,32 +1075,231 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all patrons using the `patron list` command. Multiple patrons in the list.
 
-    1. Test case: `patron delete 1`<br>
-       Expected: First patron is deleted from the list. Details of the deleted patron shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `patron delete 1`<br>
+       Expected: First patron is deleted from the list. Details of the deleted patron shown in the status message.
 
-    1. Test case: `patron delete 0`<br>
-       Expected: No patron is deleted. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect delete commands to try: `patron delete`, `patron delete x`, `...` (where x is larger than the list size)<br>
+    3. Test case: `patron delete 0`<br>
+       Expected: No patron is deleted. Error details shown in the status message.
+   
+    4. Other incorrect delete commands to try: `patron delete`, `patron delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
-
 ### Deleting a book
-1. Deleting a book while all books are being shown
+1. Deleting an available book while all books are being shown
 
-   1. Prerequisites: List all books using the `book list` command. Multiple books in the list.
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list. The first book must not be borrowed
 
-   1. Test case: `book delete 1`<br>
-      Expected: First book is deleted from the list. Details of the deleted book shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `book delete 1`<br>
+      Expected: First book is deleted from the list. Details of the deleted book shown in the status message.
 
-   1. Test case: `book delete 0`<br>
-      Expected: No book is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `book delete`, `book delete x`, `...` (where x is larger than the list size)<br>
+   3. Test case: `book delete 0`<br>
+      Expected: No book is deleted. Error details shown in the status message.
+   
+   4. Other incorrect delete commands to try: `book delete`, `book delete x`, `...` (where x is larger than the size of book list)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
+2. Deleting a borrowed book while all books are being shown
+
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list. The first book must be borrowed
+
+   2. Test case: `book delete 1`<br>
+      Expected: First book is not deleted from the list. Error details shown in the status message.
+
+### Borrowing a book
+
+1. Borrowing a book while all books and all patrons are being shown
+
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. The first book must be available. The first patron is not borrowing any book with the same ISBN as the first book. The second book is already borrowed by the second patron.
+
+   2. Test case: `borrow 1 0 01-May-2022`<br>
+      Expected: No book is borrowed. Error details shown in the status message.
+   
+   3. Test case: `borrow 1 1 01-May-2022`<br>
+      Expected: First book is borrowed by first patron with a return date of 01-May-2022. The initial `Available` tag on the borrowed book is changed to `Borrowed`. Two additional rows of information is shown under `Borrowed`. The additional information is the borrower's name and the return date.
+   
+   4. Test case: `borrow 1 1 01-May-1999`<br>
+      Expected: No book is borrowed. Error details shown in the status message.
+
+   5. Test case: `borrow 1 2 01-May-2022`<br>
+      Expected: No book is borrowed. Error details shown in the status message.
+   
+   6. Test case: `borrow 2 2 01-May-2022`<br>
+      Expected: No book is borrowed. Error details shown in the status message.
+
+   7. Test case: `borrow 0 1 01-May-2022`<br>
+      Expected: No book is borrowed. Error details show in the status message.
+   
+   8. Other incorrect borrow commands to try: `borrow `, `borrow 1 1 31-Apr-2022`, `borrow x y 01-May-2022`, `...` (where either x is larger than size of patron list, or y is larger than size of book list)<br>
+      Expected: Similar to previous.
+
+### Returning a book
+
+1. Returning a book that does not have any requesters while all books and all patrons are being shown
+
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. The first book must be borrowed and not have any requesters.
+
+   2. Test case: `return b/1`
+      Expected: First book is returned. The initial `Borrowed` tag on the returned book is changed to `Available`. The rows showing the borrower and return date is removed.
+
+   3. Test case: `return b/0`
+      Expected: No book is returned. Error details show in the status message.
+
+   4. Other incorrect return commands to try: `return `, `return a/1`, `return b/x`, `...` (where either x is larger than size of book list)<br>
+      Expected: Similar to previous.
+   
+2. Returning a book that has at least one requester while all books and all patrons are being shown
+
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. The first book must be borrowed. The first book is requested by the first patron.
+
+   2. Test case: `return b/1`
+      Expected: First book is returned. The initial `Borrowed` tag on the returned book is changed to `Available`. The rows showing the borrower and return date is removed. The `Requested By` tag is removed and the row showing name of the requester is removed. A reminder message is shown in the status message to remind the librarian to notify the first patron.
+
+3. Returning all books by a patron while all books and all patrons are being shown
+
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. Only the first book, second book, and third book are borrowed by the first patron. Among the three books, some have requesters while some do not have requesters.
+
+   2. Test case: `return p/1`
+      Expected: The first, second, and third books are returned. For all returned books, the initial `Borrowed` tag on the returned book is changed to `Available`. The rows showing the borrower and return date is also removed. For all returned books that have requesters, the `Requested By` tag and the row showing names of requesters will be be removed. Reminder messages is shown in the status message to remind the librarian to notify patrons who requested for some of the returned books.
+   
+   3. Test case: `return p/0`
+      Expected: No book is returned. Error details show in the status message.
+
+   4. Other incorrect return commands to try: `return p/x`, `...` (where either x is larger than size of patron list)<br>
+      Expected: Similar to previous.
+
+### Requesting a book
+
+1. Requesting a book while all books and patrons are being shown
+
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. The first book and all its copies must be borrowed. The first book must not already be requested by the first patron, and does not have any requesters. The first book is borrowed by the second patron.
+
+   2. Test case: `book request 1 1`<br>
+      Expected: All books with same isbn as the first book is requested by the first patron. For all such books, an additional `Requested By` tag is shown under the row with return date. Name of requester is shown under the `Requested By` tag.
+
+   3. Test case: `book request 2 1`<br>
+      Expected: No book is requested. Error details shown in the status message.
+
+   4. Test case: `book request 1 1`<br>
+      Note: This test case must be done after step ii, when the first patron is still requesting for the first book, in order to get the expected result.   
+      Expected: No book is requested. Error details shown in the status message.
+
+   5. Test case: `book request 0 1`<br>
+      Expected: No book is requested. Error details shown in the status message.
+
+   6. Other incorrect book commands to try: `book request 1 0`, `book request x y`, `...` (where either x is larger than size of patron list, or y is larger than size of book list)<br>
+      Expected: Similar to previous.
+
+2. Requesting a book that has some available copies
+
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. The first book is borrowed. The second book has the same isbn as the first book and is available.
+   
+   2. Test case: `book request 1 1`<br>
+      Expected: No book is requested. Error details shown in the status message.
+
+###Overdue command
+
+1. Displaying patrons with overdue books while no book has been borrowed.
+  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Ensure that all
+     borrowed books have been returned.
+
+  2. Test case: `patron overdue`<br>
+     Expected: Patron list is empty.
+
+2. Displaying patrons with overdue books while there are borrowed books but no borrowed book is overdue.
+  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Return all borrowed
+     books with return dates before the present date.
+     Ensure that there are some books borrowed with return dates after the present date.
+
+  2. Test case: `patron overdue`<br>
+     Expected: Patron list is empty.
+
+3. Displaying patrons with overdue books while there are borrowed books and all of them are overdue.
+  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Return all borrowed
+     books with return dates after the present date.
+     Ensure that there are some books borrowed with return dates before the present date.
+
+  2. Test case: `patron overdue`<br>
+     Expected: Patron list contains borrowers of all books borrowed.
+
+4. Displaying patrons with overdue books while there are borrowed books and some of them are overdue.
+  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Ensure that there
+     are some books borrowed with return dates after the present date.
+     Ensure that there are some books borrowed with return dates before the present date.
+
+  2. Test case: `patron overdue`<br>
+     Expected: Patron list contains borrowers of all books borrowed with return dates before the present date.
+
+### Listing all books related to a patron
+1. Listing all books related to a patron while all books are being shown and a book has been borrowed by a patron
+
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list. Ensure that the first book
+   is borrowed by the first person.
+
+   2. Test case: `book related 1`<br>
+      Expected: Only first book is shown in the book list.
+
+   3. Test case: `book related 0`<br>
+      Expected: Book list remains unchanged. Error details shown in the status message.
+
+   4. Other incorrect book related commands to try: `book related`, `book related x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
+
+2. Listing all books related to a patron while all books are being shown and multiple books have been borrowed by a patron.
+
+    1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first,
+   second and third book are borrowed by the first patron.
+
+    2. Test case: `book related 1`<br>
+       Expected: The first, second and third book are shown in the book list.
+
+3. Listing all books related to a patron while all books are being shown and a book has been requested by a patron.
+
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list. Ensure that the first
+   book is borrowed by the first patron and requested by the second patron.
+
+   2. Test case: `book related 2`<br>
+      Expected: Only first book is shown in the book list.
+
+4. Listing all books related to a patron while all books are being shown and multiple books have been requested
+by a patron.
+
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first,
+   second, and third book is borrowed by the first patron and requested by the second patron.
+
+   2. Test case: `book related 2`<br>
+      Expected: The first, second and third book are shown in the book list.
+
+5. Listing all books related to a patron while all books are being shown and multiple books have been requested
+and borrowed by a patron.
+
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first
+   and second book are borrowed by the first patron and requested by the second patron. Ensure that the third book is
+   borrowed by the second patron.
+
+   2. Test case: `book related 2`<br>
+      Expected: The first, second and third book are shown in the book list.
+
+### Searching for a book based on tags, author, title
+1. Searching for a book based on title.
+
+   1. Prerequisites: List all books using the `book list` command. Ensure that there is only one book is titled "Harry Potter and the Philosopher's Stone".
+
+   2. Test case: `book find n/Harry Potter and the Philospher's Stone`
+      Expected: One book with the title "Harry Potter and the Philosopher's Stone" will be displayed in the book list. 
+
+2. Searching for a book based on tags.
+
+   1. Prerequisites: List all books using the `book list` command. Ensure that only one book has the tag "Romance".
+
+   2. Test case: `book find t/Romance`
+      Expected: One book will with the tag "romance" be shown in the book list.
+
+3. Searching for a book based on author.
+
+   1. Prerequisites: List all books using the `book list` command. Ensure only one book has an author "Suzanne Collins".
+
+   2. Test case: `book find a/Suzanne Collins`
+      Expected: One book with the author "Suzanne Collins" be displayed in the Book list. 
 
 ### Saving data
 

@@ -1,0 +1,16 @@
+@startuml
+start
+:User enters book find command;
+if () then ([only one valid prefix is given])
+    : FindBookParser parses prefix;
+        : Logic Executes Command;
+    if () then ([Books match the search query])
+        : Show books that match the search query;
+    else ([else])
+        : Show an empty book list;
+    endif
+else ([else])
+    : Ui shows an error message;
+endif
+stop
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+start
+:User enters overdue command;
+:Logic executes command;
+:Model executes updateFilteredPatronList();
+stop
+@enduml
