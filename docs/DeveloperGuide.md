@@ -6,7 +6,6 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
@@ -348,7 +347,6 @@ LibTask can store a large number of books and patrons, making it infeasible for 
 
 This feature allows users to keep track of books that are requested by patrons, and allow users to be automatically reminded to notify requesters when the books of interest become available.
 
-<div style="page-break-after: always;"></div>
 
 #### Implementation details
 
@@ -617,7 +615,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `**`     | Efficient librarian          | refer to previous commands                            | I can save time from retyping past commands                                            |
 | `*`      | Efficient librarian          | filter patrons in my database based on books          | I can know which patrons are requesting or borrowing the book                          |
 
-*{More to be added}*
 
 <div style="page-break-after: always;"></div>
 
@@ -656,7 +653,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case resume from step 1.
 
 
---------------------------------------------------------------------------------------------------------------------
+[//]: # (--------------------------------------------------------------------------------------------------------------------&#41;)
 
 
 <div style="page-break-after: always;"></div>
@@ -681,7 +678,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
---------------------------------------------------------------------------------------------------------------------
+[//]: # (--------------------------------------------------------------------------------------------------------------------)
 
 
 **UC03: Editing a patron on LibTask**
@@ -716,7 +713,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case resumes from step 1.
 
 
---------------------------------------------------------------------------------------------------------------------
+[//]: # (--------------------------------------------------------------------------------------------------------------------)
 
 
 <div style="page-break-after: always;"></div>
