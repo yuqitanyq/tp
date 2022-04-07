@@ -168,7 +168,7 @@ Method A:
    number is 5.
 2. Scroll through the book list to find the index at which `Death on the Nile` is stored in LibTask. Let's say this
    index number is 5.
-3. Enter command `request 5 5` in the Command Box. `Christian Grey` has now requested for `Death on the Nile`. You can 
+3. Enter command `book request 5 5` in the Command Box. `Christian Grey` has now requested for `Death on the Nile`. You can 
    confirm this by viewing the book's status in the book list.
 
 Method B:
@@ -176,22 +176,21 @@ Method B:
    the patron list. Learn more about the format of the `patron find` command [here](#324-finding-patrons-patron-find).
 2. Enter `book find n/death on the nile` in the Command box. Running this command will display `Death on the Nile` first
    in the book list. Learn more about the format of the `book find` command [here](#333-finding-books--book-find).
-3. Enter command `request 1 1` in the Command box. `Christian Grey` has now requested for `Death on the Nile`. You can
+3. Enter command `book request 1 1` in the Command box. `Christian Grey` has now requested for `Death on the Nile`. You can
    confirm this by viewing the book's status in the book list.
 
 Subsequently, when Harper Lee returns Death on the Nile, find the book by entering `book find n/death on the nile` 
 (which would result in it being displayed first) followed by `return b/1` (more about the `return` command 
-[here](#337-returning-a-book--return)). `Death on the Nile` is hence returned and the Result box would prompt you to 
+[here](#337-returning-a-book--return)). `Death on the Nile` is hence returned and the `Result box` would prompt you to 
 notify Christian Grey that the book is now available. 
 
 <div markdown="block" class="alert alert-info">
 
 **Notes:**<br>
 
-* Multiple patrons may request for `Death on the Nile` in which case, Result box would prompt you to notify all of them 
-  once the book is returned.
+* Multiple patrons may request for `Death on the Nile` in which case, `Result box` would remind you to notify all of them once the book is returned.
 
-* Learn more about the `request` command [here](#338-requesting-a-book--book-request).
+* Learn more about the request command [here](#338-requesting-a-book--book-request).
 
 </div>
 
@@ -218,13 +217,12 @@ This section describes the features supported by LibTask and how to use them.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `patron list`, `book list`, `exit` and `clear`) will be ignored.<br>
   e.g. `help 123` will be interpreted as `help`.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### 3.1. General Features
 
@@ -265,6 +263,8 @@ Format: `u`
 
 LibTask's data is saved in the hard disk automatically after any command that changes it. There is no need to save manually.
 
+<div style="page-break-after: always;"></div>
+
 ### 3.2. Patron Features
 
 This section describes features users can use to interact with LibTask's patron list.
@@ -279,11 +279,13 @@ Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
 
 **Notes about the add command:**<br>
 
-* ID must be 9 characters in length. First character of ID should be 'A' and last character of ID should be an alphabet.
+* ID must be 9 characters in length. First character of ID should be 'A' and last character of ID should be a capital letter.
 
-* NAME can be a maximum of 40 characters.
+* NAME can be a maximum of 40 characters and can only contain alphanumeric characters and spaces.
 
 * EMAIL can be a maximum of 50 characters.
+
+* TAG can only contain alphanumeric characters and cannot contain spaces.
 
 * You cannot add a patron with the same NAME, EMAIL or ID as another existing patron in the patron list.
 
@@ -485,6 +487,8 @@ Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 * ISBN digits must have valid checksum. Details on calculating checksum can be found in [this section](#6-appendix).
 
 * AUTHOR must start with an alphanumeric character, and can only contain alphanumeric characters and `.` character.
+
+* TAG can only contain alphanumeric characters and cannot contain spaces.
 
 * You can add multiple copies the same book with the same isbn. However, all books with the same isbn must also have the same name and written by the same authors.
 
@@ -796,15 +800,6 @@ After entering the command, the book list displays only books that are borrowed 
 ![book-related-2.png](images/book-related-2.PNG)
 
 This command is typically used after `patron overdue` command. After listing all patrons with overdue books, you can use this command to check which books are overdue by each patron.
-
-#### Editing the data file
-
-LibTask's data is saved as a JSON file `[JAR file location]/data/libtask.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation:
-**Caution:**
-If your changes to the data file makes its format invalid, LibTask will discard all data and start with an empty data file at the next run.
-</div>
 
 ## **4. FAQ**
 
