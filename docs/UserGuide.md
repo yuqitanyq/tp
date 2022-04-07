@@ -22,10 +22,10 @@ The purpose of this guide is to explain to you how to use **LibTask** and to all
 
 Take note of following symbols that are used in this document:
 
-| Icon                 | Explanation                                                                                    |
-|----------------------|------------------------------------------------------------------------------------------------|
-| :information_source: | This symbol is used to highlight extra knowledge.                                              |
-| :exclamation:        | This symbol is used to warn users of potential actions that might corrupt LibTask's data file. |
+| Icon                 | Explanation                                                                             |
+|----------------------|-----------------------------------------------------------------------------------------|
+| :information_source: | This symbol is used to highlight extra knowledge.                                       |
+| :exclamation:        | This symbol is used to warn users of potential actions that might erase LibTask's data. |
 
 ### 1.3. Navigating the User Guide
 
@@ -78,7 +78,7 @@ The various GUI components of LibTask are described in the picture below:
 
 <div markdown="block" class="alert alert-info">
 
-**Warning:**<br>
+**:exclamation: Warning:**<br>
 
 Do not clear LibTask's pre-existing data if you wish to test its commands. You are recommended to finish testing prior 
 to doing this tutorial.
@@ -148,7 +148,7 @@ Method B:
 
 <div markdown="block" class="alert alert-info">
 
-**Notes:**<br>
+**:information_source: Notes:**<br>
 
 * The return dates of the above `borrow` commands may be changed. 
 
@@ -185,7 +185,7 @@ notify Christian Grey that the book is now available.
 
 <div markdown="block" class="alert alert-info">
 
-**Notes:**<br>
+**:information_source: Notes:**<br>
 
 * Multiple patrons may request for `Death on the Nile` in which case, `Result box` would remind you to notify all of them once the book is returned.
 
@@ -238,6 +238,14 @@ Format: `help`
 
 #### 3.1.2. Clearing all entries : `clear`
 
+<div markdown="block" class="alert alert-info">
+
+**:exclamation: Warning:**<br>
+
+Do not clear LibTask's pre-existing data if you wish to test its commands.
+
+</div>
+
 Clears all patrons and books from LibTask's patron and book lists.
 
 Format: `clear`
@@ -275,7 +283,7 @@ Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the add command:**<br>
+**:information_source: Notes about the add command:**<br>
 
 * ID must be 9 characters in length. First character of ID should be 'A' and last character of ID should be a capital letter.
 
@@ -316,7 +324,7 @@ Format: `patron list`
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the list command:**<br>
+**:information_source: Notes about the list command:**<br>
 
 * If all patrons are already listed, the command will still show a success message as having listed all patrons, but the patrons listed will have no visual change.
 
@@ -342,7 +350,7 @@ Format: `patron find KEYWORD [KEYWORD]…​`
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the find command:**<br>
+**:information_source: Notes about the find command:**<br>
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 
@@ -383,7 +391,7 @@ Format: `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the edit command:**<br>
+**:information_source: Notes about the edit command:**<br>
 
 * Edits the patron at the specified `INDEX`. The index refers to the index number shown in the displayed patron list. The index **must be a positive integer** 1, 2, 3, … and cannot exceed the largest index number in the displayed patron list.​
 
@@ -439,7 +447,7 @@ Format: `patron delete INDEX`
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the delete command:**<br>
+**:information_source: Notes about the delete command:**<br>
 
 * Deletes the patron at the specified `INDEX`.
 
@@ -498,7 +506,7 @@ Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the add command:**<br>
+**:information_source:Notes about the add command:**<br>
 
 * BOOK_NAME must start and end with alphanumeric characters, and can only contain `'` character, `:` character and alphanumeric characters.
 
@@ -540,7 +548,7 @@ To show a list of all books in LibTask, you can enter the list command with the 
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the list command:**<br>
+**:information_source: Notes about the list command:**<br>
 
 * If all books are already listed, the command will still show a success message as having listed all books, but the books listed will have no visual change.
 
@@ -562,7 +570,7 @@ To find books in LibTask based on book name, author or tags, you can enter the f
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the find command:**<br>
+**:information_source: Notes about the find command:**<br>
 
 * `PREFIX` must be either `t` (for find based on tag), `a` (for finding based on author), or `n` (for finding based on book name).
 
@@ -606,7 +614,7 @@ To edit the details of a specific book, you can enter the edit command with the 
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the edit command:**<br>
+**:information_source: Notes about the edit command:**<br>
 
 * Edits the book at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, … and cannot exceed the largest index number in the displayed book list.
 
@@ -654,7 +662,7 @@ To delete a specific book, you can enter the delete command with the format show
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the delete command:**<br>
+**:information_source: Notes about the delete command:**<br>
 
 * Deletes the book at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, … and cannot exceed the largest index number in the displayed book list.
 
@@ -685,7 +693,7 @@ To keep track that a specific patron is borrowing a specific book, you can enter
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the borrow command:**<br>
+**:information_source: Notes about the borrow command:**<br>
 
 * `PATRON_INDEX` refers to the index number of a patron shown in the displayed patron list.
 
@@ -724,7 +732,7 @@ To return a specific book, or to return all books by a specific patron, you can 
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the return command:**<br>
+**:information_source: Notes about the return command:**<br>
 
 * `PREFIX` must be either `p` for patrons or `b` for books.
 
@@ -779,7 +787,7 @@ To keep track that a specific patron is requesting for a specific book, you can 
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the request command:**<br>
+**:information_source: Notes about the request command:**<br>
 
 * `PATRON_INDEX` refers to the index number of the patron who is requesting for the book, as shown in the displayed patron list.
 
@@ -826,7 +834,7 @@ To list all books borrowed by or requested by a specific patron, you can enter t
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the related command:**<br>
+**:information_source: Notes about the related command:**<br>
 
 * Lists all books borrowed by or requested by a patron at `INDEX`. `INDEX` refers to the index number of the patron of interest, as shown in the displayed patron list.
 
