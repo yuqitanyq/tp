@@ -959,6 +959,8 @@ Since 132 is a multiple of 11, the above 10-digit ISBN has a valid checksum.
 
 * Step 3. The 13-digit ISBN checksum is valid if the sum of products is a multiple of 10.
 
+<div style="page-break-after: always;"></div>
+
 **Example:**
 
 The checksum for an 13-digit ISBN of 978-0-306-40615-7 is calculated as follows:
