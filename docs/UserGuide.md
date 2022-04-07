@@ -298,13 +298,17 @@ you can enter the following command:
 
 `patron add n/John s/A0212828X p/93231222 e/e03482@u.nus.edu t/student`
 
-Before entering the command, there is no existing patron with the same name, id or email in LibTask.
+<div style="page-break-after: always;"></div>
+
+Before entering the command, the above patron does not exist in LibTask.
 
 ![patron-add-1](images/patron-add-1.png)
 
 After entering the command, the new patron is added.
 
 ![patron-add-2](images/patron-add-2.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 3.2.2. Listing all patrons : `patron list`
 
@@ -325,6 +329,8 @@ Format: `patron list`
 Before entering the command only two patrons are listed.
 
 ![patron-list-1](images/patron-list-1.png)
+
+<div style="page-break-after: always;"></div>
 
 After entering the command, all patrons will be listed.
 
@@ -348,10 +354,12 @@ Format: `patron find KEYWORD [KEYWORD]…​`
 
 * Only full words will be matched e.g. results from the keyword `Han` will not match results from the keyword `Hans`
 
-* Patrons matching at least one part of the keyword will be returned (i.e. `OR` search).
+* Patrons matching at least one part of the keyword will be returned.
   e.g. keyword `Hans Bo` will return patrons with names `Hans Gruber`, `Bo Yang`
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 **Example:**
 
@@ -366,6 +374,8 @@ Before entering the command, all patrons are displayed.
 After entering the command, only patrons with names containing "alex" or "david" are displayed.
 
 ![patron-find-2](images/patron-find-2.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 3.2.3. Editing a patron : `patron edit`
 
