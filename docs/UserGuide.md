@@ -570,7 +570,7 @@ To find books in LibTask based on book name, author or tags, you can enter the `
 
 </div>
 
-<div markdown="block" class="alert alert-info">
+<div style="page-break-after: always;"></div>
 
 **Example**:
 
@@ -584,7 +584,7 @@ Before entering the command, all books are displayed.
 After entering the command, only books that have a tag containing the keyword "computer" are displayed.
 ![book-find-2.png](images/book-find-2.PNG)
 
-<div markdown="block" class="alert alert-info">
+<div style="page-break-after: always;"></div>
 
 To find all books for with a book name containing the keyword `Harry`, you can enter the following command:
 
@@ -596,7 +596,7 @@ Before entering the command, all books are displayed.
 After entering the command, only one book which name contains `Harry` is displayed.
 ![book-find-4.png](images/book-find-4.PNG)
 
-<div markdown="block" class="alert alert-info">
+<div style="page-break-after: always;"></div>
 
 #### 3.3.4. Editing a book : `book edit`
 
