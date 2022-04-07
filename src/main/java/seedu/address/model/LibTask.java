@@ -106,6 +106,14 @@ public class LibTask implements ReadOnlyLibTask {
     }
 
     /**
+     * Returns the number of maximum requests allowed for the given {@link Book}
+     */
+    public int getMaxRequests(Book book) {
+        requireNonNull(book);
+        return books.getMaxRequests(book);
+    }
+
+    /**
      * Removes all book requests from all books in this LibTask's book list that has the same isbn as any book in
      * {@param booksToDelete}.
      *
