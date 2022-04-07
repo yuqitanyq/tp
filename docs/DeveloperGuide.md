@@ -472,6 +472,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 ## **Appendix: Requirements**
 
 ### Product scope
+LibTask aids librarians in managing statuses of books borrowed and along with their borrowers. Keeping track of book
+requests by patrons who are interested in the books when they become available. Organizing books and patrons into
+categories for effective querying and extraction of insightful data.
+
 
 **Target user profile**:
 
@@ -481,7 +485,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI applications
 
-**Value proposition**: simplifying how librarians manage the status of library book loans and requests by patrons.
+**Value proposition**: simplifying how librarians manage library book loans and requests by patrons.
 
 
 ### User stories
