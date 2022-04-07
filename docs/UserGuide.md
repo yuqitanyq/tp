@@ -665,7 +665,7 @@ To delete a specific book, you can enter the `delete` command with the format sh
 <div style="page-break-after: always;"></div>
 
 **Example**:
-* To delete the first book, you can enter the following command:
+To delete the first book, you can enter the following command:
 
 `book delete 1`
 
@@ -704,7 +704,7 @@ To keep track that a specific patron is borrowing a specific book, you can enter
 </div>
 
 **Example**:
-* To keep track that the first patron is borrowing the first book until a return date of 5th May 2022, you can enter the following command:
+To keep track that the first patron is borrowing the first book until a return date of 5th May 2022, you can enter the following command:
 
 `borrow 1 1 05-May-2022`
 
@@ -747,7 +747,7 @@ To return a specific book, or to return all books by a specific patron, you can 
 <div style="page-break-after: always;"></div>
 
 **Examples**:
-* To return all books borrowed by the first patron, you can enter the following command:
+To return all books borrowed by the first patron, you can enter the following command:
 
 `return p/1`
 
@@ -759,7 +759,7 @@ After entering the command, all three books borrowed by the first patron is retu
 
 <div style="page-break-after: always;"></div>
 
-* To return only the third book, you can enter the following command:
+To return only the third book, you can enter the following command:
 
 `return b/3`
 
@@ -804,7 +804,7 @@ To keep track that a specific patron is requesting for a specific book, you can 
 <div style="page-break-after: always;"></div>
 
 **Example**:
-* To keep track that the second patron is requesting for first book, you can enter the following command:
+To keep track that the second patron is requesting for first book, you can enter the following command:
 
 `book request 2 1`
 
@@ -835,7 +835,7 @@ To list all books borrowed by or requested by a specific patron, you can enter t
 </div>
 
 **Example**:
-* To list all books borrowed by or requested by the second patron, you can enter the following command:
+To list all books borrowed by or requested by the second patron, you can enter the following command:
 
 `book related 2`
 
@@ -901,6 +901,8 @@ to manually input additional commands to delete the "requested by" tags.
 | **Clear all entries**                      | `clear`                                                                    |
 | **Exit the program**                       | `exit`                                                                     |
 | **Show previous commands**                 | `u`                                                                        |
+
+<div style="page-break-after: always;"></div>
 
 ### 5.2. Patron Commands
 
