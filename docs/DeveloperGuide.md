@@ -370,6 +370,11 @@ Given below is an example usage scenario and how the request mechanism behaves a
 6. `FindBookCommand` calls `Model#updateFilteredBookList()` with the `predicate`, resulting in the book list to be updated to display all the books that match the given search query.
 7. Finally, the `FindBookCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command. 
 
+The following sequence diagram shows how the request command works:
+
+<img src="images/FindBookCommandSequenceDiagram.png" width="850" />
+
+
 The following activity diagram summarizes what happens when a user executes a request command:
 
 <img src="images/FindBookCommandActivityDiagram.png" width="650" />
