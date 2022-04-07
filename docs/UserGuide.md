@@ -473,6 +473,8 @@ To list all patrons with overdue books, you can enter the `overdue` command with
 
 Format: `patron overdue`
 
+<div style="page-break-after: always;"></div>
+
 **Example:**
 
 Before entering the command, all patrons are displayed.
@@ -662,6 +664,8 @@ To delete a specific book, you can enter the `delete` command with the format sh
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Example**:
 * To delete the first book, you can enter the following command:
 
@@ -672,6 +676,8 @@ Before entering the command, there is a copy of `Harry Potter and The Philosophe
 
 After entering the command, that copy of `Harry Potter and The Philospher's Stone` is deleted.
 ![book-delete-2.png](images/book-delete-2.PNG)
+
+<div style="page-break-after: always;"></div>
 
 #### 3.3.6. Borrowing a book : `borrow`
 
@@ -706,6 +712,8 @@ To keep track that a specific patron is borrowing a specific book, you can enter
 
 Before entering the command, the first book is available.
 ![book-borrow-1.png](images/book-borrow-1.PNG)
+
+<div style="page-break-after: always;"></div>
 
 After entering the command, that first book is labelled as borrowed, and is borrowed by the first patron Alex Yeoh, until a return data of 05-May-2022.
 ![book-borrow-2.png](images/book-borrow-2.PNG)
