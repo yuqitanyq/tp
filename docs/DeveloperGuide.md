@@ -1190,7 +1190,9 @@ testers are expected to do more *exploratory* testing.
    
     4. Other incorrect delete commands to try: `patron delete`, `patron delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
+
 ### Deleting a book
+
 1. Deleting an available book while all books are being shown
 
    1. Prerequisites: List all books using the `book list` command. Multiple books in the list. The first book must not be borrowed
