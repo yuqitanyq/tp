@@ -32,7 +32,7 @@ public class BorrowCommand extends Command {
             + "Example: " + BORROW_COMMAND_WORD + " 1 1 28-Feb-2023";
 
     public static final String MESSAGE_BORROW_BOOK_SUCCESS = "Patron %1$s borrowed book %2$s until %3$s";
-    public static final String MESSAGE_IS_BORROWING = "Patron %1$s already borrowing a copy of the same book!\n";
+    public static final String MESSAGE_IS_BORROWING = "Patron %1$s is already borrowing a copy of the same book!\n";
 
     private final Index patronIndex;
     private final Index bookIndex;
