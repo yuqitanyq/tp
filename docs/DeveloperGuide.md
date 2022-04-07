@@ -1279,6 +1279,10 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect delete commands to try: `patron delete`, `patron delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+
+<div style="page-break-after: always;"></div>
+
+
 ### Deleting a book
 
 1. Deleting an available book while all books are being shown
@@ -1457,6 +1461,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `book related 2`<br>
       Expected: Only first book is shown in the book list.
+
+<div style="page-break-after: always;"></div>
 
 4. Listing all books related to a patron while all books are being shown and multiple books have been requested by a patron.
 
