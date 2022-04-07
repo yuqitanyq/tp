@@ -18,6 +18,8 @@ As a school librarian of a large library, you may already have your own desktop 
 ### 1.2. About the User Guide
 The purpose of this guide is to explain to you how to use **LibTask** and to allow you to have an enjoyable experience. It explains the features and commands compatible with LibTask.  It is also structured in a way that lets you easily navigate to relevant sections based on your level of experience with LibTask.
 
+<div style="page-break-after: always;"></div>
+
 Take note of following symbols that are used in this document:
 
 | Icon                 | Explanation                                                                                    |
@@ -38,6 +40,7 @@ If you are an advanced user, you can refer to our [Command summary](#5-command-s
 For the glossary of content, you can refer to our [Glossary](#7-glossary) section.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **2. Quick start**
 
@@ -53,6 +56,8 @@ For the glossary of content, you can refer to our [Glossary](#7-glossary) sectio
 
 1. You can refer to [LibTask GUI Overview](#22-libtask-gui-overview) to understand what each component in the GUI does.
 
+<div style="page-break-after: always;"></div>
+
 ### 2.2. LibTask GUI Overview
 The various GUI components of LibTask are described in the picture below:
 
@@ -63,6 +68,8 @@ The various GUI components of LibTask are described in the picture below:
 * `Result box`: You can view the results from running your commands in this box.
 * `Patron list`: You can view the list of patrons with their details in this list.
 * `Book list`: You can view the list of books with their details in this list.
+
+<div style="page-break-after: always;"></div>
 
 ### 2.3. Tutorial
 
@@ -189,6 +196,7 @@ notify Christian Grey that the book is now available.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **3. Features**
 
