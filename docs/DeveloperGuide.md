@@ -233,12 +233,16 @@ Given below is an example usage scenario and how the borrow mechanism behaves at
 7. `BorrowCommand` calls `Model#borrowBook()` and passes the borrower, book to be borrowed and return date as [parameters](#glossary).
 8. Finally, `BorrowCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command.
 
+<div style="page-break-after: always;"></div>
+
 The following sequence diagram shows how the borrow command works:
 
 <img src="images/BorrowCommandSequenceDiagram.png" width="650" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BorrowCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 The following [activity diagram](#glossary) summarizes what happens when a user executes a borrow command:
 
@@ -273,12 +277,16 @@ Given below is an example usage scenario and how the return mechanism behaves at
 7. `ReturnAllBooksCommand` calls `Model#deleteAllRequests()` to delete all book requests for the returned books, and gets a message that reminds the user to notify patrons who requested for those books.
 8. Finally, `ReturnAllBooksCommand` creates a `CommandResult` with the message and returns it to `LogicManager` to complete the command.
 
+<div style="page-break-after: always;"></div>
+
 The following sequence diagram shows how the return command works:
 
 <img src="images/ReturnAllBooksCommandSequenceDiagram.png" width="800" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ReturnCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 The following activity diagram summarizes what happens when a user executes a return command:
 
@@ -309,6 +317,8 @@ Given below is an example usage scenario and how the overdue mechanism behaves a
 5. `OverduePatronCommand` calls `Model#updateFilteredPatronList()` to get a filtered list of patrons with overdue books by passing in `Model#hasOverdueBooks()` as predicate argument.
 6. Finally, `OverduePatronCommand` creates a `CommandResult` with the message and returns it to `LogicManager` to complete the command.
 
+<div style="page-break-after: always;"></div>
+
 The following sequence diagram shows how the overdue command works:
 
 <img src="images/OverduePatronCommandSequenceDiagram.png" width="800" />
@@ -320,6 +330,8 @@ The following activity diagram summarizes what happens when a user executes an o
 
 <img src="images/OverduePatronCommandActivityDiagram.png" width="300" />
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations
 
 Unlike some other patron and book features, `patron overdue` designed to be a stand-alone command (i.e. does not need to be used in conjunction with any other command) and requires no parameters. This is because iterating through LibTask patrons and filtering them based on their borrowed book statuses does not require pre-processing by any other command or additional information.
@@ -328,11 +340,12 @@ LibTask can store a large number of books and patrons, making it infeasible for 
 
 `patron overdue` is designed to not affect the displayed book list while interacting with LibTask's patron list (for example by displaying all overdue books in the displayed book list). However, executing the `book related` command in succession to the overdue command gives users a more detailed view the patron's overdue books.
 
-<div style="page-break-after: always;"></div>
 
 ### Request Feature
 
 This feature allows users to keep track of books that are requested by patrons, and allow users to be automatically reminded to notify requesters when the books of interest become available.
+
+<div style="page-break-after: always;"></div>
 
 #### Implementation details
 
@@ -350,12 +363,16 @@ Given below is an example usage scenario and how the request mechanism behaves a
 8. `RequestBookCommand` calls `Model#addRequest()` to add the book request to all book copies with the same isbn as the requested book.
 9. Finally, `RequestBookCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command.
 
+<div style="page-break-after: always;"></div>
+
 The following sequence diagram shows how the request command works:
 
 <img src="images/RequestBookCommandSequenceDiagram.png" width="850" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RequestBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 The following activity diagram summarizes what happens when a user executes a request command:
 
@@ -389,12 +406,16 @@ Given below is an example usage scenario and how the related mechanism behaves a
 8. `RelatedBookCommand` calls `Model#updateFilteredBookList()` with the `predicate`, resulting in the book list to be updated to display all the books borrowed and requested by the patron.
 9. Finally, `RelatedBookCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command.
 
+<div style="page-break-after: always;"></div>
+
 The following sequence diagram shows how the related command works:
 
 <img src="images/RelatedBookCommandSequenceDiagram.png" width="1200" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RelatedBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 The following activity diagram summarizes what happens when a user executes a related command:
 
@@ -423,12 +444,16 @@ Given below is an example usage scenario and how the request mechanism behaves a
 6. `FindBookCommand` calls `Model#updateFilteredBookList()` with the `predicate`, resulting in the book list to be updated to display all the books that match the given search query.
 7. Finally, the `FindBookCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command. 
 
+<div style="page-break-after: always;"></div>
+
 The following sequence diagram shows how the request command works:
 
 <img src="images/FindBookCommandSequenceDiagram.png" width="850" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `FindBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 The following activity diagram summarizes what happens when a user executes a request command:
 
@@ -439,6 +464,8 @@ The following activity diagram summarizes what happens when a user executes a re
 Each find query can only be one of either the tag, author or title. The feature is designed to display all books that match the predicate created and display them. We chose not to include the isbn as a user searchable query as it is likely that most users would remember the title of the book or the author's name rather than the isbn.
 To account for cases where there might be multiple editions of the same book, the book find will return partial matches. This increases usability as the librarian can find all books that match the title even if it is the first edition or the fifth.
 The feature is also designed to make other features like `borrow` and `request` easier. LibTask can store a large amount of books and users cannot be expected to scroll through them just to find the index of the book they are looking for. `book find` aims to reduce the time spent searching by providing a simple way to search for your book in multiple ways.
+
+<div style="page-break-after: always;"></div>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -462,6 +489,9 @@ Step 2. The user executes `patron delete 5` command to delete the 5th patron in 
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
+<div style="page-break-after: always;"></div>
+
+
 Step 3. The user executes `patron add n/David …​` to add a new patron. The `patron add` command also calls `Model#commitLibTask()`, causing another modified LibTask state to be saved into the `libTaskStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
@@ -478,6 +508,8 @@ Step 4. The user now decides that adding the patron was a mistake, and decides t
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
@@ -492,6 +524,9 @@ The `redo` command does the opposite — it calls `Model#redoLibTask()`, whi
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
+
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the LibTask, such as `list`, will usually not call `Model#commitLibTask()`, `Model#undoLibTask()` or `Model#redoLibTask()`. Thus, the `libTaskStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
@@ -499,6 +534,9 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 Step 6. The user executes `clear`, which calls `Model#commitLibTask()`. Since the `currentStatePointer` is not pointing at the end of the `libTaskStateList`, all LibTask states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
+
+<div style="page-break-after: always;"></div>
+
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -613,6 +651,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resume from step 1.
 
+<div style="page-break-after: always;"></div>
 
 #### UC02: List patron's on LibTask
 
@@ -631,8 +670,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. LibTask shows an empty patron list.
 
   Use case ends.
-
-<div style="page-break-after: always;"></div>
 
 #### UC03: Editing a patron on LibTask
 
@@ -690,6 +727,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. LibTask shows an empty list.
 
   Use case ends.
+
+<div style="page-break-after: always;"></div>
+
 
 #### UC05: Delete a patron from LibTask
 
@@ -829,8 +869,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-<div style="page-break-after: always;"></div>
-
 #### UC10: Delete Book from LibTask
 
 **MSS**
@@ -925,8 +963,6 @@ Use case ends.
 
   Use case resumes from step 2
 
-<div style="page-break-after: always;"></div>
-
 #### UC13: Show previously run commands
 
 **MSS**
@@ -989,6 +1025,8 @@ Extension
     * 2a1. LibTask shows an empty patron list.
 
   Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 #### UC16: Request Book
 
@@ -1148,7 +1186,6 @@ testers are expected to do more *exploratory* testing.
    
     4. Other incorrect delete commands to try: `patron delete`, `patron delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-
 ### Deleting a book
 1. Deleting an available book while all books are being shown
 
@@ -1269,7 +1306,7 @@ testers are expected to do more *exploratory* testing.
 
 <div style="page-break-after: always;"></div>
 
-###Overdue command
+### Overdue command
 
 1. Displaying patrons with overdue books while no book has been borrowed.
   1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Ensure that all borrowed books have been returned.
@@ -1361,9 +1398,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all books using the `book list` command. Ensure only one book has an author "Suzanne Collins".
 
    2. Test case: `book find a/Suzanne Collins`
-      Expected: One book with the author "Suzanne Collins" be displayed in the Book list. 
-
-<div style="page-break-after: always;"></div>
+      Expected: One book with the author "Suzanne Collins" be displayed in the Book list.
 
 ### Saving data
 
