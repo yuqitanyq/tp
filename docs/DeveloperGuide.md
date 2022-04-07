@@ -69,7 +69,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PatronListPanel`, `BookListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PatronListPanel`, `BookListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible [GUI](#glossary).
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-W14-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-W14-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -107,7 +107,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 * When called upon to parse a user command, the `LibTaskParser` class creates a `PatronCommandParser` if the command starts with `patron`, a `BookCommandParser` if the command starts with `book`, and a `XYZCommandParser` otherwise.
-* If `PatronCommandParser` or `BookCommandParser` is created, it will further create a `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPatronCommandParser` or `AddBookCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPatronCommand` or `AddBookCommand`) which the `LibTaskParser` returns back as a `Command` object.
+* If `PatronCommandParser` or `BookCommandParser` is created, it will further create a `XYZCommandParser` (`XYZ` is a [placeholder](#glossary) for the specific command name e.g., `AddPatronCommandParser` or `AddBookCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPatronCommand` or `AddBookCommand`) which the `LibTaskParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddPatronCommandParser`, `AddBookCommandParser`, ...) implement the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -119,11 +119,11 @@ How the parsing works:
 The `Model` component,
 
 * stores the libtask data i.e., all `Patron` objects (which are contained in a `UniquePatronList` object) and `Book` objects (which are contained in a `BookList` object).
-* stores the currently 'selected' `Patron` and `Book` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patron>` abd `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Patron` and `Book` objects (e.g., results of a search [query](#glossary)) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patron>` abd `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `LibTask`, which `Patron` references. This allows `LibTask` to only require one `Tag` object per unique tag, instead of each `Patron` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more [OOP](#glossary)) model is given below. It has a `Tag` list in the `LibTask`, which `Patron` references. This allows `LibTask` to only require one `Tag` object per unique tag, instead of each `Patron` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="600" />
 
@@ -137,7 +137,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="650" />
 
 The `Storage` component,
-* can save both libTask data and user preference data in json format, and read them back into corresponding objects.
+* can save both libTask data and user preference data in [json](#glossary) format, and read them back into corresponding objects.
 * implements both `LibTaskStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -159,13 +159,13 @@ The class diagram for the `Model` can be seen above in the [Design section](#mod
 
 ![ModelImplementation.png](images/ModelImplementation.png)
 
-`Book` has a set of `Patron`s both have their own set of attributes, but only the most important ones are shown here. `Book` has a set of `Patron`s as `requesters`. It also has a `BookStatus` containing an optional `Patron` representing the borrower of the book.
+`Book` has a set of `Patron`s both have their own set of [attributes](#glossary), but only the most important ones are shown here. `Book` has a set of `Patron`s as `requesters`. It also has a `BookStatus` containing an optional `Patron` representing the borrower of the book.
 
 #### Design considerations
 
-Initially, `Patron` and `Book` were designed in a way such that both classes contain references to each other. This design allows fast and direct access of certain information, such as all books borrowed and requested by a patron. However, the initial design results in cyclic reference among classes, which makes it impossible to store patron and book information in json format. For example, the patron json object needs to store a list of books it is referencing, which in turns store a list of patrons it is referencing, which in turn stores more patrons.
+Initially, `Patron` and `Book` were designed in a way such that both classes contain references to each other. This design allows fast and direct access of certain information, such as all books borrowed and requested by a patron. However, the initial design results in [cyclic reference](#glossary) among classes, which makes it impossible to store patron and book information in json format. For example, the patron json object needs to store a list of books it is referencing, which in turns store a list of patrons it is referencing, which in turn stores more patrons.
 
-Furthermore, the initial design results in the problem of cyclic update whenever data is modified. For example, when a patron's name is changed, the corresponding borrower's name of all books borrowed by that patron needs to be changed as well. Since `Book` is immutable, new `Book` objects are created to update the information, and as a result, all `Patron` objects referencing those old `Book` objects needs to be updated as well. Since `Patron` is also immutable, the chain of never ending cyclic updates continues on.
+Furthermore, the initial design results in the problem of cyclic update whenever data is modified. For example, when a patron's name is changed, the corresponding borrower's name of all books borrowed by that patron needs to be changed as well. Since `Book` is [immutable](#glossary), new `Book` objects are created to update the information, and as a result, all `Patron` objects referencing those old `Book` objects needs to be updated as well. Since `Patron` is also immutable, the chain of never ending cyclic updates continues on.
 
 Due to the downsides of the initial design, a decision was made to have only one of `Book` or `Patron` depending on the other. `Book` was chosen to depend on `Patron` because the UI needs to display information of borrower and requesters together with the book. This design does not require the transversal of the whole `UniquePatronList` to identify the borrower and requesters of the book, since such information is stored in `Book` itself. However, transversal of the whole `BookList` is required to find all books related to a patron, or when updating a patron's information. Nevertheless, the amortized cost is much lower as such commands are performed less frequently than the amount of UI updates.
 
@@ -178,7 +178,7 @@ The saving of books and patrons to json format is performed by the `Storage` com
 
 `JsonAdaptedPatron` is an object that represents a `Patron` object in its json format. It is responsible for converting attributes in `Patron` to its json compatible formats. It may contain multiple instances of `JsonAdaptedTag`
 
-Attributes of `Book` and `Patron` not mentioned above are stored directly as a String in `JsonAdaptedBook` and `JsonAdaptedPatron` respectively. For example, the isbn of a book is stored as a String and not converted to a class named `JsonAdaptedIsbn` before saving.
+Attributes of `Book` and `Patron` not mentioned above are stored directly as a String in `JsonAdaptedBook` and `JsonAdaptedPatron` respectively. For example, the [isbn](#glossary) of a book is stored as a String and not converted to a class named `JsonAdaptedIsbn` before saving.
 
 #### Design considerations
 
@@ -207,7 +207,7 @@ Given below is an example usage scenario and how the borrow mechanism behaves at
 4. `LogicManager` executes the `BorrowCommand`.
 5. `BorrowCommand` calls `Model#getFilteredPatronList()` to get the list of displayed patrons, and then gets the borrower at the specified index.
 6. `BorrowCommand` calls `Model#getFilteredBookList()` to get the list of displayed books, and then get the book to be borrowed at the specified index.
-7. `BorrowCommand` calls `Model#borrowBook()` and passes the borrower, book to be borrowed and return date as parameters.
+7. `BorrowCommand` calls `Model#borrowBook()` and passes the borrower, book to be borrowed and return date as [parameters](#glossary).
 8. Finally, `BorrowCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command.
 
 The following sequence diagram shows how the borrow command works:
@@ -217,7 +217,7 @@ The following sequence diagram shows how the borrow command works:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BorrowCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-The following activity diagram summarizes what happens when a user executes a borrow command:
+The following [activity diagram](#glossary) summarizes what happens when a user executes a borrow command:
 
 <img src="images/BorrowCommandActivityDiagram.png" width="650" />
 
@@ -263,7 +263,7 @@ The following activity diagram summarizes what happens when a user executes a re
 
 The return command is designed to be to return multiple books in one command, while providing the user with the option of returning a single book. This enhances the usability of the feature, as the librarian can experience more efficient processing of books, while retaining fine-grain control of the process if needed (e.g. in situations when a patron only intends to return some of his/her borrowed books).
 
-Despite having similar functionalities, the return commands are split into `ReturnOneBookCommand` and `ReturnAllBooksCommand` because they depend on different methods in `Model`, and have structurally similar but logically different execution. As per the _Single Responsibility Principle_, the return commands are separated into different classes so that each class is responsible for the logical implementation of only one subcommand.
+Despite having similar functionalities, the return commands are split into `ReturnOneBookCommand` and `ReturnAllBooksCommand` because they depend on different methods in `Model`, and have structurally similar but logically different execution. As per the [_Single Responsibility Principle_](#glossary), the return commands are separated into different classes so that each class is responsible for the logical implementation of only one subcommand.
 
 ### Overdue Patron List Feature
 
@@ -271,30 +271,22 @@ This feature allows users to view a list of patrons with overdue books.
 
 #### Implementation details
 
-The overdue patron feature is facilitated by `PatronCommandParser` and `OverduePatronCommand`. `OverduePatronCommand` is
-the concrete `Command` class responsible for returning a filtered list of patrons with overdue books from LibTask's main
-patron list. The class does this by checking if each patron has overdue books, a functionality exposed in the Model 
-interface as `Model#hasOverdueBooks()`.
+The overdue patron feature is facilitated by `PatronCommandParser` and `OverduePatronCommand`. `OverduePatronCommand` is the concrete `Command` class responsible for returning a filtered list of patrons with overdue books from LibTask's main patron list. The class does this by checking if each patron has overdue books, a functionality exposed in the Model interface as `Model#hasOverdueBooks()`.
 
 Given below is an example usage scenario and how the overdue mechanism behaves at each step:
 
 1. The user enters the overdue command.
-2. `LibTaskParser` creates a new `PatronCommandParser` after preliminary processing the first argument of user input as 
-   `patron`.
-3. `PatronCommandParser` creates a new `OverduePatronCommand` after processing the second argument of user input as 
-   `overdue`.
+2. `LibTaskParser` creates a new `PatronCommandParser` after preliminary processing the first argument of user input as `patron`.
+3. `PatronCommandParser` creates a new `OverduePatronCommand` after processing the second argument of user input as `overdue`.
 4. `LogicManager` executes the `OverduePatronCommand`.
-5. `OverduePatronCommand` calls `Model#updateFilteredPatronList()` to get a filtered list of patrons with overdue books 
-   by passing in `Model#hasOverdueBooks()` as predicate argument.
-6. Finally, `OverduePatronCommand` creates a `CommandResult` with the message and returns it to `LogicManager` to 
-   complete the command.
+5. `OverduePatronCommand` calls `Model#updateFilteredPatronList()` to get a filtered list of patrons with overdue books by passing in `Model#hasOverdueBooks()` as predicate argument.
+6. Finally, `OverduePatronCommand` creates a `CommandResult` with the message and returns it to `LogicManager` to complete the command.
 
 The following sequence diagram shows how the overdue command works:
 
 <img src="images/OverduePatronCommandSequenceDiagram.png" width="800" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PatronCommandParser` 
-should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PatronCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 The following activity diagram summarizes what happens when a user executes an overdue command:
@@ -303,18 +295,11 @@ The following activity diagram summarizes what happens when a user executes an o
 
 #### Design considerations
 
-Unlike some other patron and book features, `patron overdue` designed to be a stand-alone command (i.e. does not need to
-be used in conjunction with any other command) and requires no parameters. This is because iterating through LibTask
-patrons and filtering them based on their borrowed book statuses does not require pre-processing by any
-other command or additional information.
+Unlike some other patron and book features, `patron overdue` designed to be a stand-alone command (i.e. does not need to be used in conjunction with any other command) and requires no parameters. This is because iterating through LibTask patrons and filtering them based on their borrowed book statuses does not require pre-processing by any other command or additional information.
 
-LibTask can store a large number of books and patrons, making it infeasible for the user to scroll through the book list
-to identify patrons with books borrowed beyond their return dates. The design of the overdue command hence enhances 
-LibTask's usability, as librarians can experience more efficient processing of overdue books.
+LibTask can store a large number of books and patrons, making it infeasible for the user to scroll through the book list to identify patrons with books borrowed beyond their return dates. The design of the overdue command hence enhances LibTask's usability, as librarians can experience more efficient processing of overdue books.
 
-`patron overdue` is designed to not affect the displayed book list while interacting with LibTask's patron list (for 
-example by displaying all overdue books in the displayed book list). However, executing the `book related` command in 
-succession to the overdue command gives users a more detailed view the patron's overdue books.
+`patron overdue` is designed to not affect the displayed book list while interacting with LibTask's patron list (for example by displaying all overdue books in the displayed book list). However, executing the `book related` command in succession to the overdue command gives users a more detailed view the patron's overdue books.
 
 ### Request Feature
 
@@ -416,7 +401,6 @@ The following activity diagram summarizes what happens when a user executes a re
 
 <img src="images/FindBookCommandActivityDiagram.png" width="650" />
 
-
 #### Design considerations
 
 Each find query can only be one of either the tag, author or title. The feature is designed to display all books that match the predicate created and display them. We chose not to include the isbn as a user searchable query as it is likely that most users would remember the title of the book or the author's name rather than the isbn.
@@ -516,9 +500,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Product scope
 
-LibTask aids librarians in managing statuses of books borrowed and along with their borrowers. Keeping track of book 
-requests by patrons who are interested in the books when they become available. Organizing books and patrons into 
-categories for effective querying and extraction of insightful data.
+LibTask aids librarians in managing statuses of books borrowed and along with their borrowers. Keeping track of book requests by patrons who are interested in the books when they become available. Organizing books and patrons into categories for effective querying and extraction of insightful data.
 
 **Target user profile**:
 
@@ -526,7 +508,7 @@ categories for effective querying and extraction of insightful data.
 * prefer desktop apps over other types of applications
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI applications
+* is reasonably comfortable using [CLI](#glossary) applications
 
 **Value proposition**: simplifying how librarians manage library book loans and requests by patrons.
 
@@ -1025,7 +1007,7 @@ Use case ends.
 
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+1. Should work on any [_mainstream OS_](#glossary) as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 patrons and books without a noticeable sluggishness in performance for typical usage.
 3. A user with average regular English text typing speed (i.e. not code, not system admin commands) should be able to 
    accomplish most of their tasks faster using commands than using a mouse.
@@ -1034,13 +1016,30 @@ Use case ends.
 
 ### Glossary
 
-| Term                   | Explanation                                                      |
-|------------------------|------------------------------------------------------------------|
-| Mainstream OS          | Windows, Linux, macOS                                            |
-| Private contact detail | A contact detail that is not meant to be shared with others.     |
-| Patron                 | A user of the library.                                           |
-| ISBN                   | An International Standard Book Number 10 or 13 digits in length. |
-| MSS                    | Main Success Scenario.                                           |
+| Term                            | Explanation                                                                                                                                                               |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Mainstream OS                   | Windows, Linux, macOS.                                                                                                                                                    |
+| Private contact detail          | A contact detail that is not meant to be shared with others.                                                                                                              |
+| Patron                          | A user of the library.                                                                                                                                                    |
+| ISBN                            | An International Standard Book Number used to identify a book. 10 or 13 digits in length.                                                                                 |
+| MSS                             | Main Success Scenario.                                                                                                                                                    |
+| CLI                             | Command-line interface processes commands to a computer program in the form of lines of text.                                                                             |
+| GUI                             | Graphical user interface allows users to interact with a software through icons and buttons instead of text-based commands.                                               |
+| API                             | Application Programming Interface is a connection between computer programs.                                                                                              |
+| Sequence Diagram                | Depicts objects involved in a scenario and the sequence of interactions between them that are needed to carry out functionalities of scenarios.                           |
+| Activity Diagram                | An advanced version of a flow chart that models flow from one activity to another activity in a software.                                                                 |
+| Plant UML                       | An open-source tool that allows users to create diagrams from a plain text language.                                                                                      |
+| Immutable                       | Unchanging over time or unable to be changed.                                                                                                                             |
+| Placeholder                     | A character, word, or string of characters that temporarily takes the place of the final data.                                                                            |
+| OOP                             | Object Oriented programming is a programming paradigm that relies on the concept of classes and objects.                                                                  |
+| Entity                          | Any singular, identifiable and separate object.                                                                                                                           |
+| json                            | An open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays. |
+| Attribute                       | A specification that defines a property of an object.                                                                                                                     |
+| Cyclic reference                | A circular reference is a series of references where the last object references the first, resulting in a closed loop.                                                    |
+| Parameter                       | Allow us to pass information or instructions into functions and procedures.                                                                                               |
+| Single Responsibility Principle | States that each class should have one responsibility, one single purpose.                                                                                                |
+| Query                           | A request for information expressed in a formal manner.                                                                                                                   |
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -1199,32 +1198,25 @@ testers are expected to do more *exploratory* testing.
 ###Overdue command
 
 1. Displaying patrons with overdue books while no book has been borrowed.
-  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Ensure that all
-     borrowed books have been returned.
+  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Ensure that all borrowed books have been returned.
 
   2. Test case: `patron overdue`<br>
      Expected: Patron list is empty.
 
 2. Displaying patrons with overdue books while there are borrowed books but no borrowed book is overdue.
-  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Return all borrowed
-     books with return dates before the present date.
-     Ensure that there are some books borrowed with return dates after the present date.
+  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Return all borrowed books with return dates before the present date. Ensure that there are some books borrowed with return dates after the present date.
 
   2. Test case: `patron overdue`<br>
      Expected: Patron list is empty.
 
 3. Displaying patrons with overdue books while there are borrowed books and all of them are overdue.
-  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Return all borrowed
-     books with return dates after the present date.
-     Ensure that there are some books borrowed with return dates before the present date.
+  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Return all borrowed books with return dates after the present date. Ensure that there are some books borrowed with return dates before the present date.
 
   2. Test case: `patron overdue`<br>
      Expected: Patron list contains borrowers of all books borrowed.
 
 4. Displaying patrons with overdue books while there are borrowed books and some of them are overdue.
-  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Ensure that there
-     are some books borrowed with return dates after the present date.
-     Ensure that there are some books borrowed with return dates before the present date.
+  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Ensure that there are some books borrowed with return dates after the present date. Ensure that there are some books borrowed with return dates before the present date.
 
   2. Test case: `patron overdue`<br>
      Expected: Patron list contains borrowers of all books borrowed with return dates before the present date.
@@ -1232,8 +1224,7 @@ testers are expected to do more *exploratory* testing.
 ### Listing all books related to a patron
 1. Listing all books related to a patron while all books are being shown and a book has been borrowed by a patron
 
-   1. Prerequisites: List all books using the `book list` command. Multiple books in the list. Ensure that the first book
-   is borrowed by the first person.
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list. Ensure that the first book is borrowed by the first person.
 
    2. Test case: `book related 1`<br>
       Expected: Only first book is shown in the book list.
@@ -1242,39 +1233,32 @@ testers are expected to do more *exploratory* testing.
       Expected: Book list remains unchanged. Error details shown in the status message.
 
    4. Other incorrect book related commands to try: `book related`, `book related x`, `...` (where x is larger than the list size)<br>
-   Expected: Similar to previous.
+      Expected: Similar to previous.
 
 2. Listing all books related to a patron while all books are being shown and multiple books have been borrowed by a patron.
 
-    1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first,
-   second and third book are borrowed by the first patron.
+    1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first, second and third book are borrowed by the first patron.
 
     2. Test case: `book related 1`<br>
        Expected: The first, second and third book are shown in the book list.
 
 3. Listing all books related to a patron while all books are being shown and a book has been requested by a patron.
 
-   1. Prerequisites: List all books using the `book list` command. Multiple books in the list. Ensure that the first
-   book is borrowed by the first patron and requested by the second patron.
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list. Ensure that the first book is borrowed by the first patron and requested by the second patron.
 
    2. Test case: `book related 2`<br>
       Expected: Only first book is shown in the book list.
 
-4. Listing all books related to a patron while all books are being shown and multiple books have been requested
-by a patron.
+4. Listing all books related to a patron while all books are being shown and multiple books have been requested by a patron.
 
-   1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first,
-   second, and third book is borrowed by the first patron and requested by the second patron.
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first, second, and third book is borrowed by the first patron and requested by the second patron.
 
    2. Test case: `book related 2`<br>
       Expected: The first, second and third book are shown in the book list.
 
-5. Listing all books related to a patron while all books are being shown and multiple books have been requested
-and borrowed by a patron.
+5. Listing all books related to a patron while all books are being shown and multiple books have been requested and borrowed by a patron.
 
-   1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first
-   and second book are borrowed by the first patron and requested by the second patron. Ensure that the third book is
-   borrowed by the second patron.
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list (at least 3 books). Ensure that the first and second book are borrowed by the first patron and requested by the second patron. Ensure that the third book is borrowed by the second patron.
 
    2. Test case: `book related 2`<br>
       Expected: The first, second and third book are shown in the book list.
