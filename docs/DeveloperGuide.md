@@ -1039,6 +1039,7 @@ Use case ends.
 | Parameter                       | Allow us to pass information or instructions into functions and procedures.                                                                                               |
 | Single Responsibility Principle | States that each class should have one responsibility, one single purpose.                                                                                                |
 | Query                           | A request for information expressed in a formal manner.                                                                                                                   |
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
