@@ -39,7 +39,6 @@ If you are an advanced user, you can refer to our [Command summary](#5-command-s
 
 For the glossary of content, you can refer to our [Glossary](#7-glossary) section.
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## **2. Quick start**
@@ -194,7 +193,6 @@ notify Christian Grey that the book is now available.
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## **3. Features**
@@ -746,6 +744,8 @@ To return a specific book, or to return all books by a specific patron, you can 
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Examples**:
 * To return all books borrowed by the first patron, you can enter the following command:
 
@@ -757,6 +757,8 @@ Before entering the command, there are three books borrowed by the first patron.
 After entering the command, all three books borrowed by the first patron is returned. Furthermore, you are reminded to notify the two patrons who requested for the third book.
 ![book-return-2.png](images/book-return-2.PNG)
 
+<div style="page-break-after: always;"></div>
+
 * To return only the third book, you can enter the following command:
 
 `return b/3`
@@ -766,6 +768,8 @@ Before entering the command, the third book is labelled as borrowed, and has two
 
 After entering the command, the third book becomes available. The two requesters are also removed as you are reminded to notify both of them about the availability of the returned book.
 ![book-return-4.png](images/book-return-4.PNG)
+
+<div style="page-break-after: always;"></div>
 
 #### 3.3.8. Requesting a book : `book request`
 
@@ -797,6 +801,8 @@ To keep track that a specific patron is requesting for a specific book, you can 
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Example**:
 * To keep track that the second patron is requesting for first book, you can enter the following command:
 
@@ -809,6 +815,8 @@ After entering the command, both books are labelled as requested by Bernice Yu (
 ![book-request-2.png](images/book-request-2.PNG)
 
 When a copy of this book becomes available later, you will be reminded to notify Bernice Yu automatically.
+
+<div style="page-break-after: always;"></div>
 
 #### 3.3.9. Listing all books related to a patron : `book related`
 
@@ -834,10 +842,14 @@ To list all books borrowed by or requested by a specific patron, you can enter t
 Before entering the command, the book list displays all books in LibTask.
 ![book-related-1.png](images/book-related-1.PNG)
 
+<div style="page-break-after: always;"></div>
+
 After entering the command, the book list displays only books that are borrowed by or requested by Bernice Yu (the second patron). In this case, only one book is shown because Bernice Yu did not borrow any book, and requested for one book.
 ![book-related-2.png](images/book-related-2.PNG)
 
 This command is typically used after `patron overdue` command. After listing all patrons with overdue books, you can use this command to check which books are overdue by each patron.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **4. FAQ**
 
