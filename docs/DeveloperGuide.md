@@ -353,7 +353,7 @@ Each book request is designed to bind to an isbn instead of a book copy. For exa
 
 Associating a book request with multiple book copies introduces some problems. Initially, when a book becomes available, the same reminder message to the user will be printed multiple times, once per book request per book copy. Nevertheless, this is solved by using a `Set` to store reminder messages so that identical reminder messages will not be added multiple times.
 
-### Related Feature
+### Book Related Feature
 
 This feature allows users to list and view all the books borrowed or requested by a patron.
 
@@ -363,12 +363,12 @@ The related feature is facilitated by `BookCommandParser`, `RelatedBookCommandPa
 
 Given below is an example usage scenario and how the related mechanism behaves at each step:
 
-1. The user enters the request command and provides the index of the patron to related to.
-2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turns creates a new `RelatedBookCommandParser`.
+1. The user enters the related command and provides the index of the patron to relate to.
+2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turn creates a new `RelatedBookCommandParser`.
 3. `RelatedBookCommandParser` creates a new `RelatedBookCommand` based on the processed input.
 4. `RelatedBookCommand` object would be returned to `LogicManager`.
 5. `LogicManager` then executes the `RelatedBookCommand` object.
-6. `RelatedBookCommand` calls `Model#getFilteredPatronList()` to get the list of displayed patrons, and then gets the patron to be related at the specified index.
+6. `RelatedBookCommand` calls `Model#getFilteredPatronList()` to get the list of displayed patrons, and then gets the patron at that specified index.
 7. `RelatedBookCommand` then creates a `BookRelatedToPatronPredicate` object named `predicate` with the patron.
 8. `RelatedBookCommand` calls `Model#updateFilteredBookList()` with the `predicate`, resulting in the book list to be updated to display all the books borrowed and requested by the patron.
 9. Finally, `RelatedBookCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command.
@@ -386,7 +386,7 @@ The following activity diagram summarizes what happens when a user executes a re
 
 #### Design considerations
 
-LibTask can store a large number of books and patrons, making it infeasible for the user to scroll through the book list to identify the books borrowed or requested by the patron. The design of the related command hence enhances LibTask's usability, as librarians can be more efficient in identifying the books relating to the patron.
+LibTask can store a large number of books and patrons, making it infeasible for the user to scroll through the book list to identify the books borrowed or requested by a patron. The design of the related command hence enhances LibTask's usability, as librarians can be more efficient in identifying the books related to the patron.
 
 ### \[Proposed\] Undo/redo feature
 
