@@ -1144,24 +1144,24 @@ and borrowed by a patron.
 ### Searching for a book based on tags, author, title
 1. Searching for a book based on title.
 
-  1. Prerequisites: List all books using the `book list` command. Ensure that the first book is titled "Harry Potter and the Philosopher's Stone".
+  1. Prerequisites: List all books using the `book list` command. Ensure that there is one book is titled "Harry Potter and the Philosopher's Stone".
 
   2. Test case: `book find n/Harry Potter and the Philospher's Stone`
-     Expected: The first book is shown in the book list
+     Expected: One book will be displayed in the book list. 
 
 2. Searching for a book based on tags.
 
-  1. Prerequisites: List all books using the `book list` command. Ensure that the first, second and fifth books have the tag "Adventure".
+  1. Prerequisites: List all books using the `book list` command. Ensure that one book has the tag "Romance".
 
   2. Test case: `book find t/Adventure`
-     Expected: The first, second and fifth books are shown in the book list.
+     Expected: One book will be shown in the book list.
 
 3. Searching for a book based on author.
 
-  1. Prerequisites: List all books using the `book list` command. Ensure that the second book has an author "Suzanne Collins".
+  1. Prerequisites: List all books using the `book list` command. Ensure one book has an author "Suzanne Collins".
 
   2. Test case: `book find a/Suzanne Collins`
-     Expected: The second book is shown in the book list.
+     Expected: That book will be displayed in the Book list. 
 
 ### Saving data
 
