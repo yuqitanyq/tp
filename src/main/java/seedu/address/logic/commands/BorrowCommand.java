@@ -25,10 +25,14 @@ public class BorrowCommand extends Command {
             + " in the displayed patron list and the book identified the index number in the displayed book list.\n"
             + "Parameters: PATRON_INDEX BOOK_INDEX (both must be positive integers) "
             + "RETURN_DATE (in dd-MMM-yyyy format and after today's date)\n"
+            + "PATRON_INDEX must be a positive integer and "
+            + "does not exceed the largest index number in the displayed patron list\n"
+            + "BOOK_INDEX must be a positive integer and "
+            + "does not exceed the largest index number in the displayed book list\n"
             + "Example: " + BORROW_COMMAND_WORD + " 1 1 28-Feb-2023";
 
     public static final String MESSAGE_BORROW_BOOK_SUCCESS = "Patron %1$s borrowed book %2$s until %3$s";
-    public static final String MESSAGE_IS_BORROWING = "Patron %1$s already borrowing a copy of the same book!\n";
+    public static final String MESSAGE_IS_BORROWING = "Patron %1$s is already borrowing a copy of the same book!\n";
 
     private final Index patronIndex;
     private final Index bookIndex;

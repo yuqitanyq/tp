@@ -95,7 +95,7 @@ public class BookStatus {
         boolean isBorrowedConstraintsSatisfied = bookStatusType == BORROWED
                 && borrower.isPresent() && borrowDate.isPresent()
                 && returnDate.isPresent() && isValidBorrowRegex && isValidReturnRegex
-                && isParseable(borrowDateString) && isParseable(returnDateString);
+                && isValidDateString(borrowDateString) && isValidDateString(returnDateString);
 
         return isAvailableConstraintsSatisfied || isBorrowedConstraintsSatisfied;
     }
@@ -186,6 +186,22 @@ public class BookStatus {
                 && returnDate.equals(otherBookStatus.returnDate)); // state check
     }
 
+    /**
+     * Returns true if the string to be tested is a valid date in dd-MMM-yyyy format, false otherwise.
+     *
+     * @param dateString The string to be tested.
+     * @return True if the string to be tested is a valid date in dd-MMM-yyyy format.
+     */
+    public static boolean isValidDateString(String dateString) {
+        try {
+            Date parsedDate = STATUS_DATE_FORMAT.parse(dateString);
+            String parsedDateString = STATUS_DATE_FORMAT.format(parsedDate);
+            return parsedDateString.equals(dateString);
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
     private static Date parseToDate(String dateString) throws IllegalArgumentException {
         try {
             return STATUS_DATE_FORMAT.parse(dateString);
@@ -194,12 +210,4 @@ public class BookStatus {
         }
     }
 
-    private static boolean isParseable(String dateString) {
-        try {
-            STATUS_DATE_FORMAT.parse(dateString);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
 }

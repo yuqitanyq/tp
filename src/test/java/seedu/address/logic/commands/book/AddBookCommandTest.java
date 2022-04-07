@@ -214,6 +214,11 @@ public class AddBookCommandTest {
         }
 
         @Override
+        public int getMaxRequests(Book book) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public String deleteAllRequests(Book ... books) {
             throw new AssertionError("This method should not be called.");
         }

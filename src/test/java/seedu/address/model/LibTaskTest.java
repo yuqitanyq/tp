@@ -13,6 +13,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBooks.HARRY_POTTER;
 import static seedu.address.testutil.TypicalBooks.HUNGER_GAMES;
 import static seedu.address.testutil.TypicalPatrons.ALICE;
+import static seedu.address.testutil.TypicalPatrons.BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -137,6 +138,30 @@ public class LibTaskTest {
         // book with same name but different isbn is consistent
         Book consistentBook = new BookBuilder(HARRY_POTTER).withIsbn(VALID_ISBN_HUNGER_GAMES).build();
         assertFalse(libTask.hasSameIsbnDiffAuthorsOrName(consistentBook));
+    }
+
+    @Test
+    public void getMaxRequests_nullBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> libTask.getMaxRequests(null));
+    }
+
+    @Test
+    public void getMaxRequests_oneIdenticalBookCopy_returnsOne() {
+        libTask.addBook(HARRY_POTTER);
+        // There is only one copy of Harry Potter, therefore maximum of one requests allowed
+        assertEquals(1, libTask.getMaxRequests(HARRY_POTTER));
+    }
+
+    @Test
+    public void getMaxRequests_twoNonIdenticalBooksButSameIsbn_returnsTwo() {
+        Book bookWithSameIsbn1 = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES)
+                .withTags().withAuthors().withRequesters(BOB).withTimeAdded(1).build();
+        Book bookWithSameIsbn2 = new BookBuilder(HARRY_POTTER).withName(VALID_BOOK_NAME_HUNGER_GAMES)
+                .withTags(VALID_TAG_SCIFI).withAuthors().withRequesters(BOB).withTimeAdded(3).build();
+        libTask.addBook(bookWithSameIsbn1);
+        libTask.addBook(bookWithSameIsbn2);
+        // There are two copies of Harry Potter, therefore maximum of two requests allowed
+        assertEquals(2, libTask.getMaxRequests(HARRY_POTTER));
     }
 
     @Test

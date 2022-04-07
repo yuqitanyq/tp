@@ -209,6 +209,14 @@ public class BookList implements Iterable<Book> {
     }
 
     /**
+     * Returns the number of maximum requests allowed for the given {@link Book}
+     */
+    public int getMaxRequests(Book bookToRequest) {
+        requireNonNull(bookToRequest);
+        return (int) internalList.stream().filter(book -> book.hasSameIsbn(bookToRequest)).count();
+    }
+
+    /**
      * Removes all book requests from all books in this book list that has the same isbn as any book in {@param books}
      *
      * @return A message string representing the notifications for distinct book request that were deleted.

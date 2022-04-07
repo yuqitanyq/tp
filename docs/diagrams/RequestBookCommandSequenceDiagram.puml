@@ -1,0 +1,110 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":LibTaskParser" as LibTaskParser LOGIC_COLOR
+participant ":BookCommandParser" as BookCommandParser LOGIC_COLOR
+participant ":RequestBookCommandParser" as RequestBookCommandParser LOGIC_COLOR
+participant "r:RequestBookCommand" as RequestBookCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("book \nrequest 1 1")
+activate LogicManager
+
+LogicManager -> LibTaskParser : parseCommand("book \nrequest 1 1")
+activate LibTaskParser
+
+create BookCommandParser
+LibTaskParser -> BookCommandParser
+activate BookCommandParser
+
+BookCommandParser --> LibTaskParser
+deactivate BookCommandParser
+
+LibTaskParser -> BookCommandParser : parse("request 1 1")
+activate BookCommandParser
+
+create RequestBookCommandParser
+BookCommandParser -> RequestBookCommandParser
+activate RequestBookCommandParser
+
+RequestBookCommandParser --> BookCommandParser
+deactivate RequestBookCommandParser
+
+BookCommandParser -> RequestBookCommandParser : parse("1 1")
+activate RequestBookCommandParser
+
+create RequestBookCommand
+RequestBookCommandParser -> RequestBookCommand
+activate RequestBookCommand
+
+RequestBookCommand --> RequestBookCommandParser : r
+deactivate RequestBookCommand
+
+RequestBookCommandParser --> BookCommandParser : r
+deactivate RequestBookCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+RequestBookCommandParser -[hidden]-> LibTaskParser
+destroy RequestBookCommandParser
+
+BookCommandParser --> LibTaskParser : r
+deactivate BookCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+BookCommandParser -[hidden]-> LibTaskParser
+destroy BookCommandParser
+
+LibTaskParser --> LogicManager : r
+deactivate LibTaskParser
+
+LogicManager -> RequestBookCommand : execute()
+activate RequestBookCommand
+
+RequestBookCommand -> Model : getFilteredPatronList()\n.getIndex(requesterIndex)
+activate Model
+
+Model --> RequestBookCommand : requester
+deactivate Model
+
+RequestBookCommand -> Model : getFilteredBookList()\n.getIndex(bookIndex)
+activate Model
+
+Model --> RequestBookCommand : bookToRequest
+deactivate Model
+
+RequestBookCommand -> Model : isBorrowing(requester, bookToRequest)
+activate Model
+
+Model --> RequestBookCommand : isBorrowing
+deactivate Model
+
+RequestBookCommand -> Model : hasAvailableCopy(bookToRequest)
+activate Model
+
+Model --> RequestBookCommand : isAvailable
+deactivate Model
+
+RequestBookCommand -> Model : addRequest(bookToRequest, requester)
+activate Model
+
+Model --> RequestBookCommand
+deactivate Model
+
+create CommandResult
+RequestBookCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> RequestBookCommand
+deactivate CommandResult
+
+RequestBookCommand --> LogicManager : result
+deactivate RequestBookCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

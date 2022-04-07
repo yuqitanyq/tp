@@ -1,0 +1,16 @@
+@startuml
+start
+:User enters related command;
+if () then ([command is valid format])
+    :Parser parses patron index;
+    :Logic executes command;
+    if () then ([valid index])
+        :Book list is updated and displayed;
+    else([else])
+        :Ui shows error message;
+    endif
+else([else])
+    :Ui shows error message;
+endif
+stop
+@enduml

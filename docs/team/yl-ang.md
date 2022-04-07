@@ -10,7 +10,7 @@ LibTask is a desktop application used by librarians to keep track of books, over
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
   * Added the ability to view patron and book details through LibTask GUI [\#49](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/49)
     * What it does:
       * Allows users to view patron and book details quickly via the GUI.
