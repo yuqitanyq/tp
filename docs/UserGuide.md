@@ -308,7 +308,7 @@ After entering the command, the new patron is added.
 
 #### 3.2.2. Listing all patrons : `patron list`
 
-To show a list of all patrons in LibTask, you can enter the `list` command with the format shown below.
+To show a list of all patrons in LibTask, you can enter the list command with the format shown below.
 
 Format: `patron list`
 
@@ -332,7 +332,7 @@ After entering the command, all patrons will be listed.
 
 #### 3.2.4. Finding patrons: `patron find`
 
-To find patrons in LibTask based on patron name, you can enter the `find` command with the format shown below.
+To find patrons in LibTask based on patron name, you can enter the find command with the format shown below.
 
 Format: `patron find KEYWORD [KEYWORD]…​`
 
@@ -369,7 +369,7 @@ After entering the command, only patrons with names containing "alex" or "david"
 
 #### 3.2.3. Editing a patron : `patron edit`
 
-To edit the details of a specific patron, you can enter the `edit` command with the format shown below.
+To edit the details of a specific patron, you can enter the edit command with the format shown below.
 
 Format: `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
@@ -419,7 +419,7 @@ After entering the command, the first patron will have their tags removed.
 
 #### 3.2.5. Deleting a patron : `patron delete`
 
-To delete a specific patron, you can enter the `delete` command with the format shown below.
+To delete a specific patron, you can enter the delete command with the format shown below.
 
 Format: `patron delete INDEX`
 
@@ -451,7 +451,7 @@ After entering the command, patron `Bernice Yu` is deleted.
 
 #### 3.2.6. Listing all patrons with overdue books : `patron overdue`
 
-To list all patrons with overdue books, you can enter the `overdue` command with the format shown below.
+To list all patrons with overdue books, you can enter the overdue command with the format shown below.
 
 Format: `patron overdue`
 
@@ -510,7 +510,7 @@ After entering the command, a new available copy of the book is added. You will 
 
 #### 3.3.2. Listing all books : `book list`
 
-To show a list of all books in LibTask, you can enter the `list` command with the format shown below.
+To show a list of all books in LibTask, you can enter the list command with the format shown below.
 
 **Format**: `book list`
 
@@ -532,7 +532,7 @@ After entering the command, all books will be listed.
 
 #### 3.3.3. Finding books : `book find`
 
-To find books in LibTask based on book name, author or tags, you can enter the `find` command with the format shown below.
+To find books in LibTask based on book name, author or tags, you can enter the find command with the format shown below.
 
 **Format**: `book find PREFIX/KEYWORD`
 
@@ -570,7 +570,7 @@ After entering the command, only one book which name contains `Harry` is display
 
 #### 3.3.4. Editing a book : `book edit`
 
-To edit the details of a specific book, you can enter the `edit` command with the format shown below.
+To edit the details of a specific book, you can enter the edit command with the format shown below.
 
 **Format**: `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR] … [t/CATEGORY_TAG] …`
 
@@ -618,7 +618,7 @@ After entering the command, both copies will have their author removed. However,
 
 #### 3.3.5. Deleting a book : `book delete`
 
-To delete a specific book, you can enter the `delete` command with the format shown below.
+To delete a specific book, you can enter the delete command with the format shown below.
 
 **Format**: `book delete INDEX`
 
@@ -645,7 +645,7 @@ After entering the command, that copy of `Harry Potter and The Philospher's Ston
 
 #### 3.3.6. Borrowing a book : `borrow`
 
-To keep track that a specific patron is borrowing a specific book, you can enter the `borrow` command with the format shown below.
+To keep track that a specific patron is borrowing a specific book, you can enter the borrow command with the format shown below.
 
 **Format**: `borrow PATRON_INDEX BOOK_INDEX RETURN_DATE`
 
@@ -682,7 +682,7 @@ After entering the command, that first book is labelled as borrowed, and is borr
 
 #### 3.3.7. Returning a book : `return`
 
-To return a specific book, or to return all books by a specific patron, you can enter the `return` command with the format shown below.
+To return a specific book, or to return all books by a specific patron, you can enter the return command with the format shown below.
 
 **Format**: `return PREFIX/INDEX`
 
@@ -731,7 +731,7 @@ After entering the command, the third book becomes available. The two requesters
 
 #### 3.3.8. Requesting a book : `book request`
 
-To keep track that a specific patron is requesting for a specific book, you can enter the `request` command with the format shown below.
+To keep track that a specific patron is requesting for a specific book, you can enter the request command with the format shown below.
 
 **Format**: `book request PATRON_INDEX BOOK_INDEX`
 
@@ -774,7 +774,7 @@ When a copy of this book becomes available later, you will be reminded to notify
 
 #### 3.3.9. Listing all books related to a patron : `book related`
 
-To list all books borrowed by or requested by a specific patron, you can enter the `related` command with the format shown below.
+To list all books borrowed by or requested by a specific patron, you can enter the related command with the format shown below.
 
 **Format**: `book related INDEX`
 
