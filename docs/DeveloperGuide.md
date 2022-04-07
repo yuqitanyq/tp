@@ -563,7 +563,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `LibTask` and the **Actor** is the `user`, unless specified otherwise)
 
-### UC01: Adding a patron to LibTask
+#### UC01: Adding a patron to LibTask
 
 **MSS**
 
@@ -594,7 +594,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case resume from step 1.
 
 
-### UC02: List patron's on LibTask
+#### UC02: List patron's on LibTask
 
 **MSS**
 
@@ -612,7 +612,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### UC03: Editing a patron on LibTask
+#### UC03: Editing a patron on LibTask
 
 **MSS**
 1. User list all patrons [UC02](#uc02-list-patrons-on-libtask)
@@ -643,7 +643,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 1.
 
-### UC04: Find a patron on LibTask
+#### UC04: Find a patron on LibTask
 
 **MSS**
 
@@ -667,7 +667,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### UC05: Delete a patron from LibTask
+#### UC05: Delete a patron from LibTask
 
 **MSS**
 
@@ -699,7 +699,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 3.
 
-### UC06: Add book to LibTask
+#### UC06: Add book to LibTask
 
 **MSS**
 
@@ -723,7 +723,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 1.
 
-### UC07: List Books on LibTask
+#### UC07: List Books on LibTask
 
 **MSS**
 1. User requests to list all books.
@@ -740,7 +740,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### UC08: Find books on LibTask
+#### UC08: Find books on LibTask
 
 **MSS**
 1. User requests to find books and provides either a tag, author or title.
@@ -769,7 +769,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### UC09: Edit a book on LibTask
+#### UC09: Edit a book on LibTask
 
 **MSS**
 
@@ -799,7 +799,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 1.
 
-### UC10: Delete Book from LibTask
+#### UC10: Delete Book from LibTask
 
 **MSS**
 
@@ -823,7 +823,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case resumes from step 1.
 
-### UC11: Borrow Book
+#### UC11: Borrow Book
 
 **MSS**
 
@@ -857,7 +857,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 3.
 
-### UC12: Return Book on LibTask
+#### UC12: Return Book on LibTask
 
 **MSS**
 
@@ -889,7 +889,7 @@ Use case ends.
 
   Use case resumes from step 2
 
-### UC13: Asking for Help on LibTask
+#### UC13: Asking for Help on LibTask
 
 **MSS**
 1. User requests to list all commands.
@@ -898,7 +898,7 @@ Use case ends.
 
   Use case ends.
 
-### UC14: Exiting LibTask
+#### UC14: Exiting LibTask
 
 **MSS**
 1. User requests to exit LibTask.
@@ -907,7 +907,7 @@ Use case ends.
 
   Use case ends.
 
-### UC15: Clear database of all Patron's and Book's
+#### UC15: Clear database of all Patron's and Book's
 
 **MSS**
 
@@ -917,7 +917,7 @@ Use case ends.
 
   Use case ends.
 
-### UC16: Show previously run commands
+#### UC16: Show previously run commands
 
 **MSS**
 1. User requests to see previous command.
@@ -934,7 +934,7 @@ Extension
 
   Use case ends.
 
-### UC17: List books related to a patron
+#### UC17: List books related to a patron
 
 **MSS**
 1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
@@ -959,7 +959,7 @@ Extension
 
   Use case ends
 
-### UC18: List patrons with overdue books
+#### UC18: List patrons with overdue books
 
 **MSS**
 1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
@@ -978,7 +978,7 @@ Extension
 
   Use case ends.
 
-### UC19: Request Book
+#### UC19: Request Book
 
 **MSS**
 1. User lists all patrons. [UC02](#uc02-list-patrons-on-libtask)
