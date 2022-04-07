@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -272,20 +273,20 @@ This feature allows users to view a list of patrons with overdue books.
 
 The overdue patron feature is facilitated by `PatronCommandParser` and `OverduePatronCommand`. `OverduePatronCommand` is
 the concrete `Command` class responsible for returning a filtered list of patrons with overdue books from LibTask's main
-patron list. The class does this by checking if each patron has overdue books, a functionality exposed in the Model
+patron list. The class does this by checking if each patron has overdue books, a functionality exposed in the Model 
 interface as `Model#hasOverdueBooks()`.
 
 Given below is an example usage scenario and how the overdue mechanism behaves at each step:
 
 1. The user enters the overdue command.
-2. `LibTaskParser` creates a new `PatronCommandParser` after preliminary processing the first argument of user input as
+2. `LibTaskParser` creates a new `PatronCommandParser` after preliminary processing the first argument of user input as 
    `patron`.
-3. `PatronCommandParser` creates a new `OverduePatronCommand` after processing the second argument of user input as
+3. `PatronCommandParser` creates a new `OverduePatronCommand` after processing the second argument of user input as 
    `overdue`.
 4. `LogicManager` executes the `OverduePatronCommand`.
-5. `OverduePatronCommand` calls `Model#updateFilteredPatronList()` to get a filtered list of patrons with overdue books
+5. `OverduePatronCommand` calls `Model#updateFilteredPatronList()` to get a filtered list of patrons with overdue books 
    by passing in `Model#hasOverdueBooks()` as predicate argument.
-6. Finally, `OverduePatronCommand` creates a `CommandResult` with the message and returns it to `LogicManager` to
+6. Finally, `OverduePatronCommand` creates a `CommandResult` with the message and returns it to `LogicManager` to 
    complete the command.
 
 The following sequence diagram shows how the overdue command works:
@@ -308,13 +309,12 @@ patrons and filtering them based on their borrowed book statuses does not requir
 other command or additional information.
 
 LibTask can store a large number of books and patrons, making it infeasible for the user to scroll through the book list
-to identify patrons with books borrowed beyond their return dates. The design of the overdue command hence enhances
+to identify patrons with books borrowed beyond their return dates. The design of the overdue command hence enhances 
 LibTask's usability, as librarians can experience more efficient processing of overdue books.
 
-`patron overdue` is designed to not affect the displayed book list while interacting with LibTask's patron list (for
-example by displaying all overdue books in the displayed book list). However, executing the `book related` command in
+`patron overdue` is designed to not affect the displayed book list while interacting with LibTask's patron list (for 
+example by displaying all overdue books in the displayed book list). However, executing the `book related` command in 
 succession to the overdue command gives users a more detailed view the patron's overdue books.
-
 
 ### Request Feature
 
@@ -326,11 +326,11 @@ The request feature is facilitated by `BookCommandParser`, `RequestBookCommandPa
 
 Given below is an example usage scenario and how the request mechanism behaves at each step:
 
-1. The user enters the borrow command and provides the index of the requester patron, and the index of book to be requested.
+1. The user enters the request command and provides the index of the requester patron, and the index of book to be requested.
 2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turns creates a new `RequestBookCommandParser`.
 3. `RequestBookCommandParser` creates a new `RequestBookCommand` based on the processed input.
 4. `LogicManager` executes the `RequestBookCommand`.
-5. `RequestBookCommand` calls `Model#getFilteredPatronList()`` to get the list of displayed patrons, and then gets the requester at the specified index. It then calls `Model#getFilteredBookList()` to get the list of displayed books, and then get the book to be requested at the specified index.
+5. `RequestBookCommand` calls `Model#getFilteredPatronList()` to get the list of displayed patrons, and then gets the requester at the specified index. It then calls `Model#getFilteredBookList()` to get the list of displayed books, and then get the book to be requested at the specified index.
 6. `RequestBookCommand` calls `Model#isBorrowing()` to check that the requester is not currently borrowing a copy of the requested book, to prevent a patron from requesting a book he/she is already borrowing.
 7. `RequestBookCommand` calls `Model#hasAvailableCopy()` to confirm that there are no available copies of the requested book. This is because there is no need for a book request if there is an available copy of the book.
 8. `RequestBookCommand` calls `Model#addRequest()` to add the book request to all book copies with the same isbn as the requested book.
@@ -340,7 +340,7 @@ The following sequence diagram shows how the request command works:
 
 <img src="images/RequestBookCommandSequenceDiagram.png" width="850" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RequestCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RequestBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 The following activity diagram summarizes what happens when a user executes a request command:
@@ -352,6 +352,41 @@ The following activity diagram summarizes what happens when a user executes a re
 Each book request is designed to bind to an isbn instead of a book copy. For example, when a patron requests to be notified when the first book becomes available, LibTask attaches the book request to all books with the same isbn as the first book. This is in-line with our use case, as it is rational to assume that patrons are not particular about which book copy they are requesting for.
 
 Associating a book request with multiple book copies introduces some problems. Initially, when a book becomes available, the same reminder message to the user will be printed multiple times, once per book request per book copy. Nevertheless, this is solved by using a `Set` to store reminder messages so that identical reminder messages will not be added multiple times.
+
+### Book Related Feature
+
+This feature allows users to list and view all the books borrowed or requested by a patron.
+
+#### Implementation details
+
+The related feature is facilitated by `BookCommandParser`, `RelatedBookCommandParser`, and `RelatedBookCommand`.
+
+Given below is an example usage scenario and how the related mechanism behaves at each step:
+
+1. The user enters the related command and provides the index of the patron to relate to.
+2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turn creates a new `RelatedBookCommandParser`.
+3. `RelatedBookCommandParser` creates a new `RelatedBookCommand` based on the processed input.
+4. `RelatedBookCommand` object would be returned to `LogicManager`.
+5. `LogicManager` then executes the `RelatedBookCommand` object.
+6. `RelatedBookCommand` calls `Model#getFilteredPatronList()` to get the list of displayed patrons, and then gets the patron at that specified index.
+7. `RelatedBookCommand` then creates a `BookRelatedToPatronPredicate` object named `predicate` with the patron.
+8. `RelatedBookCommand` calls `Model#updateFilteredBookList()` with the `predicate`, resulting in the book list to be updated to display all the books borrowed and requested by the patron.
+9. Finally, `RelatedBookCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command.
+
+The following sequence diagram shows how the related command works:
+
+<img src="images/RelatedBookCommandSequenceDiagram.png" width="1000" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RelatedBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The following activity diagram summarizes what happens when a user executes a related command:
+
+<img src="images/RelatedBookCommandActivityDiagram.png" width="650" />
+
+#### Design considerations
+
+LibTask can store a large number of books and patrons, making it infeasible for the user to scroll through the book list to identify the books borrowed or requested by a patron. The design of the related command hence enhances LibTask's usability, as librarians can be more efficient in identifying the books related to the patron.
 
 ### Book Find feature
 
@@ -480,10 +515,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 ## **Appendix: Requirements**
 
 ### Product scope
-LibTask aids librarians in managing statuses of books borrowed and along with their borrowers. Keeping track of book
-requests by patrons who are interested in the books when they become available. Organizing books and patrons into
-categories for effective querying and extraction of insightful data.
 
+LibTask aids librarians in managing statuses of books borrowed and along with their borrowers. Keeping track of book 
+requests by patrons who are interested in the books when they become available. Organizing books and patrons into 
+categories for effective querying and extraction of insightful data.
 
 **Target user profile**:
 
@@ -992,7 +1027,8 @@ Extension
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 patrons and books without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. A user with average regular English text typing speed (i.e. not code, not system admin commands) should be able to 
+   accomplish most of their tasks faster using commands than using a mouse.
 4. A novice with no coding background should be able to use the Lib Task.
 5. The system should respond in 1 second.
 
