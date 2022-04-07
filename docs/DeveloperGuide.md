@@ -301,10 +301,9 @@ Each book request is designed to bind to an isbn instead of a book copy. For exa
 
 Associating a book request with multiple book copies introduces some problems. Initially, when a book becomes available, the same reminder message to the user will be printed multiple times, once per book request per book copy. Nevertheless, this is solved by using a `Set` to store reminder messages so that identical reminder messages will not be added multiple times.
 
-
 ### Book Find feature
 
-This feature allows users to search for any books with either the isbn, title or author's name
+This feature allows users to search for any books with either the isbn, title or author's name. 
 
 ### Implementation
 The Book find feature is facilitated by the `BookCommandParser`, `FindBookParser` and `FindBookCommand`. 
@@ -313,10 +312,22 @@ Given below is an example usage scenario and how the request mechanism behaves a
 
 1. The user enters a book find command and provides the parameter for the search query.
 2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turns creates a new `FindBookParser`.
-3. `FindBookParser` creates a new `FindBookCommand` based on the parsed input.
-4. `FindBookCommand` calls 
+3. `FindBookParser` creates either a `BookAuthorContainsKeywordsPredicatem` or `BookNameContainsKeywordsPredicate` or `BookTagContainsKeywordsPredicate` object `predicate` with the search query.4. 
+4. `FindBookParser` creates a new `FindBookCommand` based on the processed input and passes the predicate on.
+5. `LogicManager` then executes the `FindBookCommand`. 
+6. `FindBookCommand` calls `Model#updateFilteredBookList()` with the `predicate`, resulting in the book list to be updated to display all the books that match the given search query.
+7. Finally, the `FindBookCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command. 
+
+The following activity diagram summarizes what happens when a user executes a request command:
+
+<img src="images/FindBookCommandActivityDiagram.png" width="650" />
 
 
+#### Design considerations
+
+Each find query can only be one of either the tag, author or title. The feature is designed to return all books that match the predicate created and display them. We chose not to include the isbn as a user searchable query as it is likely that most users would remember the title of the book or the author's name rather than the isbn.
+To account for cases where there might be multiple editions of the same book, the book find will return partial matches. This increases usability as the librarian can find all books that match the title even if it is the first edition or the fifth.
+The feature is also designed to make other features like `borrow` and `request` easier. LibTask can store a large amount of books and users cannot be expected to scroll through them just to find the index of the book they are looking for. `book find` aims to reduce the time spent searching by providing a simple way to search for your book in multiple ways. 
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
