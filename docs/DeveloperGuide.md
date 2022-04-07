@@ -384,6 +384,10 @@ The following activity diagram summarizes what happens when a user executes a re
 
 <img src="images/RelatedBookCommandActivityDiagram.png" width="650" />
 
+#### Design considerations
+
+LibTask can store a large number of books and patrons, making it infeasible for the user to scroll through the book list to identify the books borrowed or requested by the patron. The design of the related command hence enhances LibTask's usability, as librarians can be more efficient in identifying the books relating to the patron.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
