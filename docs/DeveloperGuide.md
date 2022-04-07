@@ -1016,29 +1016,29 @@ Extension
 
 ### Glossary
 
-| Term                            | Explanation                                                                                                                                                               |
-|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Mainstream OS                   | Windows, Linux, macOS.                                                                                                                                                    |
-| Private contact detail          | A contact detail that is not meant to be shared with others.                                                                                                              |
-| Patron                          | A user of the library.                                                                                                                                                    |
-| ISBN                            | An International Standard Book Number used to identify a book. 10 or 13 digits in length.                                                                                 |
-| MSS                             | Main Success Scenario.                                                                                                                                                    |
-| CLI                             | Command-line interface processes commands to a computer program in the form of lines of text.                                                                             |
-| GUI                             | Graphical user interface allows users to interact with a software through icons and buttons instead of text-based commands.                                               |
-| API                             | Application Programming Interface is a connection between computer programs.                                                                                              |
-| Sequence Diagram                | Depicts objects involved in a scenario and the sequence of interactions between them that are needed to carry out functionalities of scenarios.                           |
-| Activity Diagram                | An advanced version of a flow chart that models flow from one activity to another activity in a software.                                                                 |
-| Plant UML                       | An open-source tool that allows users to create diagrams from a plain text language.                                                                                      |
-| Immutable                       | Unchanging over time or unable to be changed.                                                                                                                             |
-| Placeholder                     | A character, word, or string of characters that temporarily takes the place of the final data.                                                                            |
-| OOP                             | Object Oriented programming is a programming paradigm that relies on the concept of classes and objects.                                                                  |
-| Entity                          | Any singular, identifiable and separate object.                                                                                                                           |
-| json                            | An open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays. |
-| Attribute                       | A specification that defines a property of an object.                                                                                                                     |
-| Cyclic reference                | A circular reference is a series of references where the last object references the first, resulting in a closed loop.                                                    |
-| Parameter                       | Allow us to pass information or instructions into functions and procedures.                                                                                               |
-| Single Responsibility Principle | States that each class should have one responsibility, one single purpose.                                                                                                |
-| Query                           | A request for information expressed in a formal manner.                                                                                                                   |
+| Term                            | Explanation                                                                                                                                                                    |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Mainstream OS                   | Windows, Linux, macOS.                                                                                                                                                         |
+| Private contact detail          | A contact detail that is not meant to be shared with others.                                                                                                                   |
+| Patron                          | A user of the library.                                                                                                                                                         |
+| ISBN                            | An International Standard Book Number used to identify a book. 10 or 13 digits in <br/>length.                                                                                 |
+| MSS                             | Main Success Scenario.                                                                                                                                                         |
+| CLI                             | Command-line interface processes commands to a computer program in the form of <br/>lines of text.                                                                             |
+| GUI                             | Graphical user interface allows users to interact with a software through icons and<br/> buttons instead of text-based commands.                                               |
+| API                             | Application Programming Interface is a connection between computer programs.                                                                                                   |
+| Sequence Diagram                | Depicts objects involved in a scenario and the sequence of interactions between <br/>them that are needed to carry out functionalities of scenarios.                           |
+| Activity Diagram                | An advanced version of a flow chart that models flow from one activity to another <br/>activity in a software.                                                                 |
+| Plant UML                       | An open-source tool that allows users to create diagrams from a plain text <br/>language.                                                                                      |
+| Immutable                       | Unchanging over time or unable to be changed.                                                                                                                                  |
+| Placeholder                     | A character, word, or string of characters that temporarily takes the place of the <br/>final data.                                                                            |
+| OOP                             | Object Oriented programming is a programming paradigm that relies on the concept <br/>of classes and objects.                                                                  |
+| Entity                          | Any singular, identifiable and separate object.                                                                                                                                |
+| json                            | An open standard file format and data interchange format that uses human-readable <br/>text to store and transmit data objects consisting of attribute–value pairs and arrays. |
+| Attribute                       | A specification that defines a property of an object.                                                                                                                          |
+| Cyclic reference                | A circular reference is a series of references where the last object references the<br/> first, resulting in a closed loop.                                                    |
+| Parameter                       | Allow us to pass information or instructions into functions and procedures.                                                                                                    |
+| Single Responsibility Principle | States that each class should have one responsibility, one single purpose.                                                                                                     |
+| Query                           | A request for information expressed in a formal manner.                                                                                                                        |
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
