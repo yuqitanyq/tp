@@ -305,7 +305,7 @@ Associating a book request with multiple book copies introduces some problems. I
 
 This feature allows users to search for any books with either the isbn, title or author's name. 
 
-### Implementation
+#### Implementation
 The Book find feature is facilitated by the `BookCommandParser`, `FindBookParser` and `FindBookCommand`. 
 
 Given below is an example usage scenario and how the request mechanism behaves at each step:
