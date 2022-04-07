@@ -61,7 +61,7 @@ The various GUI components of LibTask are described in the picture below:
 * `Menu bar`: Menu buttons that you can click to exit LibTask or to open up the help window that contains a link to this user guide.
 * `Command box`: You can type and enter commands to run in this box.
 * `Result box`: You can view the results from running your commands in this box.
-* `patron list`: You can view the list of patrons with their details in this list.
+* `Patron list`: You can view the list of patrons with their details in this list.
 * `Book list`: You can view the list of books with their details in this list.
 
 ### 2.3. Tutorial
