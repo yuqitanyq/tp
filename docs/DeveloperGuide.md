@@ -912,6 +912,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 --------------------------------------------------------------------------------------------------------------------
 
 
+<div style="page-break-after: always;"></div>
+
+
 **UC10: Delete Book from LibTask**
 
 **MSS**
@@ -1018,6 +1021,9 @@ Use case ends.
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+
+<div style="page-break-after: always;"></div>
 
 
 **UC13: Show previously run commands**
