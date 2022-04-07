@@ -407,13 +407,17 @@ To edit the first patron's name from `Alex Yeoh` to `John Cena`, its phone numbe
 
 `patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu`
 
+<div style="page-break-after: always;"></div>
+
 Before entering the command, the first patron still has its original name, phone number and email.
 
-![patron-edit-1](images/patron-edit-1.png)
+![patron-edit-1](images/patron-edit-11.png)
 
 After entering the command, the first patron has its name edited to `John Cena`, phone number edited to `91959491` and email edited to `johncena@u.nus.edu`
 
-![patron-edit-2](images/patron-edit-2.png)
+![patron-edit-2](images/patron-edit-21.PNG)
+
+<div style="page-break-after: always;"></div>
 
 To remove all tags and edit the first patron's name from `Alex Yeoh` to `John Cena`, its phone number from `87438807` to `91959491` and email from `alexyeoh@example.com` to `johncena@u.nus.edu`you can enter the following command:
 
@@ -421,11 +425,13 @@ To remove all tags and edit the first patron's name from `Alex Yeoh` to `John Ce
 
 Before entering the command, the first patron has different tags.
 
-![patron-edit-3](images/patron-edit-3.png)
+![patron-edit-3](images/patron-edit-31.PNG)
 
 After entering the command, the first patron will have their tags removed.
 
-![patron-edit-4](images/patron-edit-4.png)
+![patron-edit-4](images/patron-edit-41.PNG)
+
+<div style="page-break-after: always;"></div>
 
 #### 3.2.5. Deleting a patron : `patron delete`
 
@@ -455,6 +461,8 @@ Before entering the command, the second patron in LibTask is `Bernice Yu`.
 
 ![patron-delete-1](images/patron-delete-1.png)
 
+<div style="page-break-after: always;"></div>
+
 After entering the command, patron `Bernice Yu` is deleted.
 
 ![patron-delete-2](images/patron-delete-2.png)
@@ -469,11 +477,13 @@ Format: `patron overdue`
 
 Before entering the command, all patrons are displayed.
 
-![patron-list-1](images/patron-list-1.png)
+![patron-list-1](images/patron-overdue-1.png)
 
 After entering the command, only patrons with overdue books are displayed.
 
-![patron-list-2](images/patron-list-2.png)
+![patron-list-2](images/patron-overdue-21.PNG)
+
+<div style="page-break-after: always;"></div>
 
 ### 3.3. Book Features
 
@@ -512,11 +522,15 @@ To add a book with the name `Introduction to Algorithms`, isbn `9780371888506`, 
 
 `book add n/Introduction to Algorithms a/Cormen a/Leiserson a/Rivest a/Stein i/9780371888506 t/ComputerScience`
 
+<div style="page-break-after: always;"></div>
+
 Before entering the command, a book with the same name already exists in LibTask. However, that copy is currently borrowed by Alex and requested by Bernice and Charlotte.
 ![book-add-1.png](images/book-add-1.PNG)
 
 After entering the command, a new available copy of the book is added. You will also be reminded to notify Bernice and Charlotte about the availability of this book.
 ![book-add-2.png](images/book-add-2.PNG)
+
+<div style="page-break-after: always;"></div>
 
 #### 3.3.2. Listing all books : `book list`
 
