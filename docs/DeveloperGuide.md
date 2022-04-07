@@ -1462,9 +1462,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `book related 2`<br>
       Expected: Only first book is shown in the book list.
 
-
-<div style="page-break-after: always;"></div>
-
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 
 4. Listing all books related to a patron while all books are being shown and multiple books have been requested by a patron.
 
