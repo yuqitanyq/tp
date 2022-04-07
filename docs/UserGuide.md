@@ -18,6 +18,8 @@ As a school librarian of a large library, you may already have your own desktop 
 ### 1.2. About the User Guide
 The purpose of this guide is to explain to you how to use **LibTask** and to allow you to have an enjoyable experience. It explains the features and commands compatible with LibTask.  It is also structured in a way that lets you easily navigate to relevant sections based on your level of experience with LibTask.
 
+<div style="page-break-after: always;"></div>
+
 Take note of following symbols that are used in this document:
 
 | Icon                 | Explanation                                                                                    |
