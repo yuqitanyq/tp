@@ -6,6 +6,7 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
@@ -19,12 +20,13 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<img src="images/ArchitectureDiagram.png" width="240" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -63,6 +65,8 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-W14-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -80,13 +84,15 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Patron` and `Book` objects residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-W14-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/LogicClassDiagram.png" width="400"/>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `LibTaskParser` class to parse the user command.
@@ -94,12 +100,16 @@ How the `Logic` component works:
 3. The command can communicate with the `Model` when it is executed (e.g. to add a Patron or a Book).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`, which is then used by the `Ui` to perform certain actions, such as displaying the results to the user.
 
+<div style="page-break-after: always;"></div>
+
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("patron delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `patron delete 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `DeleteBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -109,6 +119,8 @@ How the parsing works:
 * When called upon to parse a user command, the `LibTaskParser` class creates a `PatronCommandParser` if the command starts with `patron`, a `BookCommandParser` if the command starts with `book`, and a `XYZCommandParser` otherwise.
 * If `PatronCommandParser` or `BookCommandParser` is created, it will further create a `XYZCommandParser` (`XYZ` is a [placeholder](#glossary) for the specific command name e.g., `AddPatronCommandParser` or `AddBookCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPatronCommand` or `AddBookCommand`) which the `LibTaskParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddPatronCommandParser`, `AddBookCommandParser`, ...) implement the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W14-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -123,12 +135,15 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more [OOP](#glossary)) model is given below. It has a `Tag` list in the `LibTask`, which `Patron` references. This allows `LibTask` to only require one `Tag` object per unique tag, instead of each `Patron` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="600" />
 
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -147,6 +162,8 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -161,6 +178,8 @@ The class diagram for the `Model` can be seen above in the [Design section](#mod
 
 `Book` has a set of `Patron`s both have their own set of [attributes](#glossary), but only the most important ones are shown here. `Book` has a set of `Patron`s as `requesters`. It also has a `BookStatus` containing an optional `Patron` representing the borrower of the book.
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations
 
 Initially, `Patron` and `Book` were designed in a way such that both classes contain references to each other. This design allows fast and direct access of certain information, such as all books borrowed and requested by a patron. However, the initial design results in [cyclic reference](#glossary) among classes, which makes it impossible to store patron and book information in json format. For example, the patron json object needs to store a list of books it is referencing, which in turns store a list of patrons it is referencing, which in turn stores more patrons.
@@ -172,6 +191,8 @@ Due to the downsides of the initial design, a decision was made to have only one
 ### Saving books and patrons to Json format
 
 The saving of books and patrons to json format is performed by the `Storage` component, which class diagram can be seen [above](#storage-component).The `JsonSerializableLibTask` stores both `JsonAdaptedPatron` and `JsonAdaptedBook`, which implementations will be discussed below.
+
+<div style="page-break-after: always;"></div>
 
 #### Implementation details
 `JsonAdaptedBook` is an object that represents a `Book` object in its json format. It is responsible for converting attributes in `Book` to json compatible formats. `JsonApdatedBook` contains a `JsonAdaptedBookStatus` , and may contain multiple instances of `JsonAdaptedPatron`, `JsonAdaptedAuthor`, and `JsonAdaptedTag` as requesters, authors, and tags respectively
@@ -190,6 +211,8 @@ Aspect: How to store a list of patrons requesting for a book.
 * Alternative 2: `JsonAdaptedBook` stores a list of String representing the name of the patrons. This is possible since patrons can be identified by their unique names.
   * Pros: Less overhead in converting `Patron` object to `JsonAdaptedPatron` and less storage space used.
   * Cons: Slow program loading time. When the program loads up, for every name we need to search through the whole `UniquePatronList` for the specified `Patron` object before we can initialize a `Book` object that refers to the `Patron` as requester. Furthermore, this design is not flexible to changes if we need to patron names are no longer unique.
+
+<div style="page-break-after: always;"></div>
 
 ### Borrow Feature
 
@@ -212,7 +235,7 @@ Given below is an example usage scenario and how the borrow mechanism behaves at
 
 The following sequence diagram shows how the borrow command works:
 
-<img src="images/BorrowCommandSequenceDiagram.png" width="800" />
+<img src="images/BorrowCommandSequenceDiagram.png" width="650" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BorrowCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -226,6 +249,8 @@ The following [activity diagram](#glossary) summarizes what happens when a user 
 The borrow command is designed to be used in conjunction with the `book find` and `patron find` command. For instance, the user would first use `patron find n/Alex Yeoh` and `book find n/Harry Potter` to find the borrower and book to be borrowed, before entering `borrow 1 1 23-May-2022` to keep track of Alex Yeoh borrowing Harry Potter until 23-May-2022.
 
 This integration of borrow command with the find commands is important because LibTask can store large amounts of books and patrons, making it infeasible for the user to scroll through both patron list and book list to identify the target patron and book. By designing borrow command to work based on indexes, we do not restrict users to borrow books based on a fixed attribute, for example, book isbn and patron id. This allows users to search for books and patrons in any way they deem convenient (e.g. using tags, names etc.), thus enhancing the usability of borrow feature.
+
+<div style="page-break-after: always;"></div>
 
 ### Return Feature
 
@@ -265,6 +290,8 @@ The return command is designed to be to return multiple books in one command, wh
 
 Despite having similar functionalities, the return commands are split into `ReturnOneBookCommand` and `ReturnAllBooksCommand` because they depend on different methods in `Model`, and have structurally similar but logically different execution. As per the [_Single Responsibility Principle_](#glossary), the return commands are separated into different classes so that each class is responsible for the logical implementation of only one subcommand.
 
+<div style="page-break-after: always;"></div>
+
 ### Overdue Patron List Feature
 
 This feature allows users to view a list of patrons with overdue books.
@@ -300,6 +327,8 @@ Unlike some other patron and book features, `patron overdue` designed to be a st
 LibTask can store a large number of books and patrons, making it infeasible for the user to scroll through the book list to identify patrons with books borrowed beyond their return dates. The design of the overdue command hence enhances LibTask's usability, as librarians can experience more efficient processing of overdue books.
 
 `patron overdue` is designed to not affect the displayed book list while interacting with LibTask's patron list (for example by displaying all overdue books in the displayed book list). However, executing the `book related` command in succession to the overdue command gives users a more detailed view the patron's overdue books.
+
+<div style="page-break-after: always;"></div>
 
 ### Request Feature
 
@@ -338,6 +367,8 @@ Each book request is designed to bind to an isbn instead of a book copy. For exa
 
 Associating a book request with multiple book copies introduces some problems. Initially, when a book becomes available, the same reminder message to the user will be printed multiple times, once per book request per book copy. Nevertheless, this is solved by using a `Set` to store reminder messages so that identical reminder messages will not be added multiple times.
 
+<div style="page-break-after: always;"></div>
+
 ### Book Related Feature
 
 This feature allows users to list and view all the books borrowed or requested by a patron.
@@ -372,6 +403,8 @@ The following activity diagram summarizes what happens when a user executes a re
 #### Design considerations
 
 LibTask can store a large number of books and patrons, making it infeasible for the user to scroll through the book list to identify the books borrowed or requested by a patron. The design of the related command hence enhances LibTask's usability, as librarians can be more efficient in identifying the books related to the patron.
+
+<div style="page-break-after: always;"></div>
 
 ### Book Find feature
 
@@ -486,6 +519,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -512,6 +547,7 @@ LibTask aids librarians in managing statuses of books borrowed and along with th
 
 **Value proposition**: simplifying how librarians manage library book loans and requests by patrons.
 
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -540,6 +576,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Efficient librarian          | filter patrons in my database based on books          | I can know which patrons are requesting or borrowing the book                          |
 
 *{More to be added}*
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -594,6 +632,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 #### UC03: Editing a patron on LibTask
 
 **MSS**
@@ -624,6 +664,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1c1. LibTask shows an error message.
 
   Use case resumes from step 1.
+
+<div style="page-break-after: always;"></div>
 
 #### UC04: Find a patron on LibTask
 
@@ -681,6 +723,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 3.
 
+<div style="page-break-after: always;"></div>
+
 #### UC06: Add book to LibTask
 
 **MSS**
@@ -722,6 +766,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 #### UC08: Edit a book on LibTask
 
 **MSS**
@@ -752,6 +798,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 1.
 
+<div style="page-break-after: always;"></div>
+
 #### UC09: Find books on LibTask
 
 **MSS**
@@ -781,6 +829,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 #### UC10: Delete Book from LibTask
 
 **MSS**
@@ -804,6 +854,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b1. LibTask shows an error message.
 
    Use case resumes from step 1.
+
+<div style="page-break-after: always;"></div>
 
 #### UC11: Borrow Book
 
@@ -839,6 +891,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 3.
 
+<div style="page-break-after: always;"></div>
+
 #### UC12: Return Book on LibTask
 
 **MSS**
@@ -870,6 +924,8 @@ Use case ends.
   * 2c1. LibTask shows an error message.
 
   Use case resumes from step 2
+
+<div style="page-break-after: always;"></div>
 
 #### UC13: Show previously run commands
 
@@ -912,6 +968,8 @@ Extension
   * 3a1. LibTask returns an empty book list.
 
   Use case ends
+
+<div style="page-break-after: always;"></div>
 
 #### UC15: List patrons with overdue books
 
@@ -977,6 +1035,8 @@ Extension
 
   Use case resumes from step 3.
 
+<div style="page-break-after: always;"></div>
+
 #### UC17: Asking for Help on LibTask
 
 **MSS**
@@ -1004,6 +1064,8 @@ Use case ends.
 2. LibTask clears the all patrons and books.
 
 Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -1041,6 +1103,8 @@ Use case ends.
 | Query                           | A request for information expressed in a formal manner.                                                                                                                   |
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -1066,6 +1130,8 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a patron
 
@@ -1103,6 +1169,8 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `book delete 1`<br>
       Expected: First book is not deleted from the list. Error details shown in the status message.
 
+<div style="page-break-after: always;"></div>
+
 ### Borrowing a book
 
 1. Borrowing a book while all books and all patrons are being shown
@@ -1129,6 +1197,8 @@ testers are expected to do more *exploratory* testing.
    
    8. Other incorrect borrow commands to try: `borrow `, `borrow 1 1 31-Apr-2022`, `borrow x y 01-May-2022`, `...` (where either x is larger than size of patron list, or y is larger than size of book list)<br>
       Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Returning a book
 
@@ -1165,6 +1235,8 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect return commands to try: `return p/x`, `...` (where either x is larger than size of patron list)<br>
       Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
+
 ### Requesting a book
 
 1. Requesting a book while all books and patrons are being shown
@@ -1194,6 +1266,8 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `book request 1 1`<br>
       Expected: No book is requested. Error details shown in the status message.
 
+<div style="page-break-after: always;"></div>
+
 ###Overdue command
 
 1. Displaying patrons with overdue books while no book has been borrowed.
@@ -1219,6 +1293,8 @@ testers are expected to do more *exploratory* testing.
 
   2. Test case: `patron overdue`<br>
      Expected: Patron list contains borrowers of all books borrowed with return dates before the present date.
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all books related to a patron
 1. Listing all books related to a patron while all books are being shown and a book has been borrowed by a patron
@@ -1262,6 +1338,8 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `book related 2`<br>
       Expected: The first, second and third book are shown in the book list.
 
+<div style="page-break-after: always;"></div>
+
 ### Searching for a book based on tags, author, title
 1. Searching for a book based on title.
 
@@ -1283,6 +1361,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `book find a/Suzanne Collins`
       Expected: One book with the author "Suzanne Collins" be displayed in the Book list. 
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
