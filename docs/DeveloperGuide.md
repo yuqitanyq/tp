@@ -1358,8 +1358,6 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `return b/1`
       Expected: First book is returned. The initial `Borrowed` tag on the returned book is changed to `Available`. The rows showing the borrower and return date is removed. The `Requested By` tag is removed and the row showing name of the requester is removed. A reminder message is shown in the status message to remind the librarian to notify the first patron.
 
-<div style="page-break-after: always;"></div>
-
 3. Returning all books by a patron while all books and all patrons are being shown
 
    1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. Only the first book, second book, and third book are borrowed by the first patron. Among the three books, some have requesters while some do not have requesters.
@@ -1461,8 +1459,6 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `book related 2`<br>
       Expected: Only first book is shown in the book list.
-
-<br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 
 4. Listing all books related to a patron while all books are being shown and multiple books have been requested by a patron.
 
