@@ -654,8 +654,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. LibTask shows an error message.
 
   Use case resume from step 1.
+
+
 --------------------------------------------------------------------------------------------------------------------
+
+
 <div style="page-break-after: always;"></div>
+
 
 **UC02: List patron's on LibTask**
 
@@ -674,7 +679,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. LibTask shows an empty patron list.
 
   Use case ends.
+
+
 --------------------------------------------------------------------------------------------------------------------
+
+
 **UC03: Editing a patron on LibTask**
 
 **MSS**
@@ -705,8 +714,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1c1. LibTask shows an error message.
 
   Use case resumes from step 1.
+
+
 --------------------------------------------------------------------------------------------------------------------
+
+
 <div style="page-break-after: always;"></div>
+
 
 **UC04: Find a patron on LibTask**
 
@@ -731,8 +745,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. LibTask shows an empty list.
 
   Use case ends.
+
 --------------------------------------------------------------------------------------------------------------------
+
+
 <div style="page-break-after: always;"></div>
+
 
 **UC05: Delete a patron from LibTask**
 
@@ -766,8 +784,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 3.
 
+
 --------------------------------------------------------------------------------------------------------------------
+
+
 <div style="page-break-after: always;"></div>
+
 
 **UC06: Add book to LibTask**
 
@@ -793,7 +815,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 1.
 
+
 --------------------------------------------------------------------------------------------------------------------
+
 
 **UC07: List Books on LibTask**
 
@@ -812,9 +836,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
+
 <div style="page-break-after: always;"></div>
+
 
 **UC08: Edit a book on LibTask**
 
@@ -846,9 +873,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 1.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
+
 <div style="page-break-after: always;"></div>
+
 
 **UC09: Find books on LibTask**
 
@@ -879,7 +909,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+
 --------------------------------------------------------------------------------------------------------------------
+
 
 **UC10: Delete Book from LibTask**
 
@@ -905,9 +937,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case resumes from step 1.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
+
 <div style="page-break-after: always;"></div>
+
 
 **UC11: Borrow Book**
 
@@ -943,9 +978,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 3.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
+
 <div style="page-break-after: always;"></div>
+
 
 **UC12: Return Book on LibTask**
 
@@ -979,7 +1017,9 @@ Use case ends.
 
   Use case resumes from step 2
 
+
 --------------------------------------------------------------------------------------------------------------------
+
 
 **UC13: Show previously run commands**
 
@@ -998,7 +1038,9 @@ Extension
 
   Use case ends.
 
+
 --------------------------------------------------------------------------------------------------------------------
+
 
 **UC14: List books related to a patron**
 
@@ -1025,9 +1067,12 @@ Extension
 
   Use case ends
 
+
 --------------------------------------------------------------------------------------------------------------------
 
+
 <div style="page-break-after: always;"></div>
+
 
 **UC15: List patrons with overdue books**
 
@@ -1048,9 +1093,12 @@ Extension
 
   Use case ends.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
+
 <div style="page-break-after: always;"></div>
+
 
 **UC16: Request Book**
 
@@ -1097,9 +1145,12 @@ Extension
 
   Use case resumes from step 3.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
+
 <div style="page-break-after: always;"></div>
+
 
 **UC17: Asking for Help on LibTask**
 
@@ -1133,7 +1184,10 @@ Use case ends.
 
 Use case ends.
 
+
 --------------------------------------------------------------------------------------------------------------------
+
+
 <div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
