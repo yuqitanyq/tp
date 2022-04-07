@@ -265,6 +265,57 @@ The return command is designed to be to return multiple books in one command, wh
 
 Despite having similar functionalities, the return commands are split into `ReturnOneBookCommand` and `ReturnAllBooksCommand` because they depend on different methods in `Model`, and have structurally similar but logically different execution. As per the _Single Responsibility Principle_, the return commands are separated into different classes so that each class is responsible for the logical implementation of only one subcommand.
 
+### Overdue Patron List Feature
+
+This feature allows users to view a list of patrons with overdue books.
+
+#### Implementation details
+
+The overdue patron feature is facilitated by `PatronCommandParser` and `OverduePatronCommand`. `OverduePatronCommand` is
+the concrete `Command` class responsible for returning a filtered list of patrons with overdue books from LibTask's main
+patron list. The class does this by checking if each patron has overdue books, a functionality exposed in the Model 
+interface as `Model#hasOverdueBooks()`.
+
+Given below is an example usage scenario and how the overdue mechanism behaves at each step:
+
+1. The user enters the overdue command.
+2. `LibTaskParser` creates a new `PatronCommandParser` after preliminary processing the first argument of user input as 
+   `patron`.
+3. `PatronCommandParser` creates a new `OverduePatronCommand` after processing the second argument of user input as 
+   `overdue`.
+4. `LogicManager` executes the `OverduePatronCommand`.
+5. `OverduePatronCommand` calls `Model#updateFilteredPatronList()` to get a filtered list of patrons with overdue books 
+   by passing in `Model#hasOverdueBooks()` as predicate argument.
+6. Finally, `OverduePatronCommand` creates a `CommandResult` with the message and returns it to `LogicManager` to 
+   complete the command.
+
+The following sequence diagram shows how the overdue command works:
+
+<img src="images/OverduePatronCommandSequenceDiagram.png" width="800" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PatronCommandParser` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The following activity diagram summarizes what happens when a user executes an overdue command:
+
+<img src="images/OverduePatronCommandActivityDiagram.png" width="300" />
+
+#### Design considerations
+
+Unlike some other patron and book features, `patron overdue` designed to be a stand-alone command (i.e. does not need to
+be used in conjunction with any other command) and requires no parameters. This is because iterating through LibTask
+patrons and filtering them based on their borrowed book statuses does not require pre-processing by any
+other command or additional information.
+
+LibTask can store a large number of books and patrons, making it infeasible for the user to scroll through the book list
+to identify patrons with books borrowed beyond their return dates. The design of the overdue command hence enhances 
+LibTask's usability, as librarians can experience more efficient processing of overdue books.
+
+`patron overdue` is designed to not affect the displayed book list while interacting with LibTask's patron list (for 
+example by displaying all overdue books in the displayed book list). However, executing the `book related` command in 
+succession to the overdue command gives users a more detailed view the patron's overdue books.
+
 ### Request Feature
 
 This feature allows users to keep track of books that are requested by patrons, and allow users to be automatically reminded to notify requesters when the books of interest become available.
@@ -426,15 +477,19 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Product scope
 
+LibTask aids librarians in managing statuses of books borrowed and along with their borrowers. Keeping track of book 
+requests by patrons who are interested in the books when they become available. Organizing books and patrons into 
+categories for effective querying and extraction of insightful data.
+
 **Target user profile**:
 
 * a librarian who wants to manage book loans and requests by patrons
-* prefer desktop apps over other types
+* prefer desktop apps over other types of applications
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* is reasonably comfortable using CLI applications
 
-**Value proposition**: simplifying how librarians manage the status of library book loans and requests by patrons
+**Value proposition**: simplifying how librarians manage library book loans and requests by patrons.
 
 
 ### User stories
@@ -933,7 +988,8 @@ Extension
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 patrons and books without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. A user with average regular English text typing speed (i.e. not code, not system admin commands) should be able to 
+   accomplish most of their tasks faster using commands than using a mouse.
 4. A novice with no coding background should be able to use the Lib Task.
 5. The system should respond in 1 second.
 
@@ -1007,6 +1063,39 @@ testers are expected to do more *exploratory* testing.
 
 2. _{ more test cases …​ }_
 
+###Overdue command
+
+1. Displaying patrons with overdue books while no book has been borrowed.
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Ensure that all 
+      borrowed books have been returned.
+   
+   2. Test case: `patron overdue`<br>
+      Expected: Patron list is empty.
+
+2. Displaying patrons with overdue books while there are borrowed books but no borrowed book is overdue.
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Return all borrowed 
+      books with return dates before the present date.
+      Ensure that there are some books borrowed with return dates after the present date.
+
+   2. Test case: `patron overdue`<br>
+      Expected: Patron list is empty.
+
+3. Displaying patrons with overdue books while there are borrowed books and all of them are overdue.
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Return all borrowed 
+      books with return dates after the present date.
+      Ensure that there are some books borrowed with return dates before the present date.
+
+   2. Test case: `patron overdue`<br>
+      Expected: Patron list contains borrowers of all books borrowed.
+
+4. Displaying patrons with overdue books while there are borrowed books and some of them are overdue. 
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Ensure that there 
+      are some books borrowed with return dates after the present date.
+      Ensure that there are some books borrowed with return dates before the present date.
+
+   2. Test case: `patron overdue`<br>
+      Expected: Patron list contains borrowers of all books borrowed with return dates before the present date.
+
 ### Listing all books related to a patron
 1. Listing all books related to a patron while all books are being shown and a book has been borrowed by a patron
 
@@ -1056,7 +1145,6 @@ and borrowed by a patron.
 
    3. Test case: `book related 2`<br>
       Expected: The first, second and third book are shown in the book list. 
-
 
 ### Saving data
 
