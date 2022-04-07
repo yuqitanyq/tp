@@ -811,7 +811,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. LibTask shows an empty book list.
 
   Use case ends.
+
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 **UC08: Edit a book on LibTask**
@@ -843,7 +845,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. LibTask shows an error message saying that at least ISBN, author or category must be provided.
 
   Use case resumes from step 1.
+
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 **UC09: Find books on LibTask**
@@ -874,7 +878,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1c1. Lib Task shows an error message.
 
   Use case ends.
+
 --------------------------------------------------------------------------------------------------------------------
+
 **UC10: Delete Book from LibTask**
 
 **MSS**
@@ -898,7 +904,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b1. LibTask shows an error message.
 
    Use case resumes from step 1.
+
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 **UC11: Borrow Book**
@@ -934,7 +942,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c1. LibTask shows an error message.
 
   Use case resumes from step 3.
+
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 **UC12: Return Book on LibTask**
@@ -968,7 +978,9 @@ Use case ends.
   * 2c1. LibTask shows an error message.
 
   Use case resumes from step 2
+
 --------------------------------------------------------------------------------------------------------------------
+
 **UC13: Show previously run commands**
 
 **MSS**
@@ -985,7 +997,9 @@ Extension
     * 1a1. LibTask shows an empty CommandBox.
 
   Use case ends.
+
 --------------------------------------------------------------------------------------------------------------------
+
 **UC14: List books related to a patron**
 
 **MSS**
@@ -1010,7 +1024,9 @@ Extension
   * 3a1. LibTask returns an empty book list.
 
   Use case ends
+
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 **UC15: List patrons with overdue books**
@@ -1031,7 +1047,9 @@ Extension
     * 2a1. LibTask shows an empty patron list.
 
   Use case ends.
+
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 **UC16: Request Book**
@@ -1078,7 +1096,9 @@ Extension
     * 3e1. LibTask shows an error message.
 
   Use case resumes from step 3.
+
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 **UC17: Asking for Help on LibTask**
