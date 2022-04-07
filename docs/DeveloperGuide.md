@@ -355,7 +355,7 @@ Associating a book request with multiple book copies introduces some problems. I
 
 ### Book Find feature
 
-This feature allows users to search for any books with either the isbn, title or author's name. 
+This feature allows users to search for any books with either the tag, title or author's name. 
 
 #### Implementation
 The Book find feature is facilitated by the `BookCommandParser`, `FindBookParser` and `FindBookCommand`. 
@@ -364,8 +364,8 @@ Given below is an example usage scenario and how the request mechanism behaves a
 
 1. The user enters a book find command and provides the parameter for the search query.
 2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turns creates a new `FindBookParser`.
-3. `FindBookParser` creates either a `BookAuthorContainsKeywordsPredicatem` or `BookNameContainsKeywordsPredicate` or `BookTagContainsKeywordsPredicate` object `predicate` with the search query.4. 
-4. `FindBookParser` creates a new `FindBookCommand` based on the processed input and passes the predicate on.
+3. `FindBookParser` creates either a `BookAuthorContainsKeywordsPredicate` or `BookNameContainsKeywordsPredicate` or `BookTagContainsKeywordsPredicate` object `predicate` with the search query.
+4. `FindBookParser` creates a new `FindBookCommand` based on the processed input and passes the `predicate` on.
 5. `LogicManager` then executes the `FindBookCommand`. 
 6. `FindBookCommand` calls `Model#updateFilteredBookList()` with the `predicate`, resulting in the book list to be updated to display all the books that match the given search query.
 7. Finally, the `FindBookCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command. 
@@ -377,9 +377,10 @@ The following activity diagram summarizes what happens when a user executes a re
 
 #### Design considerations
 
-Each find query can only be one of either the tag, author or title. The feature is designed to return all books that match the predicate created and display them. We chose not to include the isbn as a user searchable query as it is likely that most users would remember the title of the book or the author's name rather than the isbn.
+Each find query can only be one of either the tag, author or title. The feature is designed to display all books that match the predicate created and display them. We chose not to include the isbn as a user searchable query as it is likely that most users would remember the title of the book or the author's name rather than the isbn.
 To account for cases where there might be multiple editions of the same book, the book find will return partial matches. This increases usability as the librarian can find all books that match the title even if it is the first edition or the fifth.
-The feature is also designed to make other features like `borrow` and `request` easier. LibTask can store a large amount of books and users cannot be expected to scroll through them just to find the index of the book they are looking for. `book find` aims to reduce the time spent searching by providing a simple way to search for your book in multiple ways. 
+The feature is also designed to make other features like `borrow` and `request` easier. LibTask can store a large amount of books and users cannot be expected to scroll through them just to find the index of the book they are looking for. `book find` aims to reduce the time spent searching by providing a simple way to search for your book in multiple ways.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -1144,24 +1145,24 @@ and borrowed by a patron.
 ### Searching for a book based on tags, author, title
 1. Searching for a book based on title.
 
-  1. Prerequisites: List all books using the `book list` command. Ensure that there is one book is titled "Harry Potter and the Philosopher's Stone".
+   1. Prerequisites: List all books using the `book list` command. Ensure that there is only one book is titled "Harry Potter and the Philosopher's Stone".
 
-  2. Test case: `book find n/Harry Potter and the Philospher's Stone`
-     Expected: One book will be displayed in the book list. 
+   2. Test case: `book find n/Harry Potter and the Philospher's Stone`
+      Expected: One book with the title "Harry Potter and the Philosopher's Stone" will be displayed in the book list. 
 
 2. Searching for a book based on tags.
 
-  1. Prerequisites: List all books using the `book list` command. Ensure that one book has the tag "Romance".
+   1. Prerequisites: List all books using the `book list` command. Ensure that only one book has the tag "Romance".
 
-  2. Test case: `book find t/Adventure`
-     Expected: One book will be shown in the book list.
+   2. Test case: `book find t/Romance`
+      Expected: One book will with the tag "romance" be shown in the book list.
 
 3. Searching for a book based on author.
 
-  1. Prerequisites: List all books using the `book list` command. Ensure one book has an author "Suzanne Collins".
+   1. Prerequisites: List all books using the `book list` command. Ensure only one book has an author "Suzanne Collins".
 
-  2. Test case: `book find a/Suzanne Collins`
-     Expected: That book will be displayed in the Book list. 
+   2. Test case: `book find a/Suzanne Collins`
+      Expected: One book with the author "Suzanne Collins" be displayed in the Book list. 
 
 ### Saving data
 
