@@ -257,7 +257,7 @@ Format: `u`
 * Loads your previous successfully entered commands back to the command box so you can view and rerun it.
 * Only allows each command to be viewed once.
 
-#### Saving LibTask's data
+#### 3.1.5. Saving LibTask's data
 
 LibTask's data is saved in the hard disk automatically after any command that changes it. There is no need to save manually.
 
