@@ -39,13 +39,13 @@ deactivate FindBookCommandParser
 
 BookCommandParser -> FindBookCommandParser : parse("t/adventure")
 activate FindBookCommandParser
-alt
+alt [A tag_prefix]
     FindBookCommandParser -> Model : BookTagContainsKeywordsPredicate
     Model --> FindBookCommandParser
-else
+else [Name_prefix]
     FindBookCommandParser -> Model : BookNameContainsKeywordsPredicate
     Model --> FindBookCommandParser
-else
+else [Author_prefix]
     FindBookCommandParser -> Model : BookAuthorContainsKeywordsPredicate
     Model --> FindBookCommandParser
 end
