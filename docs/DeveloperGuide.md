@@ -1075,32 +1075,126 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all patrons using the `patron list` command. Multiple patrons in the list.
 
-    1. Test case: `patron delete 1`<br>
-       Expected: First patron is deleted from the list. Details of the deleted patron shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `patron delete 1`<br>
+       Expected: First patron is deleted from the list. Details of the deleted patron shown in the status message.
 
-    1. Test case: `patron delete 0`<br>
-       Expected: No patron is deleted. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect delete commands to try: `patron delete`, `patron delete x`, `...` (where x is larger than the list size)<br>
+    3. Test case: `patron delete 0`<br>
+       Expected: No patron is deleted. Error details shown in the status message.
+   
+    4. Other incorrect delete commands to try: `patron delete`, `patron delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
-
 ### Deleting a book
-1. Deleting a book while all books are being shown
+1. Deleting an available book while all books are being shown
 
-   1. Prerequisites: List all books using the `book list` command. Multiple books in the list.
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list. The first book must not be borrowed
 
-   1. Test case: `book delete 1`<br>
-      Expected: First book is deleted from the list. Details of the deleted book shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `book delete 1`<br>
+      Expected: First book is deleted from the list. Details of the deleted book shown in the status message.
 
-   1. Test case: `book delete 0`<br>
-      Expected: No book is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `book delete`, `book delete x`, `...` (where x is larger than the list size)<br>
+   3. Test case: `book delete 0`<br>
+      Expected: No book is deleted. Error details shown in the status message.
+   
+   4. Other incorrect delete commands to try: `book delete`, `book delete x`, `...` (where x is larger than the size of book list)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
+2. Deleting a borrowed book while all books are being shown
+
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the list. The first book must be borrowed
+
+   2. Test case: `book delete 1`<br>
+      Expected: First book is not deleted from the list. Error details shown in the status message.
+
+### Borrowing a book
+
+1. Borrowing a book while all books and all patrons are being shown
+
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. The first book must be available. The first patron is not borrowing any book with the same ISBN as the first book. The second book is already borrowed by the second patron.
+
+   2. Test case: `borrow 1 0 01-May-2022`<br>
+      Expected: No book is borrowed. Error details shown in the status message.
+   
+   3. Test case: `borrow 1 1 01-May-2022`<br>
+      Expected: First book is borrowed by first patron with a return date of 01-May-2022. The initial `Available` tag on the borrowed book is changed to `Borrowed`. Two additional rows of information is shown under `Borrowed`. The additional information is the borrower's name and the return date.
+   
+   4. Test case: `borrow 1 1 01-May-1999`<br>
+      Expected: No book is borrowed. Error details shown in the status message.
+
+   5. Test case: `borrow 1 2 01-May-2022`<br>
+      Expected: No book is borrowed. Error details shown in the status message.
+   
+   6. Test case: `borrow 2 2 01-May-2022`<br>
+      Expected: No book is borrowed. Error details shown in the status message.
+
+   7. Test case: `borrow 0 1 01-May-2022`<br>
+      Expected: No book is borrowed. Error details show in the status message.
+   
+   8. Other incorrect borrow commands to try: `borrow `, `borrow 1 1 31-Apr-2022`, `borrow x y 01-May-2022`, `...` (where either x is larger than size of patron list, or y is larger than size of book list)<br>
+      Expected: Similar to previous.
+
+### Returning a book
+
+1. Returning a book that does not have any requesters while all books and all patrons are being shown
+
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. The first book must be borrowed and not have any requesters.
+
+   2. Test case: `return b/1`
+      Expected: First book is returned. The initial `Borrowed` tag on the returned book is changed to `Available`. The rows showing the borrower and return date is removed.
+
+   3. Test case: `return b/0`
+      Expected: No book is returned. Error details show in the status message.
+
+   4. Other incorrect return commands to try: `return `, `return a/1`, `return b/x`, `...` (where either x is larger than size of book list)<br>
+      Expected: Similar to previous.
+   
+2. Returning a book that has at least one requester while all books and all patrons are being shown
+
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. The first book must be borrowed. The first book is requested by the first patron.
+
+   2. Test case: `return b/1`
+      Expected: First book is returned. The initial `Borrowed` tag on the returned book is changed to `Available`. The rows showing the borrower and return date is removed. The `Requested By` tag is removed and the row showing name of the requester is removed. A reminder message is shown in the status message to remind the librarian to notify the first patron.
+
+3. Returning all books by a patron while all books and all patrons are being shown
+
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. Only the first book, second book, and third book are borrowed by the first patron. Among the three books, some have requesters while some do not have requesters.
+
+   2. Test case: `return p/1`
+      Expected: The first, second, and third books are returned. For all returned books, the initial `Borrowed` tag on the returned book is changed to `Available`. The rows showing the borrower and return date is also removed. For all returned books that have requesters, the `Requested By` tag and the row showing names of requesters will be be removed. Reminder messages is shown in the status message to remind the librarian to notify patrons who requested for some of the returned books.
+   
+   3. Test case: `return p/0`
+      Expected: No book is returned. Error details show in the status message.
+
+   4. Other incorrect return commands to try: `return p/x`, `...` (where either x is larger than size of patron list)<br>
+      Expected: Similar to previous.
+
+### Requesting a book
+
+1. Requesting a book while all books and patrons are being shown
+
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. The first book and all its copies must be borrowed. The first book must not already be requested by the first patron, and does not have any requesters. The first book is borrowed by the second patron.
+
+   2. Test case: `book request 1 1`<br>
+      Expected: All books with same isbn as the first book is requested by the first patron. For all such books, an additional `Requested By` tag is shown under the row with return date. Name of requester is shown under the `Requested By` tag.
+
+   3. Test case: `book request 2 1`<br>
+      Expected: No book is requested. Error details shown in the status message.
+
+   4. Test case: `book request 1 1`<br>
+      Note: This test case must be done after step ii, when the first patron is still requesting for the first book, in order to get the expected result.   
+      Expected: No book is requested. Error details shown in the status message.
+
+   5. Test case: `book request 0 1`<br>
+      Expected: No book is requested. Error details shown in the status message.
+
+   6. Other incorrect book commands to try: `book request 1 0`, `book request x y`, `...` (where either x is larger than size of patron list, or y is larger than size of book list)<br>
+      Expected: Similar to previous.
+
+2. Requesting a book that has some available copies
+
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. The first book is borrowed. The second book has the same isbn as the first book and is available.
+   
+   2. Test case: `book request 1 1`<br>
+      Expected: No book is requested. Error details shown in the status message.
 
 ###Overdue command
 

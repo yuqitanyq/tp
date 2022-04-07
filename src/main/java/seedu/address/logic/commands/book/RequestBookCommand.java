@@ -29,7 +29,8 @@ public class RequestBookCommand extends Command {
             + "does not exceed the largest index number in the displayed book list\n"
             + "Example: " + BOOK_COMMAND_GROUP + " " + REQUEST_COMMAND_WORD + " 1 1";
 
-    public static final String MESSAGE_REQUEST_BOOK_SUCCESS = "Patron %1$s requested for all books with isbn %2$s";
+    public static final String MESSAGE_REQUEST_BOOK_SUCCESS = "Patron %1$s requested for all books with "
+            + "the same isbn as %2$s";
     public static final String MESSAGE_ALREADY_REQUESTED = "Patron %1$s already requested for %2$s";
     public static final String MESSAGE_MAX_REQUEST = "%1$s already has maximum number of requesters!";
     public static final String MESSAGE_HAS_AVAILABLE = "There is at least one copy of %1$s that is available.\n"
