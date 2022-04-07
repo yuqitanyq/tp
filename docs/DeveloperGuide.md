@@ -740,36 +740,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### UC08: Find books on LibTask
-
-**MSS**
-1. User requests to find books and provides either a tag, author or title.
-
-2. LibTask shows the books that match the search.
-
-    Use case ends.
-
-**Extension**
-
-* 1a. The given search is invalid.
-
-  * 1a1. LibTask shows an error message.
-
-  Use case resumes from step 1.
-
-* 1b. No books match the given query.
-
-  * 1b1. LibTask shows an empty list.
-
-  Use case ends.
-
-* 1c. More than search parameter was provided.
-
-  * 1c1. Lib Task shows an error message.
-
-  Use case ends.
-
-#### UC09: Edit a book on LibTask
+#### UC08: Edit a book on LibTask
 
 **MSS**
 
@@ -798,6 +769,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. LibTask shows an error message saying that at least ISBN, author or category must be provided.
 
   Use case resumes from step 1.
+
+#### UC09: Find books on LibTask
+
+**MSS**
+1. User requests to find books and provides either a tag, author or title.
+
+2. LibTask shows the books that match the search.
+
+   Use case ends.
+
+**Extension**
+
+* 1a. The given search is invalid.
+
+  * 1a1. LibTask shows an error message.
+
+  Use case resumes from step 1.
+
+* 1b. No books match the given query.
+
+  * 1b1. LibTask shows an empty list.
+
+  Use case ends.
+
+* 1c. More than search parameter was provided.
+
+  * 1c1. Lib Task shows an error message.
+
+  Use case ends.
 
 #### UC10: Delete Book from LibTask
 
@@ -889,35 +889,7 @@ Use case ends.
 
   Use case resumes from step 2
 
-#### UC13: Asking for Help on LibTask
-
-**MSS**
-1. User requests to list all commands.
-
-2. LibTask shows the list of all the commands.
-
-  Use case ends.
-
-#### UC14: Exiting LibTask
-
-**MSS**
-1. User requests to exit LibTask.
-
-2. LibTask closes.
-
-  Use case ends.
-
-#### UC15: Clear database of all Patron's and Book's
-
-**MSS**
-
-1. User requests to clear all patrons and books.
-
-2. LibTask clears the all patrons and books.
-
-  Use case ends.
-
-#### UC16: Show previously run commands
+#### UC13: Show previously run commands
 
 **MSS**
 1. User requests to see previous command.
@@ -934,7 +906,7 @@ Extension
 
   Use case ends.
 
-#### UC17: List books related to a patron
+#### UC14: List books related to a patron
 
 **MSS**
 1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
@@ -959,7 +931,7 @@ Extension
 
   Use case ends
 
-#### UC18: List patrons with overdue books
+#### UC15: List patrons with overdue books
 
 **MSS**
 1. User lists all patrons [UC02](#uc02-list-patrons-on-libtask)
@@ -978,7 +950,7 @@ Extension
 
   Use case ends.
 
-#### UC19: Request Book
+#### UC16: Request Book
 
 **MSS**
 1. User lists all patrons. [UC02](#uc02-list-patrons-on-libtask)
@@ -1022,6 +994,34 @@ Extension
     * 3e1. LibTask shows an error message.
 
   Use case resumes from step 3.
+
+#### UC17: Asking for Help on LibTask
+
+**MSS**
+1. User requests to list all commands.
+
+2. LibTask shows the list of all the commands.
+
+Use case ends.
+
+#### UC18: Exiting LibTask
+
+**MSS**
+1. User requests to exit LibTask.
+
+2. LibTask closes.
+
+Use case ends.
+
+#### UC19: Clear database of all Patron's and Book's
+
+**MSS**
+
+1. User requests to clear all patrons and books.
+
+2. LibTask clears the all patrons and books.
+
+Use case ends.
 
 ### Non-Functional Requirements
 
