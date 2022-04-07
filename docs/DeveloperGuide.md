@@ -1266,7 +1266,6 @@ testers are expected to do more *exploratory* testing.
 
 <div style="page-break-after: always;"></div>
 
-
 3. Returning all books by a patron while all books and all patrons are being shown
 
    1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. Only the first book, second book, and third book are borrowed by the first patron. Among the three books, some have requesters while some do not have requesters.
@@ -1316,28 +1315,28 @@ testers are expected to do more *exploratory* testing.
 ### Overdue command
 
 1. Displaying patrons with overdue books while no book has been borrowed.
-  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Ensure that all borrowed books have been returned.
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Ensure that all borrowed books have been returned.
 
-  2. Test case: `patron overdue`<br>
-     Expected: Patron list is empty.
+   2. Test case: `patron overdue`<br>
+      Expected: Patron list is empty.
 
 2. Displaying patrons with overdue books while there are borrowed books but no borrowed book is overdue.
-  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Return all borrowed books with return dates before the present date. Ensure that there are some books borrowed with return dates after the present date.
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Return all borrowed books with return dates before the present date. Ensure that there are some books borrowed with return dates after the present date.
 
-  2. Test case: `patron overdue`<br>
-     Expected: Patron list is empty.
+   2. Test case: `patron overdue`<br>
+      Expected: Patron list is empty.
 
 3. Displaying patrons with overdue books while there are borrowed books and all of them are overdue.
-  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Return all borrowed books with return dates after the present date. Ensure that there are some books borrowed with return dates before the present date.
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Return all borrowed books with return dates after the present date. Ensure that there are some books borrowed with return dates before the present date.
 
-  2. Test case: `patron overdue`<br>
-     Expected: Patron list contains borrowers of all books borrowed.
+   2. Test case: `patron overdue`<br>
+      Expected: Patron list contains borrowers of all books borrowed.
 
 4. Displaying patrons with overdue books while there are borrowed books and some of them are overdue.
-  1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Ensure that there are some books borrowed with return dates after the present date. Ensure that there are some books borrowed with return dates before the present date.
+   1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Ensure that there are some books borrowed with return dates after the present date. Ensure that there are some books borrowed with return dates before the present date.
 
-  2. Test case: `patron overdue`<br>
-     Expected: Patron list contains borrowers of all books borrowed with return dates before the present date.
+   2. Test case: `patron overdue`<br>
+      Expected: Patron list contains borrowers of all books borrowed with return dates before the present date.
 
 <div style="page-break-after: always;"></div>
 
