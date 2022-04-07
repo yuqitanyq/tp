@@ -341,6 +341,9 @@ LibTask can store a large number of books and patrons, making it infeasible for 
 `patron overdue` is designed to not affect the displayed book list while interacting with LibTask's patron list (for example by displaying all overdue books in the displayed book list). However, executing the `book related` command in succession to the overdue command gives users a more detailed view the patron's overdue books.
 
 
+<div style="page-break-after: always;"></div>
+
+
 ### Request Feature
 
 This feature allows users to keep track of books that are requested by patrons, and allow users to be automatically reminded to notify requesters when the books of interest become available.
@@ -485,11 +488,11 @@ Step 1. The user launches the application for the first time. The `VersionedLibT
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
+<div style="page-break-after: always;"></div>
+
 Step 2. The user executes `patron delete 5` command to delete the 5th patron in the LibTask. The `patron delete` command calls `Model#commitLibTask()`, causing the modified state of the LibTask after the `patron delete 5` command executes to be saved in the `libTaskStateList`, and the `currentStatePointer` is shifted to the newly inserted LibTask state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
-
-<div style="page-break-after: always;"></div>
 
 
 Step 3. The user executes `patron add n/David …​` to add a new patron. The `patron add` command also calls `Model#commitLibTask()`, causing another modified LibTask state to be saved into the `libTaskStateList`.
@@ -509,6 +512,7 @@ Step 4. The user now decides that adding the patron was a mistake, and decides t
 </div>
 
 <div style="page-break-after: always;"></div>
+
 
 The following sequence diagram shows how the undo operation works:
 
@@ -1259,6 +1263,9 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `return b/1`
       Expected: First book is returned. The initial `Borrowed` tag on the returned book is changed to `Available`. The rows showing the borrower and return date is removed. The `Requested By` tag is removed and the row showing name of the requester is removed. A reminder message is shown in the status message to remind the librarian to notify the first patron.
+
+<div style="page-break-after: always;"></div>
+
 
 3. Returning all books by a patron while all books and all patrons are being shown
 
