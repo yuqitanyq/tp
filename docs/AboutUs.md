@@ -34,7 +34,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](http://github.com/yuqitanyq)] [[portfolio](team/yuqitanyq.md)]
 
 * Role: Developer
-* Responsibilities: Implementation of some book, patron and general commands, plus integration.
+* Responsibilities: Book commands and integration
 
 ### Sarthak Pradhan
 
