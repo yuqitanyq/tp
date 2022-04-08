@@ -183,15 +183,15 @@ The class diagram for the `Model` can be seen above in the [Design section](#mod
 
 #### Design considerations
 
-Initially, `Patron` and `Book` were designed in a way such that both classes contain references to each other. This design allows fast and direct access of certain information, such as all books borrowed and requested by a patron. However, the initial design results in [cyclic reference](#glossary) among classes, which makes it impossible to store patron and book information in json format. For example, the patron json object needs to store a list of books it is referencing, which in turns store a list of patrons it is referencing, which in turn stores more patrons.
+Initially, `Patron` and `Book` were designed in a way such that both classes contain references to each other. This design allows fast and direct access to certain information, such as all books borrowed and requested by a patron. However, the initial design results in [cyclic reference](#glossary) among classes, which makes it impossible to store patron and book information in json format. For example, the patron json object needs to store a list of books it is referencing, which in turns store a list of patrons it is referencing, which in turn stores more patrons.
 
-Furthermore, the initial design results in the problem of cyclic update whenever data is modified. For example, when a patron's name is changed, the corresponding borrower's name of all books borrowed by that patron needs to be changed as well. Since `Book` is [immutable](#glossary), new `Book` objects are created to update the information, and as a result, all `Patron` objects referencing those old `Book` objects needs to be updated as well. Since `Patron` is also immutable, the chain of never ending cyclic updates continues on.
+Furthermore, the initial design results in the problem of cyclic updates whenever data is modified. For example, when a patron's name is changed, the corresponding borrower's name of all books borrowed by that patron needs to be changed as well. Since `Book` is [immutable](#glossary), new `Book` objects are created to update the information, and as a result, all `Patron` objects referencing those old `Book` objects need to be updated as well. Since `Patron` is also immutable, the chain of never ending cyclic updates continues on.
 
-Due to the downsides of the initial design, a decision was made to have only one of `Book` or `Patron` depending on the other. `Book` was chosen to depend on `Patron` because the UI needs to display information of borrower and requesters together with the book. This design does not require the transversal of the whole `UniquePatronList` to identify the borrower and requesters of the book, since such information is stored in `Book` itself. However, transversal of the whole `BookList` is required to find all books related to a patron, or when updating a patron's information. Nevertheless, the amortized cost is much lower as such commands are performed less frequently than the amount of UI updates.
+Due to the downsides of the initial design, a decision was made to have only one`Book` or `Patron` depending on the other. `Book` was chosen to depend on `Patron` because the UI needs to display information about borrowers and requesters together with the book. This design does not require the transversal of the whole `UniquePatronList` to identify the borrower and requesters of the book, since such information is stored in `Book` itself. However, transversal of the whole `BookList` is required to find all books related to a patron, or when updating a patron's information. Nevertheless, the amortized cost is much lower as such commands are performed less frequently than the amount of UI updates.
 
 ### Saving books and patrons to Json format
 
-The saving of books and patrons to json format is performed by the `Storage` component, which class diagram can be seen [above](#storage-component).The `JsonSerializableLibTask` stores both `JsonAdaptedPatron` and `JsonAdaptedBook`, which implementations will be discussed below.
+The saving of books and patrons to json format is performed by the `Storage` component, which class diagram can be seen [above](#storage-component). The `JsonSerializableLibTask` stores both `JsonAdaptedPatron` and `JsonAdaptedBook`, which implementations will be discussed below.
 
 <div style="page-break-after: always;"></div>
 
@@ -295,7 +295,7 @@ The following activity diagram summarizes what happens when a user executes a re
 
 #### Design considerations
 
-The return command is designed to be to return multiple books in one command, while providing the user with the option of returning a single book. This enhances the usability of the feature, as the librarian can experience more efficient processing of books, while retaining fine-grain control of the process if needed (e.g. in situations when a patron only intends to return some of his/her borrowed books).
+The return command is designed to be able to return multiple books in one command, while providing the user with the option of returning a single book. This enhances the usability of the feature, as the librarian can experience more efficient processing of books, while retaining fine-grain control of the process if needed (e.g. in situations when a patron only intends to return some of his/her borrowed books).
 
 Despite having similar functionalities, the return commands are split into `ReturnOneBookCommand` and `ReturnAllBooksCommand` because they depend on different methods in `Model`, and have structurally similar but logically different execution. As per the [_Single Responsibility Principle_](#glossary), the return commands are separated into different classes so that each class is responsible for the logical implementation of only one subcommand.
 
@@ -335,7 +335,7 @@ The following activity diagram summarizes what happens when a user executes an o
 
 #### Design considerations
 
-Unlike some other patron and book features, `patron overdue` designed to be a stand-alone command (i.e. does not need to be used in conjunction with any other command) and requires no parameters. This is because iterating through LibTask patrons and filtering them based on their borrowed book statuses does not require pre-processing by any other command or additional information.
+Unlike some other patron and book features, `patron overdue` is designed to be a stand-alone command (i.e. does not need to be used in conjunction with any other command) and requires no parameters. This is because iterating through LibTask patrons and filtering them based on their borrowed book statuses does not require pre-processing by any other command or additional information.
 
 LibTask can store a large number of books and patrons, making it infeasible for the user to scroll through the book list to identify patrons with books borrowed beyond their return dates. The design of the overdue command hence enhances LibTask's usability, as librarians can experience more efficient processing of overdue books.
 
@@ -583,7 +583,7 @@ LibTask aids librarians in managing statuses of books borrowed and along with th
 
 * a librarian who wants to manage book loans and requests by patrons
 * prefer desktop apps over other types of applications
-* can type fast
+* able to type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using [CLI](#glossary) applications
 
