@@ -1498,9 +1498,42 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `book find a/Suzanne Collins`
       Expected: One book with the author "Suzanne Collins" be displayed in the Book list.
 
-### Saving data
+## **Appendix: Effort**
 
-1. Dealing with missing/corrupted data files
+LibTask is a result of tremendous effort put in by each of the team members. Since the beginning of the project, our team met up consistently for six to eight hours weekly to discuss ideas for improving LibTask, as well as reviewing and debugging one another's code to maintain LibTask's high quality code base. The section below outlines different aspects of challenges faced throughout the development of LibTask, justification of notable efforts put in, as well the achievements of LibTask that the development team is proud of.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-    
+### Extension of Model component and non-unique nature of `BookList`
+
+The original restrictions on `PersonList` in AB-3 that disallows `Person` with the same name is a convenient way of avoiding bugs. For the purpose of LibTask, however, it does not make sense to disallow books with the same name, or isbn, or authors etc. This is because libraries often contain multiple copies of the exact same book. There can be multiple `Book` objects with the exact same name, isbn, author, and status, therefore `BookList` can be buggy because it can contain multiple objects that are same based on `Book::equals()` method. This is resolved by adding a `timeAdded` attribute, which is the time the book is added into the system. This attribute cannot be changed through any commands, and therefore solves the above-mentioned problem.
+
+Another challenge is that the use case of LibTask also requires that all books with the same isbn must have the same name and authors. An initial consideration is to use the `Abstract Occurence` pattern in Week 10 topics, where a single book is represented by `Abstraction` and `Occurence` classes. However, this pattern binds book name and authors to isbn, and enforces a stronger than necessary requirement that books with same name must have the same isbn. This does not fit our use case because books with different edition can have the same name but different isbn. Hence, our team deliberately chose not to enforce such a constraint through design patterns, but rather introduced the following invariant and maintained the invariant at each step of command execution:
+
+Invariant 1: If a book has same isbn as another book, then both books must have the same name, and same set of authors.
+
+The method used to maintain such invariants is discussed in the next section.
+
+### Elimination of Data Inconsistency
+
+The original AB-3 code only contains one main type of object, which is `Person` object. Upon extension of `Model` component to include `Book` object that references `Patron` object, many data inconsistencies arise due to the immutable nature of `Book` and `Patron`. One example is that when a patron is edited, books borrowed and requested by that patron may not have their borrower and requester information updated, causing the name displayed on Book Card to be outdated.
+
+Instead of relying only on testing, LibTask uses a formal method approach to establish certain invariants to be held true after execution of every command, and use these invariants to prove the absence of data inconsistency bugs during the execution of the program. Some invariants were shown below to illustrate the careful consideration by the team to eliminate bugs:
+
+Invariant 1: A book can have requesters if and only if it does not have an available copy (i.e. another book with the same isbn).
+Invariant 2: Books with the same isbn must have the same set of requesters.
+Invariant 3: Borrower and requester information of a book must be the most updated patron information.
+
+To maintain invariant 1, we identify commands that can possibly add requesters, such as `book request` command, and commands that can modify availability of a book copy, such as `borrow`, `return`, and non-trivially `book edit`, `book add` and `patron delete` commands. We then impose suitable restrictions or behaviour modifications to those commands to ensure invariant 1 is maintained, as follows:
+
+`book request`: Modify initial behaviour such that only books with no available copies can be requested, shows error otherwise.
+`borrow`: No modification required
+`return`: When a book is returned and becomes available, the second part of the invariant is violated. To maintain the invariant, all requesters are removed from all copies of the book, and the librarian is reminded to notify all those requesters.
+`book edit`: When a book is edited to another existing isbn, it may be an available book, which causes the new isbn to have an available copy. One way of maintaining invariant 1 is to remove all requesters for the new isbn and notify them, while another way is to disallow such edits. Our team chose the later method as this method is a more rational way of maintaining invariant 2 as well. When editing a book into another existing isbn, the set of requesters may be different for both old and new isbn, resulting in the new isbn now having a book copy with different requesters. For example, the user wants to change isbn of book A from 1 to 2, but different requesters are requesting for books with isbn 1 and 2. One method is to change the requesters of all books with isbn 2 to the requesters of book A, then invariant 2 is maintained. This does not make sense from the user point of view because the requesters of book A were originally requesting for isbn 1, not isbn 2. Hence, disallowing such an action is a better way to maintain data consistency.
+`book add`: When adding another copy of existing, the previous copies may all be borrowed and requested by some patrons. Since there is now an available copy, the behaviour of `book add` is also modified to remove all requesters and remind the librarian to notify them in such a situation, in order to maintain invariant 1.
+`patron delete`: When deleting a patron that has unreturned books, the decision to be made is whether the borrowed book should become available. If it becomes available, then the librarian should be reminded to notify all requesters for that book to maintain invariant 1. This does not make sense because physically the book is not returned yet. It also does not make sense to perform a cascading deletion on book when patron is deleted, because they are viewed as separate independent entities. Therefore, a decision is made to disallow deletion of patron with borrowed books
+
+The detailed reasoning above demonstrates the rigorous reasoning adopted by our team before deciding on every minor behavioural changes to LibTask commands, in order to maintain data integrity. The thought process for maintaining other invariants are similar and thus omitted for brevity.
+
+### Achievement
+
+Our team is proud that we do not only rely on testing, but also rigorous reasoning and formal methods to prove the absence of data inconsistency bugs, while imposing only reasonable restrictions to our commands. Among the 50 bug reports received during Practical Exam Dry Run, none of the bugs received are related to data inconsistency.
+
