@@ -22,10 +22,10 @@ The purpose of this guide is to explain to you how to use **LibTask** and to all
 
 Take note of following symbols that are used in this document:
 
-| Icon                 | Explanation                                                                                    |
-|----------------------|------------------------------------------------------------------------------------------------|
-| :information_source: | This symbol is used to highlight extra knowledge.                                              |
-| :exclamation:        | This symbol is used to warn users of potential actions that might corrupt LibTask's data file. |
+| Icon                 | Explanation                                                                             |
+|----------------------|-----------------------------------------------------------------------------------------|
+| :information_source: | This symbol is used to highlight extra knowledge.                                       |
+| :exclamation:        | This symbol is used to warn users of potential actions that might erase LibTask's data. |
 
 ### 1.3. Navigating the User Guide
 
@@ -39,7 +39,6 @@ If you are an advanced user, you can refer to our [Command summary](#5-command-s
 
 For the glossary of content, you can refer to our [Glossary](#7-glossary) section.
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## **2. Quick start**
@@ -79,7 +78,7 @@ The various GUI components of LibTask are described in the picture below:
 
 <div markdown="block" class="alert alert-info">
 
-**Warning:**<br>
+**:exclamation: Warning:**<br>
 
 Do not clear LibTask's pre-existing data if you wish to test its commands. You are recommended to finish testing prior 
 to doing this tutorial.
@@ -149,7 +148,7 @@ Method B:
 
 <div markdown="block" class="alert alert-info">
 
-**Notes:**<br>
+**:information_source: Notes:**<br>
 
 * The return dates of the above `borrow` commands may be changed. 
 
@@ -186,7 +185,7 @@ notify Christian Grey that the book is now available.
 
 <div markdown="block" class="alert alert-info">
 
-**Notes:**<br>
+**:information_source: Notes:**<br>
 
 * Multiple patrons may request for `Death on the Nile` in which case, `Result box` would remind you to notify all of them once the book is returned.
 
@@ -194,7 +193,6 @@ notify Christian Grey that the book is now available.
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## **3. Features**
@@ -240,6 +238,14 @@ Format: `help`
 
 #### 3.1.2. Clearing all entries : `clear`
 
+<div markdown="block" class="alert alert-info">
+
+**:exclamation: Warning:**<br>
+
+Do not clear LibTask's pre-existing data if you wish to test its commands.
+
+</div>
+
 Clears all patrons and books from LibTask's patron and book lists.
 
 Format: `clear`
@@ -259,7 +265,7 @@ Format: `u`
 * Loads your previous successfully entered commands back to the command box so you can view and rerun it.
 * Only allows each command to be viewed once.
 
-#### Saving LibTask's data
+#### 3.1.5. Saving LibTask's data
 
 LibTask's data is saved in the hard disk automatically after any command that changes it. There is no need to save manually.
 
@@ -277,7 +283,7 @@ Format: `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the add command:**<br>
+**:information_source: Notes about the add command:**<br>
 
 * ID must be 9 characters in length. First character of ID should be 'A' and last character of ID should be a capital letter.
 
@@ -298,13 +304,17 @@ you can enter the following command:
 
 `patron add n/John s/A0212828X p/93231222 e/e03482@u.nus.edu t/student`
 
-Before entering the command, there is no existing patron with the same name, id or email in LibTask.
+<div style="page-break-after: always;"></div>
+
+Before entering the command, the above patron does not exist in LibTask.
 
 ![patron-add-1](images/patron-add-1.png)
 
 After entering the command, the new patron is added.
 
 ![patron-add-2](images/patron-add-2.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 3.2.2. Listing all patrons : `patron list`
 
@@ -314,7 +324,7 @@ Format: `patron list`
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the list command:**<br>
+**:information_source: Notes about the list command:**<br>
 
 * If all patrons are already listed, the command will still show a success message as having listed all patrons, but the patrons listed will have no visual change.
 
@@ -325,6 +335,8 @@ Format: `patron list`
 Before entering the command only two patrons are listed.
 
 ![patron-list-1](images/patron-list-1.png)
+
+<div style="page-break-after: always;"></div>
 
 After entering the command, all patrons will be listed.
 
@@ -338,7 +350,7 @@ Format: `patron find KEYWORD [KEYWORD]…​`
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the find command:**<br>
+**:information_source: Notes about the find command:**<br>
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 
@@ -348,10 +360,12 @@ Format: `patron find KEYWORD [KEYWORD]…​`
 
 * Only full words will be matched e.g. results from the keyword `Han` will not match results from the keyword `Hans`
 
-* Patrons matching at least one part of the keyword will be returned (i.e. `OR` search).
+* Patrons matching at least one part of the keyword will be returned.
   e.g. keyword `Hans Bo` will return patrons with names `Hans Gruber`, `Bo Yang`
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 **Example:**
 
@@ -367,6 +381,8 @@ After entering the command, only patrons with names containing "alex" or "david"
 
 ![patron-find-2](images/patron-find-2.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 3.2.3. Editing a patron : `patron edit`
 
 To edit the details of a specific patron, you can enter the edit command with the format shown below.
@@ -375,7 +391,7 @@ Format: `patron edit INDEX [n/NAME] [s/ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the edit command:**<br>
+**:information_source: Notes about the edit command:**<br>
 
 * Edits the patron at the specified `INDEX`. The index refers to the index number shown in the displayed patron list. The index **must be a positive integer** 1, 2, 3, … and cannot exceed the largest index number in the displayed patron list.​
 
@@ -397,13 +413,17 @@ To edit the first patron's name from `Alex Yeoh` to `John Cena`, its phone numbe
 
 `patron edit 1 n/John Cena p/91959491 e/johncena@u.nus.edu`
 
+<div style="page-break-after: always;"></div>
+
 Before entering the command, the first patron still has its original name, phone number and email.
 
-![patron-edit-1](images/patron-edit-1.png)
+![patron-edit-1](images/patron-edit-11.png)
 
 After entering the command, the first patron has its name edited to `John Cena`, phone number edited to `91959491` and email edited to `johncena@u.nus.edu`
 
-![patron-edit-2](images/patron-edit-2.png)
+![patron-edit-2](images/patron-edit-21.PNG)
+
+<div style="page-break-after: always;"></div>
 
 To remove all tags and edit the first patron's name from `Alex Yeoh` to `John Cena`, its phone number from `87438807` to `91959491` and email from `alexyeoh@example.com` to `johncena@u.nus.edu`you can enter the following command:
 
@@ -411,11 +431,13 @@ To remove all tags and edit the first patron's name from `Alex Yeoh` to `John Ce
 
 Before entering the command, the first patron has different tags.
 
-![patron-edit-3](images/patron-edit-3.png)
+![patron-edit-3](images/patron-edit-31.PNG)
 
 After entering the command, the first patron will have their tags removed.
 
-![patron-edit-4](images/patron-edit-4.png)
+![patron-edit-4](images/patron-edit-41.PNG)
+
+<div style="page-break-after: always;"></div>
 
 #### 3.2.5. Deleting a patron : `patron delete`
 
@@ -425,7 +447,7 @@ Format: `patron delete INDEX`
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the delete command:**<br>
+**:information_source: Notes about the delete command:**<br>
 
 * Deletes the patron at the specified `INDEX`.
 
@@ -445,6 +467,8 @@ Before entering the command, the second patron in LibTask is `Bernice Yu`.
 
 ![patron-delete-1](images/patron-delete-1.png)
 
+<div style="page-break-after: always;"></div>
+
 After entering the command, patron `Bernice Yu` is deleted.
 
 ![patron-delete-2](images/patron-delete-2.png)
@@ -455,15 +479,19 @@ To list all patrons with overdue books, you can enter the overdue command with t
 
 Format: `patron overdue`
 
+<div style="page-break-after: always;"></div>
+
 **Example:**
 
 Before entering the command, all patrons are displayed.
 
-![patron-list-1](images/patron-list-1.png)
+![patron-list-1](images/patron-overdue-1.png)
 
 After entering the command, only patrons with overdue books are displayed.
 
-![patron-list-2](images/patron-list-2.png)
+![patron-list-2](images/patron-overdue-21.PNG)
+
+<div style="page-break-after: always;"></div>
 
 ### 3.3. Book Features
 
@@ -478,7 +506,7 @@ Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the add command:**<br>
+**:information_source:Notes about the add command:**<br>
 
 * BOOK_NAME must start and end with alphanumeric characters, and can only contain `'` character, `:` character and alphanumeric characters.
 
@@ -502,11 +530,15 @@ To add a book with the name `Introduction to Algorithms`, isbn `9780371888506`, 
 
 `book add n/Introduction to Algorithms a/Cormen a/Leiserson a/Rivest a/Stein i/9780371888506 t/ComputerScience`
 
+<div style="page-break-after: always;"></div>
+
 Before entering the command, a book with the same name already exists in LibTask. However, that copy is currently borrowed by Alex and requested by Bernice and Charlotte.
 ![book-add-1.png](images/book-add-1.PNG)
 
 After entering the command, a new available copy of the book is added. You will also be reminded to notify Bernice and Charlotte about the availability of this book.
 ![book-add-2.png](images/book-add-2.PNG)
+
+<div style="page-break-after: always;"></div>
 
 #### 3.3.2. Listing all books : `book list`
 
@@ -516,7 +548,7 @@ To show a list of all books in LibTask, you can enter the list command with the 
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the list command:**<br>
+**:information_source: Notes about the list command:**<br>
 
 * If all books are already listed, the command will still show a success message as having listed all books, but the books listed will have no visual change.
 
@@ -538,13 +570,15 @@ To find books in LibTask based on book name, author or tags, you can enter the f
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the find command:**<br>
+**:information_source: Notes about the find command:**<br>
 
 * `PREFIX` must be either `t` (for find based on tag), `a` (for finding based on author), or `n` (for finding based on book name).
 
 * All books with a tag, or author, or book name that contains the substring `KEYWORD` will be displayed in the book list.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 **Example**:
 
@@ -558,6 +592,8 @@ Before entering the command, all books are displayed.
 After entering the command, only books that have a tag containing the keyword "computer" are displayed.
 ![book-find-2.png](images/book-find-2.PNG)
 
+<div style="page-break-after: always;"></div>
+
 To find all books for with a book name containing the keyword `Harry`, you can enter the following command:
 
 `book find n/Harry`
@@ -568,6 +604,8 @@ Before entering the command, all books are displayed.
 After entering the command, only one book which name contains `Harry` is displayed.
 ![book-find-4.png](images/book-find-4.PNG)
 
+<div style="page-break-after: always;"></div>
+
 #### 3.3.4. Editing a book : `book edit`
 
 To edit the details of a specific book, you can enter the edit command with the format shown below.
@@ -576,7 +614,7 @@ To edit the details of a specific book, you can enter the edit command with the 
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the edit command:**<br>
+**:information_source: Notes about the edit command:**<br>
 
 * Edits the book at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, … and cannot exceed the largest index number in the displayed book list.
 
@@ -624,7 +662,7 @@ To delete a specific book, you can enter the delete command with the format show
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the delete command:**<br>
+**:information_source: Notes about the delete command:**<br>
 
 * Deletes the book at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, … and cannot exceed the largest index number in the displayed book list.
 
@@ -632,8 +670,10 @@ To delete a specific book, you can enter the delete command with the format show
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Example**:
-* To delete the first book, you can enter the following command:
+To delete the first book, you can enter the following command:
 
 `book delete 1`
 
@@ -643,6 +683,8 @@ Before entering the command, there is a copy of `Harry Potter and The Philosophe
 After entering the command, that copy of `Harry Potter and The Philospher's Stone` is deleted.
 ![book-delete-2.png](images/book-delete-2.PNG)
 
+<div style="page-break-after: always;"></div>
+
 #### 3.3.6. Borrowing a book : `borrow`
 
 To keep track that a specific patron is borrowing a specific book, you can enter the borrow command with the format shown below.
@@ -651,7 +693,7 @@ To keep track that a specific patron is borrowing a specific book, you can enter
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the borrow command:**<br>
+**:information_source: Notes about the borrow command:**<br>
 
 * `PATRON_INDEX` refers to the index number of a patron shown in the displayed patron list.
 
@@ -670,12 +712,14 @@ To keep track that a specific patron is borrowing a specific book, you can enter
 </div>
 
 **Example**:
-* To keep track that the first patron is borrowing the first book until a return date of 5th May 2022, you can enter the following command:
+To keep track that the first patron is borrowing the first book until a return date of 5th May 2022, you can enter the following command:
 
 `borrow 1 1 05-May-2022`
 
 Before entering the command, the first book is available.
 ![book-borrow-1.png](images/book-borrow-1.PNG)
+
+<div style="page-break-after: always;"></div>
 
 After entering the command, that first book is labelled as borrowed, and is borrowed by the first patron Alex Yeoh, until a return data of 05-May-2022.
 ![book-borrow-2.png](images/book-borrow-2.PNG)
@@ -688,7 +732,7 @@ To return a specific book, or to return all books by a specific patron, you can 
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the return command:**<br>
+**:information_source: Notes about the return command:**<br>
 
 * `PREFIX` must be either `p` for patrons or `b` for books.
 
@@ -708,8 +752,10 @@ To return a specific book, or to return all books by a specific patron, you can 
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Examples**:
-* To return all books borrowed by the first patron, you can enter the following command:
+To return all books borrowed by the first patron, you can enter the following command:
 
 `return p/1`
 
@@ -719,7 +765,9 @@ Before entering the command, there are three books borrowed by the first patron.
 After entering the command, all three books borrowed by the first patron is returned. Furthermore, you are reminded to notify the two patrons who requested for the third book.
 ![book-return-2.png](images/book-return-2.PNG)
 
-* To return only the third book, you can enter the following command:
+<div style="page-break-after: always;"></div>
+
+To return only the third book, you can enter the following command:
 
 `return b/3`
 
@@ -729,6 +777,8 @@ Before entering the command, the third book is labelled as borrowed, and has two
 After entering the command, the third book becomes available. The two requesters are also removed as you are reminded to notify both of them about the availability of the returned book.
 ![book-return-4.png](images/book-return-4.PNG)
 
+<div style="page-break-after: always;"></div>
+
 #### 3.3.8. Requesting a book : `book request`
 
 To keep track that a specific patron is requesting for a specific book, you can enter the request command with the format shown below.
@@ -737,7 +787,7 @@ To keep track that a specific patron is requesting for a specific book, you can 
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the request command:**<br>
+**:information_source: Notes about the request command:**<br>
 
 * `PATRON_INDEX` refers to the index number of the patron who is requesting for the book, as shown in the displayed patron list.
 
@@ -759,8 +809,10 @@ To keep track that a specific patron is requesting for a specific book, you can 
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Example**:
-* To keep track that the second patron is requesting for first book, you can enter the following command:
+To keep track that the second patron is requesting for first book, you can enter the following command:
 
 `book request 2 1`
 
@@ -772,6 +824,8 @@ After entering the command, both books are labelled as requested by Bernice Yu (
 
 When a copy of this book becomes available later, you will be reminded to notify Bernice Yu automatically.
 
+<div style="page-break-after: always;"></div>
+
 #### 3.3.9. Listing all books related to a patron : `book related`
 
 To list all books borrowed by or requested by a specific patron, you can enter the related command with the format shown below.
@@ -780,7 +834,7 @@ To list all books borrowed by or requested by a specific patron, you can enter t
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the related command:**<br>
+**:information_source: Notes about the related command:**<br>
 
 * Lists all books borrowed by or requested by a patron at `INDEX`. `INDEX` refers to the index number of the patron of interest, as shown in the displayed patron list.
 
@@ -789,17 +843,21 @@ To list all books borrowed by or requested by a specific patron, you can enter t
 </div>
 
 **Example**:
-* To list all books borrowed by or requested by the second patron, you can enter the following command:
+To list all books borrowed by or requested by the second patron, you can enter the following command:
 
 `book related 2`
 
 Before entering the command, the book list displays all books in LibTask.
 ![book-related-1.png](images/book-related-1.PNG)
 
+<div style="page-break-after: always;"></div>
+
 After entering the command, the book list displays only books that are borrowed by or requested by Bernice Yu (the second patron). In this case, only one book is shown because Bernice Yu did not borrow any book, and requested for one book.
 ![book-related-2.png](images/book-related-2.PNG)
 
 This command is typically used after `patron overdue` command. After listing all patrons with overdue books, you can use this command to check which books are overdue by each patron.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **4. FAQ**
 
@@ -851,6 +909,8 @@ to manually input additional commands to delete the "requested by" tags.
 | **Clear all entries**                      | `clear`                                                                    |
 | **Exit the program**                       | `exit`                                                                     |
 | **Show previous commands**                 | `u`                                                                        |
+
+<div style="page-break-after: always;"></div>
 
 ### 5.2. Patron Commands
 
@@ -906,6 +966,8 @@ Since 132 is a multiple of 11, the above 10-digit ISBN has a valid checksum.
 * Step 2. After obtaining the product of digit and weight for each digit, sum all the products.
 
 * Step 3. The 13-digit ISBN checksum is valid if the sum of products is a multiple of 10.
+
+<div style="page-break-after: always;"></div>
 
 **Example:**
 
