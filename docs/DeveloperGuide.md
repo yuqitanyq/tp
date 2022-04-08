@@ -1488,14 +1488,14 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `book delete 2`<br>
       Expected: No book is deleted. Error details shown in the status message.
 
-5. Deleting an available book while all books are being shown and provided index number is valid.
+2. Deleting an available book while all books are being shown and provided index number is valid.
 
    1. Prerequisites: List all books using the `book list` command. Ensure that there is at least one book in the book list and the first book is not borrowed.
 
    2. Test case: `book delete 1`<br>
       Expected: First book is deleted from the list. Details of the deleted book shown in the status message.
 
-6. Deleting a borrowed book while all books are being shown.
+3. Deleting a borrowed book while all books are being shown.
 
    1. Prerequisites: List all books using the `book list` command. Ensure that there is at least one book in the book list and the first book is borrowed.
 
@@ -1508,29 +1508,29 @@ testers are expected to do more *exploratory* testing.
 
 1. Borrowing a book while all books and all patrons are being shown and provided index numbers are invalid.
 
-  1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Ensure that there is one patron in the patron list and one book in the book list.
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Ensure that there is one patron in the patron list and one book in the book list.
 
-  2. Test case: `borrow 2 0 01-May-2022`<br>
-     Expected: No book is borrowed. Error details shown in the status message.
+   2. Test case: `borrow 2 0 01-May-2022`<br>
+      Expected: No book is borrowed. Error details shown in the status message.
 
-1. Borrowing a book while all books and all patrons are being shown and provided return date is invalid.
+2. Borrowing a book while all books and all patrons are being shown and provided return date is invalid.
 
-  1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list and multiple patrons in the patron list.
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list and multiple patrons in the patron list.
 
-  4. Test case: `borrow 1 1 01-May-1999`<br>
-     Expected: No book is borrowed. Error details shown in the status message.
+   2. Test case: `borrow 1 1 01-May-1999`<br>
+      Expected: No book is borrowed. Error details shown in the status message.
 
-1. Borrowing a book while all books and all patrons are being shown and provided parameters are valid.
+3. Borrowing a book while all books and all patrons are being shown and provided parameters are valid.
 
    1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. The first book must be available. The first patron is not borrowing any book with the same ISBN as the first book. The second book is already borrowed by the second patron.
    
-   3. Test case: `borrow 1 1 01-May-2022`<br>
+   2. Test case: `borrow 1 1 01-May-2022`<br>
       Expected: First book is borrowed by first patron with a return date of 01-May-2022. The initial `Available` tag on the borrowed book is changed to `Borrowed`. Two additional rows of information is shown under `Borrowed`. The additional information is the borrower's name and the return date.
 
-   5. Test case: `borrow 1 2 01-May-2022`<br>
+   3. Test case: `borrow 1 2 01-May-2022`<br>
       Expected: No book is borrowed. Error details shown in the status message.
    
-   6. Test case: `borrow 2 2 01-May-2022`<br>
+   4. Test case: `borrow 2 2 01-May-2022`<br>
       Expected: No book is borrowed. Error details shown in the status message.
 
 <div style="page-break-after: always;"></div>
@@ -1547,21 +1547,21 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `return p/2`
       Expected: No book is returned. Error details show in the status message.
 
-1. Returning a book that does not have any requesters while all books and all patrons are being shown.
+2. Returning a book that does not have any requesters while all books and all patrons are being shown.
 
    1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list and multiple patrons in the patron list. The first book must be borrowed and not have any requesters.
 
    2. Test case: `return b/1`
       Expected: First book is returned. The initial `Borrowed` tag on the returned book is changed to `Available`. The rows showing the borrower and return date is removed.
    
-2. Returning a book that has at least one requester while all books and all patrons are being shown
+3. Returning a book that has at least one requester while all books and all patrons are being shown
 
    1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list and multiple patrons in the patron list. The first book must be borrowed. The first book is requested by the first patron.
 
    2. Test case: `return b/1`
       Expected: First book is returned. The initial `Borrowed` tag on the returned book is changed to `Available`. The rows showing the borrower and return date is removed. The `Requested By` tag is removed and the row showing name of the requester is removed. A reminder message is shown in the status message to remind the librarian to notify the first patron.
 
-3. Returning all books by a patron while all books and all patrons are being shown
+4. Returning all books by a patron while all books and all patrons are being shown
 
    1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list and multiple patrons in the patron list. Only the first book, second book, and third book are borrowed by the first patron. Among the three books, some have requesters while some do not have requesters.
 
@@ -1574,12 +1574,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Requesting a book while all books and patrons are being shown and provided index numbers are invalid.
 
-  1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Ensure that there is one book in the book list and one patron in the patron list.
+   1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Ensure that there is one book in the book list and one patron in the patron list.
 
-  5. Test case: `book request 0 1`<br>
-     Expected: No book is requested. Error details shown in the status message.
+   2. Test case: `book request 0 1`<br>
+      Expected: No book is requested. Error details shown in the status message.
 
-1. Requesting a book while all books and patrons are being shown and provided index numbers are valid.
+2. Requesting a book while all books and patrons are being shown and provided index numbers are valid.
 
    1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. The first book and all its copies must be borrowed. The first book must not already be requested by the first patron, and does not have any requesters. The first book is borrowed by the second patron.
 
@@ -1593,7 +1593,7 @@ testers are expected to do more *exploratory* testing.
       Note: This test case must be done after step ii, when the first patron is still requesting for the first book, in order to get the expected result.   
       Expected: No book is requested. Error details shown in the status message.
 
-2. Requesting a book that has some available copies
+3. Requesting a book that has some available copies
 
    1. Prerequisites: List all books using the `book list` command. List all patrons using the `patron list` command. Multiple books in the book list. Multiple patrons in the patron list. The first book is borrowed. The second book has the same isbn as the first book and is available.
    
