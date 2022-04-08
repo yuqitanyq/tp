@@ -1266,36 +1266,21 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a patron
 
-1. Adding a patron with all required parameters. Patron name longer than characters. 
-
-   1. Test case: `patron add n/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA s/A1111111H p/90123212 e/profA@u.nus.edu t/professor`<br>
-      Expected: Patron list remain unchanged. Error details shown in the status message. 
-
-2. Adding a patron with all required parameters. Invalid patron id.
+1. Adding a patron with all required parameters. Invalid patron id.
 
    1. Test case: `patron add n/Alice s/A11111111 p/90123212 e/profA@u.nus.edu t/professor`<br>
       Expected: Patron list remain unchanged. Error details shown in the status message.
 
-3. Adding a patron with all required parameters. Invalid patron email format.
-
-   1. Test case: `patron add n/Alice s/A1111111H p/90123212 e/profAu.nus.edu t/professor`<br>
-      Expected: Patron list remain unchanged. Error details shown in the status message.
-
-4. Adding a patron with all required parameters. Patron email longer than characters.
-
-   1. Test case: `patron add n/Alice s/A0123456H p/90123212 e/profAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA@u.nus.edu t/professor`<br>
-      Expected: Patron list remain unchanged. Error details shown in the status message.
-
-5. Adding a patron with missing required parameters.
+2. Adding a patron with missing required parameters.
 
    1. Test case: `patron add n/Alice s/A1111111H p/90123212 t/professor`<br>
       Expected: Patron list remain unchanged. Error details shown in the status message.
 
-6. Adding a patron with all required parameters. All provided parameters are valid.
+3. Adding a patron with all required parameters. All provided parameters are valid. 
 
    1. Test case: `patron add n/Alice s/A1111111H p/90123212 e/profA@u.nus.edu t/professor`<br>
       Expected: Patron named `Alice` with id `A0123456H`, phone number `90123212`, email `profA@u.nus.edu` and tag `professor` added to patron list.
-   
+
 <div style="page-break-after: always;"></div>
 
 ### Listing all patrons
@@ -1340,44 +1325,17 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all patrons using the `patron list` command. Ensure that there is only one patron in the patron list.
 
-   2. Test case: `patron edit n/John Cena s/A2222222H p/91959491 e/johncena@u.nus.edu`<br>
-      Expected: Patron list remain unchanged. Error details shown in the status message.
-   
-   3. Test case: `patron edit 0 n/John Cena s/A2222222H p/91959491 e/johncena@u.nus.edu`<br>
+   2. Test case: `patron edit 2 n/John Cena s/A2222222H p/91959491 e/johncena@u.nus.edu`<br>
       Expected: Patron list remain unchanged. Error details shown in the status message.
 
-   4. Test case: `patron edit 2 n/John Cena s/A2222222H p/91959491 e/johncena@u.nus.edu`<br>
-      Expected: Patron list remain unchanged. Error details shown in the status message.
-
-2. Editing patrons while none of the optional fields are provided.
-
-   1. Prerequisites: List all patrons using the `patron list` command. Ensure that there is at least one patron in the patron list.
-
-   2. Test case: `patron edit 1`<br>
-      Expected: Patron list remain unchanged. Error details shown in the status message.
-
-3. Editing patrons while the provided name matches that of another patron apart from the one being edited.
+2. Editing patrons while the provided name matches that of another patron apart from the one being edited.
 
    1. Prerequisites: List all books using the `patron list` command. Ensure that there is more than one patron in the patron list. Ensure that the name of a patron other than the first one matches "John Cena".
 
    2. Test case: `patron edit 1 n/John Cena`<br>
       Expected: Patron list remain unchanged. Error details shown in the status message.
 
-4. Editing patrons while the provided id matches that of another patron apart from the one being edited.
-
-   1. Prerequisites: List all books using the `patron list` command. Ensure that there is more than one patron in the patron list. Ensure that the id of a patron other than the first one matches "A2222222H".
-
-   2. Test case: `patron edit 1 s/A2222222H`<br>
-      Expected: Patron list remain unchanged. Error details shown in the status message.
-
-5. Editing patrons while the provided email matches that of another patron apart from the one being edited.
-
-   1. Prerequisites: List all books using the `patron list` command. Ensure that there is more than one patron in the patron list. Ensure that the email of a patron other than the first one matches "johncena@u.nus.edu".
-
-   2. Test case: `patron edit 1 e/johncena@u.nus.edu`<br>
-      Expected: Patron list remain unchanged. Error details shown in the status message.
-
-6. Editing patrons while the provided index and parameters are valid.
+3. Editing patrons while the provided index and parameters are valid.
 
    1. Prerequisites: List all books using the `patron list` command. Ensure that there is at least one patron in the patron list. Ensure that no other patron other than the first one has a name, id or email that matches "John Cena", "A2222222H", "johncena@u.nus.edu" respectively.
 
@@ -1391,14 +1349,8 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a patron while all patrons are being shown and provided index number is invalid.
 
    1. Prerequisites: List all patrons using the `patron list` command. Ensure that there is only one patron in the patron list. 
-   
-   2. Test case: `patron delete`<br>
-       Expected: No patron is deleted. Error details shown in the status message.
 
-   3. Test case: `patron delete 0`<br>
-       Expected: No patron is deleted. Error details shown in the status message.
-
-   4. Test case: `patron delete 2`<br>
+   2. Test case: `patron delete 2`<br>
        Expected: No patron is deleted. Error details shown in the status message.
 
 2. Deleting a patron while all patrons are being shown and provided index number is valid.
@@ -1426,14 +1378,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `patron overdue`<br>
       Expected: Patron list is empty.
 
-3. Displaying patrons with overdue books while there are borrowed books and all of them are overdue.
-
-   1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Return all borrowed books with return dates after the present date. Ensure that there are some books borrowed with return dates before the present date.
-
-   2. Test case: `patron overdue`<br>
-      Expected: Patron list contains borrowers of all books borrowed.
-
-4. Displaying patrons with overdue books while there are borrowed books and some of them are overdue.
+3. Displaying patrons with overdue books while there are borrowed books and some of them are overdue.
 
    1. Prerequisites: List all books using the `book list` command. Multiple books in the book list. Ensure that there are some books borrowed with return dates after the present date. Ensure that there are some books borrowed with return dates before the present date.
 
@@ -1486,42 +1431,21 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding a book based on tags, author, title
 
-1. Searching for books based on their titles while there are no books with titles matching the provided keywords.
-
-   1. Prerequisites: List all books using the `book list` command. Ensure that there are no books with titles containing the word "Harry".
-
-   2. Test case: `book find n/Harry`
-      Expected: Book list is empty.
-
-2. Searching for books based on their titles while there are books with titles matching the provided keywords.
+1. Searching for books based on their titles while there are books with titles matching the provided keywords.
 
    1. Prerequisites: List all patrons using the `book list` command. Ensure that there is at least one book whose title contains the word "Harry".
 
    2. Test case: `book find n/Harry`
       Expected: Book list displays all books with titles containing the word "Harry".
 
-3. Searching for books based on their authors while there are no books with authors matching the provided keywords.
-
-   1. Prerequisites: List all books using the `book list` command. Ensure that there are no books with authors containing the word "Suzanne".
-
-   2. Test case: `book find a/Suzanne`
-      Expected: Book list is empty.
-
-4. Searching for books based on their authors while there are books with authors matching the provided keywords.
+2. Searching for books based on their authors while there are books with authors matching the provided keywords.
 
    1. Prerequisites: List all patrons using the `book list` command. Ensure that there is at least one book whose authors contain the word "Suzanne".
 
    2. Test case: `book find a/Suzanne`
       Expected: Book list displays all books with authors containing the word "Suzanne".
 
-5. Searching for books based on their tags while there are no books with tags matching the provided keyword.
-
-   1. Prerequisites: List all books using the `book list` command. Ensure that there are no books with tags matching the word "Romance".
-
-   2. Test case: `book find t/Romance`
-      Expected: Book list is empty.
-
-6. Searching for books based on their authors while there are books with authors matching the provided keyword.
+3. Searching for books based on their authors while there are books with authors matching the provided keyword.
 
    1. Prerequisites: List all patrons using the `book list` command. Ensure that there is at least one book whose tags matching the word "Romance".
 
@@ -1536,42 +1460,22 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all books using the `book list` command. Ensure that there is only one book in the book list.
 
-   2. Test case: `book edit n/Harry Potter 1 i/9780371888506`<br>
+   2. Test case: `book edit 2 n/Harry Potter 1 i/9780371888506`<br>
       Expected: Book list remain unchanged. Error details shown in the status message.
 
-   3. Test case: `book edit 0 n/Harry Potter 1 i/9780371888506`<br>
-      Expected: Book list remain unchanged. Error details shown in the status message.
-
-   4. Test case: `book edit 2 n/Harry Potter 1 i/9780371888506`<br>
-      Expected: Book list remain unchanged. Error details shown in the status message.
-
-2. Editing books while the provided isbn of book to be edited is invalid.
-
-   1. Prerequisites: List all books using the `book list` command. Ensure that there is at least one book in the book list. 
-   
-   2. Test case: `book edit 1 i/978037`<br>
-      Expected: Book list remain unchanged. Error details shown in the status message.
-
-3. Editing books while none of the optional fields are provided.
-
-   1. Prerequisites: List all books using the `books list` command. Ensure that there is at least one book in the book list.
-
-   2. Test case: `book edit 1`<br>
-      Expected: Patron list remain unchanged. Error details shown in the status message.
-
-4. Editing books while the provided isbn matches that of another book apart from the one being edited.
+2. Editing books while the provided isbn matches that of another book apart from the one being edited.
 
    1. Prerequisites: List all books using the `book list` command. Ensure that there is more than one book in the book list. Ensure that the isbn of a book other than the first one matches "9780371888506".
 
    2. Test case: `book edit 1 i/9780371888506`<br>
       Expected: Patron list remain unchanged. Error details shown in the status message.
    
-5. Editing books while the provided index and parameters are valid.
+3. Editing books while the provided index and parameters are valid.
 
    1. Prerequisites: List all books using the `book list` command. Ensure that there is at least one book in the book list. Ensure that no other book other than the first one has an isbn that matches "9780371888506".
 
    2. Test case: `book edit 1 n/Harry Potter 1 i/9780371888506`<br>
-      Expected: Title and isbn of the first book in the book list are changed to "Harry Potter 1" and "9780371888506" respectively. All books with the same isbn as the first one before entering the book edit command will have their titles changed to `Harry Potter 1` as well.
+         Expected: Title and isbn of the first book in the book list are changed to "Harry Potter 1" and "9780371888506" respectively. All books with the same isbn as the first one before entering the book edit command will have their titles changed to `Harry Potter 1` as well.
 
 <div style="page-break-after: always;"></div>
 
@@ -1581,13 +1485,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all books using the `book list` command. Ensure that there is only one book in the book list and it is not borrowed.
 
-   2. Test case: `book delete`<br>
-      Expected: No book is deleted. Error details shown in the status message.
-
-   3. Test case: `book delete 0`<br>
-      Expected: No book is deleted. Error details shown in the status message.
-
-   4. Test case: `book delete 2`<br>
+   2. Test case: `book delete 2`<br>
       Expected: No book is deleted. Error details shown in the status message.
 
 5. Deleting an available book while all books are being shown and provided index number is valid.
