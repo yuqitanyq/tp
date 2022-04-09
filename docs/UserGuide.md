@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-LibTask is a desktop application for librarians to manage book loans and requests by patrons. It is specially made to improve the overall efficiency of librarians when processing book loans and requests, helping them to complete their daily tasks quickly. LibTask is optimized for use via a [Command Line Interface (CLI)](#7-glossary) while still having the benefits of a [Graphical User Interface (GUI)](#7-glossary) so that librarians who prefer typing can get their tasks done faster than traditional GUI apps.
+LibTask is a **desktop application for librarians** to manage book loans and requests by patrons. It is specially made to **improve the overall efficiency of librarians when processing book loans and requests**, helping them to complete their daily tasks quickly. LibTask is optimized for use via a [Command Line Interface (CLI)](#7-glossary) while still having the benefits of a [Graphical User Interface (GUI)](#7-glossary) so that librarians who prefer typing can get their tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -13,7 +13,7 @@ LibTask is a desktop application for librarians to manage book loans and request
 ## **1. Introduction**
 
 ### 1.1. Welcome to LibTask
-As a school librarian of a large library, you may already have your own desktop library software. However, existing library software are GUI-based and slow to work with. If you prefer to work with CLI commands efficiently while still having the benefits of aesthetic displays, then LibTask is designed just for you! LibTask provides you with a well packaged system of commands for managing book loans and book requests by your patrons. With LibTask, you can quickly process borrowing and returning of books by simply typing a few commands. The system also maintains two independent lists of books and patrons, allowing you to perform queries more efficiently.
+As a school librarian of a large library, you may already have your own desktop library software. However, existing library software is GUI-based and slow to work with. If you prefer to work with CLI commands efficiently while still having the benefits of aesthetic displays, then LibTask is designed just for you! LibTask provides you with a well-packaged system of commands for managing book loans and book requests by your patrons. With LibTask, you can quickly process the borrowing and returning of books by simply typing a few commands. The system also maintains two independent lists of books and patrons, allowing you to perform queries more efficiently.
 
 ### 1.2. About the User Guide
 The purpose of this guide is to explain to you how to use **LibTask** and to allow you to have an enjoyable experience. It explains the features and commands compatible with LibTask.  It is also structured in a way that lets you easily navigate to relevant sections based on your level of experience with LibTask.
@@ -24,7 +24,7 @@ Take note of following symbols that are used in this document:
 
 | Icon                 | Explanation                                                                             |
 |----------------------|-----------------------------------------------------------------------------------------|
-| :information_source: | This symbol is used to highlight extra knowledge.                                       |
+| :information_source: | This symbol is used to highlight important information.                                 |
 | :exclamation:        | This symbol is used to warn users of potential actions that might erase LibTask's data. |
 
 ### 1.3. Navigating the User Guide
@@ -48,7 +48,7 @@ For the glossary of content, you can refer to our [Glossary](#7-glossary) sectio
 
 1. Download the latest `libtask.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your LibTask.
+1. Copy the file to the folder you want to use as the home folder for your LibTask.
 
 1. Double-click the file to start the app. The GUI is similar to the one shown below and should appear in a few seconds.<br>
    ![Ui](images/Ui.png)
@@ -342,7 +342,7 @@ After entering the command, all patrons will be listed.
 
 ![patron-list-2](images/patron-list-2.png)
 
-#### 3.2.4. Finding patrons: `patron find`
+#### 3.2.3. Finding patrons: `patron find`
 
 To find patrons in LibTask based on patron name, you can enter the find command with the format shown below.
 
@@ -383,7 +383,7 @@ After entering the command, only patrons with names containing "alex" or "david"
 
 <div style="page-break-after: always;"></div>
 
-#### 3.2.3. Editing a patron : `patron edit`
+#### 3.2.4. Editing a patron : `patron edit`
 
 To edit the details of a specific patron, you can enter the edit command with the format shown below.
 
@@ -506,7 +506,7 @@ Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:Notes about the add command:**<br>
+**:information_source: Notes about the add command:**<br>
 
 * BOOK_NAME must start and end with alphanumeric characters, and can only contain `'` character, `:` character and alphanumeric characters.
 

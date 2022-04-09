@@ -132,7 +132,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the libtask data i.e., all `Patron` objects (which are contained in a `UniquePatronList` object) and `Book` objects (which are contained in a `BookList` object).
-* stores the currently 'selected' `Patron` and `Book` objects (e.g., results of a search [query](#glossary)) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patron>` abd `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Patron` and `Book` objects (e.g., results of a search [query](#glossary)) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patron>` and `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -406,14 +406,18 @@ Given below is an example usage scenario and how the related mechanism behaves a
 5. `LogicManager` then executes the `RelatedBookCommand` object.
 6. `RelatedBookCommand` calls `Model#getFilteredPatronList()` to get the list of displayed patrons, and then gets the patron at that specified index.
 7. `RelatedBookCommand` then creates a `BookRelatedToPatronPredicate` object named `predicate` with the patron.
-8. `RelatedBookCommand` calls `Model#updateFilteredBookList()` with the `predicate`, resulting in the book list to be updated to display all the books borrowed and requested by the patron.
+8. `RelatedBookCommand` calls `Model#updateFilteredBookList()` with `predicate`, resulting in the book list to be updated to display all the books borrowed and requested by the patron.
 9. Finally, `RelatedBookCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command.
 
 <div style="page-break-after: always;"></div>
 
 The following sequence diagram shows how the related command works:
 
-<img src="images/RelatedBookCommandSequenceDiagram.png" width="1200" />
+<img src="images/RelatedBookCommandSequenceDiagram.png" width="1000" />
+
+The following sequence diagram is for the reference frame in the above diagram:
+
+<img src="images/ReferenceFrameBookRelatedSequenceDiagram.png" width="600" align="center" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RelatedBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
