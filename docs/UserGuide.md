@@ -342,7 +342,7 @@ After entering the command, all patrons will be listed.
 
 ![patron-list-2](images/patron-list-2.png)
 
-#### 3.2.4. Finding patrons: `patron find`
+#### 3.2.3. Finding patrons: `patron find`
 
 To find patrons in LibTask based on patron name, you can enter the find command with the format shown below.
 
@@ -383,7 +383,7 @@ After entering the command, only patrons with names containing "alex" or "david"
 
 <div style="page-break-after: always;"></div>
 
-#### 3.2.3. Editing a patron : `patron edit`
+#### 3.2.4. Editing a patron : `patron edit`
 
 To edit the details of a specific patron, you can enter the edit command with the format shown below.
 
