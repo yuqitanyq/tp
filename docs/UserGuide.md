@@ -48,7 +48,7 @@ For the glossary of content, you can refer to our [Glossary](#7-glossary) sectio
 
 1. Download the latest `libtask.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your LibTask.
+1. Copy the file to the folder you want to use as the home folder for your LibTask.
 
 1. Double-click the file to start the app. The GUI is similar to the one shown below and should appear in a few seconds.<br>
    ![Ui](images/Ui.png)
