@@ -436,12 +436,13 @@ This feature allows users to search for any books with either the tag, title or 
 
 #### Implementation
 The Book find feature is facilitated by the `BookCommandParser`, `FindBookParser` and `FindBookCommand`. 
+As the book can be found using one of 3 parameters, only the implementation of a search using the tag will be shown, as they are all highly similar. 
 
 Given below is an example usage scenario and how the request mechanism behaves at each step:
 
 1. The user enters a book find command and provides the parameter for the search query.
 2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turns creates a new `FindBookParser`.
-3. `FindBookParser` creates either a `BookAuthorContainsKeywordsPredicate` or `BookNameContainsKeywordsPredicate` or `BookTagContainsKeywordsPredicate` object `predicate` with the search query.
+3. `FindBookParser` creates a `BookTagContainsKeywordsPredicate` object `predicate` with the search query.
 4. `FindBookParser` creates a new `FindBookCommand` based on the processed input and passes the `predicate` on.
 5. `LogicManager` then executes the `FindBookCommand`. 
 6. `FindBookCommand` calls `Model#updateFilteredBookList()` with the `predicate`, resulting in the book list to be updated to display all the books that match the given search query.

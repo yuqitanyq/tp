@@ -8,6 +8,7 @@ participant ":BookCommandParser" as BookCommandParser LOGIC_COLOR
 participant ":FindBookCommandParser" as FindBookCommandParser LOGIC_COLOR
 participant "r:FindBookCommand" as FindBookCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":BookContainsTagPredicate" as BookContainsTagPredicate LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -39,18 +40,16 @@ deactivate FindBookCommandParser
 
 BookCommandParser -> FindBookCommandParser : parse("t/adventure")
 activate FindBookCommandParser
-alt [A tag_prefix]
-    FindBookCommandParser -> Model : BookTagContainsKeywordsPredicate
-    Model --> FindBookCommandParser
-else [Name_prefix]
-    FindBookCommandParser -> Model : BookNameContainsKeywordsPredicate
-    Model --> FindBookCommandParser
-else [Author_prefix]
-    FindBookCommandParser -> Model : BookAuthorContainsKeywordsPredicate
-    Model --> FindBookCommandParser
-end
+
+create BookContainsTagPredicate
+FindBookCommandParser -> BookContainsTagPredicate :
+activate BookContainsTagPredicate
+
+BookContainsTagPredicate --> FindBookCommandParser : predicate
+deactivate BookContainsTagPredicate
+
 create FindBookCommand
-FindBookCommandParser -> FindBookCommand
+FindBookCommandParser -> FindBookCommand : predicate
 activate FindBookCommand
 
 FindBookCommand --> FindBookCommandParser : r
