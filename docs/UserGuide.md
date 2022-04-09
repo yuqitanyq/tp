@@ -566,7 +566,7 @@ After entering the command, all books will be listed.
 
 To find books in LibTask based on book name, author or tags, you can enter the find command with the format shown below.
 
-**Format**: `book find PREFIX/KEYWORD`
+**Format**: `book find [n/NAME] [t/TAG] [a/AUTHOR]`
 
 <div markdown="block" class="alert alert-info">
 
@@ -574,7 +574,7 @@ To find books in LibTask based on book name, author or tags, you can enter the f
 
 * `PREFIX` must be either `t` (for find based on tag), `a` (for finding based on author), or `n` (for finding based on book name).
 
-* All books with a tag, or author, or book name that contains the substring `KEYWORD` will be displayed in the book list.
+* All books with a tag, or author, or book name that contains the substring of the given query will be displayed in the book list.
 
 </div>
 
@@ -903,18 +903,18 @@ to manually input additional commands to delete the "requested by" tags.
 
 ### 5.1. General Commands
 
-| Function                                   | Format Of Command                                                          |
-|--------------------------------------------|----------------------------------------------------------------------------|
-| **Show message to help page**              | `help`                                                                     |
-| **Clear all entries**                      | `clear`                                                                    |
-| **Exit the program**                       | `exit`                                                                     |
-| **Show previous commands**                 | `u`                                                                        |
+| Function                                   | Command Format |
+|--------------------------------------------|----------------|
+| **Show message to help page**              | `help`         |
+| **Clear all entries**                      | `clear`        |
+| **Exit the program**                       | `exit`         |
+| **Show previous commands**                 | `u`            |
 
 <div style="page-break-after: always;"></div>
 
 ### 5.2. Patron Commands
 
-| Function                            | Format Of Command                                                 |
+| Function                            | Command Format                                                    |
 |-------------------------------------|-------------------------------------------------------------------|
 | **Add a new patron**                | `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`                |
 | **List all patrons**                | `patron list`                                                     |
@@ -925,7 +925,7 @@ to manually input additional commands to delete the "requested by" tags.
 
 ### 5.3. Book Commands
 
-| Function                               | Format Of Command                                                   |
+| Function                               | Command Format                                                      |
 |----------------------------------------|---------------------------------------------------------------------|
 | **Add a book**                         | `book add n/NAME i/ISBN [a/AUTHOR]…​ [t/CATEGORY_TAG]…​`            |
 | **List all books**                     | `book list`                                                         |
