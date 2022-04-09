@@ -452,7 +452,7 @@ Given below is an example usage scenario and how the request mechanism behaves a
 
 The following sequence diagram shows how the request command works:
 
-<img src="images/FindBookCommandSequenceDiagram.png" width="850" />
+<img src="images/FindBookCommandSequenceDiagram.png" width="850">
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `FindBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
