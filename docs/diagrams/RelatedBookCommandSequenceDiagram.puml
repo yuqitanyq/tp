@@ -7,7 +7,7 @@ participant ":LibTaskParser" as LibTaskParser LOGIC_COLOR
 participant ":BookCommandParser" as BookCommandParser LOGIC_COLOR
 participant ":RelatedBookCommandParser" as RelatedBookCommandParser LOGIC_COLOR
 participant "r:RelatedBookCommand" as RelatedBookCommand LOGIC_COLOR
-participant "predicate:BookRelatedToPatronPredicate" as BookRelatedToPatronPredicate LOGIC_COLOR
+participant "p:BookRelatedToPatronPredicate" as BookRelatedToPatronPredicate LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -76,10 +76,10 @@ create BookRelatedToPatronPredicate
 RelatedBookCommand -> BookRelatedToPatronPredicate :
 activate BookRelatedToPatronPredicate
 
-BookRelatedToPatronPredicate --> RelatedBookCommand : predicate
+BookRelatedToPatronPredicate --> RelatedBookCommand : p
 deactivate BookRelatedToPatronPredicate
 
-RelatedBookCommand -> Model : updateFilteredBookList(predicate)
+RelatedBookCommand -> Model : updateFilteredBookList(p)
 activate Model
 
 Model --> RelatedBookCommand

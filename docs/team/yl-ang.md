@@ -53,6 +53,7 @@ Given below are my contributions to the project.
     * Added documentation for the feature `book related` [\#112](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/112)
     * Added documentation for `quick start` and `introduction` [\#16](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/16)
     * Enhanced documentation for `tutorial`.
+    * Added glossary section [\#138](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/138).
 
   * Developer Guide:
     * Added MSS for related book command [\#112](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/112)
@@ -61,7 +62,7 @@ Given below are my contributions to the project.
     * Added Sequence and activity diagrams for book related command [\#209](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/209)
 
 * **Review/mentoring contributions**:
-  * PR reviewed (with non-trivial review comments): [\#230](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/230), [\#214](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/214), [\#148](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/148), [\#144](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/144), [\#121](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/121), [\#101](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/101), [\#100](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/100), [\#96](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/96), [\#95](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/95), [\#83](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/83), [\#79](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/79), [\#78](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/78), [\#73](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/73), [\#69](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/69), [\#66](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/65), [\#62](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/65), [\#60](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/60)
+  * PR reviewed (with non-trivial review comments): [\#230](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/230), [\#214](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/214), [\#148](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/148), [\#144](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/144), [\#121](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/121), [\#100](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/100), [\#96](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/96), [\#95](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/95), [\#83](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/83), [\#79](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/79), [\#78](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/78), [\#73](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/73), [\#69](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/69), [\#66](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/65), [\#62](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/65), [\#60](https://github.com/AY2122S2-CS2103T-W14-1/tp/pull/60)
 
 * **Community**:
   * Bugs reported for other teams can be found [here](https://github.com/yl-ang/ped/issues).
