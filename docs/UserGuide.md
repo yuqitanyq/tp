@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-LibTask is a desktop application for librarians to manage book loans and requests by patrons. It is specially made to improve the overall efficiency of librarians when processing book loans and requests, helping them to complete their daily tasks quickly. LibTask is optimized for use via a [Command Line Interface (CLI)](#7-glossary) while still having the benefits of a [Graphical User Interface (GUI)](#7-glossary) so that librarians who prefer typing can get their tasks done faster than traditional GUI apps.
+LibTask is a **desktop application for librarians** to manage book loans and requests by patrons. It is specially made to **improve the overall efficiency of librarians when processing book loans and requests**, helping them to complete their daily tasks quickly. LibTask is optimized for use via a [Command Line Interface (CLI)](#7-glossary) while still having the benefits of a [Graphical User Interface (GUI)](#7-glossary) so that librarians who prefer typing can get their tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -13,7 +13,7 @@ LibTask is a desktop application for librarians to manage book loans and request
 ## **1. Introduction**
 
 ### 1.1. Welcome to LibTask
-As a school librarian of a large library, you may already have your own desktop library software. However, existing library software are GUI-based and slow to work with. If you prefer to work with CLI commands efficiently while still having the benefits of aesthetic displays, then LibTask is designed just for you! LibTask provides you with a well packaged system of commands for managing book loans and book requests by your patrons. With LibTask, you can quickly process borrowing and returning of books by simply typing a few commands. The system also maintains two independent lists of books and patrons, allowing you to perform queries more efficiently.
+As a school librarian of a large library, you may already have your own desktop library software. However, existing library software is GUI-based and slow to work with. If you prefer to work with CLI commands efficiently while still having the benefits of aesthetic displays, then LibTask is designed just for you! LibTask provides you with a well-packaged system of commands for managing book loans and book requests by your patrons. With LibTask, you can quickly process the borrowing and returning of books by simply typing a few commands. The system also maintains two independent lists of books and patrons, allowing you to perform queries more efficiently.
 
 ### 1.2. About the User Guide
 The purpose of this guide is to explain to you how to use **LibTask** and to allow you to have an enjoyable experience. It explains the features and commands compatible with LibTask.  It is also structured in a way that lets you easily navigate to relevant sections based on your level of experience with LibTask.
@@ -24,7 +24,7 @@ Take note of following symbols that are used in this document:
 
 | Icon                 | Explanation                                                                             |
 |----------------------|-----------------------------------------------------------------------------------------|
-| :information_source: | This symbol is used to highlight extra knowledge.                                       |
+| :information_source: | This symbol is used to highlight important information.                                 |
 | :exclamation:        | This symbol is used to warn users of potential actions that might erase LibTask's data. |
 
 ### 1.3. Navigating the User Guide
@@ -48,7 +48,7 @@ For the glossary of content, you can refer to our [Glossary](#7-glossary) sectio
 
 1. Download the latest `libtask.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your LibTask.
+1. Copy the file to the folder you want to use as the home folder for your LibTask.
 
 1. Double-click the file to start the app. The GUI is similar to the one shown below and should appear in a few seconds.<br>
    ![Ui](images/Ui.png)
@@ -163,9 +163,9 @@ Christian Grey wishes to borrow Death on the Nile however, the book seems to be 
 two following ways:
 
 Method A:
-1. Scroll through the patron list to find the index at which `Christian Grey` is stored in LibTask. Let's say this index
+1. List all patrons in the patron list by entering `patron list`. Scroll through the patron list to find the index at which `Christian Grey` is stored in LibTask. Let's say this index
    number is 5.
-2. Scroll through the book list to find the index at which `Death on the Nile` is stored in LibTask. Let's say this
+2. List all books in the book list by entering `book list`. Scroll through the book list to find the index at which `Death on the Nile` is stored in LibTask. Let's say this
    index number is 5.
 3. Enter command `book request 5 5` in the Command Box. `Christian Grey` has now requested for `Death on the Nile`. You can 
    confirm this by viewing the book's status in the book list.
@@ -342,7 +342,7 @@ After entering the command, all patrons will be listed.
 
 ![patron-list-2](images/patron-list-2.png)
 
-#### 3.2.4. Finding patrons: `patron find`
+#### 3.2.3. Finding patrons: `patron find`
 
 To find patrons in LibTask based on patron name, you can enter the find command with the format shown below.
 
@@ -383,7 +383,7 @@ After entering the command, only patrons with names containing "alex" or "david"
 
 <div style="page-break-after: always;"></div>
 
-#### 3.2.3. Editing a patron : `patron edit`
+#### 3.2.4. Editing a patron : `patron edit`
 
 To edit the details of a specific patron, you can enter the edit command with the format shown below.
 
@@ -506,7 +506,7 @@ Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:Notes about the add command:**<br>
+**:information_source: Notes about the add command:**<br>
 
 * BOOK_NAME must start and end with alphanumeric characters, and can only contain `'` character, `:` character and alphanumeric characters.
 
@@ -566,7 +566,7 @@ After entering the command, all books will be listed.
 
 To find books in LibTask based on book name, author or tags, you can enter the find command with the format shown below.
 
-**Format**: `book find PREFIX/KEYWORD`
+**Format**: `book find [n/NAME] [t/TAG] [a/AUTHOR]`
 
 <div markdown="block" class="alert alert-info">
 
@@ -574,7 +574,7 @@ To find books in LibTask based on book name, author or tags, you can enter the f
 
 * `PREFIX` must be either `t` (for find based on tag), `a` (for finding based on author), or `n` (for finding based on book name).
 
-* All books with a tag, or author, or book name that contains the substring `KEYWORD` will be displayed in the book list.
+* All books with a tag, or author, or book name that contains the substring of the given query will be displayed in the book list.
 
 </div>
 
@@ -861,38 +861,23 @@ This command is typically used after `patron overdue` command. After listing all
 
 ## **4. FAQ**
 
-**Q1**: What happens if there is no response after attempting to enter a command?<br>
-**A**: Please double-check if the format of the command is written correctly. If the issue persists, please close the
-application and restart it again.
-
-**Q2**: I tried to edit a book's details, but there seems to be an error message being shown. Why is that so?<br>
-**A**: Please do ensure that if the book name is not provided, at least one of the optional fields Isbn, Author and
-Category tag is provided.
-
-**Q3**: Is there any other way to exit the application without typing?<br>
+**Q1**: Is there any other way to exit the application without typing?<br>
 **A**: Yes, there is another way to exit the program, and that is by clicking the File button on the top left-hand
 corner of the app. There is an exit button in the dropdown list which appear after clicking the File button.
 
-**Q4**: Will the data of the books be saved if the program was not closed via the `exit` command or via the
-method shown in Q3?<br>
+**Q2**: Will the data of the books be saved if the program was not closed via the `exit` command or via the
+method shown in Q1?<br>
 **A**: Yes the data will still be saved. However, to ensure a better user experience, we recommend using the exit
 command as described in the user guide.
 
-**Q5**: Is there a shortcut on using the various commands?<br>
-**A**: Unfortunately, no there is no shortcut. In order to execute the various commands, please enter the commands
-in the correct format and with valid inputs.
-
-**Q6**: I entered the `book list` command but nothing has changed. Is this expected?<br>
+**Q3**: I entered the `book list` command but nothing has changed. Is this expected?<br>
 **A**: Yes, it is expected, as all the books have probably been already listed.
 
-**Q7**: Is there a summary of the commands?<br>
-**A**: Yes, there is a summary of commands available, and they can be found in the section below.
-
-**Q8**: Why are there two separate lists for books and patrons instead of one combined list?<br>
+**Q4**: Why are there two separate lists for books and patrons instead of one combined list?<br>
 **A**: This is done so that the user can see the two lists side by side and have a clearer picture of the various
 patrons and books in the database.
 
-**Q9**: Why are the "requested by" tags removed from the books after a patron has returned that particular book?<br>
+**Q5**: Why are the "requested by" tags removed from the books after a patron has returned that particular book?<br>
 **A**: Once a book has been returned and that book has been requested, a list of alerts will be shown to the librarian
 to remind the patrons that have requested the book. The purpose of the automatic deletion of the "requested by" tag is
 a feature that is meant to provide convenience for the user and make them more productive because they would not need
@@ -903,18 +888,18 @@ to manually input additional commands to delete the "requested by" tags.
 
 ### 5.1. General Commands
 
-| Function                                   | Format Of Command                                                          |
-|--------------------------------------------|----------------------------------------------------------------------------|
-| **Show message to help page**              | `help`                                                                     |
-| **Clear all entries**                      | `clear`                                                                    |
-| **Exit the program**                       | `exit`                                                                     |
-| **Show previous commands**                 | `u`                                                                        |
+| Function                                   | Command Format |
+|--------------------------------------------|----------------|
+| **Show message to help page**              | `help`         |
+| **Clear all entries**                      | `clear`        |
+| **Exit the program**                       | `exit`         |
+| **Show previous commands**                 | `u`            |
 
 <div style="page-break-after: always;"></div>
 
 ### 5.2. Patron Commands
 
-| Function                            | Format Of Command                                                 |
+| Function                            | Command Format                                                    |
 |-------------------------------------|-------------------------------------------------------------------|
 | **Add a new patron**                | `patron add n/NAME s/ID p/PHONE e/EMAIL [t/TAG]…​`                |
 | **List all patrons**                | `patron list`                                                     |
@@ -925,7 +910,7 @@ to manually input additional commands to delete the "requested by" tags.
 
 ### 5.3. Book Commands
 
-| Function                               | Format Of Command                                                   |
+| Function                               | Command Format                                                      |
 |----------------------------------------|---------------------------------------------------------------------|
 | **Add a book**                         | `book add n/NAME i/ISBN [a/AUTHOR]…​ [t/CATEGORY_TAG]…​`            |
 | **List all books**                     | `book list`                                                         |
@@ -986,3 +971,4 @@ Since 100 is a multiple of 10, the above 13-digit ISBN has a valid checksum.
 | Java                                      | A programming language which was used to built LibTask.                                         |
 | International Standard Book Number (ISBN) | An international standard identification number for identifying books.                          |
 | Patron                                    | Visitor of the library.                                                                         |
+| Checksum                                  | A method to validate the ISBN                                                                   |
