@@ -618,7 +618,7 @@ To edit the details of a specific book, you can enter the edit command with the 
 
 * Edits the book at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, … and cannot exceed the largest index number in the displayed book list.
 
-* At least one of the optional fields (ISBN, AUTHOR, CATEGORY_TAG) must be provided.
+* At least one of the optional fields (NAME, ISBN, AUTHOR, CATEGORY_TAG) must be provided.
 
 * Existing values will be updated to the input values.
 
