@@ -411,7 +411,7 @@ Given below is an example usage scenario and how the related mechanism behaves a
 
 <div style="page-break-after: always;"></div>
 
-The following sequence diagram show how the related command works:
+The following sequence diagram shows how the related command works:
 
 <img src="images/RelatedBookCommandSequenceDiagram.png" width="850" />
 
