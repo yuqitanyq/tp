@@ -183,15 +183,15 @@ The class diagram for the `Model` can be seen above in the [Design section](#mod
 
 #### Design considerations
 
-Initially, `Patron` and `Book` were designed in a way such that both classes contain references to each other. This design allows fast and direct access of certain information, such as all books borrowed and requested by a patron. However, the initial design results in [cyclic reference](#glossary) among classes, which makes it impossible to store patron and book information in json format. For example, the patron json object needs to store a list of books it is referencing, which in turns store a list of patrons it is referencing, which in turn stores more patrons.
+Initially, `Patron` and `Book` were designed in a way such that both classes contain references to each other. This design allows fast and direct access to certain information, such as all books borrowed and requested by a patron. However, the initial design results in [cyclic reference](#glossary) among classes, which makes it impossible to store patron and book information in json format. For example, the patron json object needs to store a list of books it is referencing, which in turns store a list of patrons it is referencing, which in turn stores more patrons.
 
-Furthermore, the initial design results in the problem of cyclic update whenever data is modified. For example, when a patron's name is changed, the corresponding borrower's name of all books borrowed by that patron needs to be changed as well. Since `Book` is [immutable](#glossary), new `Book` objects are created to update the information, and as a result, all `Patron` objects referencing those old `Book` objects needs to be updated as well. Since `Patron` is also immutable, the chain of never ending cyclic updates continues on.
+Furthermore, the initial design results in the problem of cyclic updates whenever data is modified. For example, when a patron's name is changed, the corresponding borrower's name of all books borrowed by that patron needs to be changed as well. Since `Book` is [immutable](#glossary), new `Book` objects are created to update the information, and as a result, all `Patron` objects referencing those old `Book` objects need to be updated as well. Since `Patron` is also immutable, the chain of never ending cyclic updates continues on.
 
-Due to the downsides of the initial design, a decision was made to have only one of `Book` or `Patron` depending on the other. `Book` was chosen to depend on `Patron` because the UI needs to display information of borrower and requesters together with the book. This design does not require the transversal of the whole `UniquePatronList` to identify the borrower and requesters of the book, since such information is stored in `Book` itself. However, transversal of the whole `BookList` is required to find all books related to a patron, or when updating a patron's information. Nevertheless, the amortized cost is much lower as such commands are performed less frequently than the amount of UI updates.
+Due to the downsides of the initial design, a decision was made to have only one`Book` or `Patron` depending on the other. `Book` was chosen to depend on `Patron` because the UI needs to display information about borrowers and requesters together with the book. This design does not require the transversal of the whole `UniquePatronList` to identify the borrower and requesters of the book, since such information is stored in `Book` itself. However, transversal of the whole `BookList` is required to find all books related to a patron, or when updating a patron's information. Nevertheless, the amortized cost is much lower as such commands are performed less frequently than the amount of UI updates.
 
 ### Saving books and patrons to Json format
 
-The saving of books and patrons to json format is performed by the `Storage` component, which class diagram can be seen [above](#storage-component).The `JsonSerializableLibTask` stores both `JsonAdaptedPatron` and `JsonAdaptedBook`, which implementations will be discussed below.
+The saving of books and patrons to json format is performed by the `Storage` component, which class diagram can be seen [above](#storage-component). The `JsonSerializableLibTask` stores both `JsonAdaptedPatron` and `JsonAdaptedBook`, which implementations will be discussed below.
 
 <div style="page-break-after: always;"></div>
 
@@ -295,7 +295,7 @@ The following activity diagram summarizes what happens when a user executes a re
 
 #### Design considerations
 
-The return command is designed to be to return multiple books in one command, while providing the user with the option of returning a single book. This enhances the usability of the feature, as the librarian can experience more efficient processing of books, while retaining fine-grain control of the process if needed (e.g. in situations when a patron only intends to return some of his/her borrowed books).
+The return command is designed to be able to return multiple books in one command, while providing the user with the option of returning a single book. This enhances the usability of the feature, as the librarian can experience more efficient processing of books, while retaining fine-grain control of the process if needed (e.g. in situations when a patron only intends to return some of his/her borrowed books).
 
 Despite having similar functionalities, the return commands are split into `ReturnOneBookCommand` and `ReturnAllBooksCommand` because they depend on different methods in `Model`, and have structurally similar but logically different execution. As per the [_Single Responsibility Principle_](#glossary), the return commands are separated into different classes so that each class is responsible for the logical implementation of only one subcommand.
 
@@ -335,7 +335,7 @@ The following activity diagram summarizes what happens when a user executes an o
 
 #### Design considerations
 
-Unlike some other patron and book features, `patron overdue` designed to be a stand-alone command (i.e. does not need to be used in conjunction with any other command) and requires no parameters. This is because iterating through LibTask patrons and filtering them based on their borrowed book statuses does not require pre-processing by any other command or additional information.
+Unlike some other patron and book features, `patron overdue` is designed to be a stand-alone command (i.e. does not need to be used in conjunction with any other command) and requires no parameters. This is because iterating through LibTask patrons and filtering them based on their borrowed book statuses does not require pre-processing by any other command or additional information.
 
 LibTask can store a large number of books and patrons, making it infeasible for the user to scroll through the book list to identify patrons with books borrowed beyond their return dates. The design of the overdue command hence enhances LibTask's usability, as librarians can experience more efficient processing of overdue books.
 
@@ -583,7 +583,7 @@ LibTask aids librarians in managing statuses of books borrowed and along with th
 
 * a librarian who wants to manage book loans and requests by patrons
 * prefer desktop apps over other types of applications
-* can type fast
+* able to type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using [CLI](#glossary) applications
 
@@ -1498,9 +1498,49 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `book find a/Suzanne Collins`
       Expected: One book with the author "Suzanne Collins" be displayed in the Book list.
 
-### Saving data
+## **Appendix: Effort**
 
-1. Dealing with missing/corrupted data files
+LibTask is a result of tremendous effort put in by each of the team members. Since the beginning of the project, our team met up consistently for six to eight hours weekly to discuss ideas for improving LibTask, as well as reviewing and debugging one another's code to maintain LibTask's high quality code base. The section below outlines different aspects of challenges faced throughout the development of LibTask, justification of notable efforts put in, as well the achievements of LibTask that the development team is proud of.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-    
+### Extension of Model component and non-unique nature of `BookList`
+
+The original restrictions on `PersonList` in AB-3 that disallows `Person` with the same name is a convenient way of avoiding bugs. For the purpose of LibTask, however, it does not make sense to disallow books with the same name, or isbn, or authors etc. This is because libraries often contain multiple copies of the exact same book. There can be multiple `Book` objects with the exact same name, isbn, author, and status, therefore `BookList` can be buggy because it can contain multiple objects that are same based on `Book::equals()` method. This is resolved by adding a `timeAdded` attribute, which is the time the book is added into the system. This attribute cannot be changed through any commands, and therefore solves the above-mentioned problem.
+
+Another challenge is that the use case of LibTask also requires that all books with the same isbn must have the same name and authors. An initial consideration is to use the `Abstract Occurence` pattern in Week 10 topics, where a single book is represented by `Abstraction` and `Occurence` classes. However, this pattern binds book name and authors to isbn, and enforces a stronger than necessary requirement that books with same name must have the same isbn. This does not fit our use case because books with different edition can have the same name but different isbn. Hence, our team deliberately chose not to enforce such a constraint through design patterns, but rather introduced the following invariant and maintained the invariant at each step of command execution:
+
+**Invariant 1**: If a book has same isbn as another book, then both books must have the same name, and same set of authors.
+
+The method used to maintain such invariants is discussed in the next section.
+
+### Elimination of Data Inconsistency
+
+The original AB-3 code only contains one main type of object, which is `Person` object. Upon extension of `Model` component to include `Book` object that references `Patron` object, many data inconsistencies arise due to the immutable nature of `Book` and `Patron`. One example is that when a patron is edited, books borrowed and requested by that patron may not have their borrower and requester information updated, causing the name displayed on Book Card to be outdated.
+
+Instead of relying only on testing, LibTask uses a formal method approach to establish certain invariants to be held true after execution of every command, and use these invariants to prove the absence of data inconsistency bugs during the execution of the program. Some invariants were shown below to illustrate the careful consideration by the team to eliminate bugs:
+
+**Invariant 1**: A book can have requesters if and only if it does not have an available copy (i.e. another book with the same isbn).
+
+**Invariant 2**: Books with the same isbn must have the same set of requesters.
+
+**Invariant 3**: Borrower and requester information of a book must be the most updated patron information.
+
+To maintain invariant 1, we identify commands that can possibly add requesters, such as `book request` command, and commands that can modify availability of a book copy, such as `borrow`, `return`, and non-trivially `book edit`, `book add` and `patron delete` commands. We then impose suitable restrictions or behaviour modifications to those commands to ensure invariant 1 is maintained, as follows:
+
+`book request`: Modify initial behaviour such that only books with no available copies can be requested, shows error otherwise.
+
+`borrow`: No modification required
+
+`return`: When a book is returned and becomes available, the second part of the invariant is violated. To maintain the invariant, all requesters are removed from all copies of the book, and the librarian is reminded to notify all those requesters.
+
+`book edit`: When a book is edited to another existing isbn, it may be an available book, which causes the new isbn to have an available copy. One way of maintaining invariant 1 is to remove all requesters for the new isbn and notify them, while another way is to disallow such edits. Our team chose the later method as this method is a more rational way of maintaining invariant 2 as well. When editing a book into another existing isbn, the set of requesters may be different for both old and new isbn, resulting in the new isbn now having a book copy with different requesters. For example, the user wants to change isbn of book A from 1 to 2, but different requesters are requesting for books with isbn 1 and 2. One method is to change the requesters of all books with isbn 2 to the requesters of book A, then invariant 2 is maintained. This does not make sense from the user point of view because the requesters of book A were originally requesting for isbn 1, not isbn 2. Hence, disallowing such an action is a better way to maintain data consistency.
+
+`book add`: When adding another copy of existing, the previous copies may all be borrowed and requested by some patrons. Since there is now an available copy, the behaviour of `book add` is also modified to remove all requesters and remind the librarian to notify them in such a situation, in order to maintain invariant 1.
+
+`patron delete`: When deleting a patron that has unreturned books, the decision to be made is whether the borrowed book should become available. If it becomes available, then the librarian should be reminded to notify all requesters for that book to maintain invariant 1. This does not make sense because physically the book is not returned yet. It also does not make sense to perform a cascading deletion on book when patron is deleted, because they are viewed as separate independent entities. Therefore, a decision is made to disallow deletion of patron with borrowed books
+
+The detailed reasoning above demonstrates the rigorous reasoning adopted by our team before deciding on every minor behavioural changes to LibTask commands, in order to maintain data integrity. The thought process for maintaining other invariants are similar and thus omitted for brevity.
+
+### Achievement
+
+Our team is proud that we do not only rely on testing, but also rigorous reasoning and formal methods to prove the absence of data inconsistency bugs, while imposing only reasonable restrictions to our commands. Among the 50 bug reports received during Practical Exam Dry Run, none of the bugs received are related to data inconsistency.
+
