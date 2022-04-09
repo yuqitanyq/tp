@@ -24,7 +24,7 @@ Take note of following symbols that are used in this document:
 
 | Icon                 | Explanation                                                                             |
 |----------------------|-----------------------------------------------------------------------------------------|
-| :information_source: | This symbol is used to highlight extra knowledge.                                       |
+| :information_source: | This symbol is used to highlight important information.                                 |
 | :exclamation:        | This symbol is used to warn users of potential actions that might erase LibTask's data. |
 
 ### 1.3. Navigating the User Guide
