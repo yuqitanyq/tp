@@ -7,7 +7,6 @@ participant ":LibTaskParser" as LibTaskParser LOGIC_COLOR
 participant ":BookCommandParser" as BookCommandParser LOGIC_COLOR
 participant ":RelatedBookCommandParser" as RelatedBookCommandParser LOGIC_COLOR
 participant "r:RelatedBookCommand" as RelatedBookCommand LOGIC_COLOR
-participant "p:BookRelatedToPatronPredicate" as BookRelatedToPatronPredicate LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -66,24 +65,7 @@ deactivate LibTaskParser
 LogicManager -> RelatedBookCommand : execute()
 activate RelatedBookCommand
 
-RelatedBookCommand -> Model : getFilteredPatronList()\n.getIndex(patronIndex)
-activate Model
-
-Model --> RelatedBookCommand : patronToRelate
-deactivate Model
-
-create BookRelatedToPatronPredicate
-RelatedBookCommand -> BookRelatedToPatronPredicate :
-activate BookRelatedToPatronPredicate
-
-BookRelatedToPatronPredicate --> RelatedBookCommand : p
-deactivate BookRelatedToPatronPredicate
-
-RelatedBookCommand -> Model : updateFilteredBookList(p)
-activate Model
-
-Model --> RelatedBookCommand
-deactivate Model
+ref over RelatedBookCommand, Model : Update Book list
 
 create CommandResult
 RelatedBookCommand -> CommandResult
