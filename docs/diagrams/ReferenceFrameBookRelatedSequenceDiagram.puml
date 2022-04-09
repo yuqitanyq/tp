@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+
+group sd Update Book list
+
+box
+participant "r:RelatedBookCommand" as RelatedBookCommand LOGIC_COLOR
+participant "predicate:BookRelatedToPatronPredicate" as BookRelatedToPatronPredicate LOGIC_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+activate RelatedBookCommand
+RelatedBookCommand -> Model : getFilteredPatronList().getIndex(patronIndex)
+activate Model
+
+Model --> RelatedBookCommand : patronToRelate
+deactivate Model
+
+create BookRelatedToPatronPredicate
+RelatedBookCommand -> BookRelatedToPatronPredicate :
+activate BookRelatedToPatronPredicate
+
+BookRelatedToPatronPredicate --> RelatedBookCommand : predicate
+deactivate BookRelatedToPatronPredicate
+
+RelatedBookCommand -> Model : updateFilteredBookList(predicate)
+activate Model
+
+Model --> RelatedBookCommand
+deactivate Model
+
+end
+@enduml

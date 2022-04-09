@@ -29,7 +29,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="240" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The **Architecture Diagram** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -50,7 +50,7 @@ The rest of the App consists of four components.
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
+* defines its API in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
@@ -59,7 +59,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `patron delete 1`.
+The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `patron delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -74,7 +74,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PatronListPanel`, `BookListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible [GUI](#glossary).
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PatronListPanel`, `BookListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-W14-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-W14-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -118,7 +118,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 * When called upon to parse a user command, the `LibTaskParser` class creates a `PatronCommandParser` if the command starts with `patron`, a `BookCommandParser` if the command starts with `book`, and a `XYZCommandParser` otherwise.
-* If `PatronCommandParser` or `BookCommandParser` is created, it will further create a `XYZCommandParser` (`XYZ` is a [placeholder](#glossary) for the specific command name e.g., `AddPatronCommandParser` or `AddBookCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPatronCommand` or `AddBookCommand`) which the `LibTaskParser` returns back as a `Command` object.
+* If `PatronCommandParser` or `BookCommandParser` is created, it will further create a `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPatronCommandParser` or `AddBookCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPatronCommand` or `AddBookCommand`) which the `LibTaskParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddPatronCommandParser`, `AddBookCommandParser`, ...) implement the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 <div style="page-break-after: always;"></div>
@@ -131,14 +131,14 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the libtask data i.e., all `Patron` objects (which are contained in a `UniquePatronList` object) and `Book` objects (which are contained in a `BookList` object).
-* stores the currently 'selected' `Patron` and `Book` objects (e.g., results of a search [query](#glossary)) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patron>` abd `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the LibTask data i.e., all `Patron` objects (which are contained in a `UniquePatronList` object) and `Book` objects (which are contained in a `BookList` object).
+* stores the currently 'selected' `Patron` and `Book` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList<Patron>` and `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div style="page-break-after: always;"></div>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more [OOP](#glossary)) model is given below. It has a `Tag` list in the `LibTask`, which `Patron` references. This allows `LibTask` to only require one `Tag` object per unique tag, instead of each `Patron` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `LibTask`, which `Patron` references. This allows `LibTask` to only require one `Tag` object per unique tag, instead of each `Patron` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="600" />
 
@@ -153,7 +153,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="650" />
 
 The `Storage` component,
-* can save both libTask data and user preference data in [json](#glossary) format, and read them back into corresponding objects.
+* can save both LibTask data and user preference data in json format, and read them back into corresponding objects.
 * implements both `LibTaskStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -177,15 +177,15 @@ The class diagram for the `Model` can be seen above in the [Design section](#mod
 
 ![ModelImplementation.png](images/ModelImplementation.png)
 
-`Book` has a set of `Patron`s both have their own set of [attributes](#glossary), but only the most important ones are shown here. `Book` has a set of `Patron`s as `requesters`. It also has a `BookStatus` containing an optional `Patron` representing the borrower of the book.
+`Book` has a set of `Patron`s both have their own set of attributes, but only the most important ones are shown here. `Book` has a set of `Patron`s as `requesters`. It also has a `BookStatus` containing an optional `Patron` representing the borrower of the book.
 
 <div style="page-break-after: always;"></div>
 
 #### Design considerations
 
-Initially, `Patron` and `Book` were designed in a way such that both classes contain references to each other. This design allows fast and direct access to certain information, such as all books borrowed and requested by a patron. However, the initial design results in [cyclic reference](#glossary) among classes, which makes it impossible to store patron and book information in json format. For example, the patron json object needs to store a list of books it is referencing, which in turns store a list of patrons it is referencing, which in turn stores more patrons.
+Initially, `Patron` and `Book` were designed in a way such that both classes contain references to each other. This design allows fast and direct access to certain information, such as all books borrowed and requested by a patron. However, the initial design results in cyclic reference among classes, which makes it impossible to store patron and book information in json format. For example, the patron json object needs to store a list of books it is referencing, which in turns store a list of patrons it is referencing, which in turn stores more patrons.
 
-Furthermore, the initial design results in the problem of cyclic updates whenever data is modified. For example, when a patron's name is changed, the corresponding borrower's name of all books borrowed by that patron needs to be changed as well. Since `Book` is [immutable](#glossary), new `Book` objects are created to update the information, and as a result, all `Patron` objects referencing those old `Book` objects need to be updated as well. Since `Patron` is also immutable, the chain of never ending cyclic updates continues on.
+Furthermore, the initial design results in the problem of cyclic updates whenever data is modified. For example, when a patron's name is changed, the corresponding borrower's name of all books borrowed by that patron needs to be changed as well. Since `Book` is immutable, new `Book` objects are created to update the information, and as a result, all `Patron` objects referencing those old `Book` objects need to be updated as well. Since `Patron` is also immutable, the chain of never ending cyclic updates continues on.
 
 Due to the downsides of the initial design, a decision was made to have only one`Book` or `Patron` depending on the other. `Book` was chosen to depend on `Patron` because the UI needs to display information about borrowers and requesters together with the book. This design does not require the transversal of the whole `UniquePatronList` to identify the borrower and requesters of the book, since such information is stored in `Book` itself. However, transversal of the whole `BookList` is required to find all books related to a patron, or when updating a patron's information. Nevertheless, the amortized cost is much lower as such commands are performed less frequently than the amount of UI updates.
 
@@ -200,7 +200,7 @@ The saving of books and patrons to json format is performed by the `Storage` com
 
 `JsonAdaptedPatron` is an object that represents a `Patron` object in its json format. It is responsible for converting attributes in `Patron` to its json compatible formats. It may contain multiple instances of `JsonAdaptedTag`
 
-Attributes of `Book` and `Patron` not mentioned above are stored directly as a String in `JsonAdaptedBook` and `JsonAdaptedPatron` respectively. For example, the [isbn](#glossary) of a book is stored as a String and not converted to a class named `JsonAdaptedIsbn` before saving.
+Attributes of `Book` and `Patron` not mentioned above are stored directly as a String in `JsonAdaptedBook` and `JsonAdaptedPatron` respectively. For example, the isbn of a book is stored as a String and not converted to a class named `JsonAdaptedIsbn` before saving.
 
 #### Design considerations
 
@@ -231,7 +231,7 @@ Given below is an example usage scenario and how the borrow mechanism behaves at
 4. `LogicManager` executes the `BorrowCommand`.
 5. `BorrowCommand` calls `Model#getFilteredPatronList()` to get the list of displayed patrons, and then gets the borrower at the specified index.
 6. `BorrowCommand` calls `Model#getFilteredBookList()` to get the list of displayed books, and then get the book to be borrowed at the specified index.
-7. `BorrowCommand` calls `Model#borrowBook()` and passes the borrower, book to be borrowed and return date as [parameters](#glossary).
+7. `BorrowCommand` calls `Model#borrowBook()` and passes the borrower, book to be borrowed and return date as parameters.
 8. Finally, `BorrowCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command.
 
 <div style="page-break-after: always;"></div>
@@ -245,7 +245,7 @@ The following sequence diagram shows how the borrow command works:
 
 <div style="page-break-after: always;"></div>
 
-The following [activity diagram](#glossary) summarizes what happens when a user executes a borrow command:
+The following activity diagram summarizes what happens when a user executes a borrow command:
 
 <img src="images/BorrowCommandActivityDiagram.png" width="650" />
 
@@ -297,7 +297,7 @@ The following activity diagram summarizes what happens when a user executes a re
 
 The return command is designed to be able to return multiple books in one command, while providing the user with the option of returning a single book. This enhances the usability of the feature, as the librarian can experience more efficient processing of books, while retaining fine-grain control of the process if needed (e.g. in situations when a patron only intends to return some of his/her borrowed books).
 
-Despite having similar functionalities, the return commands are split into `ReturnOneBookCommand` and `ReturnAllBooksCommand` because they depend on different methods in `Model`, and have structurally similar but logically different execution. As per the [_Single Responsibility Principle_](#glossary), the return commands are separated into different classes so that each class is responsible for the logical implementation of only one subcommand.
+Despite having similar functionalities, the return commands are split into `ReturnOneBookCommand` and `ReturnAllBooksCommand` because they depend on different methods in `Model`, and have structurally similar but logically different execution. As per the Single Responsibility Principle, the return commands are separated into different classes so that each class is responsible for the logical implementation of only one subcommand.
 
 <div style="page-break-after: always;"></div>
 
@@ -406,14 +406,18 @@ Given below is an example usage scenario and how the related mechanism behaves a
 5. `LogicManager` then executes the `RelatedBookCommand` object.
 6. `RelatedBookCommand` calls `Model#getFilteredPatronList()` to get the list of displayed patrons, and then gets the patron at that specified index.
 7. `RelatedBookCommand` then creates a `BookRelatedToPatronPredicate` object named `predicate` with the patron.
-8. `RelatedBookCommand` calls `Model#updateFilteredBookList()` with the `predicate`, resulting in the book list to be updated to display all the books borrowed and requested by the patron.
+8. `RelatedBookCommand` calls `Model#updateFilteredBookList()` with `predicate`, resulting in the book list to be updated to display all the books borrowed and requested by the patron.
 9. Finally, `RelatedBookCommand` creates a `CommandResult` and returns it to `LogicManager` to complete the command.
 
 <div style="page-break-after: always;"></div>
 
 The following sequence diagram shows how the related command works:
 
-<img src="images/RelatedBookCommandSequenceDiagram.png" width="1200" />
+<img src="images/RelatedBookCommandSequenceDiagram.png" width="1000" />
+
+The following sequence diagram is for the reference frame in the above diagram:
+
+<img src="images/ReferenceFrameBookRelatedSequenceDiagram.png" width="600" align="center" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RelatedBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -436,12 +440,13 @@ This feature allows users to search for any books with either the tag, title or 
 
 #### Implementation
 The Book find feature is facilitated by the `BookCommandParser`, `FindBookParser` and `FindBookCommand`. 
+As the book can be found using one of 3 parameters, only the implementation of a search using the tag will be shown, as they are all highly similar. 
 
 Given below is an example usage scenario and how the request mechanism behaves at each step:
 
 1. The user enters a book find command and provides the parameter for the search query.
 2. `LibTaskParser` creates a new `BookCommandParser` after preliminary processing of user input, which in turns creates a new `FindBookParser`.
-3. `FindBookParser` creates either a `BookAuthorContainsKeywordsPredicate` or `BookNameContainsKeywordsPredicate` or `BookTagContainsKeywordsPredicate` object `predicate` with the search query.
+3. `FindBookParser` creates a `BookTagContainsKeywordsPredicate` object `predicate` with the search query.
 4. `FindBookParser` creates a new `FindBookCommand` based on the processed input and passes the `predicate` on.
 5. `LogicManager` then executes the `FindBookCommand`. 
 6. `FindBookCommand` calls `Model#updateFilteredBookList()` with the `predicate`, resulting in the book list to be updated to display all the books that match the given search query.
@@ -451,7 +456,7 @@ Given below is an example usage scenario and how the request mechanism behaves a
 
 The following sequence diagram shows how the request command works:
 
-<img src="images/FindBookCommandSequenceDiagram.png" width="850" />
+<img src="images/FindBookCommandSequenceDiagram.png" width="850">
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `FindBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -585,7 +590,7 @@ LibTask aids librarians in managing statuses of books borrowed and along with th
 * prefer desktop apps over other types of applications
 * able to type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using [CLI](#glossary) applications
+* is reasonably comfortable using CLI applications
 
 **Value proposition**: simplifying how librarians manage library book loans and requests by patrons.
 
@@ -1200,7 +1205,7 @@ Use case ends.
 
 ### Non-Functional Requirements
 
-1. Should work on any [_mainstream OS_](#glossary) as long as it has Java `11` or above installed.
+1. Should work on any mainstream OS as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 patrons and books without a noticeable sluggishness in performance for typical usage.
 3. A user with average regular English text typing speed (i.e. not code, not system admin commands) should be able to 
    accomplish most of their tasks faster using commands than using a mouse.
@@ -1219,9 +1224,6 @@ Use case ends.
 | CLI                             | Command-line interface processes commands to a computer program in the form of lines of text.                                                                             |
 | GUI                             | Graphical user interface allows users to interact with a software through icons and buttons instead of text-based commands.                                               |
 | API                             | Application Programming Interface is a connection between computer programs.                                                                                              |
-| Sequence Diagram                | Depicts objects involved in a scenario and the sequence of interactions between them that are needed to carry out functionalities of scenarios.                           |
-| Activity Diagram                | An advanced version of a flow chart that models flow from one activity to another activity in a software.                                                                 |
-| Plant UML                       | An open-source tool that allows users to create diagrams from a plain text language.                                                                                      |
 | Immutable                       | Unchanging over time or unable to be changed.                                                                                                                             |
 | Placeholder                     | A character, word, or string of characters that temporarily takes the place of the final data.                                                                            |
 | OOP                             | Object Oriented programming is a programming paradigm that relies on the concept of classes and objects.                                                                  |
