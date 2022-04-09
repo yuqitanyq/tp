@@ -506,7 +506,7 @@ Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:Notes about the add command:**<br>
+**:information_source: Notes about the add command:**<br>
 
 * BOOK_NAME must start and end with alphanumeric characters, and can only contain `'` character, `:` character and alphanumeric characters.
 
