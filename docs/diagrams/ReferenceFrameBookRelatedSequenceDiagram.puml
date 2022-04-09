@@ -3,7 +3,7 @@
 
 group sd Update Book list
 
-box  LOGIC_COLOR_T1
+box
 participant "r:RelatedBookCommand" as RelatedBookCommand LOGIC_COLOR
 participant "predicate:BookRelatedToPatronPredicate" as BookRelatedToPatronPredicate LOGIC_COLOR
 participant ":Model" as Model MODEL_COLOR

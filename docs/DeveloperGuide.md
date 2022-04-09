@@ -413,11 +413,11 @@ Given below is an example usage scenario and how the related mechanism behaves a
 
 The following sequence diagram shows how the related command works:
 
-<img src="images/RelatedBookCommandSequenceDiagram.png" width="850" />
+<img src="images/RelatedBookCommandSequenceDiagram.png" width="1000" />
 
 The following sequence diagram is for the reference frame in the above diagram:
 
-<img src="images/ReferenceFrameBookRelatedSequenceDiagram.png" width="600" />
+<img src="images/ReferenceFrameBookRelatedSequenceDiagram.png" width="600" align="center" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `RelatedBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
