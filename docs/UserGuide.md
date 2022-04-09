@@ -90,19 +90,19 @@ to doing this tutorial.
    Below are some sample commands you can try running. You may continue adding more books while
    ensuring that the format of your command follows [book add](#331-adding-a-book-book-add).
 
-   **`book add n/Harry Potter i/97888-69183-157 a/J.K.Rowling t/Thriller t/Magic`**: Adds a book titled `Harry Potter` 
+   `book add n/Harry Potter i/97888-69183-157 a/J.K.Rowling t/Thriller t/Magic`: Adds a book titled `Harry Potter` 
       into LibTask's book list.
 
-   **`book add n/To Kill a Mockingbird i/97804-46310-789 a/Harper Lee t/Thriller t/Suspense`**: Adds a book title 
+   `book add n/To Kill a Mockingbird i/97804-46310-789 a/Harper Lee t/Thriller t/Suspense`: Adds a book title 
       `To Kill a Mockingbird` into LibTask's book list.
 
-   **`book add n/The Da Vinci Code i/97803-85513-227 a/Dan Brown t/Thriller t/Mystery t/Crime`**: Adds a book titled 
+   `book add n/The Da Vinci Code i/97803-85513-227 a/Dan Brown t/Thriller t/Mystery t/Crime`: Adds a book titled 
      `The Da Vinci Code` into LibTask's book list.
 
-   **`book add n/The Two Towers i/97800-07203-598 a/J. R. R. Tolkein t/Action t/Fantasy t/Adventure t/Drama`**: Adds a 
+   `book add n/The Two Towers i/97800-07203-598 a/J. R. R. Tolkein t/Action t/Fantasy t/Adventure t/Drama`: Adds a 
       book titled `The Two Towers` into LibTask's book list.
 
-   **`book add n/Death on the Nile i/97800-06168-959 a/Agatha Christie t/Mystery t/Drama t/Crime t/Thriller`**: 
+   `book add n/Death on the Nile i/97800-06168-959 a/Agatha Christie t/Mystery t/Drama t/Crime t/Thriller`: 
       Adds a book titled `Death on the Nile` into LibTask's book list.
 
 
@@ -111,19 +111,19 @@ to doing this tutorial.
    Below are some sample commands you can try running. You may continue adding more patrons while
    ensuring that the format of your command follows [patron add](#321-adding-a-patron-patron-add).
 
-   **`patron add n/Alice s/A0123456H p/90123212 e/profA@u.nus.edu t/professor`**: Adds a patron named `Alice` into 
+   `patron add n/Alice s/A0123456H p/90123212 e/profA@u.nus.edu t/professor`: Adds a patron named `Alice` into 
       LibTask's patron list.
 
-   **`patron add n/Bob Miller s/A4468931X p/92940284 e/bobmiller@u.nus.edu t/student`**: Adds a patron named 
+   `patron add n/Bob Miller s/A4468931X p/92940284 e/bobmiller@u.nus.edu t/student`: Adds a patron named 
      `Bob Miller` into LibTask's patron list.
 
-   **`patron add n/Harper Lee s/A0988773M p/91437496 e/harperlee@u.nus.edu`**: Adds a patron named `Harper Lee` into 
+   `patron add n/Harper Lee s/A0988773M p/91437496 e/harperlee@u.nus.edu`: Adds a patron named `Harper Lee` into 
       LibTask's patron list.
 
-   **`patron add n/Jessica s/A6666789G p/90194628 e/jessica@u.nus.edu t/student`**: Adds a patron named `Jessica` into 
+   `patron add n/Jessica s/A6666789G p/90194628 e/jessica@u.nus.edu t/student`: Adds a patron named `Jessica` into 
       LibTask's patron list.
 
-   **`patron add n/Christian Grey s/A0123345L p/91214567 e/christian@u.nus.edu`**: Adds a patron named `Christian Grey` 
+   `patron add n/Christian Grey s/A0123345L p/91214567 e/christian@u.nus.edu`: Adds a patron named `Christian Grey` 
       into LibTask's patron list.
 
 #### Step 2: Borrow some books
